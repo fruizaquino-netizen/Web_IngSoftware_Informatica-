@@ -1,7 +1,8 @@
 import { Component, computed, signal } from '@angular/core';
-@Component({
 
+@Component({
   selector:'proyecto',
   templateUrl: './proyectos-page.component.html',
 })
+
 export class ProyectoPageComponent{}
