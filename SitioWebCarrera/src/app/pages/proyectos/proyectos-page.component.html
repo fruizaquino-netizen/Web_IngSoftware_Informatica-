@@ -1,1 +1,107 @@
-<h1>Esto es la pagina de proyectos</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Proyectos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 5 -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <!-- CSS separado -->
+  <link rel="stylesheet" href="proyectos-page.component.css">
+</head>
+
+<body>
+
+<!-- Header -->
+<section class="bg-white py-5 border-bottom">
+  <div class="container">
+    <h1 class="fw-bold mb-3">Proyectos</h1>
+    <p class="text-muted col-lg-8">
+      Conoce los proyectos de investigación y desarrollo tecnológico realizados
+      por nuestros estudiantes y docentes.
+    </p>
+  </div>
+</section>
+
+<!-- Filtros -->
+<section class="bg-white border-bottom py-3">
+  <div class="container d-flex flex-wrap gap-2">
+    <button class="btn btn-dark">Todos</button>
+    <button class="btn btn-light">Software</button>
+    <button class="btn btn-light">Inteligencia Artificial</button>
+    <button class="btn btn-light">Sistemas Inteligentes</button>
+  </div>
+</section>
+
+<!-- Cards -->
+<section class="container py-5">
+  <div class="row g-4">
+
+    <!-- Card -->
+    <div class="col-12 col-md-6 col-lg-4 project-item" data-category="software">
+      <div class="card project-card">
+        <div class="card-img-top-wrapper">
+          <img src="assets/img/proy1.jpeg" alt="Proyecto1">
+        </div>
+
+        <div class="card-body">
+          <span class="card-category">Software</span>
+          <h5 class="card-title fw-semibold">Sistema de Gestión Académica</h5>
+          <p class="card-text text-muted small">
+            Plataforma web para administración de procesos académicos y servicios estudiantiles.
+          </p>
+          <a href="#" class="btn btn-dark-custom w-100 btn-sm">
+            Ver Más
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card -->
+    <div class="col-12 col-md-6 col-lg-4 project-item" data-category="ia">
+      <div class="card project-card">
+        <div class="card-img-top-wrapper">
+          <img src="assets/img/proy2.jpg" alt="Proyecto2">
+        </div>
+        <div class="card-body">
+          <span class="card-category">Inteligencia Artificial</span>
+          <h5 class="card-title fw-semibold">Reconocimiento de Patrones</h5>
+          <p class="card-text text-muted small">
+            Modelo de ML para identificación automática de patrones en imágenes médicas.
+          </p>
+          <a href="#" class="btn btn-dark-custom w-100 btn-sm">
+            Ver Más
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card -->
+    <div class="col-12 col-md-6 col-lg-4 project-item" data-category="sistemas">
+      <div class="card project-card">
+        <div class="card-img-top-wrapper">
+          <img src="assets/img/proy3.jpg" alt="Proyecto3">
+        </div>
+        <div class="card-body">
+          <span class="card-category">Sistemas Inteligentes</span>
+          <h5 class="card-title fw-semibold">Sistema de Monitoreo IoT</h5>
+          <p class="card-text text-muted small">
+            Red de sensores inteligentes para control ambiental en invernaderos.
+          </p>
+          <a href="#" class="btn btn-dark-custom w-100 btn-sm">
+            Ver Más
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>
