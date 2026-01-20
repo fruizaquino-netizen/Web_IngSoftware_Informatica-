@@ -12,6 +12,7 @@ interface Docente {
   templateUrl: './docentes-pages.component.html',
   styleUrls: ['./docentes-pages.component.css']
 })
+
 export class DocentesPageComponent {
   
   // Usamos un signal para manejar el estado de los docentes
