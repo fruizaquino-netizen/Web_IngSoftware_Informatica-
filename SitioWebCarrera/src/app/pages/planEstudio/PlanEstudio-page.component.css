@@ -14,8 +14,8 @@
 /* ================= ESTILOS GENERALES DEL BODY ================= */
 /* Define el color de fondo y el color base del texto */
 body {
-    background-color: #f5f6f8;
-    color: #1f2933;
+    background-color: #ffffff;
+    color: #2b2b2b;
 }
 
 /* ================= ENCABEZADO ================= */
@@ -23,19 +23,20 @@ body {
 .header {
     background-color: #ffffff;      /* Fondo blanco */
     padding: 40px 80px;              /* Espaciado interno */
-    border-bottom: 1px solid #e5e7eb;/* Línea divisoria inferior */
+    border-bottom: 1px solid #e6ded2;/* Línea divisoria inferior */
 }
 
 /* Título principal del encabezado */
 .header h1 {
     font-size: 32px;                 /* Tamaño grande del título */
     margin-bottom: 10px;             /* Separación inferior */
+    color: #5f0f14;
 }
 
 /* Texto descriptivo del encabezado */
 .header p {
     max-width: 700px;                /* Limita el ancho del texto */
-    color: #4b5563;                  /* Color gris suave */
+    margin: 40px auto;
 }
 
 /* ================= CONTENEDOR PRINCIPAL ================= */
@@ -60,6 +61,7 @@ body {
 /* Títulos dentro de las tarjetas */
 .card h2 {
     margin-bottom: 20px;
+    color: #85272d;
 }
 
 /* ================= TABS (PESTAÑAS) ================= */
@@ -104,7 +106,7 @@ input[type="radio"] {
     border: none;
     padding: 12px 20px;   /* MÁS ESPACIO */
     font-weight: bold;
-    color: #6b7280;
+    color: #6b6b6b;
     cursor: pointer;
 }
 
@@ -113,8 +115,8 @@ input[type="radio"] {
 #tab1:checked ~ .tabs label[for="tab1"],
 #tab2:checked ~ .tabs label[for="tab2"],
 #tab3:checked ~ .tabs label[for="tab3"] {
-    color: #111827;
-    border-bottom: 3px solid #111827;
+    color: #85272d;
+    border-bottom: 3px solid #85272d;
 }
 
 /* ================= ENCABEZADO DE MATERIAS ================= */
@@ -128,8 +130,8 @@ input[type="radio"] {
 
 /* Botón para descargar el plan en PDF */
 .btn-pdf {
-    background-color: #1f2933;
-    color: white;
+    background-color: #85272d;
+    color: #ffffff;
     border: none;
     padding: 10px 18px;
     border-radius: 6px;
@@ -146,7 +148,7 @@ input[type="radio"] {
 
 /* Tarjeta individual de una materia */
 .subject {
-    background-color: #f9fafb;
+    background-color: #f7f5f2;
     padding: 18px;
     border-radius: 10px;
     display: flex;
@@ -157,18 +159,19 @@ input[type="radio"] {
 /* Nombre de la materia */
 .subject h3 {
     font-size: 16px;
+    color: #2b2b2b;
 }
 
 /* Créditos u otros textos secundarios */
 .subject span {
     font-size: 14px;
-    color: #6b7280;
+    color: #2b2b2b;
 }
 
 /* Etiqueta del nivel de formación */
 .badge {
-    background-color: #6b7280;
-    color: white;
+    background-color: #85272d;
+    color: #ffffff;
     padding: 6px 14px;
     border-radius: 6px;
     font-size: 13px;
@@ -194,8 +197,8 @@ input[type="radio"] {
 .level-icon {
     width: 45px;
     height: 45px;
-    background-color: #374151;
-    color: white;
+    background-color: #5f0f14;
+    color: #ffffff;
     font-weight: bold;
     display: flex;
     align-items: center;
