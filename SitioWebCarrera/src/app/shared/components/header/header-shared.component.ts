@@ -8,4 +8,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './header-shared.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderSharedComponent { }
+export class HeaderSharedComponent {
+
+}
