@@ -28,7 +28,7 @@ body {
 .hero {
     height: 600px; /* Un poco más alto para impacto */
     background: linear-gradient(rgba(10, 25, 47, 0.6), rgba(10, 25, 47, 0.6)),
-                url('./Imagenes/Fondo Uistmo.jpg');
+                url('./Imagenes/Fondo\ Uistmo.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* Efecto Parallax sutil */

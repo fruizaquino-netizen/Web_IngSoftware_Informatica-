@@ -1,0 +1,71 @@
+/* Franja superior institucional */
+.top-bar-institucional {
+  height: 6px;
+  background-color: #933;
+}
+
+/* Logo */
+.logo-institucional {
+  height: 60px;
+  width: auto;
+}
+
+/* Mobile logo */
+@media (max-width: 992px) {
+  .logo-institucional {
+    height: 46px;
+  }
+}
+
+/* Links */
+.nav-link {
+  font-size: 0.95rem;
+  color: #1f2937;
+  padding: 6px 0;
+}
+
+.nav-link:hover {
+  color: #933;
+  font-weight: 500;
+}
+
+/* Botón Inicio institucional */
+.btn-institucional {
+  background-color: #933;
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.btn-institucional:hover {
+  background-color: #933;
+}
+
+/* Estado activo general */
+.active-link {
+  font-weight: 600;
+  color: #933 !important;
+}
+
+/* Botón Inicio activo */
+.btn-institucional.active-link {
+  background-color: #933;   /* rojo institucional */
+  color: #fff !important;
+  box-shadow: 0 0 0 2px rgba(166, 29, 29, 0.25);
+}
+
+/* Links activos (no botón) */
+.nav-link.active-link {
+  position: relative;
+}
+
+.nav-link.active-link::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #933;
+}
