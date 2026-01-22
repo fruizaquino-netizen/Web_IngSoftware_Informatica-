@@ -1,0 +1,146 @@
+/* =========================
+   RESET BÁSICO
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* =========================
+   HERO
+========================= */
+.hero {
+  background: linear-gradient(135deg, #8b1e3f, #a4163a);
+  color: #ffffff;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.hero h1 {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* =========================
+   CONTENIDO PRINCIPAL
+========================= */
+.about-container {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+/* =========================
+   TEXTO
+========================= */
+.about-text h2 {
+  font-size: 28px;
+  color: #3b1f1f;
+  margin-bottom: 20px;
+}
+
+.about-text p {
+  font-size: 16px;
+  color: #4b2e2e;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* =========================
+   VALORES
+========================= */
+.values-card {
+  background-color: #f7f2f2;
+  border-radius: 12px;
+  padding: 30px;
+}
+
+.values-card h3 {
+  font-size: 22px;
+  color: #3b1f1f;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.value-item {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 15px;
+  color: #5a2a2a;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* =========================
+   CTA
+========================= */
+.cta {
+  background: linear-gradient(135deg, #8b1e3f, #a4163a);
+  color: #ffffff;
+  text-align: center;
+  padding: 70px 20px;
+}
+
+.cta h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.cta p {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+/* =========================
+   BOTÓN
+========================= */
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #ffffff;
+  color: #8b1e3f;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #f2e6e6;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .about-container {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .cta h2 {
+    font-size: 26px;
+  }
+}

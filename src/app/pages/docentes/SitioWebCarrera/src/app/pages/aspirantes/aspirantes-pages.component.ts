@@ -17,3 +17,5 @@ import { Component } from '@angular/core';
 // Clase del componente
 // Aquí se agrega la lógica, variables y métodos del componente
 export class AspirantesPageComponent {}
+
+
