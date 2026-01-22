@@ -65,7 +65,12 @@
     text-decoration: none;
     font-size: 14px;
 }
-
+.footer h5 {
+    text-align: center;
+    margin-top: 20px;
+    color: #6b7280;
+    font-size: 14px;
+}
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .footer-grid {
