@@ -1,219 +1,237 @@
-/* ================= VARIABLES ================= */
-:root {
-  --rojo: #8B1D22;
-  --amarillo: #F2E3A1;
-  --gris: #2F2F2F;
-  --gris-soft: #6B6B6B;
-  --verde: #1E7F4F;
-  --blanco: #FFFFFF;
-}
-
-/* ================= BASE ================= */
+/* =========================
+   RESET BÁSICO
+========================= */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-.aspirantes-wrapper {
-  background: #f4f4f4;
-  padding: 60px 0;
+/* =========================
+   CONTENEDOR GENERAL
+========================= */
+.aspirantes {
+  background-color: #f7f2f2;
+  padding-bottom: 60px;
 }
 
-.aspirantes-container {
-  max-width: 1200px;
-  margin: auto;
-  font-family: Arial, Helvetica, sans-serif;
-  color: var(--gris);
-}
-
-/* ================= RECUADRO BASE ================= */
-.aspirantes-header,
-.proceso,
-.info-card,
-.cta {
-  background: var(--amarillo);
-  border-radius: 24px;
-  border-left: 8px solid var(--rojo);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
-}
-
-/* ================= HEADER ================= */
-.aspirantes-header {
-  padding: 70px 10%;
-  margin-bottom: 60px;
-}
-
-.aspirantes-header h1 {
-  color: var(--rojo);
-  font-size: 42px;
-  margin-bottom: 16px;
-}
-
-.aspirantes-header p {
-  max-width: 720px;
-  font-size: 17px;
-  color: var(--gris-soft);
-}
-
-/* ================= PROCESO ================= */
-.proceso {
-  padding: 80px 8%;
+/* =========================
+   HEADER
+========================= */
+.header {
+  background: linear-gradient(135deg, #8b1e3f, #a4163a);
+  color: #ffffff;
   text-align: center;
-  margin-bottom: 60px;
+  padding: 80px 20px;
 }
 
-.proceso h2 {
-  color: var(--rojo);
-  margin-bottom: 60px;
+.header h1 {
+  font-size: 40px;
+  margin-bottom: 12px;
 }
 
-.proceso-cards {
+.header p {
+  font-size: 18px;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* =========================
+   PROCESO
+========================= */
+.proceso-box {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 40px 20px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.proceso-box h2 {
+  font-size: 28px;
+  color: #3b1f1f;
+  margin-bottom: 40px;
+}
+
+.pasos {
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: 30px;
   flex-wrap: wrap;
 }
 
-.card {
-  background: var(--blanco);
-  width: 280px;
-  padding: 36px 26px;
-  border-radius: 18px;
-  border-top: 6px solid var(--rojo);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-6px);
+/* =========================
+   PASO CARD
+========================= */
+.paso-card {
+  width: 260px;
+  background-color: #f7f2f2;
+  padding: 30px 20px;
+  border-radius: 12px;
 }
 
 .icono {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 18px;
-  background: var(--amarillo);
-  color: var(--rojo);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
+  font-size: 36px;
+  margin-bottom: 12px;
 }
 
-/* ================= BOTONES ================= */
+.paso-num {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #8b1e3f;
+  margin-bottom: 8px;
+}
+
+.paso-card h3 {
+  font-size: 18px;
+  color: #3b1f1f;
+  margin-bottom: 10px;
+}
+
+.paso-card p {
+  font-size: 15px;
+  color: #5a2a2a;
+  line-height: 1.5;
+}
+
+/* =========================
+   CONECTOR (OPCIONAL)
+========================= */
+.conector {
+  display: none;
+}
+
+/* =========================
+   BOTÓN PRINCIPAL
+========================= */
 .btn-principal {
-  margin-top: 60px;
-  padding: 16px 44px;
-  background: var(--rojo);
-  color: var(--blanco);
+  margin-top: 40px;
+  padding: 12px 34px;
+  background-color: #8b1e3f;
+  color: #ffffff;
   border: none;
-  border-radius: 999px;
-  font-size: 16px;
+  border-radius: 30px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .btn-principal:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 28px rgba(139, 29, 34, 0.45);
+  background-color: #a4163a;
 }
 
-.btn-secundario {
-  background: var(--blanco);
-  color: var(--rojo);
-  padding: 14px 34px;
-  border-radius: 999px;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.25s ease;
-}
-
-.btn-secundario:hover {
-  transform: translateY(-2px);
-}
-
-.btn-outline {
-  background: transparent;
-  color: var(--rojo);
-  border: 2px solid var(--rojo);
-  padding: 14px 34px;
-  border-radius: 999px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease;
-}
-
-.btn-outline:hover {
-  background: var(--rojo);
-  color: var(--blanco);
-}
-
-/* ================= INFO ================= */
-.info-grid {
+/* =========================
+   INFO
+========================= */
+.info {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-  margin-bottom: 60px;
 }
 
 .info-card {
-  padding: 36px;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .info-card h3 {
-  color: var(--rojo);
+  font-size: 22px;
+  color: #3b1f1f;
   margin-bottom: 20px;
 }
 
-.info-card ul {
-  list-style: none;
-  padding: 0;
-}
-
 .info-card ul li {
-  margin-bottom: 14px;
-  padding-left: 28px;
-  position: relative;
+  margin-bottom: 10px;
+  color: #5a2a2a;
+  font-size: 15px;
 }
 
-.info-card ul li::before {
-  content: "✔";
-  color: var(--verde);
-  position: absolute;
-  left: 0;
-}
-
+/* =========================
+   FECHAS
+========================= */
 .fecha {
-  border-left: 4px solid var(--rojo);
-  padding-left: 16px;
-  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: #5a2a2a;
 }
 
-/* ================= CTA ================= */
+/* =========================
+   CTA
+========================= */
 .cta {
-  padding: 80px 10%;
+  margin: 60px 20px 0;
+  background: linear-gradient(135deg, #8b1e3f, #a4163a);
+  color: #ffffff;
   text-align: center;
-  margin-bottom: 80px;
+  padding: 70px 20px;
+  border-radius: 16px;
 }
 
-.cta-buttons {
-  margin-top: 40px;
+.cta h2 {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.cta p {
+  font-size: 18px;
+  max-width: 700px;
+  margin: 0 auto 30px;
+}
+
+/* =========================
+   BOTONES CTA
+========================= */
+.cta-botones {
   display: flex;
   justify-content: center;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
-/* ================= CHAT ================= */
-.chat-btn {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  background: var(--rojo);
-  color: var(--blanco);
-  padding: 14px 22px;
-  border-radius: 999px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+.btn-blanco {
+  background-color: #ffffff;
+  color: #8b1e3f;
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: none;
+  font-weight: 600;
   cursor: pointer;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #ffffff;
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: 2px solid #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .info {
+    grid-template-columns: 1fr;
+  }
+
+  .header h1 {
+    font-size: 32px;
+  }
+
+  .cta h2 {
+    font-size: 26px;
+  }
 }
