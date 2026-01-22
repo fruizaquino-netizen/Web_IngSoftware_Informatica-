@@ -46,7 +46,7 @@ body {
   background-color: var(--unistmo-gold);
 }
 
-/* --- TARJETAS DE DOCENTES (ESTILO LIMPIO) --- */
+/* --- TARJETAS DE DOCENTES --- */
 .premium-card {
   background: #ffffff;
   border-radius: 16px;
@@ -62,7 +62,6 @@ body {
   border-color: rgba(157, 36, 73, 0.2);
 }
 
-/* Contenedor de Imagen */
 .card-image-box {
   position: relative;
   height: 280px;
@@ -83,7 +82,6 @@ body {
   filter: saturate(1.1);
 }
 
-/* Badge de Especialidad (Acento Dorado) */
 .specialty-glass-badge {
   position: absolute;
   top: 15px;
@@ -98,6 +96,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  z-index: 2;
 }
 
 /* --- CUERPO DE LA TARJETA --- */
@@ -107,7 +106,7 @@ body {
 }
 
 .card-body-premium h3 {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #1a1a1a;
   margin-bottom: 6px;
@@ -119,126 +118,79 @@ body {
 }
 
 .teacher-role {
-  color: #777;
+  color: #666;
   font-size: 0.9rem;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
-/* --- BOTÓN VER PERFIL (GUINDA INSTITUCIONAL) --- */
+/* --- BOTÓN VER PERFIL (CORREGIDO TOTALMENTE) --- */
 .btn-ultra-profile {
   position: relative;
   width: 100%;
-  padding: 12px;
-  border: 1.5px solid var(--unistmo-wine);
-  background: transparent;
+  padding: 14px 20px;
+  border: 2px solid var(--unistmo-wine);
+  background-color: transparent;
   color: var(--unistmo-wine);
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.9rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.95rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  z-index: 1;
 }
 
-.btn-ultra-profile:hover {
-  background: var(--unistmo-wine);
-  color: white;
-  box-shadow: 0 8px 15px rgba(157, 36, 73, 0.2);
+/* El span es vital para que el texto se mantenga por encima del color de fondo */
+.btn-ultra-profile span {
+  position: relative;
+  z-index: 3; 
 }
 
-.btn-icon {
+.btn-ultra-profile .btn-icon {
+  position: relative;
+  z-index: 3;
   display: flex;
   align-items: center;
   transition: transform 0.3s ease;
 }
 
+/* Efecto de fondo que "llena" el botón */
+.btn-ultra-profile::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--unistmo-wine);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 2;
+}
+
+.btn-ultra-profile:hover {
+  color: #ffffff !important;
+  box-shadow: 0 8px 20px rgba(157, 36, 73, 0.25);
+}
+
+.btn-ultra-profile:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 .btn-ultra-profile:hover .btn-icon {
-  transform: translateX(3px);
-}
-
-/* --- FOOTER (ESTILO ISTMO) --- */
-.footer-modern {
-  background: #fdfdfd;
-  border-top: 4px solid var(--unistmo-wine);
-  padding-top: 60px;
-}
-
-.footer-title {
-  font-weight: 700;
-  font-size: 1rem;
-  margin-bottom: 20px;
-  color: var(--unistmo-wine);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.footer-list-custom li {
-  list-style: none;
-  margin-bottom: 12px;
-  color: var(--unistmo-gray);
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.95rem;
-}
-
-.footer-list-custom li:hover {
-  color: var(--unistmo-wine);
   transform: translateX(5px);
 }
 
-.footer-list-custom i {
-  font-size: 1.1rem;
-  color: var(--unistmo-gold);
-}
-
-.footer-bullets-premium li {
-  list-style: none;
-  position: relative;
-  padding-left: 20px;
-  margin-bottom: 12px;
-  color: var(--unistmo-gray);
-}
-
-.footer-bullets-premium li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: var(--unistmo-gold);
-  font-weight: bold;
-}
-
-/* --- REDES SOCIALES (ICONOS CUADRADOS INSTITUCIONALES) --- */
-.social-box-grid {
-  display: flex;
-  gap: 10px;
-}
-
-.social-item {
-  width: 42px;
-  height: 42px;
-  background: #333d47; /* Gris oscuro para redes */
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  text-decoration: none;
-}
-
-.social-item:hover {
-  background: var(--unistmo-wine);
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-/* Animación de carga para las tarjetas */
+/* --- ANIMACIONES DE ENTRADA --- */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -248,7 +200,6 @@ body {
   animation: fadeInUp 0.6s ease backwards;
 }
 
-/* Delay para cada tarjeta (opcional, requiere nth-child) */
 .premium-card:nth-child(1) { animation-delay: 0.1s; }
 .premium-card:nth-child(2) { animation-delay: 0.2s; }
 .premium-card:nth-child(3) { animation-delay: 0.3s; }
