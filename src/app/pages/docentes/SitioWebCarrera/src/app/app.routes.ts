@@ -31,5 +31,6 @@ export const routes: Routes = [
 {
  path: 'aspirantes',
  component:AspirantesPageComponent,
-}
+},
+{ path: '**', redirectTo: '' }
 ];

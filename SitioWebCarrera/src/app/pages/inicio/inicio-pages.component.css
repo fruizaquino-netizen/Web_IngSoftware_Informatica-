@@ -3,7 +3,7 @@
     --rojo-inst: #8B1D22;
     --rojo-hover: #6d161a;
     --crema-arena: #F2E3A1;
-    --gris-oscuro: #1e293b; /* Un poco más azulado para modernidad */
+    --gris-oscuro: #1e293b;
     --verde-logo: #008037;
     --gris-claro: #f8fafc;
     --azul-oscuro-social: #334155;
@@ -13,7 +13,7 @@
 }
 
 html {
-    scroll-behavior: smooth; /* Desplazamiento suave entre secciones */
+    scroll-behavior: smooth;
 }
 
 body {
@@ -24,14 +24,14 @@ body {
     line-height: 1.5;
 }
 
-/* --- 2. HERO SECTION (EFECTO PARALLAX VISUAL) --- */
+/* --- 2. HERO SECTION --- */
 .hero {
-    height: 600px; /* Un poco más alto para impacto */
+    height: 600px;
     background: linear-gradient(rgba(10, 25, 47, 0.6), rgba(10, 25, 47, 0.6)),
                 url('./Imagenes/Fondo\ Uistmo.png');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Efecto Parallax sutil */
+    background-attachment: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,11 +41,11 @@ body {
 }
 
 .hero-title {
-    font-size: clamp(2rem, 5vw, 3.5rem); /* Tamaño fluido */
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 800;
     margin-bottom: 24px;
     text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    animation: fadeInUp 0.8s ease-out; /* Animación de entrada */
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .btn-hero {
@@ -53,7 +53,7 @@ body {
     background: var(--rojo-inst);
     color: white;
     border: none;
-    border-radius: 50px; /* Botón tipo píldora, más moderno */
+    border-radius: 50px;
     font-weight: 700;
     font-size: 1.1rem;
     cursor: pointer;
@@ -67,7 +67,7 @@ body {
     box-shadow: 0 6px 20px rgba(139, 29, 34, 0.23);
 }
 
-/* --- 3. CARDS (DISEÑO ELEVADO) --- */
+/* --- 3. CARDS (CON ICONOS Y DELINEADO SUTIL) --- */
 .container {
     max-width: 1200px;
     margin: 80px auto;
@@ -84,14 +84,14 @@ body {
     background: white;
     padding: 40px;
     border-radius: 20px;
-    border: 1px solid #f1f5f9;
+    border: 1px solid rgba(139, 29, 34, 0.2);
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
     position: relative;
     overflow: hidden;
 }
 
-.card::before { /* Línea decorativa que brilla al pasar el mouse */
+.card::before {
     content: "";
     position: absolute;
     top: 0; left: 0; width: 100%; height: 4px;
@@ -101,14 +101,35 @@ body {
 
 .card:hover {
     transform: translateY(-10px);
-    box-shadow: var(--shadow-md);
-    border-color: transparent;
+    box-shadow: 0 10px 20px rgba(139, 29, 34, 0.1);
+    border-color: rgba(139, 29, 34, 0.4);
 }
 
 .card-green:hover::before { background: var(--verde-logo); }
 .card-red:hover::before { background: var(--rojo-inst); }
 
-.icon-placeholder {
+/* Nuevo estilo para el contenedor del icono */
+.icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background: rgba(139, 29, 34, 0.08); /* Un fondo muy sutil con el color rojizo */
+    border-radius: 12px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilo para las imágenes de icono */
+.card-icon {
+    width: 40px;      /* Puedes ajustar el tamaño */
+    height: 40px;
+    object-fit: contain; /* Evita que la imagen se estire */
+    display: block;
+}
+
+/* Puedes eliminar o renombrar el antiguo .icon-placeholder si ya no lo usas */
+/* .icon-placeholder {
     width: 60px;
     height: 60px;
     background: var(--crema-arena);
@@ -117,7 +138,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} */
+
 
 .card h3 {
     margin-top: 0;
@@ -125,7 +147,7 @@ body {
     color: #0f172a;
 }
 
-/* --- 4. CTA SECTION (DISEÑO REFINADO) --- */
+/* --- 4. CTA SECTION & BOTONES --- */
 .cta-section {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     padding: 100px 20px;
@@ -143,81 +165,64 @@ body {
     display: flex;
     gap: 20px;
     justify-content: center;
-    flex-wrap: wrap; /* Responsivo */
+    flex-wrap: wrap;
     margin-top: 40px;
 }
 
-.cta-buttons button {
+.btn-primary, .btn-secondary {
+    background-color: #8B1D22;
+    color: white;
+    border: 2px solid #8B1D22;
     padding: 14px 32px;
     border-radius: 10px;
     font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
     transition: var(--transition);
+    box-shadow: 0 4px 10px rgba(139, 29, 34, 0.2);
 }
 
-.btn-primary {
-    background-color: var(--azul-oscuro-social);
-    color: white;
-    border: none;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-}
-
-.btn-primary:hover {
-    background-color: #1e293b;
-    transform: scale(1.05);
-}
-
-.btn-secondary {
+.btn-primary:hover, .btn-secondary:hover {
     background-color: white;
-    color: var(--azul-oscuro-social);
-    border: 2px solid var(--azul-oscuro-social);
+    color: #8B1D22;
+    border: 2px solid #8B1D22;
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(139, 29, 34, 0.3);
 }
 
-.btn-secondary:hover {
-    background-color: var(--azul-oscuro-social);
-    color: white;
+.btn-primary:active, .btn-secondary:active {
+    transform: scale(0.98);
 }
 
-/* --- 5. FOOTER (ESTILO CORPORATIVO) --- */
-/* Footer */
-
+/* --- 5. FOOTER --- */
 .footer {
-
     background-color: var(--gris-claro);
     padding: 60px 10%;
     border-top: 1px solid #e2e8f0;
 }
 
 .footer-grid {
-
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 40px;
 }
 
 .footer-list {
-
     list-style: none;
     padding: 0;
 }
 
 .footer-list li {
-
     margin-bottom: 12px;
     color: #475569;
 }
 
-/* Social Icons FIX */
-
 .social-group {
-
     display: flex;
     gap: 12px;
 }
 
 .social-icon {
-
     width: 42px;
     height: 42px;
     background: var(--azul-oscuro-social);
@@ -228,7 +233,6 @@ body {
 }
 
 .social-icon svg {
-
     width: 20px;
     height: 20px;
     stroke: white;

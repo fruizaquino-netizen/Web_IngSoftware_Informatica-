@@ -1,0 +1,212 @@
+/* ================= RESET GENERAL ================= */
+/* Elimina márgenes y rellenos por defecto del navegador
+   y define el modelo de caja para que padding y border
+   no aumenten el tamaño total de los elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    /* Fuente general del sitio */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ================= ESTILOS GENERALES DEL BODY ================= */
+/* Define el color de fondo y el color base del texto */
+body {
+    background-color: #f5f6f8;
+    color: #1f2933;
+}
+
+/* ================= ENCABEZADO ================= */
+/* Estilo del contenedor del encabezado */
+.header {
+    background-color: #ffffff;      /* Fondo blanco */
+    padding: 40px 80px;              /* Espaciado interno */
+    border-bottom: 1px solid #e5e7eb;/* Línea divisoria inferior */
+}
+
+/* Título principal del encabezado */
+.header h1 {
+    font-size: 32px;                 /* Tamaño grande del título */
+    margin-bottom: 10px;             /* Separación inferior */
+}
+
+/* Texto descriptivo del encabezado */
+.header p {
+    max-width: 700px;                /* Limita el ancho del texto */
+    color: #4b5563;                  /* Color gris suave */
+}
+
+/* ================= CONTENEDOR PRINCIPAL ================= */
+/* Contenedor central que limita el ancho del contenido */
+.container {
+    max-width: 1100px;               /* Ancho máximo */
+    margin: 40px auto;               /* Centrado horizontal */
+    display: flex;                   /* Flexbox */
+    flex-direction: column;          /* Elementos en columna */
+    gap: 30px;                       /* Separación entre secciones */
+}
+
+/* ================= TARJETAS ================= */
+/* Estilo base para todas las tarjetas */
+.card {
+    background-color: #ffffff;       /* Fondo blanco */
+    padding: 30px;                   /* Espacio interno */
+    border-radius: 12px;             /* Bordes redondeados */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05); /* Sombra suave */
+}
+
+/* Títulos dentro de las tarjetas */
+.card h2 {
+    margin-bottom: 20px;
+}
+
+/* ================= TABS (PESTAÑAS) ================= */
+
+/* OCULTAR COMPLETAMENTE LOS RADIOS (CÍRCULOS MORADOS) */
+input[type="radio"] {
+    display: none !important;
+    visibility: hidden;
+    position: absolute;
+}
+
+/* Oculta TODOS los contenidos */
+.tab-content {
+    display: none;
+}
+
+
+/* Contenedor de las pestañas */
+.tabs {
+    display: flex;
+    gap: 40px;           /* SEPARA BIEN Semestre 1, 2 y 3 */
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 25px;
+}
+
+/* Muestra el semestre correspondiente */
+#tab1:checked ~ .content-1 {
+    display: block;
+}
+
+#tab2:checked ~ .content-2 {
+    display: block;
+}
+
+#tab3:checked ~ .content-3 {
+    display: block;
+}
+
+/* Estilo de cada pestaña */
+.tab {
+    background: none;
+    border: none;
+    padding: 12px 20px;   /* MÁS ESPACIO */
+    font-weight: bold;
+    color: #6b7280;
+    cursor: pointer;
+}
+
+
+/* Estilo de la pestaña activa */
+#tab1:checked ~ .tabs label[for="tab1"],
+#tab2:checked ~ .tabs label[for="tab2"],
+#tab3:checked ~ .tabs label[for="tab3"] {
+    color: #111827;
+    border-bottom: 3px solid #111827;
+}
+
+/* ================= ENCABEZADO DE MATERIAS ================= */
+/* Contenedor del título del semestre y botón PDF */
+.card-header {
+    display: flex;                   /* Alineación horizontal */
+    justify-content: space-between;  /* Separación entre elementos */
+    align-items: center;             /* Alineación vertical */
+    margin-bottom: 25px;
+}
+
+/* Botón para descargar el plan en PDF */
+.btn-pdf {
+    background-color: #1f2933;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* ================= MATERIAS ================= */
+/* Contenedor de todas las materias */
+.subjects {
+    display: flex;
+    flex-direction: column;          /* Materias en columna */
+    gap: 15px;
+}
+
+/* Tarjeta individual de una materia */
+.subject {
+    background-color: #f9fafb;
+    padding: 18px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;  /* Texto a la izquierda, badge a la derecha */
+    align-items: center;
+}
+
+/* Nombre de la materia */
+.subject h3 {
+    font-size: 16px;
+}
+
+/* Créditos u otros textos secundarios */
+.subject span {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* Etiqueta del nivel de formación */
+.badge {
+    background-color: #6b7280;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+/* ================= NIVELES DE FORMACIÓN ================= */
+/* Contenedor de los niveles */
+.levels {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Nivel individual */
+.level {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;                         /* Todos ocupan el mismo ancho */
+}
+
+/* Ícono circular/rectangular del nivel */
+.level-icon {
+    width: 45px;
+    height: 45px;
+    background-color: #374151;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+/* ================= DURACIÓN Y MODALIDAD ================= */
+/* Contenedor con dos tarjetas en columnas */
+.double-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* Dos columnas iguales */
+    gap: 30px;
+}

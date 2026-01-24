@@ -1,0 +1,110 @@
+<!-- Franja institucional superior -->
+<div class="top-bar-institucional"></div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+  <div class="container">
+
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center" routerLink="/">
+      <img
+        src="/assets/img/unistmo-logo.png"
+        alt="Universidad del Istmo"
+        class="logo-institucional"
+      />
+    </a>
+
+    <!-- Hamburguesa -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarInstitucional"
+      aria-controls="navbarInstitucional"
+      aria-expanded="false"
+      aria-label="Menú de navegación">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menú -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarInstitucional">
+        <ul class="navbar-nav align-items-lg-center gap-lg-4">
+
+          <!-- Inicio -->
+          <li class="nav-item">
+            <a
+              class="btn btn-institucional"
+              routerLink="/"
+              [class.active-link]="isActive('/')"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarInstitucional"
+            >
+              Inicio
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/quienesSomos"
+              [class.active-link]="isActive('/quienesSomos')"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarInstitucional"
+            >
+              ¿Quiénes Somos?
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/planEstudios"
+              [class.active-link]="isActive('/planEstudios')"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarInstitucional"
+            >
+              Plan de Estudios
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/proyectos"
+              [class.active-link]="isActive('/proyectos')"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarInstitucional"
+            >
+              Proyectos
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/docentes"
+              [class.active-link]="isActive('/docentes')"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarInstitucional"
+            >
+              Docentes
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/aspirantes"
+              [class.active-link]="isActive('/aspirantes')"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarInstitucional"
+            >
+              Aspirantes
+            </a>
+          </li>
+
+        </ul>
+
+
+    </div>
+  </div>
+</nav>

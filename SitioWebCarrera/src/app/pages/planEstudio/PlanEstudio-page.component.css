@@ -106,7 +106,7 @@ input[type="radio"] {
     border: none;
     padding: 12px 20px;   /* MÁS ESPACIO */
     font-weight: bold;
-    color: #6b6b6b;
+    color: #000000;
     cursor: pointer;
 }
 
@@ -163,15 +163,15 @@ input[type="radio"] {
 }
 
 /* Créditos u otros textos secundarios */
-.subject span {
+span {
     font-size: 14px;
-    color: #2b2b2b;
+    color: #000000;
 }
 
 /* Etiqueta del nivel de formación */
 .badge {
+    color: #ffffff;
     background-color: #85272d;
-    color: #a09d9d;
     padding: 6px 14px;
     border-radius: 6px;
     font-size: 13px;
