@@ -1,17 +1,12 @@
 <!-- Franja institucional superior -->
 <div class="top-bar-institucional"></div>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-white border-bottom navbar-sticky"
+  [class.scrolled]="isScrolled"
+>
   <div class="container">
 
-    <!-- Logo -->
-    <a class="navbar-brand d-flex align-items-center" routerLink="/">
-      <img
-        src="/assets/img/unistmo-logo.png"
-        alt="Universidad del Istmo"
-        class="logo-institucional"
-      />
-    </a>
 
     <!-- Hamburguesa -->
     <button

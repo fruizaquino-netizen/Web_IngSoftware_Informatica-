@@ -1,0 +1,48 @@
+<div class="main-wrapper">
+  <section class="docentes-section py-5">
+    <div class="container">
+      
+      <header class="mb-5 position-relative header-container">
+        <h1 class="display-4 fw-bold text-dark mb-2">Docentes</h1>
+        <p class="lead text-secondary subtitle-text">
+          Liderazgo académico y experiencia profesional al servicio de tu formación.
+        </p>
+        <div class="animated-underline"></div>
+      </header>
+
+      <div class="row g-4 justify-content-center">
+        @for (docente of docentes(); track docente.nombre) {
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="premium-card shadow-lg border-0">
+              
+              <div class="card-image-box">
+                <div class="image-zoom-container">
+                  <img [src]="docente.imagen" 
+                       class="img-fluid" 
+                       [alt]="docente.nombre"
+                       onerror="this.src='https://ui-avatars.com/api/?name=Docente&background=cbd5e1&color=333d47&size=512'">
+                </div>
+                <div class="specialty-glass-badge">
+                  {{ docente.especialidad }}
+                </div>
+              </div>
+
+              <div class="card-body-premium p-4 text-center">
+                <h3 class="h5 fw-bold text-dark mb-1">{{ docente.nombre }}</h3>
+                <p class="teacher-role small mb-4">{{ docente.cargo }}</p>
+                
+                <button class="btn-ultra-profile">
+                  <span>Ver Perfil</span>
+                  <div class="btn-icon">
+                    <i class="bi bi-chevron-right"></i>
+                  </div>
+                </button>
+              </div>
+
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+</div>

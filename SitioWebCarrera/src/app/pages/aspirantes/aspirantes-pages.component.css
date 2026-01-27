@@ -1,237 +1,239 @@
-/* =========================
-   RESET BÁSICO
-========================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-
-/* =========================
-   CONTENEDOR GENERAL
-========================= */
+/* CONTENEDOR GENERAL */
 .aspirantes {
-  background-color: #f7f2f2;
-  padding-bottom: 60px;
+  background-color: #f5f6f8;
+  padding-bottom: 70px;
 }
-
-/* =========================
-   HEADER
-========================= */
+/* HEADER*/
 .header {
-  background: linear-gradient(135deg, #8b1e3f, #a4163a);
-  color: #ffffff;
-  text-align: center;
-  padding: 80px 20px;
+  background-color: #ffffff;
+  padding: 30px 10px 30px;
 }
-
 .header h1 {
-  font-size: 40px;
-  margin-bottom: 12px;
+  font-size: 35px;
+  font-weight: 700;
+  color: #5f0f14;
+  margin-bottom: 10px;
 }
-
 .header p {
   font-size: 18px;
-  max-width: 800px;
+  max-width: 850px;
   margin: 0 auto;
-  line-height: 1.6;
+  line-height: 1.5;
+  color: #4b5563;
 }
-
-/* =========================
-   PROCESO
-========================= */
+/*PROCESO*/
 .proceso-box {
-  max-width: 1100px;
-  margin: 60px auto;
-  padding: 40px 20px;
+  max-width: 1150px;
+  margin: 40px auto;
+  padding: 50px 30px;
   background-color: #ffffff;
-  border-radius: 14px;
+  border-radius: 18px;
   text-align: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
 }
-
 .proceso-box h2 {
-  font-size: 28px;
-  color: #3b1f1f;
-  margin-bottom: 40px;
+  font-size: 30px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 50px;
 }
-
+/*PASOS*/
 .pasos {
   display: flex;
+  align-items: center;
   justify-content: center;
   gap: 30px;
-  flex-wrap: wrap;
+  margin-bottom: 40px;
 }
-
-/* =========================
-   PASO CARD
-========================= */
+/*PASO CARD*/
 .paso-card {
   width: 260px;
-  background-color: #f7f2f2;
-  padding: 30px 20px;
-  border-radius: 12px;
+  background-color: #ffffff;
+  padding: 36px 26px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-.icono {
-  font-size: 36px;
-  margin-bottom: 12px;
+.paso-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
 }
-
+/*ICONO*/
+.icono-circulo {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 16px;
+  background-color: #f3f4f6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+/*TEXTO PASO*/
 .paso-num {
   display: block;
   font-size: 14px;
   font-weight: 600;
   color: #8b1e3f;
-  margin-bottom: 8px;
-}
-
-.paso-card h3 {
-  font-size: 18px;
-  color: #3b1f1f;
   margin-bottom: 10px;
 }
-
+.paso-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 10px;
+}
 .paso-card p {
   font-size: 15px;
-  color: #5a2a2a;
-  line-height: 1.5;
+  color: #4b5563;
+  line-height: 1.6;
 }
-
-/* =========================
-   CONECTOR (OPCIONAL)
-========================= */
-.conector {
-  display: none;
+/*LINEA CONECTORA*/
+.linea {
+  width: 90px;
+  height: 2px;
+  background-color: #d1d5db;
 }
-
-/* =========================
-   BOTÓN PRINCIPAL
-========================= */
+/*BOTÓN PRINCIPAL*/
 .btn-principal {
-  margin-top: 40px;
-  padding: 12px 34px;
-  background-color: #8b1e3f;
+  padding: 14px 38px;
+  background-color: #374151;
   color: #ffffff;
   border: none;
   border-radius: 30px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-
 .btn-principal:hover {
-  background-color: #a4163a;
+  background-color: #1f2937;
 }
-
-/* =========================
-   INFO
-========================= */
+/*INFO*/
 .info {
-  max-width: 1100px;
-  margin: 60px auto;
+  max-width: 1150px;
+  margin: 70px auto;
   padding: 0 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
 }
-
 .info-card {
   background-color: #ffffff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 34px;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
 }
-
 .info-card h3 {
   font-size: 22px;
-  color: #3b1f1f;
-  margin-bottom: 20px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 22px;
 }
-
+/*REQUISITOS*/
+.info-card ul {
+  list-style: none;
+}
 .info-card ul li {
-  margin-bottom: 10px;
-  color: #5a2a2a;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
   font-size: 15px;
+  color: #4b5563;
 }
-
-/* =========================
-   FECHAS
-========================= */
+.info-card ul li::before {
+  content: "✔";
+  color: #22c55e;
+  font-weight: bold;
+}
+/*FECHAS*/
 .fecha {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e7eb;
   font-size: 15px;
-  color: #5a2a2a;
+  color: #4b5563;
 }
-
-/* =========================
-   CTA
-========================= */
+.fecha:last-child {
+  border-bottom: none;
+}
+.fecha strong {
+  font-weight: 600;
+  color: #111827;
+}
+/*CTA*/
 .cta {
-  margin: 60px 20px 0;
-  background: linear-gradient(135deg, #8b1e3f, #a4163a);
+  max-width: 1150px;
+  margin: 80px auto 0;
+  background-color: #374151;
   color: #ffffff;
   text-align: center;
-  padding: 70px 20px;
-  border-radius: 16px;
+  padding: 80px 30px;
+  border-radius: 22px;
 }
-
 .cta h2 {
-  font-size: 32px;
-  margin-bottom: 12px;
+  font-size: 34px;
+  font-weight: 600;
+  margin-bottom: 14px;
 }
-
 .cta p {
   font-size: 18px;
-  max-width: 700px;
-  margin: 0 auto 30px;
+  max-width: 720px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+  color: #e5e7eb;
 }
-
-/* =========================
-   BOTONES CTA
-========================= */
+/*BOTONES CTA*/
 .cta-botones {
   display: flex;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
 }
-
 .btn-blanco {
   background-color: #ffffff;
-  color: #8b1e3f;
-  padding: 12px 30px;
+  color: #374151;
+  padding: 14px 34px;
   border-radius: 30px;
   border: none;
   font-weight: 600;
   cursor: pointer;
 }
-
 .btn-outline {
   background-color: transparent;
   color: #ffffff;
-  padding: 12px 30px;
+  padding: 14px 34px;
   border-radius: 30px;
   border: 2px solid #ffffff;
   font-weight: 600;
   cursor: pointer;
 }
+/*RESPONSIVE*/
+@media (max-width: 900px) {
+  .pasos {
+    flex-wrap: wrap;
+  }
 
-/* =========================
-   RESPONSIVE
-========================= */
+  .linea {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   .info {
     grid-template-columns: 1fr;
   }
-
-  .header h1 {
-    font-size: 32px;
-  }
-
   .cta h2 {
-    font-size: 26px;
+    font-size: 28px;
   }
 }
