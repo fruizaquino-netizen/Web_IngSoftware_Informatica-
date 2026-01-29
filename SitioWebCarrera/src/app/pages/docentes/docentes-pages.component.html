@@ -1,7 +1,7 @@
 <div class="main-wrapper">
   <section class="docentes-section py-5">
     <div class="container">
-      
+
       <header class="mb-5 position-relative header-container">
         <h1 class="display-4 fw-bold text-dark mb-2">Docentes</h1>
         <p class="lead text-secondary subtitle-text">
@@ -14,11 +14,11 @@
         @for (docente of docentes(); track docente.nombre) {
           <div class="col-12 col-md-6 col-lg-4">
             <div class="premium-card shadow-lg border-0">
-              
+
               <div class="card-image-box">
                 <div class="image-zoom-container">
-                  <img [src]="docente.imagen" 
-                       class="img-fluid" 
+                  <img [src]="docente.imagen"
+                       class="img-fluid"
                        [alt]="docente.nombre"
                        onerror="this.src='https://ui-avatars.com/api/?name=Docente&background=random&size=512'">
                 </div>
@@ -30,7 +30,7 @@
               <div class="card-body-premium p-4 text-center">
                 <h3 class="h5 fw-bold text-dark mb-1">{{ docente.nombre }}</h3>
                 <p class="text-uppercase text-danger small fw-bold tracking-wider mb-4">{{ docente.cargo }}</p>
-                
+
                 <button class="btn-ultra-profile">
                   <span>Ver Perfil</span>
                   <div class="btn-icon">
@@ -44,42 +44,4 @@
       </div>
     </div>
   </section>
-
-  <footer class="footer-modern py-5 mt-5">
-    <div class="container">
-      <div class="row gy-4 align-items-start">
-        
-        <div class="col-md-4">
-          <h5 class="footer-title">Footer / Soporte</h5>
-          <ul class="footer-list-custom">
-            <li><i class="bi bi-file-earmark-pdf"></i> Zona de Descargas</li>
-            <li><i class="bi bi-clipboard-check"></i> Formularios</li>
-            <li><i class="bi bi-shield-check"></i> Reglamentos</li>
-            <li><i class="bi bi-folder2-open"></i> Documentos</li>
-          </ul>
-        </div>
-
-        <div class="col-md-4">
-          <h5 class="footer-title">Recursos</h5>
-          <ul class="footer-bullets-premium">
-            <li>Formularios en línea</li>
-            <li>Reglamento estudiantil</li>
-            <li>Documentos académicos</li>
-          </ul>
-        </div>
-
-        <div class="col-md-4 d-flex flex-column align-items-md-end align-items-center">
-          <h5 class="footer-title mb-4">Síguenos</h5>
-          <div class="social-box-grid">
-            <a href="#" class="social-item fb"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="social-item ig"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="social-item yt"><i class="bi bi-youtube"></i></a>
-            <a href="#" class="social-item tw"><i class="bi bi-twitter-x"></i></a>
-            <a href="#" class="social-item wa"><i class="bi bi-whatsapp"></i></a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </footer>
 </div>
