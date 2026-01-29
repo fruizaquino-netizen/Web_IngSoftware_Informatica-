@@ -10,29 +10,49 @@
 
     <section class="container">
         <div class="grid-cards">
-            <div class="card card-green">
-                <div class="icon-wrapper">
-                    <img src="Imagenes/Excelencia.png" alt="Icono de Excelencia Académica" class="card-icon">
-                </div>
-                <h3>Excelencia Académica</h3>
-                <p>Programas educativos de alta calidad enfocados en el desarrollo integral de nuestros estudiantes.</p>
-            </div>
+<div class="card card-green" routerLink="/excelecia-academica">
+    <div class="icon-wrapper">
+        <img
+            src="assets/img/Excelencia.png"
+            alt="Icono de Excelencia Académica"
+            class="card-icon">
+    </div>
+    <h3>Excelencia Académica</h3>
+    <p>
+        Programas educativos de alta calidad enfocados en el desarrollo integral
+        de nuestros estudiantes.
+    </p>
+</div>
 
-            <div class="card card-red">
-                <div class="icon-wrapper">
-                    <img src="Imagenes/Tecnologia.png" alt="Icono de Tecnología Avanzada" class="card-icon">
-                </div>
-                <h3>Tecnología Avanzada</h3>
-                <p>Infraestructura moderna y recursos tecnológicos de vanguardia para tu aprendizaje.</p>
-            </div>
+            <div class="card card-red" routerLink="/tecnologia-avanzada">
+    <div class="icon-wrapper">
+        <img
+            src="assets/img/Tecnologia.png"
+            alt="Icono de Tecnología Avanzada"
+            class="card-icon">
+    </div>
+    <h3>Tecnología Avanzada</h3>
+    <p>
+        Infraestructura moderna y recursos tecnológicos de vanguardia
+        para tu aprendizaje.
+    </p>
+</div>
 
-            <div class="card card-green">
-                <div class="icon-wrapper">
-                    <img src="Imagenes/Vinculacion.png" alt="Icono de Vinculación Regional" class="card-icon">
-                </div>
-                <h3>Vinculación Regional</h3>
-                <p>Conexión directa con el sector productivo y las necesidades de la región.</p>
-            </div>
+
+           <div class="card card-green"[routerLink]="['/vinculacion-regional']"style="cursor: pointer;"
+>
+  <div class="icon-wrapper">
+    <img
+      src="assets/img/Vinculacion.png"
+      alt="Icono de Vinculación Regional"
+      class="card-icon">
+  </div>
+  <h3>Vinculación Regional</h3>
+  <p>
+    Conexión directa con el sector productivo y las necesidades de la región.
+  </p>
+</div>
+
         </div>
     </section>
 

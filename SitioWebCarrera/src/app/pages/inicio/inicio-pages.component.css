@@ -29,7 +29,7 @@ body {
     height: 600px;
     background:
         linear-gradient(rgba(10, 25, 47, 0.6), rgba(10, 25, 47, 0.6)),
-        url('/assets/img/FondoUistmo.png');
+        url('../../../assets/img/FondoUistmo.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
