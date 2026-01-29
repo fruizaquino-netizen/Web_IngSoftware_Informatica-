@@ -2,7 +2,9 @@
     <section class="hero">
         <div>
             <h1 class="hero-title">Innovación tecnológica con sentido humano</h1>
+            <a href="https://www.unistmo.edu.mx/web/p_ensenanza/escolares.html" target="_blank">
             <button class="btn-hero">Inicia tu proceso de ingreso aquí</button>
+            </a>
         </div>
     </section>
 
@@ -47,5 +49,59 @@
             </div>
         </div>
     </section>
-</main>
+<section class="news-section">
+    <div class="news-header">
+        <h2 class="section-title">Noticias Informática</h2>
+        <button class="btn-calendar" (click)="toggleCalendar()" title="Ver Calendario">
+            📅
+        </button>
+    </div>
 
+   <div class="news-container">
+    <article class="news-card ia">
+        <span class="news-date">25 de Mayo, 2024</span>
+        <h3>Nuevo Laboratorio de IA</h3>
+        <p>Se inaugura el centro de cómputo avanzado para proyectos de Inteligencia Artificial en el campus Ixtepec.</p>
+    </article>
+
+    <article class="news-card">
+        <span class="news-date">18 de Mayo, 2024</span>
+        <h3>Convenio con Google Cloud</h3>
+        <p>Alumnos de Informática tendrán acceso a certificaciones oficiales de la nube de Google.</p>
+    </article>
+
+    <article class="news-card hackathon">
+        <span class="news-date">12 de Mayo, 2024</span>
+        <h3>Hackathon Regional</h3>
+        <p>Participa en el próximo encuentro de desarrollo de software para el Istmo.</p>
+    </article>
+</div>
+</section>
+
+<div class="calendar-modal" *ngIf="isCalendarVisible" (click)="closeCalendar()">
+    <div class="calendar-content" (click)="$event.stopPropagation()">
+
+        <div class="calendar-header">
+            <div class="nav-controls">
+                <button (click)="changeMonth(-1)" class="btn-nav">&lt;</button>
+                <h3>{{ currentMonthName }} {{ currentYear }}</h3>
+                <button (click)="changeMonth(1)" class="btn-nav">&gt;</button>
+            </div>
+            <button class="close-modal" (click)="toggleCalendar()">&times;</button>
+        </div>
+
+        <div class="calendar-grid">
+            <span *ngFor="let dayName of daysOfWeek; let i = index"
+                  [class.dom]="i === 6" class="day-name">
+                {{ dayName }}
+            </span>
+
+            <span *ngFor="let day of calendarDays; let i = index"
+                  [class.dom]="i % 7 === 6">
+                {{ day }}
+            </span>
+        </div>
+    </div>
+</div>
+
+</main>

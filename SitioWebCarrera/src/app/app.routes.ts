@@ -34,6 +34,21 @@ export const routes: Routes = [
       .then(m => m.AspirantesPageComponent)
   },
   {
+    path:'excelecia-academica',
+    loadComponent:()=> import('./pages/inicio/excelencia/excelencia.component')
+      .then(m=> m.ExcelenciaComponent)
+  },
+  {
+    path:'tecnologia-avanzada',
+    loadComponent:() => import('./pages/inicio/tecnologia/tecnologia.component')
+      .then(m =>m.TecnologiaComponent)
+  },
+  {
+    path:'vinculacion-regional',
+    loadComponent:()=> import('./pages/inicio/vinculacion/vinculacion.component')
+      .then(m => m.VinculacionComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }

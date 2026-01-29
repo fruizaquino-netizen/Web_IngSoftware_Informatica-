@@ -27,8 +27,9 @@ body {
 /* --- 2. HERO SECTION --- */
 .hero {
     height: 600px;
-    background: linear-gradient(rgba(10, 25, 47, 0.6), rgba(10, 25, 47, 0.6)),
-                url('./Imagenes/Fondo\ Uistmo.png');
+    background:
+        linear-gradient(rgba(10, 25, 47, 0.6), rgba(10, 25, 47, 0.6)),
+        url('/assets/img/FondoUistmo.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -57,7 +58,7 @@ body {
     font-weight: 700;
     font-size: 1.1rem;
     cursor: pointer;
-    box-shadow: 0 4px 14px 0 rgba(139, 29, 34, 0.39);
+    box-shadow: 0 4px 14px rgba(139, 29, 34, 0.39);
     transition: var(--transition);
 }
 
@@ -67,7 +68,12 @@ body {
     box-shadow: 0 6px 20px rgba(139, 29, 34, 0.23);
 }
 
-/* --- 3. CARDS (CON ICONOS Y DELINEADO SUTIL) --- */
+.hero a {
+    text-decoration: none;
+}
+
+
+/* --- 3. CARDS --- */
 .container {
     max-width: 1200px;
     margin: 80px auto;
@@ -94,7 +100,10 @@ body {
 .card::before {
     content: "";
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 4px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
     background: transparent;
     transition: var(--transition);
 }
@@ -105,14 +114,19 @@ body {
     border-color: rgba(139, 29, 34, 0.4);
 }
 
-.card-green:hover::before { background: var(--verde-logo); }
-.card-red:hover::before { background: var(--rojo-inst); }
+.card-green:hover::before {
+    background: var(--verde-logo);
+}
 
-/* Nuevo estilo para el contenedor del icono */
+.card-red:hover::before {
+    background: var(--rojo-inst);
+}
+
+/* --- ICONOS --- */
 .icon-wrapper {
     width: 60px;
     height: 60px;
-    background: rgba(139, 29, 34, 0.08); /* Un fondo muy sutil con el color rojizo */
+    background: rgba(139, 29, 34, 0.08);
     border-radius: 12px;
     margin-bottom: 25px;
     display: flex;
@@ -120,26 +134,12 @@ body {
     justify-content: center;
 }
 
-/* Estilo para las imágenes de icono */
 .card-icon {
-    width: 40px;      /* Puedes ajustar el tamaño */
+    width: 40px;
     height: 40px;
-    object-fit: contain; /* Evita que la imagen se estire */
+    object-fit: contain;
     display: block;
 }
-
-/* Puedes eliminar o renombrar el antiguo .icon-placeholder si ya no lo usas */
-/* .icon-placeholder {
-    width: 60px;
-    height: 60px;
-    background: var(--crema-arena);
-    border-radius: 12px;
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
-
 
 .card h3 {
     margin-top: 0;
@@ -147,51 +147,74 @@ body {
     color: #0f172a;
 }
 
-/* --- 4. CTA SECTION & BOTONES --- */
+/* --- 4. CTA SECTION (CORREGIDA) --- */
 .cta-section {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    padding: 100px 20px;
+    padding: 120px 20px;
     text-align: center;
 }
 
 .cta-title {
-    font-size: 2.8rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    margin-bottom: 20px;
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin-bottom: 18px;
+    color: #0f172a;
+}
+
+.cta-text {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+    color: #475569;
 }
 
 .cta-buttons {
     display: flex;
-    gap: 20px;
+    gap: 24px;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
-.btn-primary, .btn-secondary {
-    background-color: #8B1D22;
+/* Botón principal */
+.btn-primary {
+    background: linear-gradient(135deg, #8B1D22, #6d161a);
     color: white;
-    border: 2px solid #8B1D22;
-    padding: 14px 32px;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 700;
+    border: none;
+    padding: 15px 38px;
+    border-radius: 14px;
+    font-size: 1.05rem;
+    font-weight: 800;
     cursor: pointer;
+    box-shadow: 0 8px 20px rgba(139, 29, 34, 0.35);
     transition: var(--transition);
-    box-shadow: 0 4px 10px rgba(139, 29, 34, 0.2);
 }
 
-.btn-primary:hover, .btn-secondary:hover {
-    background-color: white;
-    color: #8B1D22;
-    border: 2px solid #8B1D22;
-    transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(139, 29, 34, 0.3);
+.btn-primary:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 28px rgba(139, 29, 34, 0.45);
 }
 
-.btn-primary:active, .btn-secondary:active {
-    transform: scale(0.98);
+/* Botón secundario */
+.btn-secondary {
+    background: white;
+    color: var(--rojo-inst);
+    border: 2px solid var(--rojo-inst);
+    padding: 15px 38px;
+    border-radius: 14px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(139, 29, 34, 0.45);
+    transition: var(--transition);
+}
+
+.btn-secondary:hover {
+    background: var(--rojo-inst);
+    color: white;
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 28px rgba(139, 29, 34, 0.35);
 }
 
 /* --- 5. FOOTER --- */
@@ -217,29 +240,6 @@ body {
     color: #475569;
 }
 
-.social-group {
-    display: flex;
-    gap: 12px;
-}
-
-.social-icon {
-    width: 42px;
-    height: 42px;
-    background: var(--azul-oscuro-social);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.social-icon svg {
-    width: 20px;
-    height: 20px;
-    stroke: white;
-    fill: none;
-    stroke-width: 2;
-}
-
 /* --- 6. ANIMACIONES --- */
 @keyframes fadeInUp {
     from {
@@ -251,3 +251,214 @@ body {
         transform: translateY(0);
     }
 }
+
+/* --- SECCIÓN NOTICIAS (ESTILO EXACTO IMAGEN 2) --- */
+.news-section {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 40px;
+    /* Fondo general sutil que se ve en la imagen 2 */
+    background: linear-gradient(135deg, #ffffff 0%, #f3ecea 100%);
+    border-radius: 30px;
+}
+
+.news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: white;
+    background-color: #8B1D22; /* El color rojo institucional */
+    padding: 15px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    margin: 0;
+}
+
+.news-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.news-card {
+    background: #f8f5f4; /* Color crema/grisáceo muy claro de la imagen */
+    padding: 30px;
+    border-radius: 25px;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: var(--transition);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.news-date {
+    display: block;
+    font-size: 0.85rem;
+    color: #1e293b;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.news-card h3 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+    font-weight: 800;
+    color: #0c1c3d; /* Azul muy oscuro */
+    margin-bottom: 15px;
+}
+
+.news-card p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 40px; /* Espacio para el icono */
+}
+
+/* Iconos en la esquina inferior derecha */
+.news-card::after {
+    content: '🏆'; /* Icono por defecto */
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+
+/* Personalización de iconos para cada carta (opcional vía HTML) */
+.news-card.ia::after { content: '🌐'; }
+.news-card.google::after { content: ''; } /* Google no parece tener icono en la imagen */
+.news-card.hackathon::after { content: '🏆'; }
+
+/* --- BOTÓN CALENDARIO ESTILO IMAGEN 2 --- */
+.btn-calendar {
+    background: #ffffff;
+    border: none;
+    border-radius: 15px;
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+/* Estilo para el icono de calendario dentro del botón */
+.btn-calendar img, .calendar-icon-svg {
+    width: 45px;
+    height: 45px;
+    color: #8B1D22;
+}
+
+/* --- MODAL Y NAVEGACIÓN (AJUSTES) --- */
+.calendar-content {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    width: 400px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.btn-nav {
+    background: #f8fafc;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    color: var(--rojo-inst);
+    cursor: pointer;
+}
+/* --- MODAL CALENDARIO --- */
+.calendar-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex; /* Angular se encarga de mostrarlo/ocultarlo con *ngIf */
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.calendar-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 350px;
+    box-shadow: var(--shadow-md);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: var(--gris-oscuro);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.calendar-grid span {
+    padding: 5px;
+}
+
+.calendar-grid .dom {
+    color: #00bcd4; /* Azul de tu imagen */
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-nav {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 5px 12px;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--rojo-inst);
+    transition: 0.2s;
+}
+
+.btn-nav:hover {
+    background: var(--rojo-inst);
+    color: white;
+}
+
+.day-name {
+    font-weight: 800;
+    font-size: 0.75rem;
+    color: #64748b;
+}
+

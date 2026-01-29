@@ -4,43 +4,59 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+/* CONTENEDOR GENERAL */
+.aspirantes {
+  background-color: #f5f6f8;
+  padding-bottom: 70px;
+}
 /* HEADER*/
 .header {
   background-color: #ffffff;
   padding: 30px 10px 30px;
 }
 .header h1 {
+  font-size: 35px;
+  font-weight: 700;
   color: #5f0f14;
+  margin-bottom: 10px;
 }
-
+.header p {
+  font-size: 18px;
+  max-width: 850px;
+  margin: 0 auto;
+  line-height: 1.5;
+  color: #4b5563;
+}
 /*PROCESO*/
 .proceso-box {
   max-width: 1150px;
-  margin: 30px auto;
-  padding: 40px 20px;
-  background-color: #f3eeee;
-  border-radius: 10px;
+  margin: 40px auto;
+  padding: 50px 30px;
+  background-color: #ffffff;
+  border-radius: 18px;
   text-align: center;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
-
 }
 .proceso-box h2 {
-  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 50px;
 }
 /*PASOS*/
 .pasos {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
   margin-bottom: 40px;
 }
 /*PASO CARD*/
 .paso-card {
-  width: 970px;
+  width: 260px;
   background-color: #ffffff;
-  padding: 30px 15px;
-  border-radius: 10px;
+  padding: 36px 26px;
+  border-radius: 18px;
   text-align: center;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -51,111 +67,142 @@
 }
 /*ICONO*/
 .icono-circulo {
-  width: 62px;
-  height: 62px;
+  width: 68px;
+  height: 68px;
   margin: 0 auto 16px;
-  background-color: #dfe1e6;
+  background-color: #f3f4f6;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 40px;
+  font-size: 30px;
 }
 /*TEXTO PASO*/
-
+.paso-num {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #8b1e3f;
+  margin-bottom: 10px;
+}
 .paso-card h3 {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
   color: #111827;
   margin-bottom: 10px;
 }
 .paso-card p {
-  font-size: 14px;
-
+  font-size: 15px;
+  color: #4b5563;
+  line-height: 1.6;
 }
 /*LINEA CONECTORA*/
 .linea {
-  width: 100px;
+  width: 90px;
   height: 2px;
-  background-color: #0b1627;
+  background-color: #d1d5db;
 }
 /*BOTÓN PRINCIPAL*/
 .btn-principal {
   padding: 14px 38px;
-  background-color: #901d25;
+  background-color: #374151;
   color: #ffffff;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  display: inline-block;
-  text-decoration: none;
 }
 .btn-principal:hover {
-  background-color: #5f0f14;
+  background-color: #1f2937;
 }
 /*INFO*/
 .info {
+  max-width: 1150px;
+  margin: 70px auto;
+  padding: 0 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
 }
 .info-card {
-  background-color: #f4f1f1;
-  padding: 20px;
-  border-radius: 10px;
+  background-color: #ffffff;
+  padding: 34px;
+  border-radius: 18px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
 }
 .info-card h3 {
-
+  font-size: 22px;
+  font-weight: 600;
   color: #111827;
   margin-bottom: 22px;
 }
 /*REQUISITOS*/
-
+.info-card ul {
+  list-style: none;
+}
 .info-card ul li {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
   margin-bottom: 14px;
   font-size: 15px;
   color: #4b5563;
 }
 .info-card ul li::before {
-  content: "✅";
+  content: "✔";
+  color: #22c55e;
+  font-weight: bold;
 }
 /*FECHAS*/
 .fecha {
   display: flex;
   justify-content: space-between;
   padding: 12px 0;
-  border-bottom: 1px solid #910d16;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 15px;
+  color: #4b5563;
+}
+.fecha:last-child {
+  border-bottom: none;
+}
+.fecha strong {
+  font-weight: 600;
+  color: #111827;
 }
 /*CTA*/
 .cta {
   max-width: 1150px;
-  margin: 35px auto ;
-  background-color: #5f0f14;
+  margin: 80px auto 0;
+  background-color: #374151;
   color: #ffffff;
   text-align: center;
-  padding: 18px 20px;
-  border-radius: 10px;
+  padding: 80px 30px;
+  border-radius: 22px;
 }
 .cta h2 {
-  font-size: 25px;
-  margin-bottom: 22px;
+  font-size: 34px;
+  font-weight: 600;
+  margin-bottom: 14px;
 }
 .cta p {
+  font-size: 18px;
   max-width: 720px;
-  margin: 0 auto 24px;
-  line-height: 1.5;
+  margin: 0 auto 36px;
+  line-height: 1.7;
   color: #e5e7eb;
 }
-.btn-cta {
+/*BOTONES CTA*/
+.cta-botones {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.btn-blanco {
   background-color: #ffffff;
-  color: #1f0305;
-  padding: 14px 30px;
-  border-radius: 10px;
+  color: #374151;
+  padding: 14px 34px;
+  border-radius: 30px;
   border: none;
   font-weight: 600;
   cursor: pointer;
@@ -166,7 +213,15 @@
 .btn-cta:hover {
   background-color: #e5e7eb;
 }
-
+.btn-outline {
+  background-color: transparent;
+  color: #ffffff;
+  padding: 14px 34px;
+  border-radius: 30px;
+  border: 2px solid #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
 /*RESPONSIVE*/
 @media (max-width: 900px) {
   .pasos {

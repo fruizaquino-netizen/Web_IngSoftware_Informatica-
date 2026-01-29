@@ -1,0 +1,74 @@
+/* Estilos para la sección de Excelencia */
+.excelencia-header {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #f8fafc;
+}
+
+.excelencia-header h1 {
+    color: #8B1D22; /* Rojo sólido */
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    border-left: 5px solid #8B1D22; /* Por defecto rojo */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Variaciones de color para las tarjetas */
+.card-red {
+    border-left: 5px solid #8B1D22;
+}
+
+.card-green {
+    border-left: 5px solid #2e7d32; /* Un verde sólido acorde al logo */
+}
+
+.card h3 {
+    color: #1e293b;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.card p {
+    color: #475569;
+    line-height: 1.6;
+}
+
+/* Botón Volver (Mismo estilo que las anteriores) */
+.btn-secondary {
+    padding: 12px 25px;
+    background-color: #8B1D22;
+    color: white !important;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background-color: #A52329;
+    box-shadow: 0 4px 12px rgba(139, 29, 34, 0.3);
+}
