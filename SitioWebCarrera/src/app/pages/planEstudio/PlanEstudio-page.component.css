@@ -79,13 +79,35 @@ input[type="radio"] {
 }
 
 
-/* Contenedor de las pestañas */
+/* ================= CONTENEDOR DE PESTAÑAS ================= */
+
+/* Contenedor de las pestañas con scroll horizontal */
 .tabs {
     display: flex;
-    gap: 40px;           /* SEPARA BIEN Semestre 1, 2 y 3 */
-    border-bottom: 1px solid #e5e7eb;
-    margin-bottom: 25px;
+    gap: 10px;
+    overflow-x: auto;              /* Scroll horizontal */
+    white-space: nowrap;           /* Evita salto de línea */
+    padding: 10px;
+    background-color: #f5f5f5;     /* Color de fondo */
+    border-radius: 10px;
 }
+
+/* Oculta el scroll vertical si aparece */
+.tabs::-webkit-scrollbar {
+    height: 6px;
+}
+
+/* Estilo de la barra de scroll */
+.tabs::-webkit-scrollbar-thumb {
+    background-color: #85272d;
+    border-radius: 10px;
+}
+
+/* Fondo del track del scroll */
+.tabs::-webkit-scrollbar-track {
+    background-color: #e0e0e0;
+}
+
 
 /* Muestra el semestre correspondiente */
 #tab1:checked ~ .content-1 {
@@ -127,15 +149,24 @@ input[type="radio"] {
 
 
 
-/* Estilo de cada pestaña */
+/* ================= ESTILO DE CADA PESTAÑA ================= */
+
 .tab {
-    background: none;
-    border: none;
-    padding: 12px 20px;   /* MÁS ESPACIO */
+    background-color: #ffffff;     /* Fondo individual */
+    border: 1px solid #ddd;
+    padding: 12px 20px;
     font-weight: bold;
     color: #000000;
     cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
+
+/* Hover de las pestañas */
+.tab:hover {
+    background-color: #ffffff;
+}
+
 
 
 /* Estilo de la pestaña activa */
@@ -152,6 +183,7 @@ input[type="radio"] {
     color: #85272d;
     border-bottom: 3px solid #85272d;
 }
+
 
 /* ================= ENCABEZADO DE MATERIAS ================= */
 /* Contenedor del título del semestre y botón PDF */
