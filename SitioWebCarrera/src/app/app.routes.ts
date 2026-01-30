@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-// Importamos SOLO el inicio para que cargue rápido al entrar
 import { InicioPageComponent } from './pages/inicio/inicio-pages.component';
 
 export const routes: Routes = [
@@ -8,8 +7,7 @@ export const routes: Routes = [
     component: InicioPageComponent
   },
   {
-    path: 'quienesSomos',
-    // Aquí empieza la magia del Lazy Loading
+    path: 'quienesSomos', // <--- Esta es la ruta que usaremos
     loadComponent: () => import('./pages/quienesSomos/quienesSomos-page.component')
       .then(m => m.QuienesSomosPageComponent)
   },
@@ -34,24 +32,22 @@ export const routes: Routes = [
       .then(m => m.AspirantesPageComponent)
   },
   {
-    path:'excelecia-academica',
-    loadComponent:()=> import('./pages/inicio/excelencia/excelencia.component')
-      .then(m=> m.ExcelenciaComponent)
+    path: 'excelecia-academica',
+    loadComponent: () => import('./pages/inicio/excelencia/excelencia.component')
+      .then(m => m.ExcelenciaComponent)
   },
   {
-    path:'tecnologia-avanzada',
-    loadComponent:() => import('./pages/inicio/tecnologia/tecnologia.component')
-      .then(m =>m.TecnologiaComponent)
+    path: 'tecnologia-avanzada',
+    loadComponent: () => import('./pages/inicio/tecnologia/tecnologia.component')
+      .then(m => m.TecnologiaComponent)
   },
   {
-    path:'vinculacion-regional',
-    loadComponent:()=> import('./pages/inicio/vinculacion/vinculacion.component')
+    path: 'vinculacion-regional',
+    loadComponent: () => import('./pages/inicio/vinculacion/vinculacion.component')
       .then(m => m.VinculacionComponent)
   },
   {
     path: '**',
     redirectTo: ''
   }
-
-
 ];

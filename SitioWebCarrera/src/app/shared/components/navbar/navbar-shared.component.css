@@ -66,3 +66,14 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   background-color: #ffffff;
 }
+
+/* Estilo para resaltar el botón de Inicio (y otros) al estar activos */
+.active-link {
+    background-color: #8B1D22 !important; /* Rojo UNISTMO */
+    color: white !important;
+    border-radius: 8px; /* Redondeado como en tu foto */
+    padding: 8px 16px;  /* Agregamos un poco de espacio interno para que no se vea apretado */
+    display: inline-block;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
