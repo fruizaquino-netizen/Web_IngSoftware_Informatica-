@@ -26,7 +26,20 @@ export class NavbarSharedComponent {
   }
 
   isActive(path: string): boolean {
-    return this.router.url === path;
+    const currentRoute = this.router.url;
+
+    // Lógica especial para el botón de INICIO
+    if (path === '/') {
+      return (
+        currentRoute === '/' ||
+        currentRoute.includes('excelecia-academica') ||
+        currentRoute.includes('tecnologia-avanzada') ||
+        currentRoute.includes('vinculacion-regional')
+      );
+    }
+
+    // Para el resto de los botones (Docentes, Proyectos, etc.)
+    return currentRoute === path;
   }
 
   @HostListener('window:scroll', [])
