@@ -1,4 +1,6 @@
 import { Component, signal } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
 
 interface Docente {
   nombre: string;
@@ -8,13 +10,15 @@ interface Docente {
 }
 
 @Component({
+  imports: [RouterModule],
+  standalone: true,
   selector: 'docentes',
   templateUrl: './docentes-pages.component.html',
   styleUrls: ['./docentes-pages.component.css']
 })
 
 export class DocentesPageComponent {
-  
+
   // Usamos un signal para manejar el estado de los docentes
   public docentes = signal<Docente[]>([
     {

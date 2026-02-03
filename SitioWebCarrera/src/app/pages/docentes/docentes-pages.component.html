@@ -31,12 +31,13 @@
                 <h3 class="h5 fw-bold text-dark mb-1">{{ docente.nombre }}</h3>
                 <p class="text-uppercase text-danger small fw-bold tracking-wider mb-4">{{ docente.cargo }}</p>
 
-                <button class="btn-ultra-profile">
-                  <span>Ver Perfil</span>
-                  <div class="btn-icon">
-                    <i class="bi bi-chevron-right"></i>
-                  </div>
-                </button>
+              <button class="btn-ultra-profile"
+                      [routerLink]="['/docente', docente.nombre]">
+                <span>Ver Perfil</span>
+                <div class="btn-icon">
+                  <i class="bi bi-chevron-right"></i>
+                </div>
+              </button>
               </div>
             </div>
           </div>
