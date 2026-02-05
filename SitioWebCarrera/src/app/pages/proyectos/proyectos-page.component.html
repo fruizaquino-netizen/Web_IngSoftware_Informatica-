@@ -1,3 +1,4 @@
+
 <!-- Header -->
 <section class="bg-white py-5 border-bottom">
   <div class="container">
@@ -8,40 +9,31 @@
     </p>
   </div>
 </section>
-
-<!-- CONTENEDOR ÚNICO (IMPORTANTE) -->
+<!-- ================= CONTENEDOR ÚNICO (IMPORTANTE) ================= -->
 <section class="container py-5 project-filter">
-
   <!-- ================= RADIOS OCULTOS ================= -->
   <input type="radio" name="filter" id="filter-all" checked>
   <input type="radio" name="filter" id="filter-software">
   <input type="radio" name="filter" id="filter-sistemas">
-
   <!-- ================= FILTROS ================= -->
   <div class="d-flex flex-wrap gap-2 filters mb-4">
-
     <label for="filter-all" class="btn btn-light">
       Todos
     </label>
-
     <label for="filter-software" class="btn btn-light">
       Desarrollo de Software
     </label>
-
     <label for="filter-sistemas" class="btn btn-light">
       Sistemas Inteligentes
     </label>
-
   </div>
-
   <!-- ================= CARDS ================= -->
   <div class="row g-4 projects">
-
-    <!-- SOFTWARE -->
+    <!-- ================= SOFTWARE 1 ================= -->
     <div class="col-12 col-md-6 col-lg-4 project-item software">
       <div class="card project-card">
         <div class="card-img-top-wrapper">
-          <img src="assets/img/proy1.jpg" alt="Carrito Arduino">
+          <img src="assets/img/proy1.jpg" alt="Carrito Autónomo con Arduino">
         </div>
         <div class="card-body">
           <span class="card-category">Desarrollo de Software</span>
@@ -49,16 +41,19 @@
             Carrito Autónomo con Arduino
           </h5>
           <p class="card-text text-muted small">
-            Vehículo a escala controlado por Arduino con sensores inteligentes.
+            Vehículo autónomo a escala controlado por Arduino con sensores inteligentes.
           </p>
-          <a href="#" class="btn btn-dark-custom w-100 btn-sm">
+          <button
+            type="button"
+            class="btn btn-dark-custom w-100 btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#modal-proyecto-1">
             Ver Más
-          </a>
+          </button>
         </div>
       </div>
     </div>
-
-    <!-- SOFTWARE -->
+    <!-- ================= SOFTWARE 2 ================= -->
     <div class="col-12 col-md-6 col-lg-4 project-item software">
       <div class="card project-card">
         <div class="card-img-top-wrapper">
@@ -72,18 +67,21 @@
           <p class="card-text text-muted small">
             Sistema de medición con visualización gráfica en tiempo real.
           </p>
-          <a href="#" class="btn btn-dark-custom w-100 btn-sm">
+          <button
+            type="button"
+            class="btn btn-dark-custom w-100 btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#modal-proyecto-2">
             Ver Más
-          </a>
+          </button>
         </div>
       </div>
     </div>
-
-    <!-- SISTEMAS -->
+    <!-- ================= SISTEMAS 1 ================= -->
     <div class="col-12 col-md-6 col-lg-4 project-item sistemas">
       <div class="card project-card">
         <div class="card-img-top-wrapper">
-          <img src="assets/img/sensor.jpg" alt="Sensor de Personas">
+          <img src="assets/img/sensor.jpg" alt="Sensor de Detección de Personas">
         </div>
         <div class="card-body">
           <span class="card-category">Sistemas Inteligentes</span>
@@ -91,20 +89,23 @@
             Sensor de Detección de Personas
           </h5>
           <p class="card-text text-muted small">
-            Sensor inteligente para detección de presencia humana.
+            Sensor inteligente para detección automática de presencia humana.
           </p>
-          <a href="#" class="btn btn-dark-custom w-100 btn-sm">
+          <button
+            type="button"
+            class="btn btn-dark-custom w-100 btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#modal-proyecto-3">
             Ver Más
-          </a>
+          </button>
         </div>
       </div>
     </div>
-
-    <!-- SISTEMAS -->
+    <!-- ================= SISTEMAS 2 ================= -->
     <div class="col-12 col-md-6 col-lg-4 project-item sistemas">
       <div class="card project-card">
         <div class="card-img-top-wrapper">
-          <img src="assets/img/proy4.png" alt="DronPorVoz">
+          <img src="assets/img/proy4.png" alt="Dron comandado por voz">
         </div>
         <div class="card-body">
           <span class="card-category">Sistemas Inteligentes</span>
@@ -112,22 +113,24 @@
             Dron comandado por voz
           </h5>
           <p class="card-text text-muted small">
-            Dron programado para obedecer comandos por voz
+            Dron inteligente programado para obedecer comandos por voz.
           </p>
-          <a href="#" class="btn btn-dark-custom w-100 btn-sm">
+          <button
+            type="button"
+            class="btn btn-dark-custom w-100 btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#modal-proyecto-4">
             Ver Más
-          </a>
+          </button>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
 <!-- ================= VIDEOS INFORMATIVOS ================= -->
 <section class="container py-5">
   <h2 class="fw-bold mb-4">Videos Informativos</h2>
-
   <div class="row g-4">
     <div class="col-md-6">
       <div class="ratio ratio-16x9">
@@ -137,7 +140,6 @@
         Presentación general de la carrera de Informática.
       </p>
     </div>
-
     <div class="col-md-6">
       <div class="ratio ratio-16x9">
         <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
@@ -155,32 +157,64 @@
     <h2 class="fw-bold mb-4">Áreas Físicas</h2>
 
     <div class="row g-4">
+
       <div class="col-6 col-md-4">
-        <img src="assets/img/Electronica1.jpg" class="img-fluid rounded" alt="Laboratorio de Electronica">
+        <img
+          src="assets/img/Electronica1.jpg"
+          class="img-fluid rounded gallery-img"
+          (click)="openGallery(0)"
+          alt="Laboratorio de Electrónica">
       </div>
+
       <div class="col-6 col-md-4">
-        <img src="assets/img/Elect.jpg" class="img-fluid rounded" alt="Laboratorio de Electronica">
+        <img
+          src="assets/img/Elect.jpg"
+          class="img-fluid rounded gallery-img"
+          (click)="openGallery(1)"
+          alt="Laboratorio de Electrónica">
       </div>
+
       <div class="col-6 col-md-4">
-        <img src="assets/img/SalaRedes.jpg" class="img-fluid rounded" alt="Sala de Redes">
+        <img
+          src="assets/img/SalaRedes.jpg"
+          class="img-fluid rounded gallery-img"
+          (click)="openGallery(2)"
+          alt="Sala de Redes">
       </div>
+
       <div class="col-6 col-md-4">
-        <img src="assets/img/Auditorio.jpg" class="img-fluid rounded" alt="Auditorio">
+        <img
+          src="assets/img/Auditorio.jpg"
+          class="img-fluid rounded gallery-img"
+          (click)="openGallery(3)"
+          alt="Auditorio">
       </div>
+
       <div class="col-6 col-md-4">
-        <img src="assets/img/Estatua.jpg" class="img-fluid rounded" alt="Estatua">
+        <img
+          src="assets/img/Estatua.jpg"
+          class="img-fluid rounded gallery-img"
+          (click)="openGallery(4)"
+          alt="Estatua">
       </div>
+
       <div class="col-6 col-md-4">
-        <img src="assets/img/Electronica2.jpg" class="img-fluid rounded" alt="Laboratorio de Electronica">
+        <img
+          src="assets/img/Electronica2.jpg"
+          class="img-fluid rounded gallery-img"
+          (click)="openGallery(5)"
+          alt="Laboratorio de Electrónica">
       </div>
+
     </div>
   </div>
 </section>
 
+
+
 <!-- ================= TESTIMONIOS ================= -->
 <section class="container py-5">
   <h2 class="fw-bold mb-4">Testimonios de Egresados</h2>
-
   <div class="row g-4">
     <div class="col-md-4">
       <div class="card h-100">
@@ -193,7 +227,6 @@
         </div>
       </div>
     </div>
-
     <div class="col-md-4">
       <div class="card h-100">
         <div class="card-body">
@@ -205,7 +238,6 @@
         </div>
       </div>
     </div>
-
     <div class="col-md-4">
       <div class="card h-100">
         <div class="card-body">
@@ -219,3 +251,248 @@
     </div>
   </div>
 </section>
+
+
+<!-- ================= MODALS ================= -->
+<!-- ================= MODAL 1 – Carrito Autónomo con Arduino ================= -->
+<div class="modal fade" id="modal-proyecto-1" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content rounded-4">
+      <div class="modal-header border-bottom">
+        <h5 class="modal-title fw-bold">
+          Carrito Autónomo con Arduino
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted">
+          Proyecto enfocado en el desarrollo de un carrito autónomo a escala
+          utilizando Arduino y sensores ultrasónicos para la detección de
+          obstáculos y toma de decisiones en tiempo real.
+        </p>
+        <h6 class="fw-bold mt-4">Integrantes</h6>
+        <ul>
+          <li>Ana Martínez</li>
+          <li>José Ramírez</li>
+          <li>Luisa Fernández</li>
+        </ul>
+        <h6 class="fw-bold mt-4">Galería</h6>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <img src="assets/img/proy1.jpg" class="img-fluid rounded">
+          </div>
+          <div class="col-md-4">
+            <img src="assets/img/proy1_2.jpg" class="img-fluid rounded">
+          </div>
+          <div class="col-md-4">
+            <img src="assets/img/proy1_3.jpg" class="img-fluid rounded">
+          </div>
+        </div>
+        <h6 class="fw-bold mt-4">Video</h6>
+        <div class="ratio ratio-16x9">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ================= MODAL 2 – Medidor de Presión con Gráficas ================= -->
+<div class="modal fade" id="modal-proyecto-2" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content rounded-4">
+      <div class="modal-header border-bottom">
+        <h5 class="modal-title fw-bold">Medidor de Presión con Gráficas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted">
+          Sistema de medición de presión que permite visualizar datos en tiempo real
+          mediante gráficas dinámicas. El proyecto integra sensores electrónicos y
+          software para el análisis de información.
+        </p>
+        <h6 class="fw-bold mt-4">Integrantes</h6>
+        <ul>
+          <li>Carlos Méndez</li>
+          <li>María López</li>
+          <li>Fernando Ruiz</li>
+        </ul>
+        <h6 class="fw-bold mt-4">Galería</h6>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <img src="assets/img/proy2.jpeg" class="img-fluid rounded">
+          </div>
+          <div class="col-md-4">
+            <img src="assets/img/proy2_2.jpg" class="img-fluid rounded">
+          </div>
+          <div class="col-md-4">
+            <img src="assets/img/proy2_3.jpg" class="img-fluid rounded">
+          </div>
+        </div>
+        <h6 class="fw-bold mt-4">Video</h6>
+        <div class="ratio ratio-16x9">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ================= MODAL 3 – Sensor de Detección de Personas ================= -->
+<div class="modal fade" id="modal-proyecto-3" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content rounded-4">
+      <div class="modal-header border-bottom">
+        <h5 class="modal-title fw-bold">Sensor de Detección de Personas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted">
+          Proyecto de sistemas inteligentes enfocado en la detección automática
+          de presencia humana mediante sensores infrarrojos, aplicable a seguridad
+          y control de accesos.
+        </p>
+        <h6 class="fw-bold mt-4">Integrantes</h6>
+        <ul>
+          <li>Andrea Torres</li>
+          <li>Juan Castillo</li>
+          <li>Diego Herrera</li>
+        </ul>
+        <h6 class="fw-bold mt-4">Galería</h6>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <img src="assets/img/sensor.jpg" class="img-fluid rounded">
+          </div>
+          <div class="col-md-4">
+            <img src="assets/img/sensor_2.jpg" class="img-fluid rounded">
+          </div>
+          <div class="col-md-4">
+            <img src="assets/img/sensor_3.jpg" class="img-fluid rounded">
+          </div>
+        </div>
+        <h6 class="fw-bold mt-4">Video</h6>
+        <div class="ratio ratio-16x9">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ================= MODAL 4 – Dron Comandado por Voz ================= -->
+<div class="modal fade" id="modal-proyecto-4" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content rounded-4">
+      <div class="modal-header border-bottom">
+        <h5 class="modal-title fw-bold">Dron Comandado por Voz</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted">
+          Dron inteligente programado para ejecutar acciones mediante comandos
+          de voz. El sistema utiliza reconocimiento de voz y lógica de control
+          para maniobras básicas de vuelo.
+        </p>
+        <h6 class="fw-bold mt-4">Integrantes</h6>
+        <ul>
+          <li>Pedro Sánchez</li>
+          <li>Lucía Moreno</li>
+          <li>Daniel Cruz</li>
+        </ul>
+        <h6 class="fw-bold mt-4">Galería</h6>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <img src="assets/img/proy4.png" class="img-fluid rounded">
+          </div>
+          <div class="col-md-4">
+            <img src="assets/img/proy4_2.jpg" class="img-fluid rounded">
+          </div>
+          <div class="col-md-4">
+            <img src="assets/img/proy4_3.jpg" class="img-fluid rounded">
+          </div>
+        </div>
+        <h6 class="fw-bold mt-4">Video</h6>
+        <div class="ratio ratio-16x9">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID_4" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MODAL + CARRUSEL ================= -->
+<div
+  class="modal fade show"
+  style="display: block; background: rgba(0,0,0,0.85);"
+  *ngIf="galleryOpen"
+  (click)="closeGallery()">
+
+  <div
+    class="modal-dialog modal-xl modal-dialog-centered"
+    (click)="$event.stopPropagation()">
+
+    <div class="modal-content bg-transparent border-0">
+
+      <!-- BOTÓN CERRAR -->
+      <div class="modal-header border-0 justify-content-end">
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          aria-label="Close"
+          (click)="closeGallery()">
+        </button>
+      </div>
+
+      <!-- CUERPO -->
+      <div class="modal-body p-0">
+
+        <div class="carousel slide">
+
+          <div class="carousel-inner text-center">
+
+            <div
+              class="carousel-item"
+              *ngFor="let img of galleryImages; let i = index"
+              [class.active]="i === activeImage">
+
+              <img
+                [src]="img"
+                class="img-fluid rounded"
+                style="max-height: 80vh;"
+                alt="Imagen de galería">
+            </div>
+
+          </div>
+
+          <!-- CONTROLES -->
+          <button
+            class="carousel-control-prev"
+            type="button"
+            (click)="prev()">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+
+          <button
+            class="carousel-control-next"
+            type="button"
+            (click)="next()">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
