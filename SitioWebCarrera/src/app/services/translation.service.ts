@@ -1,38 +1,25 @@
-import { Injectable, signal, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class TranslationService {
-  private http = inject(HttpClient);
+@Injectable({ providedIn: 'root' })
+export class TranslateService {
 
-  // Signal del idioma actual
-  currentLang = signal<string>('es');
+  private currentLang = 'español';
+  private translations: any = {};
 
-  // Signal con los datos del JSON
-  private translationsData = signal<any>({});
-
-  constructor() {
-    this.loadTranslations('es');
+  getCurrentLang(): string {
+    return this.currentLang;
   }
 
   changeLanguage(lang: string) {
-    this.currentLang.set(lang);
-    this.loadTranslations(lang);
+    this.currentLang = lang;
+
+    fetch(`assets/i18n/${lang}.json`)
+      .then(res => res.json())
+      .then(data => this.translations = data);
   }
 
-  private loadTranslations(lang: string) {
-    this.http.get(`assets/i18n/${lang}.json`).subscribe({
-      next: (data) => this.translationsData.set(data),
-      error: () => console.error(`Error cargando idioma: ${lang}`)
-    });
-  }
-
-  // Traduce una clave anidada como "HOME.HERO.TITLE"
   translate(key: string): string {
-    const data = this.translationsData();
-    const result = key.split('.').reduce((o, i) => o ? o[i] : null, data);
-    return result || key; // Si no encuentra, devuelve la clave
+    return key.split('.').reduce((obj, k) => obj?.[k], this.translations) || key;
   }
 }

@@ -1,15 +1,16 @@
-import { Pipe, PipeTransform, inject } from '@angular/core';
-import { TranslationService } from '../services/translation.service';
+import { Pipe, PipeTransform } from '@angular/core';
+import { TranslateService } from '../services/translation.service';
 
 @Pipe({
   name: 'translate',
   standalone: true,
-  pure: false // ¡IMPORTANTE! Para reactividad en tiempo real
+  pure: false
 })
 export class TranslatePipe implements PipeTransform {
-  private translationService = inject(TranslationService);
+
+  constructor(private translateService: TranslateService) {}
 
   transform(key: string): string {
-    return this.translationService.translate(key);
+    return this.translateService.translate(key);
   }
 }

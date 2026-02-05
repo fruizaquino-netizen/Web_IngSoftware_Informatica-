@@ -1,11 +1,50 @@
 {
+  "MENU": {
+    "HOME": "Inicio",
+    "ABOUT": "¿Quiénes Somos?",
+    "STUDY_PLAN": "Plan de Estudios",
+    "PROJECTS": "Proyectos",
+    "TEACHERS": "Docentes",
+    "APPLICANTS": "Aspirantes",
+    "LANGUAGE": "Idioma",
+    "NEWS": "Noticias"
+  },
   "HOME": {
     "HERO": {
-      "TITLE": "Ingeniería de Software (en zapoteco)",
-      "SUBTITLE": "El futuro es hoy (en zapoteco)"
+      "TITLE": "Ingeniería de Software",
+      "SUBTITLE": "El futuro es hoy"
+    },
+    "CTA": {
+      "START_PROCESS": "Inicia tu Proceso de Ingreso",
+      "READY": "¿Listo para comenzar?",
+      "JOIN": "Únete a nuestra comunidad universitaria.",
+      "LEARN_MORE": "Conoce más"
+    },
+    "FEATURES": {
+      "EXCELLENCE": "Excelencia Académica",
+      "TECH": "Tecnología Avanzada",
+      "REGIONAL_LINK": "Vinculación Regional",
+      "INNOVATION": "Innovación tecnológica con sentido humano",
+      "PROGRAMS": "Programas educativos de alta calidad enfocados en el desarrollo integral",
+      "INFRASTRUCTURE": "Infraestructura moderna y recursos tecnológicos de vanguardia.",
+      "CONNECTION": "Conexión directa con el sector productivo de la región.",
+      "SCIENCE": "Ciencia, cultura y compromiso con el desarrollo regional"
     }
   },
   "BUTTONS": {
     "CONTACT_US": "Contáctanos"
+  },
+  "FOOTER": {
+    "EVENTS": "Calendario de eventos",
+    "FOLLOW": "Síguenos",
+    "DOCUMENTS": "Documentos",
+    "SUPPORT": "Soporte",
+    "DOWNLOADS": "Zona de descarga",
+    "FORMS": "Formularios",
+    "RULES": "Reglamentos",
+    "RESOURCES": "Recursos",
+    "STUDENT_RULES": "Reglamento Estudiantil",
+    "ACADEMIC_DOCS": "Documentos Académicos",
+    "ONLINE_FORMS": "Formularios en línea"
   }
 }

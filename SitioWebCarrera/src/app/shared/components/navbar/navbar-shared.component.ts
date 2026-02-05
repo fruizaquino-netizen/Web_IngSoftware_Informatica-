@@ -2,7 +2,8 @@ import { Component, HostListener, inject } from '@angular/core';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
-import { TranslationService } from '../../../services/translation.service'; // Ruta desde navbar
+import { TranslateService } from '../../../services/translation.service';
+import { TranslatePipe } from '../../../pipes/translate.pipe';
 
 @Component({
   selector: 'app-navbar-shared',
@@ -13,13 +14,10 @@ import { TranslationService } from '../../../services/translation.service'; // R
 })
 export class NavbarSharedComponent {
 
-  // 🌎 Servicio de traducción
-  translationService = inject(TranslationService);
-
+  translateService = inject(TranslateService);
   isScrolled = false;
 
   constructor(private router: Router) {
-    // Cerrar menú al navegar
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -30,15 +28,17 @@ export class NavbarSharedComponent {
       });
   }
 
-  // 🌐 Método para cambiar idioma
   cambiarIdioma(lang: string) {
-    this.translationService.changeLanguage(lang);
+    this.translateService.changeLanguage(lang);
+  }
+
+  idiomaActual(): string {
+    return this.translateService.getCurrentLang();
   }
 
   isActive(path: string): boolean {
     const currentRoute = this.router.url;
 
-    // Lógica especial para el botón de INICIO
     if (path === '/') {
       return (
         currentRoute === '/' ||

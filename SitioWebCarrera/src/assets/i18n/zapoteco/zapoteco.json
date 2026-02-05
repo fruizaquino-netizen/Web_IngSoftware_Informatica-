@@ -1,11 +1,50 @@
 {
+  "MENU": {
+    "HOME": "Ruzulu'",
+    "ABOUT": "¿Tu laadu'?",
+    "STUDY_PLAN": "Ni' rusiidi' du'",
+    "PROJECTS": "Dxiiña' huayuniidu'",
+    "TEACHERS": "Binni ni' rusiidi'",
+    "APPLICANTS": "Ni' rului'la'dxi chu'",
+    "LANGUAGE": "Diidxa'",
+    "NEWS": "Diidxa' cubi'"
+  },
   "HOME": {
     "HERO": {
-      "TITLE": "Ingeniería de Software (en zapoteco)",
-      "SUBTITLE": "El futuro es hoy (en zapoteco)"
+      "TITLE": "Ingeniería de Software",
+      "SUBTITLE": "Guendaró guendanabani' nisa"
+    },
+    "CTA": {
+      "START_PROCESS": "Bizulu' ne laadu",
+      "READY": "¿Zula'dxi para guzulu'?",
+      "JOIN": "Guyuu' lade guidxi ni napa guendariene stinu.",
+      "LEARN_MORE": "Gunna' jma"
+    },
+    "FEATURES": {
+      "EXCELLENCE": "Guenda nandxo' sti' guendariene",
+      "TECH": "Xquenda biaani' ni ma' didi",
+      "REGIONAL_LINK": "Guenda ridagulisaa sti' ca guidxi",
+      "INNOVATION": "Guendanacuubi sti' xquendabiaani' binni laanu",
+      "PROGRAMS": "Runi guendariziidi' nandxó' ni ruyubi guendariani' sti' binni",
+      "INFRASTRUCTURE": "Guedarucui' na cubi' ne xquendabiaani' sti ni ma' zaniiru'",
+      "CONNECTION": "Guendaridagulisaa ne ca binni laanu ni ruyubi gunii dxiña'",
+      "SCIENCE": "Guendabiaani', guendanandxó' ne guendaruyubi guendariazaa sti' guidxi stinu"
     }
   },
   "BUTTONS": {
-    "CONTACT_US": "Contáctanos (en zapoteco)"
+    "CONTACT_US": "Guni' ne laadu"
+  },
+  "FOOTER": {
+    "EVENTS": "Ca' dxi guendaridagulisaa",
+    "FOLLOW": "Guza naanda laadu",
+    "DOCUMENTS": "Yaza libi' lisaa / Ca guichi",
+    "SUPPORT": "Guendaricabi",
+    "DOWNLOADS": "Ra ridagu ca guichi",
+    "FORMS": "Ca guichi ra rucaa binni",
+    "RULES": "Guichi ni rapa' ni runinu'",
+    "RESOURCES": "Ca ni riquiñe'du'",
+    "STUDENT_RULES": "Ca guichi ni rapa' ni runii ca ni caziidi'",
+    "ACADEMIC_DOCS": "Ca guichi sti guendariene",
+    "ONLINE_FORMS": "Ca guichi ni nuu lu guichu' bii"
   }
 }
