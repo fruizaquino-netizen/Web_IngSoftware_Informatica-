@@ -24,6 +24,11 @@ export const routes: Routes = [
       .then(m => m.ProyectoPageComponent)
   },
   {
+    path: 'egresados',
+    loadComponent: () => import('./pages/egresados/egresados-pages.component')
+      .then(m => m.EgresadosPagesComponent)
+  },
+  {
     path: 'docentes',
     loadComponent: () => import('./pages/docentes/docentes-pages.component')
       .then(m => m.DocentesPageComponent)

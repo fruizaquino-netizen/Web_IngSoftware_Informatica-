@@ -1,0 +1,279 @@
+/* HEADER 150*/
+.egresados-header {
+  margin: 0 auto 50px;
+}
+.egresados-header h1 {
+  font-size: 34px;
+  color: #5f0f14;
+  margin-bottom: 20px;
+}
+.egresados-container {
+  margin-top: 40px;
+}
+.egresados-header p {
+  color: #111827;
+}
+/* SECCIONES */
+.egresados-section {
+  width: 1150px;
+  margin: 0 auto 40px;
+}
+.egresados-section h2 {
+  font-size: 26px;
+  color: #141313;
+  margin-bottom: 20px;
+  border-left: 6px solid #998a02d4;
+  padding-left: 13px;
+}
+/* CARDS POR AÑO */
+.egresados-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+/*Aqui!!!!!!!!!!!!*/
+.card-anio {
+  background-color: #f3efef;
+  border: 1.2px solid #d7a1a1;
+  border-radius: 10px;
+  padding: 15px 20px;
+  min-width: 200px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(199, 37, 37, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-anio:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+.card-anio .anio {
+  display: block;
+  font-size: 26px;
+  font-weight: 700;
+  color: #8b1d1d;
+}
+.card-anio .cantidad {
+  color: #616161;
+  margin-top: 8px;
+}
+
+.filtros {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.filtro {
+  background-color: #f3efef;
+  border: 1.2px solid #d7a1a1;
+  color: #8b1d1d;
+  padding: 10px 32px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.filtro.activo {
+  background-color: #8b1d1d;
+  color: #ffffff;
+}
+
+.tabla-container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow-x: auto;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+thead {
+  background-color: #f3efef;
+}
+th,
+td {
+  padding: 18px;
+  text-align: left;
+  border-bottom: 1.2px solid #110606;
+}
+th {
+  font-weight: 600;
+  color: #0f0101;
+  font-size: 18px;
+}
+.badge {
+  background-color: #f3efef;
+  color: #0f0101;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 16px;
+}
+.total-egresados {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  background-color: #f3efef;
+  padding: 10px 20px;
+  border-left: 6px solid #998a02d4;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.total-label {
+  color: #0f0101;
+  font-size: 17px;
+}
+.total-badge {
+  background-color: #8b1d1d;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 10px;
+  min-width: 30px;
+  text-align: center;
+}
+
+/* --- AGREGAR A TUS ESTILOS DE .card-anio --- */
+.card-anio {
+  /* ... tus estilos existentes ... */
+  cursor: pointer; /* IMPORTANTE: Para indicar que es cliqueable */
+}
+
+/* --- ESTILOS DEL MODAL (AGREGAR AL FINAL) --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que esté encima de todo */
+  backdrop-filter: blur(4px); /* Efecto borroso opcional y moderno */
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px; /* Ancho máximo de la ventanita */
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  border-top: 6px solid #8b1d1d; /* Usando tu color institucional */
+  position: relative;
+  animation: slideUp 0.3s ease;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #5f0f14;
+  font-size: 24px;
+}
+
+.btn-cerrar {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s;
+}
+
+.btn-cerrar:hover {
+  color: #8b1d1d;
+}
+
+/* Estilos específicos para la tabla dentro del modal */
+.modal-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.modal-table th {
+  background-color: #f3efef;
+  padding: 12px;
+  text-align: left;
+  color: #8b1d1d;
+  font-size: 16px;
+}
+
+.modal-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Animaciones suaves */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  /* Contenedor general */
+  .egresados-container {
+    margin-top: 30px;
+    padding: 0 15px;
+  }
+  .egresados-header h1 {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+  .egresados-header p {
+    font-size: 15px;
+  }
+  /* Cards (años y modalidades) */
+  .egresados-cards {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .card-anio {
+    padding: 20px;
+  }
+  .card-anio .anio {
+    font-size: 26px;
+  }
+  .card-anio .cantidad {
+    font-size: 15px;
+  }
+
+  .filtros {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .filtro {
+    flex: 1 1 45%;
+    text-align: center;
+  }
+  .total-egresados {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .total-badge {
+    align-self: flex-start;
+  }
+  .tabla-container {
+    overflow-x: auto;
+  }
+  table {
+    min-width: 600px;
+  }
+}

@@ -1,0 +1,133 @@
+<section class="egresados-container">
+
+  <header class="egresados-header">
+    <h1>Registro de los Egresados</h1>
+    <p>
+      Información estadística y académica de los egresados de la carrera.
+    </p>
+  </header>
+
+  <section class="egresados-section">
+    <h2>Egresados por Año</h2>
+
+    <div class="egresados-cards">
+      <div class="card-anio"
+           *ngFor="let anio of aniosDisponibles()"
+           (click)="abrirModalPorAnio(anio)">
+        <span class="anio">{{ anio }}</span>
+        <span class="cantidad">
+          {{ conteoPorAnio()[anio] }}
+          {{ conteoPorAnio()[anio] === 1 ? 'egresado' : 'egresados' }}
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="egresados-section">
+    <h2>Egresados por Modalidad</h2>
+
+    <div class="filtros">
+      <button class="filtro"
+              [class.activo]="filtroActivo() === 'todos'"
+              (click)="cambiarFiltro('todos')">
+        Todos
+      </button>
+
+      <button class="filtro"
+              [class.activo]="filtroActivo() === 'tesis'"
+              (click)="cambiarFiltro('tesis')">
+        Tesis
+      </button>
+
+      <button class="filtro"
+              [class.activo]="filtroActivo() === 'ceneval'"
+              (click)="cambiarFiltro('ceneval')">
+        CENEVAL
+      </button>
+
+      <button class="filtro"
+              [class.activo]="filtroActivo() === 'experiencia'"
+              (click)="cambiarFiltro('experiencia')">
+        Experiencia
+      </button>
+    </div>
+  </section>
+
+  <div class="total-egresados">
+    <span class="total-label">
+      Total de egresados
+      {{
+        filtroActivo() === 'todos'
+          ? 'registrados'
+          : 'en modalidad ' + filtroActivo()
+      }}
+    </span>
+
+    <span class="total-badge">
+      {{ totalSegunFiltro() }}
+    </span>
+  </div>
+
+  <section class="egresados-section">
+    <h2>Listado de Egresados</h2>
+
+    <div class="tabla-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Año</th>
+            <th>Modalidad</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let e of egresadosFiltrados()">
+            <td>{{ e.nombre }}</td>
+            <td>{{ e.anio }}</td>
+            <td>
+              <span class="badge">{{ e.modalidad }}</span>
+            </td>
+          </tr>
+
+          <tr *ngIf="egresadosFiltrados().length === 0">
+            <td colspan="3" style="text-align: center; padding: 20px;">
+              No hay egresados para la modalidad seleccionada.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</section>
+<div class="modal-overlay" *ngIf="anioSeleccionado()" (click)="cerrarModal()">
+
+  <div class="modal-content" (click)="$event.stopPropagation()">
+
+    <div class="modal-header">
+      <h3>Generación {{ anioSeleccionado() }}</h3>
+      <button class="btn-cerrar" (click)="cerrarModal()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <table class="modal-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Modalidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let e of egresadosPorAnioSeleccionado()">
+            <td>{{ e.nombre }}</td>
+            <td>
+              <span class="badge">{{ e.modalidad }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
