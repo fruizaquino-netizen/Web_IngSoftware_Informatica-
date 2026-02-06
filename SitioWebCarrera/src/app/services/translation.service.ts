@@ -6,8 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class TranslateService {
 
-  private currentLang = 'español';
-  private translations: any = {};
+  public currentLang = 'español';
+  public translations: any = {};
 
   private langChanged = new BehaviorSubject<string>(this.currentLang);
   langChanged$ = this.langChanged.asObservable();
