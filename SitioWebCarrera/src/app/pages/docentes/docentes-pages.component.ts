@@ -184,6 +184,16 @@ export class DocentesPageComponent {
         { titulo: 'Cano, E., Ruiz, J., & Huerta, L. (2013). Gateway for Bluetooth and CAN Communications Protocols. Journal of Theoretical and Applied Information Technology, 55(3). ISSN: 1992-8645. ', anio: 2013, enlace: '#' },
         { titulo: 'E. Cano and I. Garcia. (2011). "Design and Development of a BlueBee Gateway for Bluetooth and ZigBee Wireless Protocols," 2011 IEEE Electronics, Robotics and Automotive Mechanics Conference, Cuernavaca, Mexico, 2011, pp. 366-370, doi: 10.1109/CERMA.2011.67.', anio: 2011, enlace: '#' }
       ]
+    },
+    {
+      nombre: 'Lic. Florentino Ruiz Aquino',
+      especialidad: 'Licenciado en Informática',
+      cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática e Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
+      imagen: 'assets/docente6.png',
+      descripcion: 'Sistemas Inteligentes.',
+      email: 'ie.edgarcano@gmail.com',
+      publicaciones: [
+      ]
     }
   ]);
   /**
