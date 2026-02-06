@@ -70,7 +70,7 @@ export class DocentesPageComponent {
       nombre: 'Dr. Luis David Huerta Hernández',
       especialidad: 'Dr. En Sistemas Computacionales',
       cargo: 'Profesor Investigador Asociado C, Jefe de carrera de la Licenciatura en Informática, Comité del servicio de la cafetería UNISTMO y Vocal en el comité de adquisiciones de la UNISTMO',
-      imagen: 'assets/img/Luis.jpg',
+      imagen: 'assets/img/Luis.png',
       descripcion: 'Reconocimiento de Patrones.',
       email: 'ldhuerth@gmail.com, luisdh2@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -84,8 +84,8 @@ export class DocentesPageComponent {
       nombre: 'M. en I. Carlos Edgardo Cruz Pérez',
       especialidad: 'Maestría en Ingeniería en Tecnología de la Información',
       cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática y de la Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
-      imagen: 'assets/img/Carlos.jpg',
-      descripcion: 'Ciberseguridad.',
+      imagen: 'assets/img/Carlos.png',
+      descripcion: 'Ciberseguridad Avanzada.',
       email: 'carloscruz@bianni.unistmo.edu.mx',
       publicaciones: [
         { titulo: 'Hernández Montiel, L. Velázquez Vázquez, J. & Cruz Pérez, C. (2021). Reducción y clasificación de una base de datos de audio mediante redes neuronales artificiales y minería de datos para el diagnóstico de pacientes con enfermedad De Parkinson . Research in Computing Science Vol 150 No 5, pp. 141–154. ', anio: 2021, enlace: '#' },
@@ -97,7 +97,7 @@ export class DocentesPageComponent {
       nombre: 'M. en I.A. Nayeli Joaquinita Meléndez Acosta',
       especialidad: 'Maestría en Inteligencia Artificial. Facultad de Física e Inteligencia Artificial, Universidad Veracruzana, México.',
       cargo: 'Profesor-Investigador de tiempo completo en la Universidad de Istmo, campus Ixtepec, adscrito a la Licenciatura en Informática',
-      imagen: 'assets/docente5.png',
+      imagen: 'assets/img/Nayeli.jpg',
       descripcion: 'Inteligencia Artificial: Aprendizaje Automático, ciencia de datos, reconocimiento de patrones, algoritmos bio-inspirados, visión por computadora, procesamiento de imágenes y redes neuronales.',
       email: 'nayelim@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -169,7 +169,7 @@ export class DocentesPageComponent {
       nombre: 'M. en E. y C. Edgar Manuel Cano Cruz',
       especialidad: 'Maestría en Electrónica y Computación con especialidad en Sistemas Inteligentes Aplicados',
       cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática e Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
-      imagen: 'docentes-perfil/docente6.png',
+      imagen: 'assets/img/Cano.png',
       descripcion: 'Sistemas empotrados.',
       email: 'ie.edgarcano@gmail.com',
       publicaciones: [
@@ -189,7 +189,7 @@ export class DocentesPageComponent {
       nombre: 'Lic. Florentino Ruiz Aquino',
       especialidad: 'Licenciado en Informática',
       cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática e Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
-      imagen: 'assets/docente6.png',
+      imagen: 'assets/img/Tino.jpeg',
       descripcion: 'Sistemas Inteligentes.',
       email: 'FRuizAquino@gmail.com',
       publicaciones: [
