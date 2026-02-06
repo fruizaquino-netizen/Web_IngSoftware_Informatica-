@@ -77,3 +77,22 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
 }
+/* Control del tamaño del logo */
+.logo-img {
+  height: 70px; /* Ajusta este valor según el tamaño deseado */
+  width: auto;  /* Mantiene la proporción */
+  transition: transform 0.3s ease;
+}
+
+/* Efecto opcional al pasar el mouse sobre el logo */
+.navbar-brand:hover .logo-img {
+  transform: scale(1.05);
+}
+
+/* Ajuste para móviles si es necesario */
+@media (max-width: 991px) {
+  .logo-img {
+    height: 40px; /* Un poco más pequeño en celular */
+  }
+
+}

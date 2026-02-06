@@ -1,0 +1,168 @@
+{
+  "programa": {
+    "nombre": "Ingeniería en Desarrollo de Software y Sistemas Inteligentes",
+    "objetivo": "Formar ingenieros e ingenieras humanistas, analíticos, innovadores, emprendedores y creadores de aplicaciones inteligentes, mediante el uso de metodologías de desarrollo de software y sistemas, ciencia de datos, inteligencia artificial y tecnologías emergentes que coadyuven al desarrollo de la sociedad a nivel local, regional, nacional e internacional.",
+    "perfilEgreso": "Los egresados y egresadas de la carrera de Ingeniería en Desarrollo de Software y Sistemas Inteligentes serán profesionales altamente capacitados para enfrentar los desafíos tecnológicos del siglo XXI. Su formación integral les permitirá diseñar, desarrollar, implementar y mantener soluciones de software y sistemas inteligentes que respondan a las necesidades actuales y futuras de la sociedad e industria. Las competencias y habilidades adquiridas durante su formación los posicionan como agentes de cambio y líderes en innovación tecnológica. A lo largo de su formación académica, los egresados y egresadas adquirirán aptitudes y valores que les permitan conducirse como agentes de cambio en diferentes contextos con principios éticos y morales al ejercer su profesión.",
+    "planEstudios": {
+      "1": [
+        "Metodología de la Investigación",
+        "Fundamentos Matemáticos Para la Ingeniería",
+        "Lógica Matemática",
+        "Filosofía Practica",
+        "Fundamentos de Programación Estructurada",
+        "Administración"
+      ],
+      "2": [
+        "Física",
+        "Cálculo Diferencial e Integral",
+        "Matemáticas Discretas",
+        "Teoría General de Sistemas",
+        "Estructura de Datos",
+        "Contabilidad y Finanzas"
+      ],
+      "3": [
+        "Electrónica I",
+        "Teoría de Algoritmos y Complejidad",
+        "Algebra Lineal",
+        "Sistemas Operativos",
+        "Paradigmas de Programación",
+        "Liderazgo y Emprendedurismo"
+      ],
+      "4": [
+        "Electrónica II",
+        "Probabilidad y Estadística",
+        "Métodos Numéricos",
+        "Redes de Computadoras",
+        "Programación Orientada a Objetos",
+        "Diseño de Bases de Datos"
+      ],
+      "5": [
+        "Arquitectura de Computadoras",
+        "Modelos de Optimización Para Toma de Decisiones",
+        "Ingeniería de Software I",
+        "Servidores y Seguridad",
+        "Sistemas Distribuidos",
+        "Implementación de Bases de Datos"
+      ],
+      "6": [
+        "Derecho y Legislación Informática",
+        "Desarrollo de Aplicaciones Web I",
+        "Ingeniería de Software II",
+        "Interfaz Humano Computadora",
+        "Redes Inteligentes",
+        "Bases de Datos Avanzadas"
+      ],
+      "7": [
+        "Proyectos de Tecnologías de Información",
+        "Desarrollo de Aplicaciones Web II",
+        "Calidad de Software",
+        "Fundamentos de Inteligencia Artificial",
+        "Aprendizaje Automático",
+        "Ciencia de Datos"
+      ],
+      "8": [
+        "Cómputo en la Nube",
+        "Seminario de Titulación",
+        "Desarrollo de Soluciones Tecnológicas",
+        "Desarrollo de Sistemas Inteligentes",
+        "Optativa I",
+        "Optativa II"
+      ],
+      "9": [
+        "Estancia Profesional"
+      ]
+    }
+  },
+  "admision": {
+    "ciclo": "2026",
+    "fechas": {
+      "entregaFichas": "13 de febrero al 26 de junio de 2026",
+      "examenDiagnostico": "23 de mayo o 01 de julio de 2026",
+      "resultados": "06 de julio de 2026",
+      "inscripcionPropedeutico": "13 al 24 de julio de 2026",
+      "cursoPropedeutico": "27 de julio al 18 de septiembre de 2026",
+      "inscripcionPrimerSemestre": "21 al 30 de septiembre de 2026",
+      "inicioSemestre": "Octubre de 2026"
+    },
+    "documentos": [
+      "1 copia del acta de nacimiento formato actualizado.",
+      "1 copia del Certificado de Bachillerato y/u original de constancia de estudios.",
+      "1 copia de la CURP.",
+      "2 fotografías tamaño infantil blanco y negro, de frente, en papel mate."
+    ],
+    "formatos": [
+      "Formato de Solicitud de Ficha Licenciatura.",
+      "Formato de Solicitud de Ficha Posgrado.",
+      "Procedimiento para Solicitud de Ficha vía Web.",
+      "Link del Portal para solicitar Ficha."
+    ],
+    "guiasExamen": [
+      "Licenciatura en Nutrición.",
+      "Licenciatura en Enfermería.",
+      "Lic. en Ciencias Empresariales.",
+      "Lic. en Derecho.",
+      "Ing. en Desarrollo de Software y Sistemas Inteligentes.",
+      "Ing. en Logística y Cadenas de suministros.",
+      "Lic. en Comercio Exterior y Gestión de Aduanas.",
+      "Ingeniería Química.",
+      "Ingeniería de Petróleos.",
+      "Ingeniería en Diseño.",
+      "Ingeniería en Computación.",
+      "Ingeniería Industrial.",
+      "Licenciatura en Matemáticas Aplicadas.",
+      "Ingeniería en Energías Renovables."
+    ],
+    "formatosSolicitudesUrl": "https://www.unistmo.edu.mx/web/p_ensenanza/escolares.html"
+  },
+  "horarios": {
+    "nota": "Los horarios de clases se publican en la página oficial. Referencia actual: Curso propedéutico 2024-2025 Campus Ixtepec."
+  },
+  "becas": {
+    "url": "https://www.unistmo.edu.mx/web/p_ensenanza/becas.html"
+  },
+  "contacto": {
+    "redes": {
+      "facebook": "https://www.facebook.com/InformaticaUnistmo",
+      "instagram": "https://www.instagram.com/idssi.unistmo/",
+      "youtube": "https://www.youtube.com/@informaticaunistmo7398",
+      "x": "https://x.com/IUnistmo",
+      "whatsappJefatura": "https://wa.me/529721155207"
+    },
+    "jefaturaCarrera": {
+      "nombre": "Mtro. Luis David Huerta Hernández",
+      "programa": "Licenciatura en Informática",
+      "correo": "jefatura_dssi@unistmo.edu.mx",
+      "telefono": "(971) 7127050 ext. 207"
+    },
+    "serviciosEscolares": {
+      "direccion": "Carretera Chihuitan Ixtepec S/N, C.P. 70110, Ciudad Ixtepec, Oaxaca.",
+      "telefono": "(971) 712 70 50 ext. 212 y 213",
+      "correo": "servesc@bianni.unistmo.edu.mx"
+    },
+    "telefonosCampus": {
+      "tehuantepec": "(971) 52 240 50 ext. *111 y *123",
+      "juchitan": "(971) 712 70 50 ext. 312 y 301"
+    },
+    "nota": "Informes e inscripciones en cualquiera de los tres campus."
+  },
+  "docentes": {
+    "directorioUrl": "https://www.unistmo.edu.mx/web/p_directorio/acad.html",
+    "lista": [
+      "Dr. Francisco Alejandro González Horta",
+      "Dr. en C. Felipe Benítez Domínguez",
+      "M. en I. Carlos Edgardo Cruz Pérez",
+      "M. en C. José Antonio Huesca Chávez",
+      "M. en C. Luis David Huerta Hernández",
+      "M. en C. Oscar Alonso de la Rosa Aguilar",
+      "M. en E. y C. Edgar Manuel Cano Cruz",
+      "M. en C. Cosijopi García García",
+      "Lic. Gerardo Rafael Alfaro Cruz"
+    ]
+  },
+  "proyectos": {
+    "nota": "Para proyectos y actividades, consulta la sección de Proyectos del sitio web."
+  },
+  "quienesSomos": {
+    "nota": "Para misión, visión y más información institucional, consulta la sección de Quiénes Somos del sitio web."
+  }
+}

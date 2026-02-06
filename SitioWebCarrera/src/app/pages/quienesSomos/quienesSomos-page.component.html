@@ -1,114 +1,77 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>¿Quiénes Somos? | UNISTMO</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-
-  <!-- ================= HERO ================= -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>¿Quiénes Somos?</h1>
-      <p>Formamos líderes en el área de software y hardware</p>
-      <p>
-      Profesionales capaces de diseñar, desarrollar e implementar soluciones tecnológicas
-      innovadoras, gestionando proyectos de sistemas de información y participando en
-      equipos multidisciplinarios. Cuentan con habilidades en programación, bases de datos,
-      redes, desarrollo de software y aplicación de tecnologías emergentes para resolver
-      problemáticas reales en organizaciones y en la sociedad.
-    </p>
-
-    </div>
-  </section>
-
-  <!-- ================= QUIÉNES SOMOS ================= -->
-  <section class="about-section">
-    <div class="about-card">
-
-      <h2>Nuestra Mision y Vision</h2>
-
-      <div class="about-grid">
-
-        <!-- TEXTO -->
-        <div class="about-text">
-          <p>
-            Formar profesionales líderes en el diseño, desarrollo y aplicación de sistemas inteligentes y de software,
-            para satisfacer las necesidades en los sectores público y privado a nivel nacional e internacional,
-            impulsando el desarrollo social mediante una educación integral y multidisciplinaria.
-          </p>
-
-          <p>
-            Consolidarse como una carrera líder en la formación de profesionistas analíticos, con conocimientos
-            sólidos en informática para el desarrollo de sistemas inteligentes y software, que aporten soluciones
-            tecnológicas e innovadoras con reconocimiento nacional e internacional, que contribuyan a mejorar el
-            entorno global e impacten positivamente en el desarrollo de la sociedad.
-          </p>
-        </div>
-
-        <!-- VALORES -->
-        <div class="values-card">
-          <h3>Valores Institucionales</h3>
-          <ul class="values-list">
-            <li>Disciplina y Respeto</li>
-            <li>Responsabilidad y Tolerancia</li>
-            <li>Lealtad y Honradez</li>
-            <li>Honestidad y Solidaridad Social/li>
-            <li>Excelencia académica</li>
-            <li>Compromiso social</li>
-            <li>Innovación y tecnología</li>
-            <li>Desarrollo sostenible</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= INDICADORES INSTITUCIONALES ================= -->
-  <section class="stats-section">
-    <div class="stats-grid">
-
-      <div class="stat-card">
-        <span class="stat-number">23+</span>
-        <p class="stat-text">Años de experiencia</p>
-      </div>
-
-      <div class="stat-card">
-        <span class="stat-number">863+</span>
-        <p class="stat-text">Estudiantes activos</p>
-      </div>
-
-      <div class="stat-card">
-        <span class="stat-number">228+</span>
-        <p class="stat-text">Docentes calificados</p>
-      </div>
-
-      <div class="stat-card">
-        <span class="stat-number">90%</span>
-        <p class="stat-text">Tasa de empleabilidad</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ================= CTA ================= -->
-  <section class="cta">
-  <h2>Conoce el plan de estudios de nuestra carrera</h2>
-  <p>
-    Descubre nuestra oferta educativa en el área de tecnologías de la información, donde podrás
-    formarte como profesional en <strong>Informática</strong> o como <strong>Ingeniero/a en Desarrollo
-    de Software y Sistemas Inteligentes</strong>. Ambas carreras están diseñadas para brindarte
-    competencias sólidas en programación, administración de sistemas, bases de datos, desarrollo
-    web y móvil, así como el diseño e implementación de soluciones tecnológicas innovadoras que
-    responden a las necesidades actuales de la industria y la sociedad. Los egresados tendrán la
-    capacidad de integrarse a equipos multidisciplinarios, liderar proyectos de software, aplicar
-    metodologías modernas de desarrollo y enfrentar retos vinculados con inteligencia artificial,
-    redes, seguridad informática y otras áreas de la computación.
-  </p>
-  <a href="./app/pages/plamEstudio/planEstudio-page.component.html" class="btn">Ver Plan de Estudios</a>
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>{{ hero().titulo }}</h1>
+    <p>{{ hero().subtitulo }}</p>
+    <p>{{ hero().descripcion }}</p>
+  </div>
 </section>
 
-</body>
-</html>
+<!-- ================= QUIÉNES SOMOS ================= -->
+<section class="about-section">
+  <div class="about-card">
+    <h2>Nuestra Misión y Visión</h2>
+
+    <div class="about-grid">
+
+      <!-- TEXTO MISIÓN Y VISIÓN -->
+      <div class="about-text">
+        @for (item of infoInstitucional(); track item.texto) {
+          <p>{{ item.texto }}</p>
+        }
+      </div>
+
+      <!-- VALORES -->
+      <div class="values-card">
+        <h3>Valores Institucionales</h3>
+        <ul class="values-list">
+          @for (valor of valores(); track valor) {
+            <li>{{ valor }}</li>
+          }
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= INDICADORES INSTITUCIONALES ================= -->
+<section class="stats-section">
+  <div class="stats-grid">
+    @for (stat of stats(); track stat.texto) {
+      <div class="stat-card">
+        <span class="stat-number">{{ stat.numero }}</span>
+        <p class="stat-text">{{ stat.texto }}</p>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta">
+  <h2>{{ cta().titulo }}</h2>
+  <p>{{ cta().descripcion }}</p>
+
+  <!-- BOTÓN QUE FUNCIONA CON ANGULAR ROUTER -->
+  <a routerLink="/planEstudios" class="btn">Ver Plan de Estudios</a>
+</section>
+
+ <!-- Recorrido virtual -->
+<section class="tour-section">
+  <h2>Recorrido Virtual</h2>
+
+  <div class="visor">
+    <img
+      [src]="tour()[currentStep()].img"
+      alt="Recorrido virtual"
+    />
+
+    <div class="controls">
+      @for (control of tour()[currentStep()].controls; track control.label) {
+        <button (click)="goTo(control.target)">
+          {{ control.label }}
+        </button>
+      }
+    </div>
+  </div>
+</section>

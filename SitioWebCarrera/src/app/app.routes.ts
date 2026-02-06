@@ -47,6 +47,11 @@ export const routes: Routes = [
       .then(m => m.VinculacionComponent)
   },
   {
+  path: 'docente/:nombre',
+  loadComponent: () => import('./pages/docentes-perfil/docentes-perfil.component')
+    .then(m => m.DocentesPerfilComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }
