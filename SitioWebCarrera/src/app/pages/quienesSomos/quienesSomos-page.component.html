@@ -55,3 +55,23 @@
   <!-- BOTÓN QUE FUNCIONA CON ANGULAR ROUTER -->
   <a routerLink="/planEstudios" class="btn">Ver Plan de Estudios</a>
 </section>
+
+ <!-- Recorrido virtual -->
+<section class="tour-section">
+  <h2>Recorrido Virtual</h2>
+
+  <div class="visor">
+    <img
+      [src]="tour()[currentStep()].img"
+      alt="Recorrido virtual"
+    />
+
+    <div class="controls">
+      @for (control of tour()[currentStep()].controls; track control.label) {
+        <button (click)="goTo(control.target)">
+          {{ control.label }}
+        </button>
+      }
+    </div>
+  </div>
+</section>

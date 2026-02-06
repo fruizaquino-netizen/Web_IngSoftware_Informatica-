@@ -243,3 +243,133 @@ body {
     font-size: 34px;
   }
 }
+
+/* ======================
+   RECORRIDO VIRTUAL
+====================== */
+
+.tour-section {
+  text-align: center;
+  margin: 4rem auto;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #2b2b2b;
+}
+
+.tour-section h2 {
+  font-size: 32px;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  color: #5f0f14;
+}
+
+/* ================= VISOR / MARCO ================= */
+
+.visor {
+  position: relative;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e6ded2;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* ================= IMAGEN ================= */
+
+.visor img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background-color: #f7f5f2;
+  box-shadow: inset 0 0 0 1px #e6ded2;
+}
+
+/* ================= CONTROLES ================= */
+
+.controls {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ================= BOTONES ================= */
+
+.controls button {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: 1px solid #85272d;
+  cursor: pointer;
+
+  background-color: #85272d;
+  color: #ffffff;
+
+  transition: all 0.25s ease;
+}
+
+/* Hover elegante */
+.controls button:hover {
+  background-color: #5f0f14;
+  border-color: #5f0f14;
+  transform: translateY(-1px);
+}
+/* Click */
+.controls button:active {
+  transform: scale(0.97);
+}
+
+
+/* IMÁGENES ACTIVAS */
+#s1:checked ~ section #i1,
+#s2:checked ~ section #i2,
+#s3:checked ~ section #i3,
+#s4:checked ~ section #i4,
+#s5:checked ~ section #i5,
+#s6:checked ~ section #i6,
+#s7:checked ~ section #i7,
+#s8:checked ~ section #i8,
+#s9:checked ~ section #i9,
+#s10:checked ~ section #i10,
+#s11:checked ~ section #i11,
+#s12:checked ~ section #i12,
+#s13:checked ~ section #i13,
+#s14:checked ~ section #i14,
+#s15:checked ~ section #i15,
+#s16:checked ~ section #i16,
+#s17:checked ~ section #i17,
+#s18:checked ~ section #i18,
+#s19:checked ~ section #i19,
+#s20:checked ~ section #i20,
+#s21:checked ~ section #i21{
+  display:block;
+}
+/* CONTROLES ACTIVOS */
+#s1:checked ~ section #c1,
+#s2:checked ~ section #c2,
+#s3:checked ~ section #c3,
+#s4:checked ~ section #c4,
+#s5:checked ~ section #c5,
+#s6:checked ~ section #c6,
+#s7:checked ~ section #c7,
+#s8:checked ~ section #c8,
+#s9:checked ~ section #c9,
+#s10:checked ~ section #c10,
+#s11:checked ~ section #c11,
+#s12:checked ~ section #c12,
+#s13:checked ~ section #c13,
+#s14:checked ~ section #c14,
+#s15:checked ~ section #c15,
+#s16:checked ~ section #c16,
+#s17:checked ~ section #c17,
+#s18:checked ~ section #c18,
+#s19:checked ~ section #c19,
+#s20:checked ~ section #c20,
+#s21:checked ~ section #c21{
+  display:flex;
+}
+
+
