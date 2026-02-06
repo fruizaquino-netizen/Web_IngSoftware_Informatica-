@@ -131,25 +131,38 @@
 <!-- ================= VIDEOS INFORMATIVOS ================= -->
 <section class="container py-5">
   <h2 class="fw-bold mb-4">Videos Informativos</h2>
+
   <div class="row g-4">
+
+    <!-- Video 1 -->
     <div class="col-md-6">
       <div class="ratio ratio-16x9">
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" allowfullscreen></iframe>
+        <video controls>
+          <source src="assets/videos/IDDSI.mp4" type="video/mp4">
+          Tu navegador no soporta videos HTML5.
+        </video>
       </div>
       <p class="mt-2 text-muted small">
-        Presentación general de la carrera de Informática.
+        Presentación de la carrera IDSSI.
       </p>
     </div>
+
+    <!-- Video 2 -->
     <div class="col-md-6">
       <div class="ratio ratio-16x9">
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
+        <video controls>
+          <source src="assets/videos/LicInf_Fer.mp4" type="video/mp4">
+          Tu navegador no soporta videos HTML5.
+        </video>
       </div>
       <p class="mt-2 text-muted small">
-        Infraestructura y laboratorios de la carrera.
+        Promocion general de la carrera de Informática.
       </p>
     </div>
+
   </div>
 </section>
+
 
 <!-- ================= GALERÍA DE FOTOS ================= -->
 <section class="bg-light py-5">
@@ -158,52 +171,16 @@
 
     <div class="row g-4">
 
-      <div class="col-6 col-md-4">
-        <img
-          src="assets/img/Electronica1.jpg"
-          class="img-fluid rounded gallery-img"
-          (click)="openGallery(0)"
-          alt="Laboratorio de Electrónica">
-      </div>
+      <div
+        class="col-6 col-md-4"
+        *ngFor="let img of galleryImages; let i = index">
 
-      <div class="col-6 col-md-4">
         <img
-          src="assets/img/Elect.jpg"
+          [src]="img"
           class="img-fluid rounded gallery-img"
-          (click)="openGallery(1)"
-          alt="Laboratorio de Electrónica">
-      </div>
+          (click)="openGallery(i)"
+          alt="Imagen de galería">
 
-      <div class="col-6 col-md-4">
-        <img
-          src="assets/img/SalaRedes.jpg"
-          class="img-fluid rounded gallery-img"
-          (click)="openGallery(2)"
-          alt="Sala de Redes">
-      </div>
-
-      <div class="col-6 col-md-4">
-        <img
-          src="assets/img/Auditorio.jpg"
-          class="img-fluid rounded gallery-img"
-          (click)="openGallery(3)"
-          alt="Auditorio">
-      </div>
-
-      <div class="col-6 col-md-4">
-        <img
-          src="assets/img/Estatua.jpg"
-          class="img-fluid rounded gallery-img"
-          (click)="openGallery(4)"
-          alt="Estatua">
-      </div>
-
-      <div class="col-6 col-md-4">
-        <img
-          src="assets/img/Electronica2.jpg"
-          class="img-fluid rounded gallery-img"
-          (click)="openGallery(5)"
-          alt="Laboratorio de Electrónica">
       </div>
 
     </div>
@@ -254,6 +231,7 @@
 
 
 <!-- ================= MODALS ================= -->
+
 <!-- ================= MODAL 1 – Carrito Autónomo con Arduino ================= -->
 <div class="modal fade" id="modal-proyecto-1" tabindex="-1">
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
@@ -301,6 +279,7 @@
     </div>
   </div>
 </div>
+
 <!-- ================= MODAL 2 – Medidor de Presión con Gráficas ================= -->
 <div class="modal fade" id="modal-proyecto-2" tabindex="-1">
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
@@ -344,6 +323,7 @@
     </div>
   </div>
 </div>
+
 <!-- ================= MODAL 3 – Sensor de Detección de Personas ================= -->
 <div class="modal fade" id="modal-proyecto-3" tabindex="-1">
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
@@ -387,6 +367,7 @@
     </div>
   </div>
 </div>
+
 <!-- ================= MODAL 4 – Dron Comandado por Voz ================= -->
 <div class="modal fade" id="modal-proyecto-4" tabindex="-1">
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
@@ -431,9 +412,10 @@
   </div>
 </div>
 
+
 <!-- ================= MODAL + CARRUSEL ================= -->
 <div
-  class="modal fade show"
+  class="modal show"
   style="display: block; background: rgba(0,0,0,0.85);"
   *ngIf="galleryOpen"
   (click)="closeGallery()">

@@ -332,31 +332,41 @@ section.bg-light {
   color: #6b6b6b;
 }
 
+
 /* =====================================================
    GALERÍA DE FOTOS
 ===================================================== */
-.bg-light img {
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
-}
 
-.bg-light img:hover {
-  transform: scale(1.04);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
-}
-
-/* Galería clickable */
+/* Imágenes de la galería */
 .gallery-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .gallery-img:hover {
   transform: scale(1.04);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
 }
 
-/* Modal oscuro tipo lightbox */
+/* Responsive */
+@media (min-width: 768px) {
+  .gallery-img {
+    height: 220px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .gallery-img {
+    height: 260px;
+  }
+}
+
+/* Modal tipo lightbox */
 #galleryModal .modal-content {
   background-color: transparent;
 }
@@ -365,6 +375,8 @@ section.bg-light {
   max-height: 80vh;
   object-fit: contain;
 }
+
+
 
 
 /* =====================================================
