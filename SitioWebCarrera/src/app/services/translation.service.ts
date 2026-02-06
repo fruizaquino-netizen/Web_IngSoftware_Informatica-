@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class TranslateService {
 
-  private currentLang = 'español';
-  private translations: any = {};
+  public currentLang = 'español';
+  public translations: any = {};
 
   getCurrentLang(): string {
     return this.currentLang;
