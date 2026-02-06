@@ -22,7 +22,7 @@ interface Docente {
 
 const defaultContent = {
   DOCENTES: {
-    TITLE: 'Docentes',
+    TITLE: 'Docentes universitarios',
     SUBTITLE: 'Liderazgo académico y experiencia profesional al servicio de tu formación.',
     VIEW_PROFILE: 'Ver Perfil',
     EMAIL_LABEL: 'Correo Electrónico',
