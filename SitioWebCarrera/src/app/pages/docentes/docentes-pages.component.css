@@ -147,7 +147,7 @@ body {
 
 /* ESTADO HOVER: El secreto está en asegurar el color blanco */
 .btn-ultra-profile:hover {
-  color: #d13636 !important; /* Forzado total */
+  color: #ffffff !important; /* Forzado total */
 }
 
 .btn-ultra-profile:hover::after {

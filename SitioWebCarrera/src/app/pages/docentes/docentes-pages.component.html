@@ -71,12 +71,16 @@
                   <label class="small text-uppercase text-muted fw-bold d-block">Correo Electrónico</label>
                   <span class="text-dark"><i class="bi bi-envelope-at me-2"></i>{{ docenteSeleccionado()?.email }}</span>
                 </div>
+                <div class="mb-3">
+                  <label class="small text-uppercase text-muted fw-bold d-block">Teléfono</label>
+                  <span class="text-dark"><i class="bi bi-telephone me-2"></i>{{ docenteSeleccionado()?.telefono }}</span>
+                </div>
               </div>
             </div>
 
             <div class="col-12 col-lg-8">
               <div class="mb-4">
-                <h4 class="fw-bold text-dark border-bottom pb-2">Descripcion Profesional</h4>
+                <h4 class="fw-bold text-dark border-bottom pb-2">Biografía Profesional</h4>
                 <p class="text-muted" style="text-align: justify;">
                   {{ docenteSeleccionado()?.descripcion }}
                 </p>
