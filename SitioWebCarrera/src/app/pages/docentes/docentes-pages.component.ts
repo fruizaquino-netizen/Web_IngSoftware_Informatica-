@@ -84,7 +84,7 @@ export class DocentesPageComponent {
       nombre: 'M. en I. Carlos Edgardo Cruz Pérez',
       especialidad: 'Maestría en Ingeniería en Tecnología de la Información',
       cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática y de la Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
-      imagen: 'docentes-perfil/Carlos.jpg',
+      imagen: './docentes-perfil/Carlos.jpg',
       descripcion: 'Ciberseguridad.',
       email: 'carloscruz@bianni.unistmo.edu.mx',
       publicaciones: [
