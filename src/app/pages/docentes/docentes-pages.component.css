@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Paleta Institucional Universidad del Istmo */
-  --unistmo-wine: #9d2449;      /* Rojo vino principal */
+  --unistmo-wine: #9d2449;
   --unistmo-wine-dark: #7a1b38;
-  --unistmo-gold: #c5a059;      /* Dorado institucional */
+  --unistmo-gold: #c5a059;
+  --unistmo-gold-light: #e0c58e;
   --unistmo-gray: #4d4d4d;
-  --bg-light: #fdfdfd;
+  --bg-light: #f8fafd;
   --jakarta: 'Plus Jakarta Sans', sans-serif;
-  --shadow-elegant: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
-  --shadow-hover: 0 20px 40px -10px rgba(157, 36, 73, 0.15);
+  --shadow-premium: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+  --shadow-active: 0 30px 60px -12px rgba(157, 36, 73, 0.15);
 }
 
 body {
@@ -17,55 +17,50 @@ body {
   background-color: var(--bg-light);
   color: var(--unistmo-gray);
   margin: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* --- HEADER REFINADO --- */
+/* --- HEADER --- */
 .header-container {
-  padding: 40px 0 20px 0;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 50px;
+  padding: 60px 0 30px 0;
+  margin-bottom: 40px;
 }
 
 .header-container h1 {
   color: #1a1a1a;
   font-weight: 800;
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+  font-size: 3rem;
+  letter-spacing: -1px;
 }
 
 .animated-underline {
-  width: 40px;
-  height: 5px;
-  background-color: var(--unistmo-wine);
-  border-radius: 10px;
-  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 60px;
+  height: 6px;
+  background: linear-gradient(90deg, var(--unistmo-wine), var(--unistmo-gold));
+  border-radius: 50px;
+  transition: all 0.5s ease;
 }
 
-.header-container:hover .animated-underline {
-  width: 120px;
-  background-color: var(--unistmo-gold);
-}
-
-/* --- TARJETAS DE DOCENTES --- */
+/* --- TARJETAS --- */
 .premium-card {
   background: #ffffff;
-  border-radius: 16px;
-  border: 1px solid #eaeaea;
+  border-radius: 24px;
+  border: 1px solid rgba(0,0,0,0.03);
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  box-shadow: var(--shadow-elegant);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-premium);
+  position: relative;
+  height: 100%;
 }
 
 .premium-card:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--shadow-hover);
-  border-color: rgba(157, 36, 73, 0.2);
+  transform: translateY(-12px);
+  box-shadow: var(--shadow-active);
 }
 
 .card-image-box {
   position: relative;
-  height: 280px;
-  background: #f1f1f1;
+  height: 300px;
   overflow: hidden;
 }
 
@@ -73,133 +68,152 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1s ease, filter 0.5s ease;
-  filter: saturate(0.9);
-}
-
-.premium-card:hover .image-zoom-container img {
-  transform: scale(1.08);
-  filter: saturate(1.1);
+  transition: transform 1.2s ease;
 }
 
 .specialty-glass-badge {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  background: rgba(255, 255, 255, 0.95);
-  border-left: 4px solid var(--unistmo-gold);
-  padding: 8px 14px;
-  border-radius: 4px;
-  color: var(--unistmo-wine);
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  z-index: 2;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-left: 4px solid var(--unistmo-wine);
+  padding: 10px 18px;
+  border-radius: 12px;
+  color: var(--unistmo-wine-dark);
+  font-size: 0.75rem;
+  font-weight: 800;
+  z-index: 5;
 }
 
 /* --- CUERPO DE LA TARJETA --- */
 .card-body-premium {
-  padding: 24px;
-  text-align: center;
-}
-
-.card-body-premium h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 6px;
-  transition: color 0.3s ease;
-}
-
-.premium-card:hover h3 {
-  color: var(--unistmo-wine);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .teacher-role {
-  color: #666;
-  font-size: 0.9rem;
-  margin-bottom: 24px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
+  color: var(--unistmo-gold);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 25px;
 }
 
-/* --- BOTÓN VER PERFIL (CORREGIDO TOTALMENTE) --- */
+/* --- BOTÓN SOLUCIONADO (ALTO CONTRASTE) --- */
 .btn-ultra-profile {
   position: relative;
   width: 100%;
-  padding: 14px 20px;
+  padding: 16px;
+  background-color: transparent; /* Fondo transparente para ver el borde */
   border: 2px solid var(--unistmo-wine);
-  background-color: transparent;
-  color: var(--unistmo-wine);
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 0.95rem;
+  border-radius: 16px;
+  color: var(--unistmo-wine); /* Color inicial */
+  font-weight: 800;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   cursor: pointer;
   overflow: hidden;
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
   z-index: 1;
 }
 
-/* El span es vital para que el texto se mantenga por encima del color de fondo */
-.btn-ultra-profile span {
+/* Capa de texto: Forzamos z-index muy alto */
+.btn-ultra-profile span, 
+.btn-ultra-profile i {
   position: relative;
-  z-index: 3; 
+  z-index: 10; 
+  transition: color 0.3s ease; /* Sincronizado con el fondo */
 }
 
-.btn-ultra-profile .btn-icon {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  transition: transform 0.3s ease;
-}
-
-/* Efecto de fondo que "llena" el botón */
+/* Fondo animado */
 .btn-ultra-profile::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: var(--unistmo-wine);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  z-index: 2;
+  transform: scaleX(0); /* Animación de izquierda a derecha */
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.5, 1, 0.89, 1);
+  z-index: 2; /* Por debajo del texto (10) */
 }
 
+/* ESTADO HOVER: El secreto está en asegurar el color blanco */
 .btn-ultra-profile:hover {
-  color: #ffffff !important;
-  box-shadow: 0 8px 20px rgba(157, 36, 73, 0.25);
+  color: #ffffff !important; /* Forzado total */
 }
 
 .btn-ultra-profile:hover::after {
   transform: scaleX(1);
-  transform-origin: left;
 }
 
-.btn-ultra-profile:hover .btn-icon {
+.btn-ultra-profile:hover i {
+  color: #ffffff !important;
   transform: translateX(5px);
 }
 
-/* --- ANIMACIONES DE ENTRADA --- */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* --- MODAL Y TABLA --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
-.premium-card {
-  animation: fadeInUp 0.6s ease backwards;
+.modal-content-premium {
+  background: #ffffff;
+  width: 90%;
+  max-width: 900px;
+  max-height: 85vh;
+  border-radius: 32px;
+  padding: 40px;
+  position: relative;
+  overflow-y: auto;
 }
 
-.premium-card:nth-child(1) { animation-delay: 0.1s; }
-.premium-card:nth-child(2) { animation-delay: 0.2s; }
-.premium-card:nth-child(3) { animation-delay: 0.3s; }
+.close-btn {
+  position: absolute;
+  top: 20px; right: 20px;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: #f1f5f9;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+
+.close-btn:hover {
+  background: var(--unistmo-wine);
+  color: white;
+}
+
+.table-premium {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  margin-top: 20px;
+}
+
+.table-premium td {
+  background: #f8fafc;
+  padding: 15px 20px;
+  border-radius: 12px;
+}
+
+.link-pub {
+  color: var(--unistmo-wine);
+  font-weight: 700;
+  text-decoration: none;
+}
