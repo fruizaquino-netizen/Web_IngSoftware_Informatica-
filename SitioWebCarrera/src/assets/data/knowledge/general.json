@@ -1,0 +1,27 @@
+{
+  "nombreOficial": "Ingeniería en Desarrollo de Software y Sistemas Inteligentes",
+  "nivelAcademico": "Licenciatura (Ingeniería)",
+  "institucion": "Universidad del Istmo (UNISTMO)",
+  "campus": ["Ixtepec"],
+  "modalidad": "Presencial",
+  "duracion": {
+    "totalSemestres": 9,
+    "detalle": "8 semestres de formación académica y 1 semestre de Estancia Profesional"
+  },
+  "areaConocimiento": "Tecnologías de la Información, Computación e Inteligencia Artificial",
+  "descripcionGeneral": "La Ingeniería en Desarrollo de Software y Sistemas Inteligentes forma profesionales capaces de crear soluciones tecnológicas avanzadas que integran software, datos e inteligencia artificial para resolver problemas reales de la sociedad y la industria. Durante la carrera, el estudiante desarrolla habilidades en programación, algoritmos, bases de datos, redes, sistemas operativos, ingeniería de software, desarrollo web, seguridad informática, ciencia de datos y aprendizaje automático, complementadas con una formación humanista, ética y emprendedora. La carrera pone especial énfasis en el diseño de sistemas inteligentes, el uso de metodologías modernas de desarrollo de software y la aplicación de tecnologías emergentes, preparando a los egresados para un entorno tecnológico en constante evolución.",
+  "perfilAspirante": [
+    "Interés en tecnología y computación",
+    "Resolución lógica y analítica de problemas",
+    "Programación y desarrollo de software",
+    "Innovación, inteligencia artificial y análisis de datos",
+    "Trabajo en equipo y aprendizaje continuo"
+  ],
+  "campoAplicacion": [
+    "Empresas de desarrollo de software",
+    "Proyectos de inteligencia artificial y ciencia de datos",
+    "Instituciones públicas y privadas",
+    "Emprendimientos tecnológicos",
+    "Investigación y desarrollo tecnológico"
+  ]
+}

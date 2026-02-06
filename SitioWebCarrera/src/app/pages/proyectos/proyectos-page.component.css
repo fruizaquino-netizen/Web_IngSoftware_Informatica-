@@ -11,15 +11,48 @@ h1 {
   font-weight: 700;
 }
 
+/* TÍTULOS SECUNDARIOS */
+h2 {
+  color: #5f0f14;
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin-bottom: 1.8rem;
+}
+
+h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #85272d;
+  margin-top: 0.6rem;
+  border-radius: 2px;
+}
+
 /* =====================================================
    HEADER
 ===================================================== */
 section.bg-white {
   background-color: #ffffff !important;
+  margin: 0;
+}
+
+
+/* =====================================================
+   ESPACIADO GENERAL DE SECCIONES
+===================================================== */
+section {
+  scroll-margin-top: 90px;
+}
+
+section.container,
+section.bg-light {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
 }
 
 /* =====================================================
-   FILTROS TIPO TABS (SIN TS / SIN JS)
+   FILTROS TIPO TABS (SIN JS)
 ===================================================== */
 
 /* Ocultar radios */
@@ -66,23 +99,18 @@ section.bg-white {
 /* =====================================================
    FILTRADO DE PROYECTOS
 ===================================================== */
-
-/* Ocultar todos */
 .project-item {
   display: none;
 }
 
-/* Mostrar todos */
 #filter-all:checked ~ .projects .project-item {
   display: block;
 }
 
-/* Mostrar software */
 #filter-software:checked ~ .projects .project-item.software {
   display: block;
 }
 
-/* Mostrar sistemas */
 #filter-sistemas:checked ~ .projects .project-item.sistemas {
   display: block;
 }
@@ -95,7 +123,7 @@ section.bg-white {
 }
 
 /* =====================================================
-   CARDS
+   CARDS DE PROYECTOS
 ===================================================== */
 .project-card {
   background-color: #ffffff;
@@ -186,6 +214,166 @@ section.bg-white {
 
 .btn-dark-custom:hover {
   background-color: #780c13;
+}
+
+/* =====================================================
+   MODALES DE PROYECTOS
+===================================================== */
+
+/* Contenedor general del modal */
+.modal-content {
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+}
+
+/* Header del modal */
+.modal-header {
+  border-bottom: 1px solid #e6ded2;
+  padding: 1.2rem 1.6rem;
+}
+
+.modal-title {
+  color: #5f0f14;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+/* Botón cerrar */
+.modal-header .btn-close {
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+.modal-header .btn-close:hover {
+  opacity: 1;
+}
+
+/* Body del modal */
+.modal-body {
+  padding: 1.6rem;
+  font-size: 0.9rem;
+  color: #4f4f4f;
+  line-height: 1.6;
+}
+
+/* Títulos internos */
+.modal-body h6 {
+  color: #5f0f14;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+/* Listas de integrantes */
+.modal-body ul {
+  padding-left: 1.2rem;
+  margin-bottom: 1.4rem;
+}
+
+.modal-body ul li {
+  font-size: 0.88rem;
+  margin-bottom: 0.3rem;
+}
+
+/* Galería dentro del modal */
+.modal-body img {
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal-body img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+}
+
+/* Video dentro del modal */
+.modal-body .ratio {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
+}
+
+/* Footer del modal */
+.modal-footer {
+  border-top: 1px solid #e6ded2;
+  padding: 1rem 1.6rem;
+}
+
+/* Botón cerrar del footer */
+.modal-footer .btn-secondary {
+  background-color: #f7f5f2;
+  color: #5f0f14;
+  border: 1px solid #e6ded2;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.45rem 1.4rem;
+  transition: all 0.25s ease;
+}
+
+.modal-footer .btn-secondary:hover {
+  background-color: #85272d;
+  color: #ffffff;
+  border-color: #85272d;
+}
+
+
+/* =====================================================
+   VIDEOS
+===================================================== */
+.ratio {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+}
+
+.ratio + p {
+  font-size: 0.85rem;
+  color: #6b6b6b;
+}
+
+
+/* =====================================================
+   GALERÍA DE FOTOS
+===================================================== */
+
+/* Imágenes de la galería */
+.gallery-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.gallery-img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .gallery-img {
+    height: 220px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .gallery-img {
+    height: 260px;
+  }
+}
+
+/* Modal tipo lightbox */
+#galleryModal .modal-content {
+  background-color: transparent;
+}
+
+#galleryModal img {
+  max-height: 80vh;
+  object-fit: contain;
 }
 
 /* =====================================================

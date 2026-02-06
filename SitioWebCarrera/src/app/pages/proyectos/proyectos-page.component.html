@@ -1,167 +1,248 @@
-<!-- Header -->
+﻿<!-- Header -->
 <section class="bg-white py-5 border-bottom">
   <div class="container">
-    <h1 class="fw-bold mb-3">Proyectos</h1>
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+      <h1 class="fw-bold m-0">{{ content().text.projectsTitle }}</h1>
+      <div class="btn-group" role="group" aria-label="Idioma">
+        <button
+          type="button"
+          class="btn btn-outline-secondary btn-sm"
+          [class.active]="locale() === 'es'"
+          (click)="setLocale('es')">
+          ES
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-secondary btn-sm"
+          [class.active]="locale() === 'en'"
+          (click)="setLocale('en')">
+          EN
+        </button>
+      </div>
+    </div>
     <p class="text-muted col-lg-8">
-      Conoce los proyectos de investigación y desarrollo tecnológico realizados
-      por nuestros estudiantes y docentes.
+      {{ content().text.projectsDescription }}
     </p>
   </div>
 </section>
 
-<!-- CONTENEDOR ÚNICO (IMPORTANTE) -->
+<!-- ================= CONTENEDOR ÚNICO (IMPORTANTE) ================= -->
 <section class="container py-5 project-filter">
-
   <!-- ================= RADIOS OCULTOS ================= -->
-  <input type="radio" name="filter" id="filter-all" checked>
-  <input type="radio" name="filter" id="filter-software">
-  <input type="radio" name="filter" id="filter-sistemas">
+  <ng-container *ngFor="let filter of content().filters">
+    <input
+      type="radio"
+      name="filter"
+      [id]="filter.id"
+      [checked]="activeFilter() === $any(filter.key)"
+      (change)="setActiveFilter($any(filter.key))">
+  </ng-container>
 
   <!-- ================= FILTROS ================= -->
   <div class="d-flex flex-wrap gap-2 filters mb-4">
-
-    <label for="filter-all" class="btn btn-light">
-      Todos
+    <label
+      *ngFor="let filter of content().filters"
+      [for]="filter.id"
+      class="btn btn-light">
+      {{ filter.label }}
     </label>
-
-    <label for="filter-software" class="btn btn-light">
-      Desarrollo de Software
-    </label>
-
-    <label for="filter-sistemas" class="btn btn-light">
-      Sistemas Inteligentes
-    </label>
-
   </div>
 
   <!-- ================= CARDS ================= -->
   <div class="row g-4 projects">
+    <div
+      class="col-12 col-md-6 col-lg-4 project-item"
+      *ngFor="let project of filteredProjects()"
+      [ngClass]="project.categoryKey">
 
-    <!-- SISTEMAS -->
-    <div class="col-12 col-md-6 col-lg-4 project-item sistemas">
       <div class="card project-card">
         <div class="card-img-top-wrapper">
-          <img src="assets/img/proy1.jpeg" alt="Carrito Arduino">
+          <img [src]="project.image" [alt]="project.title">
         </div>
         <div class="card-body">
-          <span class="card-category">Sistemas Inteligentes</span>
+          <span class="card-category">{{ project.categoryLabel }}</span>
           <h5 class="card-title fw-semibold">
-            Carrito Autónomo con Arduino
+            {{ project.title }}
           </h5>
           <p class="card-text text-muted small">
-            Vehículo a escala controlado por Arduino con sensores inteligentes.
+            {{ project.summary }}
           </p>
-          <a href="#" class="btn btn-dark-custom w-100 btn-sm">
-            Ver Más
-          </a>
+          <button
+            type="button"
+            class="btn btn-dark-custom w-100 btn-sm"
+            data-bs-toggle="modal"
+            [attr.data-bs-target]="'#modal-proyecto-' + project.id">
+            {{ content().text.watchMore }}
+          </button>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- SOFTWARE -->
-    <div class="col-12 col-md-6 col-lg-4 project-item software">
-      <div class="card project-card">
-        <div class="card-img-top-wrapper">
-          <img src="assets/img/proy2.jpg" alt="Medidor de Presión">
-        </div>
-        <div class="card-body">
-          <span class="card-category">Desarrollo de Software</span>
-          <h5 class="card-title fw-semibold">
-            Medidor de Presión con Gráficas
-          </h5>
-          <p class="card-text text-muted small">
-            Sistema de medición con visualización gráfica en tiempo real.
-          </p>
-          <a href="#" class="btn btn-dark-custom w-100 btn-sm">
-            Ver Más
-          </a>
-        </div>
-      </div>
-    </div>
 
-    <!-- SISTEMAS -->
-    <div class="col-12 col-md-6 col-lg-4 project-item sistemas">
-      <div class="card project-card">
-        <div class="card-img-top-wrapper">
-          <img src="assets/img/proy3.jpg" alt="Sensor de Personas">
-        </div>
-        <div class="card-body">
-          <span class="card-category">Sistemas Inteligentes</span>
-          <h5 class="card-title fw-semibold">
-            Sensor de Detección de Personas
-          </h5>
-          <p class="card-text text-muted small">
-            Sensor inteligente para detección de presencia humana.
-          </p>
-          <a href="#" class="btn btn-dark-custom w-100 btn-sm">
-            Ver Más
-          </a>
-        </div>
-      </div>
-    </div>
+<!-- Header 2-->
+  <div class="container">
+    <h1 class="fw-bold mb-3">{{ content().text.galleryTitle }}</h1>
+  </div>
 
-    <!-- SISTEMAS -->
-    <div class="col-12 col-md-6 col-lg-4 project-item sistemas">
-      <div class="card project-card">
-        <div class="card-img-top-wrapper">
-          <img src="assets/img/proy1.jpeg" alt="Carrito Arduino">
-        </div>
-        <div class="card-body">
-          <span class="card-category">Sistemas Inteligentes</span>
-          <h5 class="card-title fw-semibold">
-            Carrito Autónomo con Arduino
-          </h5>
-          <p class="card-text text-muted small">
-            Vehículo a escala controlado por Arduino con sensores inteligentes.
-          </p>
-          <a href="#" class="btn btn-dark-custom w-100 btn-sm">
-            Ver Más
-          </a>
-        </div>
-      </div>
-    </div>
+<!-- ================= VIDEOS INFORMATIVOS ================= -->
+<section class="container py-5">
+  <h2 class="fw-bold mb-4">{{ content().text.videosTitle }}</h2>
+  <div class="row g-4">
 
-    <!-- SOFTWARE -->
-    <div class="col-12 col-md-6 col-lg-4 project-item software">
-      <div class="card project-card">
-        <div class="card-img-top-wrapper">
-          <img src="assets/img/proy2.jpg" alt="Medidor de Presión">
-        </div>
-        <div class="card-body">
-          <span class="card-category">Desarrollo de Software</span>
-          <h5 class="card-title fw-semibold">
-            Medidor de Presión con Gráficas
-          </h5>
-          <p class="card-text text-muted small">
-            Sistema de medición con visualización gráfica en tiempo real.
-          </p>
-          <a href="#" class="btn btn-dark-custom w-100 btn-sm">
-            Ver Más
-          </a>
-        </div>
+    <div class="col-md-6" *ngFor="let video of content().videos">
+      <div class="ratio ratio-16x9">
+        <video controls>
+          <source [src]="video.src" type="video/mp4">
+          {{ content().text.videoFallback }}
+        </video>
       </div>
-    </div>
-
-    <!-- SOFTWARE -->
-    <div class="col-12 col-md-6 col-lg-4 project-item software">
-      <div class="card project-card">
-        <div class="card-img-top-wrapper">
-          <img src="assets/img/proy3.jpg" alt="Medidor de Presión">
-        </div>
-        <div class="card-body">
-          <span class="card-category">Desarrollo de Software</span>
-          <h5 class="card-title fw-semibold">
-            Medidor de Presión con Gráficas
-          </h5>
-          <p class="card-text text-muted small">
-            Sistema de medición con visualización gráfica en tiempo real.
-          </p>
-          <a href="#" class="btn btn-dark-custom w-100 btn-sm">
-            Ver Más
-          </a>
-        </div>
-      </div>
+      <p class="mt-2 text-muted small">
+        {{ video.caption }}
+      </p>
     </div>
 
   </div>
 </section>
+
+
+<!-- ================= GALERÍA DE FOTOS ================= -->
+<section class="bg-light py-5">
+  <div class="container">
+    <h2 class="fw-bold mb-4">{{ content().text.imagesTitle }}</h2>
+
+    <div class="row g-4">
+
+      <div
+        class="col-6 col-md-4"
+        *ngFor="let img of galleryImages(); let i = index">
+
+        <img
+          [src]="img"
+          class="img-fluid rounded gallery-img"
+          (click)="openGallery(i)"
+          alt="Imagen de galería">
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ================= MODALS ================= -->
+
+<div
+  class="modal fade"
+  *ngFor="let project of content().projects"
+  [id]="'modal-proyecto-' + project.id"
+  tabindex="-1">
+
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content rounded-4">
+      <div class="modal-header border-bottom">
+        <h5 class="modal-title fw-bold">
+          {{ project.title }}
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted">
+          {{ project.modal.description }}
+        </p>
+        <h6 class="fw-bold mt-4">{{ content().text.members }}</h6>
+        <ul>
+          <li *ngFor="let member of project.modal.members">
+            {{ member }}
+          </li>
+        </ul>
+        <h6 class="fw-bold mt-4">{{ content().text.gallery }}</h6>
+        <div class="row g-3">
+          <div class="col-md-4" *ngFor="let img of project.modal.gallery">
+            <img [src]="img" class="img-fluid rounded" [alt]="project.title">
+          </div>
+        </div>
+        <ng-container *ngIf="project.modal.videoUrl as videoUrl">
+          <h6 class="fw-bold mt-4">{{ content().text.video }}</h6>
+          <div class="ratio ratio-16x9">
+            <iframe [src]="safeVideoUrl(videoUrl)" allowfullscreen></iframe>
+          </div>
+        </ng-container>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">
+          {{ content().text.close }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ================= MODAL + CARRUSEL ================= -->
+<div
+  class="modal show"
+  style="display: block; background: rgba(0,0,0,0.85);"
+  *ngIf="galleryOpen()"
+  (click)="closeGallery()">
+
+  <div
+    class="modal-dialog modal-xl modal-dialog-centered"
+    (click)="$event.stopPropagation()">
+
+    <div class="modal-content bg-transparent border-0">
+
+      <!-- BOTÓN CERRAR -->
+      <div class="modal-header border-0 justify-content-end">
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          aria-label="Close"
+          (click)="closeGallery()">
+        </button>
+      </div>
+
+      <!-- CUERPO -->
+      <div class="modal-body p-0">
+
+        <div class="carousel slide">
+
+          <div class="carousel-inner text-center">
+
+            <div
+              class="carousel-item"
+              *ngFor="let img of galleryImages(); let i = index"
+              [class.active]="i === activeImage()">
+
+              <img
+                [src]="img"
+                class="img-fluid rounded"
+                style="max-height: 80vh;"
+                alt="Imagen de galería">
+            </div>
+
+          </div>
+
+          <!-- CONTROLES -->
+          <button
+            class="carousel-control-prev"
+            type="button"
+            (click)="prev()">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+
+          <button
+            class="carousel-control-next"
+            type="button"
+            (click)="next()">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

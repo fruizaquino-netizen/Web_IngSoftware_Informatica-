@@ -1,179 +1,85 @@
+
+<!-- ================= PLAN DE ESTUDIOS (SECCIÓN AISLADA) ================= -->
+<section class="plan-wrapper">
     <!-- ================= ENCABEZADO ================= -->
     <header class="header">
         <!-- Título principal de la página -->
-        <h1>Plan de Estudios</h1>
+        <h1>{{ pageTitle() }}</h1>
 
         <!-- Descripción general del plan académico -->
-        <p>
-            Conoce la estructura curricular de nuestro programa académico,
-            diseñada para brindarte una formación integral y progresiva.
-        </p>
+        <p>{{ pageDescription() }}</p>
     </header>
 
     <!-- ================= CONTENEDOR PRINCIPAL ================= -->
     <main class="container">
 
         <!-- ================= CARD: PLAN DE ESTUDIOS POR SEMESTRE ================= -->
-        <section class="card">
+        <div class="card">
 
             <!-- Radios ocultos:
                  Sirven para controlar qué pestaña (semestre) se muestra
                  sin necesidad de JavaScript -->
-            <input type="radio" name="tabs" id="tab1" checked>
-            <input type="radio" name="tabs" id="tab2">
-            <input type="radio" name="tabs" id="tab3">
+            <ng-container *ngFor="let sem of semesters(); let i = index">
+                <input type="radio" name="tabs" [id]="'tab' + (i + 1)" [checked]="i === 0">
+            </ng-container>
+            <input type="radio" name="tabs" id="tabop">
+
 
             <!-- ================= PESTAÑAS ================= -->
             <div class="tabs">
                 <!-- Cada label activa un radio y muestra su contenido -->
-                <label for="tab1" class="tab">Semestre 1</label>
-                <label for="tab2" class="tab">Semestre 2</label>
-                <label for="tab3" class="tab">Semestre 3</label>
+                <label
+                    *ngFor="let sem of semesters(); let i = index"
+                    [for]="'tab' + (i + 1)"
+                    class="tab"
+                >
+                    Semestre {{ i + 1 }}
+                </label>
+                <label for="tabop" class="tab">Optativas</label>
+
             </div>
 
-            <!-- ================= CONTENIDO SEMESTRE 1 ================= -->
-            <div class="tab-content content-1">
+            <!-- ================= CONTENIDO POR SEMESTRE ================= -->
+            <ng-container *ngFor="let sem of semesters(); let i = index">
+                <div class="tab-content" [ngClass]="'content-' + (i + 1)">
+                    <div class="card-header">
+                        <h2>Materias del Semestre {{ i + 1 }}</h2>
+                        <a [href]="pdfUrl()" download class="btn-pdf">
+                            Descargar Plan en PDF
+                        </a>
+                    </div>
 
-                <!-- Encabezado del card del semestre -->
-                <div class="card-header">
-                    <h2>Materias del Semestre 1</h2>
-
-                    <!-- Botón decorativo para descarga del plan en PDF -->
-                    <button class="btn-pdf">Descargar Plan en PDF</button>
+                    <div class="subjects">
+                        <div class="subject" *ngFor="let subj of sem.subjects">
+                            <div>
+                                <h3>{{ subj.name }}</h3>
+                                <span>{{ subj.credits }} créditos</span>
+                            </div>
+                            <span class="badge">{{ subj.level }}</span>
+                        </div>
+                    </div>
                 </div>
+            </ng-container>
 
-                <!-- Contenedor de materias -->
-                <div class="subjects">
+            <!-- ================= CONTENIDO OPTATIVAS ================= -->
+<div class="tab-content content-optativas">
+  <div class="card-header">
+    <h2>Materias Optativas</h2>
+  </div>
 
-                    <!-- Materia individual -->
-                    <div class="subject">
-                        <div>
-                            <h3>Matemáticas I</h3>
-                            <span>5 créditos</span>
-                        </div>
-                        <!-- Nivel de formación -->
-                        <span class="badge">Básico</span>
-                    </div>
+  <div class="subjects">
+    <div class="subject" *ngFor="let subj of optativas()">
+      <div>
+        <h3>{{ subj.name }}</h3>
+        <span>{{ subj.credits }} créditos</span>
+      </div>
+      <span class="badge">{{ subj.level }}</span>
+    </div>
+  </div>
+</div>
 
-                    <div class="subject">
-                        <div>
-                            <h3>Programación I</h3>
-                            <span>6 créditos</span>
-                        </div>
-                        <span class="badge">Básico</span>
-                    </div>
 
-                    <div class="subject">
-                        <div>
-                            <h3>Introducción a la Ingeniería</h3>
-                            <span>4 créditos</span>
-                        </div>
-                        <span class="badge">Básico</span>
-                    </div>
-
-                    <div class="subject">
-                        <div>
-                            <h3>Comunicación Oral y Escrita</h3>
-                            <span>3 créditos</span>
-                        </div>
-                        <span class="badge">Básico</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- ================= CONTENIDO SEMESTRE 2 ================= -->
-            <div class="tab-content content-2">
-
-                <div class="card-header">
-                    <h2>Materias del Semestre 2</h2>
-                    <button class="btn-pdf">Descargar Plan en PDF</button>
-                </div>
-
-                <div class="subjects">
-
-                    <div class="subject">
-                        <div>
-                            <h3>Matemáticas II</h3>
-                            <span>5 créditos</span>
-                        </div>
-                        <span class="badge">Básico</span>
-                    </div>
-
-                    <div class="subject">
-                        <div>
-                            <h3>Programación II</h3>
-                            <span>6 créditos</span>
-                        </div>
-                        <span class="badge">Ascendente</span>
-                    </div>
-
-                    <div class="subject">
-                        <div>
-                            <h3>Bases de Datos I</h3>
-                            <span>5 créditos</span>
-                        </div>
-                        <span class="badge">Ascendente</span>
-                    </div>
-
-                    <div class="subject">
-                        <div>
-                            <h3>Estructuras de Datos</h3>
-                            <span>5 créditos</span>
-                        </div>
-                        <span class="badge">Ascendente</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- ================= CONTENIDO SEMESTRE 3 ================= -->
-            <div class="tab-content content-3">
-
-                <div class="card-header">
-                    <h2>Materias del Semestre 3</h2>
-                    <button class="btn-pdf">Descargar Plan en PDF</button>
-                </div>
-
-                <div class="subjects">
-
-                    <div class="subject">
-                        <div>
-                            <h3>Algoritmos Avanzados</h3>
-                            <span>6 créditos</span>
-                        </div>
-                        <span class="badge">Pavimentante</span>
-                    </div>
-
-                    <div class="subject">
-                        <div>
-                            <h3>Desarrollo Web</h3>
-                            <span>6 créditos</span>
-                        </div>
-                        <span class="badge">Pavimentante</span>
-                    </div>
-
-                    <div class="subject">
-                        <div>
-                            <h3>Ingeniería de Software</h3>
-                            <span>5 créditos</span>
-                        </div>
-                        <span class="badge">Pavimentante</span>
-                    </div>
-
-                    <div class="subject">
-                        <div>
-                            <h3>Redes de Computadoras</h3>
-                            <span>5 créditos</span>
-                        </div>
-                        <span class="badge">Ascendente</span>
-                    </div>
-
-                </div>
-            </div>
-
-        </section>
-
+</div>
         <!-- ================= NIVELES DE FORMACIÓN ================= -->
         <section class="card">
             <h2>Niveles de Formación</h2>
@@ -182,53 +88,29 @@
             <div class="levels">
 
                 <!-- Nivel Básico -->
-                <div class="level">
-                    <div class="level-icon">B</div>
+                <div class="level" *ngFor="let level of levels()">
+                    <div class="level-icon">{{ level.code }}</div>
                     <div>
-                        <h3>Básico</h3>
-                        <p>Fundamentos esenciales</p>
-                    </div>
-                </div>
-
-                <!-- Nivel Ascendente -->
-                <div class="level">
-                    <div class="level-icon">A</div>
-                    <div>
-                        <h3>Ascendente</h3>
-                        <p>Desarrollo intermedio</p>
-                    </div>
-                </div>
-
-                <!-- Nivel Pavimentante -->
-                <div class="level">
-                    <div class="level-icon">P</div>
-                    <div>
-                        <h3>Pavimentante</h3>
-                        <p>Especialización avanzada</p>
+                        <h3>{{ level.name }}</h3>
+                        <p>{{ level.description }}</p>
                     </div>
                 </div>
 
             </div>
         </section>
-
+<br>
         <!-- ================= DURACIÓN Y MODALIDAD ================= -->
         <section class="double-card">
 
             <!-- Duración del programa -->
             <div class="card">
-                <h2>Duración del Programa</h2>
-                <p>Duración total de 9 semestres (4.5 años).</p>
+                <h2>{{ programInfo().durationTitle }}</h2>
+                <p>{{ programInfo().durationText }}</p>
             </div>
 
             <!-- Modalidad del programa -->
             <div class="card">
-                <h2>Modalidad</h2>
-                <p>
-                    Modalidad presencial con actividades prácticas en laboratorios
-                    especializados y proyectos reales.
-                </p>
-            </div>
-
-        </section>
-
-    </main>
+                <h2>{{ programInfo().modalityTitle }}</h2>
+                <p>{{ programInfo().modalityText }}</p>
+        </div>
+</section>

@@ -1,7 +1,143 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+type Subject = {
+  name: string;
+  credits: number;
+  level: string;
+};
+
+type Semester = {
+  subjects: Subject[];
+};
+
+type LevelInfo = {
+  code: string;
+  name: string;
+  description: string;
+};
 @Component({
+  imports: [CommonModule, RouterModule],
+  standalone: true,
   selector:'planEstudios',
   templateUrl: './PlanEstudio-page.component.html',
   styleUrls: ['./PlanEstudio-page.component.css']
 })
-export class PlanEstudiosPageComponent{}
+export class PlanEstudiosPageComponent{
+  readonly pageTitle = signal('Plan de Estudios');
+  readonly pageDescription = signal(
+    'Conoce la estructura curricular de nuestro programa académico, diseñada para brindarte una formación integral y progresiva.'
+  );
+  readonly pdfUrl = signal('assets/pdf/PlanEstudios.pdf');
+
+  readonly semesters = signal<Semester[]>([
+    {
+      subjects: [
+        { name: 'Metodología de la Investigación', credits: 6, level: 'Básico' },
+        { name: 'Fundamentos Matemáticos para la Ingeniería', credits: 7, level: 'Básico' },
+        { name: 'Lógica Matemática', credits: 7, level: 'Básico' },
+        { name: 'Programación I', credits: 4, level: 'Básico' },
+        { name: 'Fundamentos de Programación Estructurada', credits: 7, level: 'Básico' },
+        { name: 'Administración', credits: 5, level: 'Básico' },
+      ],
+    },
+    {
+      subjects: [
+        { name: 'Física', credits: 6, level: 'Básico' },
+        { name: 'Cálculo Diferencial e Integral', credits: 7, level: 'Básico' },
+        { name: 'Matemáticas Discretas', credits: 7, level: 'Básico' },
+        { name: 'Teoría General de Sistemas', credits: 4, level: 'Básico' },
+        { name: 'Estructura de Datos', credits: 7, level: 'Ascendente' },
+        { name: 'Contabilidad y Finanzas', credits: 5, level: 'Básico' },
+      ],
+    },
+    {
+      subjects: [
+        { name: 'Electrónica I', credits: 6, level: 'Ascendente' },
+        { name: 'Teoría de Algoritmos y Complejidad', credits: 6, level: 'Ascendente' },
+        { name: 'Álgebra Lineal', credits: 6, level: 'Ascendente' },
+        { name: 'Sistemas Operativos', credits: 6, level: 'Pavimentante' },
+        { name: 'Paradigmas de Programación', credits: 7, level: 'Pavimentante' },
+        { name: 'Liderazgo y Emprendimiento', credits: 5, level: 'Básico' },
+      ],
+    },
+    {
+      subjects: [
+        { name: 'Electrónica II', credits: 6, level: 'Ascendente' },
+        { name: 'Probabilidad y Estadística', credits: 5, level: 'Ascendente' },
+        { name: 'Métodos Numéricos', credits: 5, level: 'Ascendente' },
+        { name: 'Redes de Computadoras', credits: 7, level: 'Pavimentante' },
+        { name: 'Programación Orientada a Objetos', credits: 7, level: 'Pavimentante' },
+        { name: 'Diseño de Bases de Datos', credits: 7, level: 'Pavimentante' },
+      ],
+    },
+    {
+      subjects: [
+        { name: 'Arquitectura de Computadoras', credits: 5, level: 'Pavimentante' },
+        { name: 'Modelos de Optimización para Toma de Decisiones', credits: 5, level: 'Pavimentante' },
+        { name: 'Ingeniería de Software I', credits: 7, level: 'Pavimentante' },
+        { name: 'Servidores y Seguridad', credits: 7, level: 'Pavimentante' },
+        { name: 'Sistemas Distribuidos', credits: 6, level: 'Pavimentante' },
+        { name: 'Implementación de Bases de Datos', credits: 7, level: 'Pavimentante' },
+      ],
+    },
+    {
+      subjects: [
+        { name: 'Derecho y Legislación Informática', credits: 4, level: 'Formativo' },
+        { name: 'Desarrollo de Aplicaciones Web I', credits: 7, level: 'Pavimentante' },
+        { name: 'Ingeniería de Software II', credits: 7, level: 'Pavimentante' },
+        { name: 'Interfaz Humano Computadora', credits: 5, level: 'Formativo' },
+        { name: 'Redes Inteligentes', credits: 6, level: 'Pavimentante' },
+        { name: 'Bases de Datos Avanzadas', credits: 5, level: 'Pavimentante' },
+      ],
+    },
+    {
+      subjects: [
+        { name: 'Proyectos de Tecnologías de Información', credits: 5, level: 'Terminal' },
+        { name: 'Desarrollo de Aplicaciones Web II', credits: 7, level: 'Terminal' },
+        { name: 'Calidad de Software', credits: 6, level: 'Terminal' },
+        { name: 'Fundamentos de Inteligencia Artificial', credits: 8, level: 'Terminal' },
+        { name: 'Aprendizaje Automático', credits: 7, level: 'Terminal' },
+        { name: 'Ciencia de Datos', credits: 6, level: 'Terminal' },
+      ],
+    },
+    {
+      subjects: [
+        { name: 'Cómputo en la Nube', credits: 5, level: 'Terminal' },
+        { name: 'Desarrollo de Soluciones Tecnológicas', credits: 7, level: 'Terminal' },
+        { name: 'Desarrollo de Sistemas Inteligentes', credits: 7, level: 'Terminal' },
+        { name: 'Optativa I', credits: 6, level: 'Optativa' },
+        { name: 'Optativa II', credits: 6, level: 'Optativa' },
+      ],
+    },
+    {
+      subjects: [
+        { name: 'Seminario de Titulación', credits: 6, level: 'Terminal' },
+        { name: 'Estancia Profesional', credits: 14, level: 'Terminal' },
+      ],
+    },
+  ]);
+
+  readonly optativas = signal<Subject[]>([
+    { name: 'Procesamiento de Lenguaje Natural', credits: 6, level: 'IA' },
+    { name: 'Visión Computacional', credits: 6, level: 'IA' },
+    { name: 'Robótica', credits: 6, level: 'IA' },
+    { name: 'Sistemas IoT', credits: 6, level: 'Hardware' },
+    { name: 'Redes Avanzadas', credits: 6, level: 'TI' },
+  ]);
+
+  readonly levels = signal<LevelInfo[]>([
+    { code: 'B', name: 'Básico', description: 'Fundamentos esenciales' },
+    { code: 'A', name: 'Ascendente', description: 'Desarrollo intermedio' },
+    { code: 'P', name: 'Pavimentante', description: 'Especialización avanzada' },
+  ]);
+
+  readonly programInfo = signal({
+    durationTitle: 'Duración del Programa',
+    durationText: 'Duración total de 9 semestres (4.5 años).',
+    modalityTitle: 'Modalidad',
+    modalityText:
+      'Modalidad presencial con actividades prácticas en laboratorios especializados y proyectos reales.',
+  });
+}

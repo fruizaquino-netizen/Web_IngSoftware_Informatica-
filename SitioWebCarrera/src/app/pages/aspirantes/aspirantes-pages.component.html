@@ -1,5 +1,39 @@
-<section class="aspirantes">
+<!-- ================= TESTIMONIOS TICKER ================= -->
+<div class="news-ticker-container testimonios-ticker">
 
+  <div class="ticker-label">
+    TESTIMONIOS
+  </div>
+
+  <div class="ticker-wrap">
+    <div class="ticker-move">
+
+      <div
+        class="ticker-item"
+        *ngFor="let testimonio of testimonios"
+        (click)="openTestimonio(testimonio)"
+      >
+        <span class="frase">“{{ testimonio.frase }}”</span>
+        <strong class="autor">{{ testimonio.nombre }}</strong>
+      </div>
+
+      <!-- duplicado -->
+      <div
+        class="ticker-item"
+        *ngFor="let testimonio of testimonios"
+        (click)="openTestimonio(testimonio)"
+      >
+        <span class="frase">“{{ testimonio.frase }}”</span>
+        <strong class="autor">{{ testimonio.nombre }}</strong>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<section class="aspirantes">
   <!-- HEADER -->
   <header class="header">
     <h1>Aspirantes</h1>
@@ -114,3 +148,45 @@
 </section>
 
 </section>
+
+
+
+
+<!-- ================= MODAL TESTIMONIO ================= -->
+<div
+  class="modal"
+  *ngIf="testimonioActivo"
+  (click)="closeTestimonio()"
+>
+
+
+  <div
+    class="modal-dialog"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="modal-content rounded-4 p-4">
+
+      <div class="modal-header border-0">
+        <h5 class="modal-title">Testimonio de Egresado</h5>
+        <button class="btn-close" (click)="closeTestimonio()"></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="fst-italic fs-5">
+          “{{ testimonioActivo.frase }}”
+        </p>
+
+        <hr>
+
+        <h6 class="fw-bold mb-0">
+          {{ testimonioActivo.nombre }}
+        </h6>
+        <small class="text-muted">
+          {{ testimonioActivo.generacion }}
+        </small>
+      </div>
+
+    </div>
+  </div>
+</div>
+

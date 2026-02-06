@@ -8,7 +8,7 @@
   <div class="container">
 
 
-    <!-- Hamburguesa -->
+    <!-- Botón hamburguesa -->
     <button
       class="navbar-toggler"
       type="button"
@@ -21,81 +21,56 @@
     </button>
 
     <!-- Menú -->
-    <div class="collapse navbar-collapse justify-content-end" id="navbarInstitucional">
-        <ul class="navbar-nav align-items-lg-center gap-lg-4">
+    <ul class="collapse navbar-collapse justify-content-end" id="navbarInstitucional">
+      <ul class="navbar-nav align-items-lg-center gap-lg-4">
 
-          <!-- Inicio -->
-          <li class="nav-item">
-            <a
-              class="btn btn-institucional"
-              routerLink="/"
-              [class.active-link]="isActive('/')"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarInstitucional"
-            >
-              Inicio
-            </a>
-          </li>
+        <li class="nav-item">
+          <a class="btn btn-institucional"
+             routerLink="/"
+             [class.active-link]="isActive('/')">
+            Inicio
+          </a>
+        </li>
 
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="/quienesSomos"
-              [class.active-link]="isActive('/quienesSomos')"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarInstitucional"
-            >
-              ¿Quiénes Somos?
-            </a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link"
+             routerLink="/quienesSomos"
+             [class.active-link]="isActive('/quienesSomos')">
+            ¿Quiénes Somos?
+          </a>
+        </li>
 
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="/planEstudios"
-              [class.active-link]="isActive('/planEstudios')"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarInstitucional"
-            >
-              Plan de Estudios
-            </a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link"
+             routerLink="/planEstudios"
+             [class.active-link]="isActive('/planEstudios')">
+            Plan de Estudios
+          </a>
+        </li>
 
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="/proyectos"
-              [class.active-link]="isActive('/proyectos')"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarInstitucional"
-            >
-              Proyectos
-            </a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link"
+             routerLink="/proyectos"
+             [class.active-link]="isActive('/proyectos')">
+            Proyectos
+          </a>
+        </li>
 
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="/docentes"
-              [class.active-link]="isActive('/docentes')"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarInstitucional"
-            >
-              Docentes
-            </a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link"
+             routerLink="/docentes"
+             [class.active-link]="isActive('/docentes')">
+            Docentes
+          </a>
+        </li>
 
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLink="/aspirantes"
-              [class.active-link]="isActive('/aspirantes')"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarInstitucional"
-            >
-              Aspirantes
-            </a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link"
+             routerLink="/aspirantes"
+             [class.active-link]="isActive('/aspirantes')">
+            Aspirantes
+          </a>
+        </li>
 
           <li class="nav-item">
             <a
@@ -110,8 +85,48 @@
           </li>
 
         </ul>
+        <!-- 🌐 MENÚ IDIOMA -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="idiomaDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+            🌐 Idioma
+          </a>
 
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="idiomaDropdown">
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="cambiarIdioma('español')"
+                [class.active-idioma]="idiomaActual() === 'español'">
+                Español 🇲🇽
+              </button>
+            </li>
 
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="cambiarIdioma('zapoteco')"
+                [class.active-idioma]="idiomaActual() === 'zapoteco'">
+                Zapoteco
+              </button>
+            </li>
+
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="cambiarIdioma('english')"
+                [class.active-idioma]="idiomaActual() === 'english'">
+                🇺🇸 English
+              </button>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
-  </div>
 </nav>
+

@@ -1,200 +1,240 @@
-/* ================= RESET GENERAL ================= */
-/* Elimina márgenes y rellenos por defecto del navegador
-   y define el modelo de caja para que padding y border
-   no aumenten el tamaño total de los elementos */
-* {
-    margin: 0;
+/* ===================================================== */
+/* =============== AISLAMIENTO TOTAL =================== */
+/* ===================================================== */
+
+.plan-wrapper {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    margin: 0 auto;
     padding: 0;
+    position: relative;
+    left: 0 !important;
+    transform: none !important;
+}
+
+.plan-wrapper * {
     box-sizing: border-box;
+    max-width: 100%;
+}
 
-    /* Fuente general del sitio */
+/* ===================================================== */
+/* ================= RESET INTERNO ===================== */
+/* ===================================================== */
+
+.plan-wrapper {
     font-family: Arial, Helvetica, sans-serif;
-}
-
-/* ================= ESTILOS GENERALES DEL BODY ================= */
-/* Define el color de fondo y el color base del texto */
-body {
-    background-color: #ffffff;
     color: #2b2b2b;
+    background-color: #ffffff;
 }
 
-/* ================= ENCABEZADO ================= */
-/* Estilo del contenedor del encabezado */
-.header {
-    background-color: #ffffff;      /* Fondo blanco */
-    padding: 40px 80px;              /* Espaciado interno */
-    border-bottom: 1px solid #e6ded2;/* Línea divisoria inferior */
+/* ===================================================== */
+/* ================= ENCABEZADO ======================== */
+/* ===================================================== */
+
+.plan-wrapper .header {
+    background-color: #ffffff;
+    padding: 40px 80px;
+    border-bottom: 1px solid #e6ded2;
+    text-align: center;
 }
 
-/* Título principal del encabezado */
-.header h1 {
-    font-size: 32px;                 /* Tamaño grande del título */
-    margin-bottom: 10px;             /* Separación inferior */
+.plan-wrapper .header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
     color: #5f0f14;
 }
 
-/* Texto descriptivo del encabezado */
-.header p {
-    max-width: 700px;                /* Limita el ancho del texto */
+.plan-wrapper .header p {
+    max-width: 700px;
+    margin: 20px auto 0;
+    padding: 0 10px;
+    font-size: 15px;
+}
+
+/* ===================================================== */
+/* ================= CONTENEDOR ======================== */
+/* ===================================================== */
+
+.plan-wrapper .container {
+    width: 100%;
+    max-width: 1100px;
     margin: 40px auto;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
-/* ================= CONTENEDOR PRINCIPAL ================= */
-/* Contenedor central que limita el ancho del contenido */
-.container {
-    max-width: 1100px;               /* Ancho máximo */
-    margin: 40px auto;               /* Centrado horizontal */
-    display: flex;                   /* Flexbox */
-    flex-direction: column;          /* Elementos en columna */
-    gap: 30px;                       /* Separación entre secciones */
+/* ===================================================== */
+/* ================= TARJETAS ========================== */
+/* ===================================================== */
+
+.plan-wrapper .card {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
 }
 
-/* ================= TARJETAS ================= */
-/* Estilo base para todas las tarjetas */
-.card {
-    background-color: #ffffff;       /* Fondo blanco */
-    padding: 30px;                   /* Espacio interno */
-    border-radius: 12px;             /* Bordes redondeados */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05); /* Sombra suave */
-}
-
-/* Títulos dentro de las tarjetas */
-.card h2 {
+.plan-wrapper .card h2 {
     margin-bottom: 20px;
     color: #85272d;
 }
 
-/* ================= TABS (PESTAÑAS) ================= */
+/* ===================================================== */
+/* ================= TABS (RADIOS) ===================== */
+/* ===================================================== */
 
-/* OCULTAR COMPLETAMENTE LOS RADIOS (CÍRCULOS MORADOS) */
-input[type="radio"] {
-    display: none !important;
-    visibility: hidden;
-    position: absolute;
-}
-
-/* Oculta TODOS los contenidos */
-.tab-content {
+.plan-wrapper input[type="radio"] {
     display: none;
 }
 
+/* Oculta todos los contenidos */
+.plan-wrapper .tab-content {
+    display: none;
+}
 
-/* Contenedor de las pestañas */
-.tabs {
+/* Mostrar según radio */
+#tab1:checked ~ .content-1,
+#tab2:checked ~ .content-2,
+#tab3:checked ~ .content-3,
+#tab4:checked ~ .content-4,
+#tab5:checked ~ .content-5,
+#tab6:checked ~ .content-6,
+#tab7:checked ~ .content-7,
+#tab8:checked ~ .content-8,
+#tab9:checked ~ .content-9,
+#tabop:checked ~ .content-optativas {
+    display: block;
+}
+
+/* ===================================================== */
+/* ================= PESTAÑAS ========================== */
+/* ===================================================== */
+
+.plan-wrapper .tabs {
     display: flex;
-    gap: 40px;           /* SEPARA BIEN Semestre 1, 2 y 3 */
-    border-bottom: 1px solid #e5e7eb;
-    margin-bottom: 25px;
+    gap: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    max-width: 100%;
 }
 
-/* Muestra el semestre correspondiente */
-#tab1:checked ~ .content-1 {
-    display: block;
+.plan-wrapper .tabs::-webkit-scrollbar {
+    height: 6px;
 }
 
-#tab2:checked ~ .content-2 {
-    display: block;
+.plan-wrapper .tabs::-webkit-scrollbar-thumb {
+    background-color: #85272d;
+    border-radius: 10px;
 }
 
-#tab3:checked ~ .content-3 {
-    display: block;
-}
-
-/* Estilo de cada pestaña */
-.tab {
-    background: none;
-    border: none;
-    padding: 12px 20px;   /* MÁS ESPACIO */
+.plan-wrapper .tab {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 12px 20px;
     font-weight: bold;
-    color: #000000;
+    font-size: 14px;
+    color: #000;
     cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
-
-/* Estilo de la pestaña activa */
 #tab1:checked ~ .tabs label[for="tab1"],
 #tab2:checked ~ .tabs label[for="tab2"],
-#tab3:checked ~ .tabs label[for="tab3"] {
+#tab3:checked ~ .tabs label[for="tab3"],
+#tab4:checked ~ .tabs label[for="tab4"],
+#tab5:checked ~ .tabs label[for="tab5"],
+#tab6:checked ~ .tabs label[for="tab6"],
+#tab7:checked ~ .tabs label[for="tab7"],
+#tab8:checked ~ .tabs label[for="tab8"],
+#tab9:checked ~ .tabs label[for="tab9"],
+#tabop:checked ~ .tabs label[for="tabop"] {
     color: #85272d;
     border-bottom: 3px solid #85272d;
 }
 
-/* ================= ENCABEZADO DE MATERIAS ================= */
-/* Contenedor del título del semestre y botón PDF */
-.card-header {
-    display: flex;                   /* Alineación horizontal */
-    justify-content: space-between;  /* Separación entre elementos */
-    align-items: center;             /* Alineación vertical */
+/* ===================================================== */
+/* ================= HEADER SEMESTRE =================== */
+/* ===================================================== */
+
+.plan-wrapper .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
     margin-bottom: 25px;
+    width: 100%;
 }
 
-/* Botón para descargar el plan en PDF */
-.btn-pdf {
+.plan-wrapper .btn-pdf {
     background-color: #85272d;
     color: #ffffff;
-    border: none;
     padding: 10px 18px;
     border-radius: 6px;
-    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap;
 }
 
-/* ================= MATERIAS ================= */
-/* Contenedor de todas las materias */
-.subjects {
+/* ===================================================== */
+/* ================= MATERIAS ========================== */
+/* ===================================================== */
+
+.plan-wrapper .subjects {
     display: flex;
-    flex-direction: column;          /* Materias en columna */
+    flex-direction: column;
     gap: 15px;
 }
 
-/* Tarjeta individual de una materia */
-.subject {
+.plan-wrapper .subject {
     background-color: #f7f5f2;
     padding: 18px;
     border-radius: 10px;
     display: flex;
-    justify-content: space-between;  /* Texto a la izquierda, badge a la derecha */
+    justify-content: space-between;
     align-items: center;
+    gap: 15px;
 }
 
-/* Nombre de la materia */
-.subject h3 {
+.plan-wrapper .subject h3 {
     font-size: 16px;
-    color: #2b2b2b;
 }
 
-/* Créditos u otros textos secundarios */
-span {
+.plan-wrapper span {
     font-size: 14px;
-    color: #000000;
 }
 
-/* Etiqueta del nivel de formación */
-.badge {
-    color: #ffffff;
+.plan-wrapper .badge {
     background-color: #85272d;
+    color: #ffffff;
     padding: 6px 14px;
     border-radius: 6px;
     font-size: 13px;
 }
 
-/* ================= NIVELES DE FORMACIÓN ================= */
-/* Contenedor de los niveles */
-.levels {
+/* ===================================================== */
+/* ================= NIVELES =========================== */
+/* ===================================================== */
+
+.plan-wrapper .levels {
     display: flex;
-    justify-content: space-between;
     gap: 20px;
 }
 
-/* Nivel individual */
-.level {
+.plan-wrapper .level {
     display: flex;
     align-items: center;
     gap: 15px;
-    flex: 1;                         /* Todos ocupan el mismo ancho */
+    flex: 1;
 }
 
-/* Ícono circular/rectangular del nivel */
-.level-icon {
+.plan-wrapper .level-icon {
     width: 45px;
     height: 45px;
     background-color: #5f0f14;
@@ -206,10 +246,66 @@ span {
     border-radius: 8px;
 }
 
-/* ================= DURACIÓN Y MODALIDAD ================= */
-/* Contenedor con dos tarjetas en columnas */
-.double-card {
+/* ===================================================== */
+/* ================= DOBLE CARD ======================== */
+/* ===================================================== */
+
+.plan-wrapper .double-card {
     display: grid;
-    grid-template-columns: 1fr 1fr;  /* Dos columnas iguales */
+    grid-template-columns: 1fr 1fr;
     gap: 30px;
+}
+
+/* ===================================================== */
+/* ================= RESPONSIVE ======================== */
+/* ===================================================== */
+
+@media (max-width: 768px) {
+
+    .plan-wrapper .header {
+        padding: 25px 20px;
+    }
+
+    .plan-wrapper .header h1 {
+        font-size: 26px;
+    }
+
+    .plan-wrapper .levels {
+        flex-direction: column;
+    }
+
+    .plan-wrapper .double-card {
+        grid-template-columns: 1fr;
+    }
+
+    .plan-wrapper .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .plan-wrapper .btn-pdf {
+        width: 100%;
+        text-align: center;
+    }
+
+    .plan-wrapper .subject {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .plan-wrapper .badge {
+        align-self: flex-end;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .plan-wrapper .card {
+        padding: 20px;
+    }
+
+    .plan-wrapper .tab {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
 }
