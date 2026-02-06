@@ -191,7 +191,7 @@ export class DocentesPageComponent {
       cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática e Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
       imagen: 'assets/docente6.png',
       descripcion: 'Sistemas Inteligentes.',
-      email: 'ie.edgarcano@gmail.com',
+      email: 'FRuizAquino@gmail.com',
       publicaciones: [
       ]
     }
