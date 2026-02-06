@@ -310,29 +310,74 @@ html, body {
   background-color: #f1dddd;
 }
 
-/* ================= MODAL TESTIMONIOS ================= */
+/* ================= MODAL TESTIMONIOS MODERNO ================= */
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.7);
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
   z-index: 9999;
 }
 
+
+
+/* Contenedor del modal */
 .modal-dialog {
+  margin: 0;
   max-width: 520px;
   width: 90%;
 }
 
+/* Tarjeta */
 .modal-content {
+  width: 100%;
+  position: relative;
   background: #ffffff;
   border-radius: 22px;
-  padding: 32px;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+  padding: 32px 30px 28px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+  animation: modalFadeUp 0.35s ease;
 }
-
+/* Animación */
+@keyframes modalFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+/* Badge superior */
+.modal-content::before {
+  content: "Testimonios";
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #8b1e1e, #5f0f14);
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+/* Header */
+.modal-header {
+  border: none;
+  padding: 0;
+  margin-bottom: 18px;
+}
+.modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+}
+/* Botón cerrar */
 .btn-close {
   position: absolute;
   top: 18px;
@@ -340,8 +385,46 @@ html, body {
   background: none;
   border: none;
   font-size: 26px;
+  color: #64748b;
   cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
+.btn-close:hover {
+  color: #8b1e1e;
+  transform: rotate(90deg);
+}
+/* Cuerpo */
+.modal-body {
+  padding: 0;
+}
+/* Frase */
+.modal-body p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #334155;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+/* Separador */
+.modal-body hr {
+  border: none;
+  height: 1px;
+  background: #e5e7eb;
+  margin: 18px 0;
+}
+/* Nombre */
+.modal-body h6 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+/* Generación */
+.modal-body small {
+  font-size: 14px;
+  color: #6b7280;
+}
+
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 900px) {
