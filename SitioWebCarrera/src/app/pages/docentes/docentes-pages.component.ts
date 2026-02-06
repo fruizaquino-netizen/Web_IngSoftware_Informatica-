@@ -141,6 +141,7 @@ export class DocentesPageComponent {
       cargo: 'Profesor Asociado B asignado a la licenciatura en Informática Universidad del Istmo Campus Ixtepec. [Oct 2024 - Presente]',
       imagen: 'assets/docente6.png',
       descripcion: 'Optimización Multiobjetivo.',
+      
       email: 'cosijopii@bianni.unistmo.edu.mx',
       publicaciones: [
         { titulo: 'Garcia-Garcia, C., Derbel, B., Morales-Reyes, A., & Escalante, H. J. (2025). Speeding up the multi-objective NAS through incremental learning. In L. Martínez-Villaseñor & G. Ochoa-Ruiz (Eds.), Advances in soft computing (pp. 3–15). Springer Nature Switzerland.', anio: 2025, enlace: 'https://doi.org/10.1007/978-3-031-75543-9_1' },
