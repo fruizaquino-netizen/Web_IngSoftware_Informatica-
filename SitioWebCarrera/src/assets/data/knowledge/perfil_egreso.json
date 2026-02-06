@@ -1,0 +1,30 @@
+{
+  "perfilGeneral": "El egresado de la Ingeniería en Desarrollo de Software y Sistemas Inteligentes es un profesional altamente capacitado para enfrentar los retos tecnológicos actuales y futuros, con habilidades técnicas, analíticas y humanistas que le permiten diseñar, desarrollar, implementar y mantener soluciones de software y sistemas inteligentes en distintos contextos. Cuenta con una formación integral que combina conocimientos en computación, inteligencia artificial, ciencia de datos y tecnologías de la información, con valores éticos, responsabilidad social y capacidad de liderazgo.",
+  "conocimientos": [
+    "Programación estructurada, orientada a objetos y basada en diferentes paradigmas.",
+    "Algoritmos, estructuras de datos y análisis de complejidad.",
+    "Bases de datos relacionales y avanzadas.",
+    "Ingeniería de software y metodologías de desarrollo.",
+    "Desarrollo de aplicaciones web y sistemas distribuidos.",
+    "Inteligencia artificial, aprendizaje automático y ciencia de datos.",
+    "Redes de computadoras, sistemas operativos y arquitectura de computadoras.",
+    "Seguridad informática y servidores.",
+    "Tecnologías emergentes como cómputo en la nube y sistemas inteligentes."
+  ],
+  "habilidades": [
+    "Analizar problemas reales y proponer soluciones tecnológicas eficientes.",
+    "Diseñar y desarrollar software de calidad, seguro y escalable.",
+    "Implementar sistemas inteligentes basados en datos y modelos computacionales.",
+    "Trabajar en equipos multidisciplinarios y liderar proyectos tecnológicos.",
+    "Adaptarse a nuevas tecnologías y entornos cambiantes.",
+    "Comunicar de forma clara ideas técnicas a públicos especializados y no especializados."
+  ],
+  "valores": [
+    "Actuar con ética profesional y responsabilidad social.",
+    "Compromiso con la mejora continua y el aprendizaje permanente.",
+    "Respeto a la diversidad cultural y social.",
+    "Espíritu innovador, emprendedor y crítico.",
+    "Capacidad de toma de decisiones informadas y responsables."
+  ],
+  "rolSocial": "El egresado se desempeña como agente de cambio, contribuyendo al desarrollo tecnológico y social mediante la creación de soluciones que impacten positivamente en su entorno."
+}

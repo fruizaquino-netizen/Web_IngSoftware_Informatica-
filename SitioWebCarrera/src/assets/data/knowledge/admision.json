@@ -1,0 +1,39 @@
+{
+  "programa": "Ingeniería en Desarrollo de Software y Sistemas Inteligentes",
+  "institucion": "Universidad del Istmo (UNISTMO)",
+  "fechas": {
+    "entregaFichas": "13 de febrero al 26 de junio de 2026",
+    "examenDiagnostico": "23 de mayo o 01 de julio de 2026",
+    "resultadosExamen": "06 de julio de 2026",
+    "inscripcionPropedeutico": "13 al 24 de julio de 2026",
+    "cursoPropedeutico": "27 de julio al 18 de septiembre de 2026",
+    "inscripcionPrimerSemestre": "21 al 30 de septiembre de 2026",
+    "inicioClases": "Octubre de 2026"
+  },
+  "modalidadesFicha": [
+    "Trámite presencial en Servicios Escolares (Tehuantepec, Ixtepec o Juchitán).",
+    "Trámite en línea a través del portal oficial de la UNISTMO."
+  ],
+  "documentosFicha": [
+    "Copia del acta de nacimiento (formato actualizado).",
+    "Copia del certificado de bachillerato o constancia de estudios vigente.",
+    "Copia de la CURP.",
+    "Dos fotografías tamaño infantil, blanco y negro, de frente, en papel mate.",
+    "Formato de Solicitud de Ficha debidamente llenado a computadora."
+  ],
+  "examenDiagnostico": {
+    "nota": "Se debe presentar examen diagnóstico en una de las fechas establecidas. La universidad proporciona guías de estudio específicas para cada programa educativo."
+  },
+  "cursoPropedeutico": {
+    "objetivo": [
+      "Reforzar conocimientos básicos.",
+      "Facilitar la adaptación a la vida universitaria.",
+      "Preparar académicamente al estudiante para el inicio del primer semestre."
+    ]
+  },
+  "observaciones": [
+    "El proceso aplica para todos los campus donde se imparte la carrera.",
+    "Las fechas y requisitos están sujetos a lineamientos oficiales de la UNISTMO.",
+    "Para mayor información y formatos oficiales, consulta el sitio institucional."
+  ]
+}

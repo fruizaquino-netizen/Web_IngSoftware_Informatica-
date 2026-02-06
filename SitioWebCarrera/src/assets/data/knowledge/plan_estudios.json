@@ -1,0 +1,72 @@
+{
+  "planEstudios": {
+    "1": [
+      "Metodología de la Investigación",
+      "Fundamentos Matemáticos para la Ingeniería",
+      "Lógica Matemática",
+      "Filosofía Práctica",
+      "Fundamentos de Programación Estructurada",
+      "Administración"
+    ],
+    "2": [
+      "Física",
+      "Cálculo Diferencial e Integral",
+      "Matemáticas Discretas",
+      "Teoría General de Sistemas",
+      "Estructura de Datos",
+      "Contabilidad y Finanzas"
+    ],
+    "3": [
+      "Electrónica I",
+      "Teoría de Algoritmos y Complejidad",
+      "Álgebra Lineal",
+      "Sistemas Operativos",
+      "Paradigmas de Programación",
+      "Liderazgo y Emprendedurismo"
+    ],
+    "4": [
+      "Electrónica II",
+      "Probabilidad y Estadística",
+      "Métodos Numéricos",
+      "Redes de Computadoras",
+      "Programación Orientada a Objetos",
+      "Diseño de Bases de Datos"
+    ],
+    "5": [
+      "Arquitectura de Computadoras",
+      "Modelos de Optimización para la Toma de Decisiones",
+      "Ingeniería de Software I",
+      "Servidores y Seguridad",
+      "Sistemas Distribuidos",
+      "Implementación de Bases de Datos"
+    ],
+    "6": [
+      "Derecho y Legislación Informática",
+      "Desarrollo de Aplicaciones Web I",
+      "Ingeniería de Software II",
+      "Interfaz Humano–Computadora",
+      "Redes Inteligentes",
+      "Bases de Datos Avanzadas"
+    ],
+    "7": [
+      "Proyectos de Tecnologías de Información",
+      "Desarrollo de Aplicaciones Web II",
+      "Calidad de Software",
+      "Fundamentos de Inteligencia Artificial",
+      "Aprendizaje Automático",
+      "Ciencia de Datos"
+    ],
+    "8": [
+      "Cómputo en la Nube",
+      "Seminario de Titulación",
+      "Desarrollo de Soluciones Tecnológicas",
+      "Desarrollo de Sistemas Inteligentes",
+      "Optativa I",
+      "Optativa II"
+    ],
+    "9": [
+      "Estancia Profesional"
+    ]
+  },
+  "notaGeneral": "El plan de estudios avanza de fundamentos matemáticos y de programación hacia áreas especializadas como inteligencia artificial, ciencia de datos, sistemas inteligentes y cómputo en la nube, culminando con una estancia profesional en un entorno real."
+}

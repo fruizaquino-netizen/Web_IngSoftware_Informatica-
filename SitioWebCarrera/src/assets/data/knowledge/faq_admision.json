@@ -1,0 +1,64 @@
+{
+  "preguntas": [
+    {
+      "pregunta": "¿Qué carrera puedo estudiar si me interesa la programación y la inteligencia artificial?",
+      "respuesta": "La Universidad del Istmo ofrece la Ingeniería en Desarrollo de Software y Sistemas Inteligentes, enfocada en programación, software, inteligencia artificial, ciencia de datos y tecnologías emergentes."
+    },
+    {
+      "pregunta": "¿En qué campus se imparte la carrera?",
+      "respuesta": "La carrera se imparte en el campus Ixtepec."
+    },
+    {
+      "pregunta": "¿Cuándo inicia el proceso de admisión 2026?",
+      "respuesta": "El proceso de admisión inicia con la entrega de fichas a partir del 13 de febrero de 2026."
+    },
+    {
+      "pregunta": "¿Cuál es la fecha límite para solicitar ficha?",
+      "respuesta": "La entrega de fichas concluye el 26 de junio de 2026."
+    },
+    {
+      "pregunta": "¿Es obligatorio presentar examen de admisión?",
+      "respuesta": "Sí. Todos los aspirantes deben presentar un examen diagnóstico, el cual se aplica en dos fechas posibles: 23 de mayo de 2026 o 01 de julio de 2026."
+    },
+    {
+      "pregunta": "¿Dónde puedo conseguir la guía para el examen diagnóstico?",
+      "respuesta": "Las guías oficiales están disponibles en el sitio web de la Universidad del Istmo, dentro del apartado de ingreso y admisiones."
+    },
+    {
+      "pregunta": "¿Qué documentos necesito para solicitar la ficha?",
+      "respuesta": "Se requiere acta de nacimiento actualizada, certificado de bachillerato o constancia, CURP, dos fotografías tamaño infantil y el formato oficial de solicitud de ficha."
+    },
+    {
+      "pregunta": "¿Puedo hacer el trámite de ficha en línea?",
+      "respuesta": "Sí. El trámite puede realizarse de manera presencial o vía web a través del portal oficial de la UNISTMO."
+    },
+    {
+      "pregunta": "¿Qué pasa después de aprobar el examen diagnóstico?",
+      "respuesta": "Los aspirantes aceptados deben inscribirse al curso propedéutico, cursarlo y acreditarlo, y luego realizar la inscripción al primer semestre."
+    },
+    {
+      "pregunta": "¿Es obligatorio el curso propedéutico?",
+      "respuesta": "Sí. El curso propedéutico es obligatorio y forma parte del proceso de ingreso."
+    },
+    {
+      "pregunta": "¿Cuándo inicia el curso propedéutico?",
+      "respuesta": "Del 27 de julio al 18 de septiembre de 2026."
+    },
+    {
+      "pregunta": "¿Cuándo inician las clases del primer semestre?",
+      "respuesta": "El inicio de clases está programado para octubre de 2026."
+    },
+    {
+      "pregunta": "¿Puedo pedir información por teléfono o correo?",
+      "respuesta": "Sí. Puedes comunicarte con Servicios Escolares o con la Jefatura de Carrera."
+    },
+    {
+      "pregunta": "¿Dónde puedo consultar información sobre becas?",
+      "respuesta": "La información sobre becas está disponible en el sitio web oficial de la UNISTMO, en el apartado de becas."
+    },
+    {
+      "pregunta": "¿El proceso de admisión es el mismo para todos los campus?",
+      "respuesta": "Sí. El proceso de admisión, requisitos y fechas son los mismos para los tres campus donde se imparte la carrera."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+﻿<div class="chatbot-wrapper">
+  <button class="chat-toggle" (click)="toggleChat()">
+  <span class="chat-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z" />
+    </svg>
+  </span>
+  <span>Chat</span>
+</button>
+
+  <div class="chat-window" *ngIf="isOpen">
+    <div class="chat-header">
+      <span class="chat-title">Chat de Soporte</span>
+      <select [(ngModel)]="selectedModel" class="model-selector">
+        <option *ngFor="let m of availableModels" [value]="m">
+          {{ m }}
+        </option>
+      </select>
+      <button class="close-btn" (click)="toggleChat()">×</button>
+    </div>
+
+    <div class="chat-body">
+      <div
+        *ngFor="let msg of messages"
+        [class]="'message ' + (msg.sender === 'user' ? 'user-msg' : 'bot-msg')">
+        {{ msg.text }}
+      </div>
+      <div *ngIf="isLoading" class="loading">
+        Pensando ({{ selectedModel }}) ...
+      </div>
+    </div>
+
+    <div class="chat-footer">
+      <input
+        [(ngModel)]="userMessage"
+        (keyup.enter)="sendMessage()"
+        placeholder="Escribe aquí..." />
+      <button (click)="sendMessage()">Enviar</button>
+    </div>
+  </div>
+</div>
+
+
