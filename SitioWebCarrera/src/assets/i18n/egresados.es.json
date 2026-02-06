@@ -1,0 +1,24 @@
+{
+  "EGRESADOS": {
+    "TITLE": "Registro de los Egresados",
+    "SUBTITLE": "Información estadística y académica de los egresados de la carrera.",
+    "BY_YEAR": "Egresados por Año",
+    "BY_MODALITY": "Egresados por Modalidad",
+    "FILTER_ALL": "Todos",
+    "FILTER_TESIS": "Tesis",
+    "FILTER_CENEVAL": "CENEVAL",
+    "FILTER_EXPERIENCE": "Experiencia",
+    "SINGULAR": "egresado",
+    "PLURAL": "egresados",
+    "TOTAL_PREFIX": "Total de egresados",
+    "TOTAL_REGISTERED": "registrados",
+    "TOTAL_IN_MODALITY": "en modalidad",
+    "LIST_TITLE": "Listado de Egresados",
+    "TABLE_NAME": "Nombre",
+    "TABLE_YEAR": "Año",
+    "TABLE_MODALITY": "Modalidad",
+    "NO_RESULTS": "No hay egresados para la modalidad seleccionada.",
+    "MODAL_TITLE": "Generación",
+    "MODAL_CLOSE": "Cerrar"
+  }
+}

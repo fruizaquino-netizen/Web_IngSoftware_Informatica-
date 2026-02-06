@@ -1,0 +1,15 @@
+﻿{
+  "NAVBAR": {
+    "HOME": "Inicio",
+    "ABOUT": "¿Quiénes Somos?",
+    "STUDY_PLAN": "Plan de Estudios",
+    "PROJECTS": "Proyectos",
+    "TEACHERS": "Docentes",
+    "APPLICANTS": "Aspirantes",
+    "GRADUATES": "Egresados",
+    "LANGUAGE": "Idioma",
+    "LANG_ES": "Español",
+    "LANG_EN": "English",
+    "LANG_ZAP": "Zapoteco"
+  }
+}

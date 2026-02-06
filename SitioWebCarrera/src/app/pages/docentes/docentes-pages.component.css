@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
   --unistmo-wine: #9d2449;
@@ -101,7 +101,7 @@ body {
   margin-bottom: 25px;
 }
 
-/* --- BOTÓN SOLUCIONADO (ALTO CONTRASTE) --- */
+/* --- BOT�f�"N SOLUCIONADO (ALTO CONTRASTE) --- */
 .btn-ultra-profile {
   position: relative;
   width: 100%;
@@ -139,13 +139,13 @@ body {
   width: 100%;
   height: 100%;
   background-color: var(--unistmo-wine);
-  transform: scaleX(0); /* Animación de izquierda a derecha */
+  transform: scaleX(0); /* Animaci�n de izquierda a derecha */
   transform-origin: left;
   transition: transform 0.4s cubic-bezier(0.5, 1, 0.89, 1);
   z-index: 2; /* Por debajo del texto (10) */
 }
 
-/* ESTADO HOVER: El secreto está en asegurar el color blanco */
+/* ESTADO HOVER: El secreto est� en asegurar el color blanco */
 .btn-ultra-profile:hover {
   color: #d13636 !important; /* Forzado total */
 }
@@ -217,3 +217,5 @@ body {
   font-weight: 700;
   text-decoration: none;
 }
+
+

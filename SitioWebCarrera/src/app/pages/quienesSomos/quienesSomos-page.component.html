@@ -7,14 +7,14 @@
   </div>
 </section>
 
-<!-- ================= QUIÉNES SOMOS ================= -->
+<!-- ================= QUI�f�?NES SOMOS ================= -->
 <section class="about-section">
   <div class="about-card">
-    <h2>Nuestra Misión y Visión</h2>
+    <h2>{{ content().QUIENES_SOMOS.MISSION_TITLE }}</h2>
 
     <div class="about-grid">
 
-      <!-- TEXTO MISIÓN Y VISIÓN -->
+      <!-- TEXTO MISI�f�"N Y VISI�f�"N -->
       <div class="about-text">
         @for (item of infoInstitucional(); track item.texto) {
           <p>{{ item.texto }}</p>
@@ -23,7 +23,7 @@
 
       <!-- VALORES -->
       <div class="values-card">
-        <h3>Valores Institucionales</h3>
+        <h3>{{ content().QUIENES_SOMOS.VALUES_TITLE }}</h3>
         <ul class="values-list">
           @for (valor of valores(); track valor) {
             <li>{{ valor }}</li>
@@ -52,24 +52,24 @@
   <h2>{{ cta().titulo }}</h2>
   <p>{{ cta().descripcion }}</p>
 
-  <!-- BOTÓN QUE FUNCIONA CON ANGULAR ROUTER -->
-  <a routerLink="/planEstudios" class="btn">Ver Plan de Estudios</a>
+  <!-- BOT�f�"N QUE FUNCIONA CON ANGULAR ROUTER -->
+  <a routerLink="/planEstudios" class="btn">{{ content().QUIENES_SOMOS.CTA.BUTTON }}</a>
 </section>
 
  <!-- Recorrido virtual -->
 <section class="tour-section">
-  <h2>Recorrido Virtual</h2>
+  <h2>{{ content().QUIENES_SOMOS.TOUR.TITLE }}</h2>
 
   <div class="visor">
     <img
       [src]="tour()[currentStep()].img"
-      alt="Recorrido virtual"
+      [alt]="content().QUIENES_SOMOS.TOUR.ALT"
     />
 
     <div class="controls">
-      @for (control of tour()[currentStep()].controls; track control.label) {
+      @for (control of tour()[currentStep()].controls; track control.key) {
         <button (click)="goTo(control.target)">
-          {{ control.label }}
+          {{ content().QUIENES_SOMOS.TOUR.CONTROLS[control.key] }}
         </button>
       }
     </div>

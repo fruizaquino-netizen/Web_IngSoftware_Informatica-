@@ -1,5 +1,7 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, effect, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslationService } from '../../services/translation.service';
 
 interface Egresado {
   nombre: string;
@@ -7,14 +9,43 @@ interface Egresado {
   modalidad: 'tesis' | 'ceneval' | 'experiencia';
 }
 
+const defaultContent = {
+  EGRESADOS: {
+    TITLE: 'Registro de los Egresados',
+    SUBTITLE: 'Informaciï¿½fï¿½fï¿½,�,³n estadï¿½fï¿½fï¿½,�,­stica y acadï¿½fï¿½fï¿½,�,©mica de los egresados de la carrera.',
+    BY_YEAR: 'Egresados por Aï¿½fï¿½fï¿½,�,±o',
+    BY_MODALITY: 'Egresados por Modalidad',
+    FILTER_ALL: 'Todos',
+    FILTER_TESIS: 'Tesis',
+    FILTER_CENEVAL: 'CENEVAL',
+    FILTER_EXPERIENCE: 'Experiencia',
+    SINGULAR: 'egresado',
+    PLURAL: 'egresados',
+    TOTAL_PREFIX: 'Total de egresados',
+    TOTAL_REGISTERED: 'registrados',
+    TOTAL_IN_MODALITY: 'en modalidad',
+    LIST_TITLE: 'Listado de Egresados',
+    TABLE_NAME: 'Nombre',
+    TABLE_YEAR: 'Aï¿½fï¿½fï¿½,�,±o',
+    TABLE_MODALITY: 'Modalidad',
+    NO_RESULTS: 'No hay egresados para la modalidad seleccionada.',
+    MODAL_TITLE: 'Generaciï¿½fï¿½fï¿½,�,³n',
+    MODAL_CLOSE: 'Cerrar'
+  }
+};
+
 @Component({
   selector: 'app-egresados-pages',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './egresados-pages.component.html',
   styleUrl: './egresados-pages.component.css'
 })
 export class EgresadosPagesComponent {
+  private http = inject(HttpClient);
+  private translation = inject(TranslationService);
+
+  content = signal(defaultContent);
 
   //  Datos base
   egresados = signal<Egresado[]>([
@@ -37,6 +68,18 @@ export class EgresadosPagesComponent {
   //  Filtro activo
   filtroActivo = signal<'todos' | 'tesis' | 'ceneval' | 'experiencia'>('todos');
 
+  constructor() {
+    effect(() => {
+      const lang = this.translation.currentLang();
+      const fileLang = lang === 'en' ? 'en' : lang === 'zapoteco' ? 'zapoteco' : 'es';
+      this.http
+        .get(`assets/i18n/egresados.${fileLang}.json`)
+        .subscribe((data) => {
+          this.content.set(data as typeof defaultContent);
+        });
+    });
+  }
+
   //  Lista filtrada (reemplaza al pipe)
   egresadosFiltrados = computed(() => {
     if (this.filtroActivo() === 'todos') {
@@ -47,7 +90,7 @@ export class EgresadosPagesComponent {
     );
   });
 
-  //  Conteo automático por año
+  //  Conteo automï¿½fï¿½fï¿½,�,¡tico por aï¿½fï¿½fï¿½,�,±o
   conteoPorAnio = computed(() => {
     const conteo: Record<number, number> = {};
 
@@ -58,16 +101,16 @@ export class EgresadosPagesComponent {
     return conteo;
   });
 
-  //  Lista de años disponibles (ordenados)
+  //  Lista de aï¿½fï¿½fï¿½,�,±os disponibles (ordenados)
   aniosDisponibles = computed(() =>
     Object.keys(this.conteoPorAnio())
       .map(anio => Number(anio))
       .sort()
   );
-// Año seleccionado para el modal
+// Aï¿½fï¿½fï¿½,�,±o seleccionado para el modal
 anioSeleccionado = signal<number | null>(null);
 
-// Egresados del año seleccionado
+// Egresados del aï¿½fï¿½fï¿½,�,±o seleccionado
 egresadosPorAnioSeleccionado = computed(() => {
   if (this.anioSeleccionado() === null) {
     return [];
@@ -88,12 +131,21 @@ cerrarModal() {
   this.anioSeleccionado.set(null);
 }
 
-// Total dinámico según el filtro activo
+// Total dinï¿½fï¿½fï¿½,�,¡mico segï¿½fï¿½fï¿½,�,ºn el filtro activo
 totalSegunFiltro = computed(() => {
   return this.egresadosFiltrados().length;
 });
-  //  Acción de botones
+  //  Acciï¿½fï¿½fï¿½,�,³n de botones
   cambiarFiltro(filtro: 'todos' | 'tesis' | 'ceneval' | 'experiencia') {
     this.filtroActivo.set(filtro);
   }
+
+  getFiltroLabel(filtro: 'todos' | 'tesis' | 'ceneval' | 'experiencia'): string {
+    const labels = this.content().EGRESADOS;
+    if (filtro === 'todos') return labels.FILTER_ALL;
+    if (filtro === 'tesis') return labels.FILTER_TESIS;
+    if (filtro === 'ceneval') return labels.FILTER_CENEVAL;
+    return labels.FILTER_EXPERIENCE;
+  }
 }
+

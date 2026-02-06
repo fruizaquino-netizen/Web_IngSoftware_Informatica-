@@ -1,4 +1,4 @@
-﻿import { Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarSharedComponent } from './shared/components/navbar/navbar-shared.component';
 import { FooterSharedComponent } from './shared/components/footer/footer-shared.component';
@@ -19,6 +19,6 @@ import { ChatbotComponent } from './shared/components/chatbot/chatbot.component'
 })
 export class App {
   protected readonly title = signal(
-    'In.En Desarrollo de Software y Sistemas Inteligentes-Informática'
+    'In.En Desarrollo de Software y Sistemas Inteligentes-Informï¿½f�,¡tica'
   );
 }

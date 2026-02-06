@@ -1,6 +1,6 @@
-<div class="page-wrapper">
+﻿<div class="page-wrapper">
   <div class="news-ticker-container">
-    <div class="ticker-label">NOTICIAS</div>
+    <div class="ticker-label">{{ content().INICIO.NEWS_TICKER }}</div>
     <div class="ticker-wrap">
       <div class="ticker-move">
         <div class="ticker-item" *ngFor="let noticia of noticias" (click)="openNews(noticia)">
@@ -13,15 +13,15 @@
     </div>
     <button class="ticker-calendar-btn" (click)="toggleCalendar()">
       <span class="cal-icon">📅</span>
-      <span class="cal-text">CALENDARIO DE EVENTOS</span>
+      <span class="cal-text">{{ content().INICIO.CALENDAR_BUTTON }}</span>
     </button>
   </div>
 
   <main class="main-content">
    <section class="hero">
-  <div class="hero-inner"> <h1 class="hero-title">Innovación tecnológica con sentido humano</h1>
+  <div class="hero-inner"> <h1 class="hero-title">{{ content().INICIO.HERO_TITLE }}</h1>
     <a href="https://www.unistmo.edu.mx/web/p_ensenanza/escolares.html" target="_blank">
-      <button class="btn-hero">Inicia tu proceso de ingreso aquí</button>
+      <button class="btn-hero">{{ content().INICIO.HERO_BUTTON }}</button>
     </a>
   </div>
 </section>
@@ -30,28 +30,28 @@
       <div class="grid-cards">
         <div class="card card-green" routerLink="/excelecia-academica">
           <div class="icon-wrapper"><img src="assets/img/Excelencia.png" class="card-icon"></div>
-          <h3>Excelencia Académica</h3>
-          <p>Programas educativos de alta calidad enfocados en el desarrollo integral.</p>
+          <h3>{{ content().INICIO.FEATURES[0]?.TITLE }}</h3>
+          <p>{{ content().INICIO.FEATURES[0]?.TEXT }}</p>
         </div>
         <div class="card card-red" routerLink="/tecnologia-avanzada">
           <div class="icon-wrapper"><img src="assets/img/Tecnologia.png" class="card-icon"></div>
-          <h3>Tecnología Avanzada</h3>
-          <p>Infraestructura moderna y recursos tecnológicos de vanguardia.</p>
+          <h3>{{ content().INICIO.FEATURES[1]?.TITLE }}</h3>
+          <p>{{ content().INICIO.FEATURES[1]?.TEXT }}</p>
         </div>
         <div class="card card-green" [routerLink]="['/vinculacion-regional']">
           <div class="icon-wrapper"><img src="assets/img/Vinculacion.png" class="card-icon"></div>
-          <h3>Vinculación Regional</h3>
-          <p>Conexión directa con el sector productivo de la región.</p>
+          <h3>{{ content().INICIO.FEATURES[2]?.TITLE }}</h3>
+          <p>{{ content().INICIO.FEATURES[2]?.TEXT }}</p>
         </div>
       </div>
     </section>
 <section class="cta-section">
   <div class="cta-content">
-    <h2 class="cta-title">¿Listo para comenzar?</h2>
-    <p class="cta-text">Únete a nuestra comunidad universitaria.</p>
+    <h2 class="cta-title">{{ content().INICIO.CTA.TITLE }}</h2>
+    <p class="cta-text">{{ content().INICIO.CTA.TEXT }}</p>
     <div class="cta-buttons">
-      <button class="btn-primary" routerLink="/quienesSomos">Conoce más</button>
-      <button class="btn-secondary" (click)="toggleContactModal()">Contáctanos</button>
+      <button class="btn-primary" routerLink="/quienesSomos">{{ content().INICIO.CTA.BUTTON_MORE }}</button>
+      <button class="btn-secondary" (click)="toggleContactModal()">{{ content().INICIO.CTA.BUTTON_CONTACT }}</button>
     </div>
   </div>
 </section>
@@ -62,25 +62,25 @@
     <button class="close-modal-x" (click)="toggleContactModal()">&times;</button>
 
     <div class="modal-body">
-      <h2 class="modal-title">Contacto Directo</h2>
-      <p class="modal-subtitle">Completa los datos para enviarnos un correo.</p>
+      <h2 class="modal-title">{{ content().INICIO.CONTACT_MODAL.TITLE }}</h2>
+      <p class="modal-subtitle">{{ content().INICIO.CONTACT_MODAL.SUBTITLE }}</p>
 
       <div class="form-container">
-        <input type="text" #userName placeholder="Nombre completo" class="contact-input">
-        <input type="email" #userEmail placeholder="tu@correo.com" class="contact-input">
-        <textarea #userAsunto placeholder="¿En qué podemos ayudarte?" class="contact-input" rows="3"></textarea>
+        <input type="text" #userName [placeholder]="content().INICIO.CONTACT_MODAL.PLACEHOLDER_NAME" class="contact-input">
+        <input type="email" #userEmail [placeholder]="content().INICIO.CONTACT_MODAL.PLACEHOLDER_EMAIL" class="contact-input">
+        <textarea #userAsunto [placeholder]="content().INICIO.CONTACT_MODAL.PLACEHOLDER_MESSAGE" class="contact-input" rows="3"></textarea>
 
         <button class="btn-send-email" (click)="sendContact(userName.value, userEmail.value, userAsunto.value)">
-          Enviar por Gmail
+          {{ content().INICIO.CONTACT_MODAL.SEND_BUTTON }}
         </button>
       </div>
 
-      <div class="whatsapp-divider">o también</div>
+      <div class="whatsapp-divider">{{ content().INICIO.CONTACT_MODAL.OR }}</div>
 
       <div class="whatsapp-section">
         <a href="https://wa.me/5219721155207" target="_blank" class="whatsapp-link">
           <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="wa-icon">
-          Chatea con nosotros
+          {{ content().INICIO.CONTACT_MODAL.WHATSAPP_TEXT }}
         </a>
       </div>
     </div>
@@ -89,7 +89,7 @@
 
 <div class="news-modal-overlay" *ngIf="selectedNews" (click)="closeNews()">
   <div class="modal-container-styled" (click)="$event.stopPropagation()">
-    <div class="modal-header-badge">Noticias Informática</div>
+    <div class="modal-header-badge">{{ content().INICIO.NEWS_MODAL.HEADER }}</div>
     <div class="news-modal-card">
       <button class="close-modal-x" (click)="closeNews()">&times;</button>
       <div class="modal-body">
@@ -98,8 +98,8 @@
         <p class="modal-news-text">{{ selectedNews.contenido }}</p>
       </div>
       <div class="modal-footer-icon">
-        <span *ngIf="selectedNews.titulo.includes('IA')">🌐</span>
-        <span *ngIf="selectedNews.titulo.includes('Google') || selectedNews.titulo.includes('Hackathon')">🏆</span>
+        <span *ngIf="selectedNews.titulo.includes('IA')">🤖</span>
+        <span *ngIf="selectedNews.titulo.includes('Google') || selectedNews.titulo.includes('Hackathon')">🚀</span>
       </div>
     </div>
   </div>
@@ -136,7 +136,7 @@
       <button class="btn-close-sidebar" (click)="toggleCalendar()">&times;</button>
 
       <div class="sidebar-content">
-        <h4 class="sidebar-title">Próximos Eventos</h4>
+        <h4 class="sidebar-title">{{ content().INICIO.CALENDAR.SIDEBAR_TITLE }}</h4>
         <div class="selected-date-badge" *ngIf="selectedDay">
           {{ selectedDay }} de {{ currentMonthName }}
         </div>
@@ -150,7 +150,7 @@
 </div>
         <ng-template #noEvents>
           <div class="no-events-msg">
-            <p>No hay eventos para este día.</p>
+            <p>{{ content().INICIO.CALENDAR.NO_EVENTS }}</p>
           </div>
         </ng-template>
       </div>

@@ -1,4 +1,4 @@
-/* --- 1. CONFIGURACIÓN, VARIABLES Y RESET --- */
+﻿/* --- 1. CONFIGURACIÓN, VARIABLES Y RESET --- */
 :root {
     --rojo-inst: #8B1D22;
     --rojo-hover: #6d161a;
@@ -18,7 +18,7 @@ html {
 
 body {
     margin: 0;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Segoe UI', 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', Roboto, Helvetica, Arial, sans-serif;
     color: var(--gris-oscuro);
     background-color: #ffffff;
     line-height: 1.5;
@@ -250,7 +250,7 @@ body {
 }
 
 .news-card::after {
-    content: '🏆';
+    content: '🚀';
     position: absolute;
     bottom: 20px;
     right: 20px;
@@ -258,9 +258,9 @@ body {
     opacity: 0.7;
 }
 
-.news-card.ia::after { content: '🌐'; }
+.news-card.ia::after { content: '🤖'; }
 .news-card.google::after { content: ''; }
-.news-card.hackathon::after { content: '🏆'; }
+.news-card.hackathon::after { content: '🚀'; }
 
 /* --- 5. CARDS GENERALES --- */
 .grid-cards {
@@ -831,3 +831,4 @@ textarea.contact-input {
   font-size: 0.9rem;
   text-align: center;
 }
+

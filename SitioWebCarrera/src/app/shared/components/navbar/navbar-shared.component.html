@@ -8,7 +8,7 @@
   <div class="container">
 
 
-    <!-- Botón hamburguesa -->
+    <!-- Boton hamburguesa -->
     <button
       class="navbar-toggler"
       type="button"
@@ -20,15 +20,15 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Menú -->
-    <ul class="collapse navbar-collapse justify-content-end" id="navbarInstitucional">
+    <!--  -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarInstitucional">
       <ul class="navbar-nav align-items-lg-center gap-lg-4">
 
         <li class="nav-item">
           <a class="btn btn-institucional"
              routerLink="/"
              [class.active-link]="isActive('/')">
-            Inicio
+            {{ content().NAVBAR.HOME }}
           </a>
         </li>
 
@@ -36,7 +36,7 @@
           <a class="nav-link"
              routerLink="/quienesSomos"
              [class.active-link]="isActive('/quienesSomos')">
-            ¿Quiénes Somos?
+            {{ content().NAVBAR.ABOUT }}
           </a>
         </li>
 
@@ -44,7 +44,7 @@
           <a class="nav-link"
              routerLink="/planEstudios"
              [class.active-link]="isActive('/planEstudios')">
-            Plan de Estudios
+            {{ content().NAVBAR.STUDY_PLAN }}
           </a>
         </li>
 
@@ -52,7 +52,7 @@
           <a class="nav-link"
              routerLink="/proyectos"
              [class.active-link]="isActive('/proyectos')">
-            Proyectos
+            {{ content().NAVBAR.PROJECTS }}
           </a>
         </li>
 
@@ -60,7 +60,7 @@
           <a class="nav-link"
              routerLink="/docentes"
              [class.active-link]="isActive('/docentes')">
-            Docentes
+            {{ content().NAVBAR.TEACHERS }}
           </a>
         </li>
 
@@ -68,7 +68,7 @@
           <a class="nav-link"
              routerLink="/aspirantes"
              [class.active-link]="isActive('/aspirantes')">
-            Aspirantes
+            {{ content().NAVBAR.APPLICANTS }}
           </a>
         </li>
 
@@ -80,21 +80,21 @@
               data-bs-toggle="collapse"
               data-bs-target="#navbarInstitucional"
             >
-              Egresados
+              {{ content().NAVBAR.GRADUATES }}
             </a>
           </li>
 
-        </ul>
-        <!-- 🌐 MENÚ IDIOMA -->
+        <!-- Idiomas-->
         <li class="nav-item dropdown">
           <a
-            class="nav-link dropdown-toggle"
+            class="nav-link dropdown-toggle language-toggle"
             href="#"
             id="idiomaDropdown"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false">
-            🌐 Idioma
+            <img class="lang-icon me-2" [src]="getLangIconUrl(service.currentLang())" alt="Idioma">
+            {{ content().NAVBAR.LANGUAGE }}
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="idiomaDropdown">
@@ -103,7 +103,8 @@
                 class="dropdown-item"
                 (click)="cambiarIdioma('es')"
                 [class.active]="service.currentLang() === 'es'">
-                🇲🇽 Español
+                <img class="lang-icon me-2" src="assets/img/mx.png" alt="MX">
+                {{ content().NAVBAR.LANG_ES }}
               </button>
             </li>
             <li>
@@ -111,12 +112,22 @@
                 class="dropdown-item"
                 (click)="cambiarIdioma('en')"
                 [class.active]="service.currentLang() === 'en'">
-                🇺🇸 English
+                <img class="lang-icon me-2" src="assets/img/eu.png" alt="US">
+                {{ content().NAVBAR.LANG_EN }}
+              </button>
+            </li>
+            <li>
+              <button
+                class="dropdown-item"
+                (click)="cambiarIdioma('zapoteco')"
+                [class.active]="service.currentLang() === 'zapoteco'">
+                <img class="lang-icon me-2" src="assets/img/lenguas.png" alt="Lenguas">
+                {{ content().NAVBAR.LANG_ZAP }}
               </button>
             </li>
           </ul>
         </li>
       </ul>
     </div>
+  </div>
 </nav>
-

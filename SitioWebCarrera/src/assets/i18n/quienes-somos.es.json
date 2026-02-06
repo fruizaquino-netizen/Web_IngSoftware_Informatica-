@@ -1,0 +1,50 @@
+﻿{
+  "QUIENES_SOMOS": {
+    "HERO": {
+      "TITLE": "¿Quiénes Somos?",
+      "SUBTITLE": "Formamos líderes en el área de software y hardware",
+      "DESCRIPTION": "Profesionales capaces de diseñar, desarrollar e implementar soluciones tecnológicas innovadoras, gestionando proyectos de sistemas de información y participando en equipos multidisciplinarios. Cuentan con habilidades en programación, bases de datos, redes, desarrollo de software y aplicación de tecnologías emergentes para resolver problemáticas reales en organizaciones y en la sociedad."
+    },
+    "MISSION_TITLE": "Nuestra Misión y Visión",
+    "MISSION_TEXTS": [
+      "Formar profesionales líderes en el diseño, desarrollo y aplicación de sistemas inteligentes y de software, para satisfacer las necesidades en los sectores público y privado a nivel nacional e internacional, impulsando el desarrollo social mediante una educación integral y multidisciplinaria.",
+      "Consolidarse como una carrera líder en la formación de profesionistas analíticos, con conocimientos sólidos en informática para el desarrollo de sistemas inteligentes y software, que aporten soluciones tecnológicas e innovadoras con reconocimiento nacional e internacional, que contribuyan a mejorar el entorno global e impacten positivamente en el desarrollo de la sociedad."
+    ],
+    "VALUES_TITLE": "Valores Institucionales",
+    "VALUES": [
+      "Disciplina y Respeto",
+      "Responsabilidad y Tolerancia",
+      "Lealtad y Honradez",
+      "Honestidad y Solidaridad Social",
+      "Excelencia académica",
+      "Compromiso social",
+      "Innovación y tecnología",
+      "Desarrollo sostenible"
+    ],
+    "STATS": [
+      { "NUMBER": "23+", "TEXT": "Años de experiencia" },
+      { "NUMBER": "863+", "TEXT": "Estudiantes activos" },
+      { "NUMBER": "228+", "TEXT": "Docentes calificados" },
+      { "NUMBER": "90%", "TEXT": "Tasa de empleabilidad" }
+    ],
+    "CTA": {
+      "TITLE": "Conoce el plan de estudios de nuestra carrera",
+      "DESCRIPTION": "Descubre nuestra oferta educativa en el área de tecnologías de la información, donde podrás formarte como profesional en Informática o como Ingeniero/a en Desarrollo de Software y Sistemas Inteligentes. Ambas carreras están diseñadas para brindarte competencias sólidas en programación, administración de sistemas, bases de datos, desarrollo web y móvil, así como el diseño e implementación de soluciones tecnológicas innovadoras que responden a las necesidades actuales de la industria y la sociedad.",
+      "BUTTON": "Ver Plan de Estudios"
+    },
+    "TOUR": {
+      "TITLE": "Recorrido Virtual",
+      "ALT": "Recorrido virtual",
+      "CONTROLS": {
+        "START": "▶ Iniciar recorrido",
+        "LEFT_ELECTRONICS": "⬅ Electrónica",
+        "RIGHT_BUILDING": "➡ Edificio",
+        "DOWN_BACK": "⬇ Atrás",
+        "UP_FORWARD": "⬆ Adelante",
+        "LEFT_ENTER": "⬅ Entrar",
+        "DOWN_RETURN": "⬇ Regresar",
+        "LEFT_BACK": "⬅ Atrás"
+      }
+    }
+  }
+}

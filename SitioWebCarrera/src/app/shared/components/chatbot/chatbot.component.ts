@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChatbotService, ChatMessage } from '../../../services/chatbot.service';
@@ -24,7 +24,7 @@ export class ChatbotComponent {
 
   messages: { text: string; sender: 'user' | 'bot' }[] = [
     {
-      text: 'Hola, soy tu asistente virtual. ¿En qué puedo ayudarte?',
+      text: 'Hola, soy tu asistente virtual. ï¿½,�,¿En quï¿½f�,© puedo ayudarte?',
       sender: 'bot'
     }
   ];
