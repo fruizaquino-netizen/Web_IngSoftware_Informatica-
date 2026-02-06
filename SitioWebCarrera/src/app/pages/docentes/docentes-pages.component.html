@@ -11,7 +11,7 @@
       </header>
 
       <div class="row g-4 justify-content-center">
-        for (docente of docentes(); track docente.nombre) {
+        @for (docente of docentes(); track docente.nombre) {
           <div class="col-12 col-md-6 col-lg-4">
             <div class="premium-card shadow-lg border-0">
               
@@ -94,7 +94,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      for (pub of docenteSeleccionado()?.publicaciones; track pub.titulo) {
+                      @for (pub of docenteSeleccionado()?.publicaciones; track pub.titulo) {
                         <tr>
                           <td class="fw-medium" style="max-width: 300px;">{{ pub.titulo }}</td>
                           <td class="text-center text-muted">{{ pub.anio }}</td>
@@ -104,7 +104,7 @@
                             </a>
                           </td>
                         </tr>
-                      } empty {
+                      } @empty {
                         <tr>
                           <td colspan="3" class="text-center py-4 text-muted italic">
                             No hay publicaciones registradas actualmente.
@@ -121,3 +121,4 @@
       </div>
     </div>
   }
+</div>
