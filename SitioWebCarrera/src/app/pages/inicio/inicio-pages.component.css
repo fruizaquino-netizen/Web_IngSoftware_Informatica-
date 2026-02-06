@@ -1,4 +1,4 @@
-/* --- 1. CONFIGURACIÓN Y VARIABLES --- */
+/* --- 1. CONFIGURACIÓN, VARIABLES Y RESET --- */
 :root {
     --rojo-inst: #8B1D22;
     --rojo-hover: #6d161a;
@@ -24,11 +24,28 @@ body {
     line-height: 1.5;
 }
 
+.page-wrapper {
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 0 25px;
+}
+
 /* --- 2. HERO SECTION --- */
 .hero {
     height: 600px;
+
+    width: 100%;
     background: linear-gradient(rgba(10, 25, 47, 0.6), rgba(10, 25, 47, 0.6)),
-                url('./Imagenes/Fondo\ Uistmo.png');
+     url('../../../assets/img/FondoUistmo.png');
+
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -38,6 +55,10 @@ body {
     text-align: center;
     color: white;
     padding: 0 20px;
+}
+
+.hero a {
+    text-decoration: none;
 }
 
 .hero-title {
@@ -57,7 +78,7 @@ body {
     font-weight: 700;
     font-size: 1.1rem;
     cursor: pointer;
-    box-shadow: 0 4px 14px 0 rgba(139, 29, 34, 0.39);
+    box-shadow: 0 4px 14px rgb(255, 255, 255);
     transition: var(--transition);
 }
 
@@ -67,13 +88,202 @@ body {
     box-shadow: 0 6px 20px rgba(139, 29, 34, 0.23);
 }
 
-/* --- 3. CARDS (CON ICONOS Y DELINEADO SUTIL) --- */
-.container {
-    max-width: 1200px;
-    margin: 80px auto;
-    padding: 0 25px;
+/* --- 3. TICKER DE NOTICIAS --- */
+.news-ticker-container {
+    width: 100%;
+    max-width: 100vw;
+    background: #f1f5f9;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 2px solid var(--rojo-inst);
+    box-sizing: border-box;
+    position: relative;
 }
 
+.ticker-label {
+    background: var(--rojo-inst);
+    color: rgb(0, 0, 0);
+    padding: 0 25px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    z-index: 10;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+}
+
+.ticker-wrap {
+    flex-grow: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.ticker-wrap::before,
+.ticker-wrap::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 40px;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.ticker-wrap::before {
+    left: 0;
+    background: linear-gradient(to right, #f1f5f9, transparent);
+}
+
+.ticker-wrap::after {
+    right: 0;
+    background: linear-gradient(to left, #f1f5f9, transparent);
+}
+
+.ticker-move {
+    display: flex;
+    width: max-content;
+    animation: tickerMove 35s linear infinite;
+}
+
+.ticker-move:hover {
+    animation-play-state: paused;
+}
+
+.ticker-item {
+    padding: 0 35px;
+    color: #1e293b;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s;
+}
+
+.ticker-item:hover {
+    color: var(--rojo-inst);
+    text-decoration: underline;
+}
+
+.ticker-calendar-btn {
+    background: var(--rojo-inst);
+    color: rgb(0, 0, 0);
+    border: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px;
+    cursor: pointer;
+    z-index: 10;
+    font-weight: 700;
+    font-size: 0.8rem;
+    box-shadow: -4px 0 10px rgba(0,0,0,0.1);
+    transition: background 0.3s;
+}
+
+.ticker-calendar-btn:hover {
+    background: var(--rojo-hover);
+}
+
+/* --- 4. SECCIÓN DE NOTICIAS (TARJETAS) --- */
+/* --- 4. SECCIÓN DE NOTICIAS (TARJETAS) --- */
+/* --- 4. SECCIÓN DE NOTICIAS (LIMPIEZA TOTAL) --- */
+.news-section {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 40px;
+
+    /* 1. Usamos el color sólido (equivalente al rojo institucional suave) */
+    /* Si quieres que sea exactamente el rojo fuerte usa: #8B1D22 */
+    /* Si quieres el tono rosado suave pero sólido usa: #E5CDCE */
+    background-color: #E5CDCE !important;
+
+    /* 2. Forzamos que NO sea transparente */
+    background-image: none !important;
+    opacity: 1 !important;
+
+    border-radius: 30px;
+    border: 1px solid rgba(139, 29, 34, 0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* IMPORTANTE: Asegúrate de que las tarjetas tengan fondo blanco sólido */
+.news-card {
+    background: #ffffff !important;
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: white;
+    background-color: var(--rojo-inst);
+    padding: 15px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    margin: 0;
+}
+
+.news-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.news-date {
+    display: block;
+    font-size: 0.85rem;
+    color: #1e293b;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.news-card h3 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+    font-weight: 800;
+    color: #0c1c3d;
+    margin-bottom: 15px;
+}
+
+.news-card p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 40px;
+}
+
+.news-card::after {
+    content: '🏆';
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+
+.news-card.ia::after { content: '🌐'; }
+.news-card.google::after { content: ''; }
+.news-card.hackathon::after { content: '🏆'; }
+
+/* --- 5. CARDS GENERALES --- */
 .grid-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -94,7 +304,10 @@ body {
 .card::before {
     content: "";
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 4px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
     background: transparent;
     transition: var(--transition);
 }
@@ -108,11 +321,10 @@ body {
 .card-green:hover::before { background: var(--verde-logo); }
 .card-red:hover::before { background: var(--rojo-inst); }
 
-/* Nuevo estilo para el contenedor del icono */
 .icon-wrapper {
     width: 60px;
     height: 60px;
-    background: rgba(139, 29, 34, 0.08); /* Un fondo muy sutil con el color rojizo */
+    background: rgba(139, 29, 34, 0.08);
     border-radius: 12px;
     margin-bottom: 25px;
     display: flex;
@@ -120,26 +332,12 @@ body {
     justify-content: center;
 }
 
-/* Estilo para las imágenes de icono */
 .card-icon {
-    width: 40px;      /* Puedes ajustar el tamaño */
+    width: 40px;
     height: 40px;
-    object-fit: contain; /* Evita que la imagen se estire */
+    object-fit: contain;
     display: block;
 }
-
-/* Puedes eliminar o renombrar el antiguo .icon-placeholder si ya no lo usas */
-/* .icon-placeholder {
-    width: 60px;
-    height: 60px;
-    background: var(--crema-arena);
-    border-radius: 12px;
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
-
 
 .card h3 {
     margin-top: 0;
@@ -147,20 +345,52 @@ body {
     color: #0f172a;
 }
 
-/* --- 4. CTA SECTION & BOTONES --- */
+/* --- 6. CTA SECTION --- */
+/* --- 6. CTA SECTION (EFECTO FLOTANTE) --- */
 .cta-section {
+    /* Fondo general de la sección (detrás del cuadro) */
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     padding: 100px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cta-content {
+    /* AQUÍ SE CREA EL CUADRO FLOTANTE */
+    background: rgba(255, 255, 255, 0.8); /* Blanco con transparencia */
+    backdrop-filter: blur(10px);          /* Efecto de vidrio (Glassmorphism) */
+    padding: 60px 40px;
+    border-radius: 30px;                  /* Bordes muy redondeados */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); /* Sombra para que "flote" */
+
+    max-width: 700px;                     /* Se acopla más al ancho del texto */
+    width: 100%;
     text-align: center;
+    transition: var(--transition);
+}
+
+.cta-content:hover {
+    transform: translateY(-10px);         /* Se eleva al pasar el mouse */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
 }
 
 .cta-title {
     font-size: 2.8rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    margin-bottom: 20px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin-bottom: 10px;
+    color: #0c1c3d;
 }
 
+.cta-text {
+    font-size: 1.2rem;
+    color: #475569;
+    margin-bottom: 0;
+}
+
+/* Ajuste de botones para que no queden pegados al cuadro */
 .cta-buttons {
     display: flex;
     gap: 20px;
@@ -169,32 +399,336 @@ body {
     margin-top: 40px;
 }
 
-.btn-primary, .btn-secondary {
-    background-color: #8B1D22;
+.btn-primary {
+    background: linear-gradient(135deg, #8B1D22, #6d161a);
     color: white;
-    border: 2px solid #8B1D22;
-    padding: 14px 32px;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 700;
+    border: none;
+    padding: 15px 38px;
+    border-radius: 14px;
+    font-size: 1.05rem;
+    font-weight: 800;
     cursor: pointer;
+    box-shadow: 0 8px 20px rgba(139, 29, 34, 0.35);
     transition: var(--transition);
-    box-shadow: 0 4px 10px rgba(139, 29, 34, 0.2);
 }
 
-.btn-primary:hover, .btn-secondary:hover {
-    background-color: white;
+.btn-primary:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 28px rgba(139, 29, 34, 0.45);
+}
+
+.btn-secondary {
+    background: white;
+    color: var(--rojo-inst);
+    border: 2px solid var(--rojo-inst);
+    padding: 15px 38px;
+    border-radius: 14px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(139, 29, 34, 0.45);
+    transition: var(--transition);
+}
+
+.btn-secondary:hover {
+    background: var(--rojo-inst);
+    color: white;
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 28px rgba(139, 29, 34, 0.35);
+}
+
+/* --- 7. CALENDARIO (GENERAL Y MODAL) --- */
+.calendar-btn-position {
+    max-width: 1200px;
+    margin: 30px auto 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 25px;
+}
+
+.btn-calendar {
+    background: #ffffff;
+    border: none;
+    border-radius: 15px;
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.btn-calendar:hover {
+    transform: scale(1.1);
+}
+
+.btn-calendar img, .calendar-icon-svg {
+    width: 45px;
+    height: 45px;
     color: #8B1D22;
-    border: 2px solid #8B1D22;
-    transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(139, 29, 34, 0.3);
 }
 
-.btn-primary:active, .btn-secondary:active {
-    transform: scale(0.98);
+.calendar-modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
 }
 
-/* --- 5. FOOTER --- */
+.calendar-container-expanded {
+    background: white;
+    display: flex;
+    width: 90%;
+    max-width: 850px;
+    min-height: 450px;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    animation: modalSlideUp 0.4s ease;
+}
+
+.calendar-main-section {
+    flex: 1.2;
+    padding: 40px;
+    background: #ffffff;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: var(--gris-oscuro);
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-nav {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 5px 12px;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--rojo-inst);
+    transition: 0.2s;
+}
+
+.btn-nav:hover {
+    background: var(--rojo-inst);
+    color: white;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.calendar-grid span { padding: 5px; }
+.calendar-grid .dom { color: #00bcd4; }
+.day-name { font-weight: 800; font-size: 0.75rem; color: #64748b; }
+
+.calendar-day-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    margin: auto;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.calendar-day-item:hover {
+    background-color: #f1f5f9;
+}
+
+.calendar-day-item.has-event::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    width: 5px;
+    height: 5px;
+    background-color: var(--rojo-inst);
+    border-radius: 50%;
+}
+
+.selected-day {
+    background-color: var(--rojo-inst) !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.selected-day.has-event::after {
+    background-color: white;
+}
+
+/* Sidebar del Calendario */
+.calendar-sidebar {
+    flex: 0.8;
+    background: #fdfdfd;
+    border-left: 1px solid #eee;
+    padding: 40px 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--rojo-inst);
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.btn-close-sidebar {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #64748b;
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.2s ease;
+}
+
+.btn-close-sidebar:hover {
+    color: var(--rojo-inst);
+    transform: scale(1.1);
+}
+
+.selected-date-badge {
+    background: var(--rojo-inst);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.event-details-card {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-left: 4px solid var(--rojo-inst);
+}
+
+.event-time {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #64748b;
+}
+
+.event-item h5 {
+    margin: 5px 0;
+    color: #0c1c3d;
+    font-size: 1.1rem;
+}
+
+/* --- 8. MODAL DE NOTICIAS --- */
+.news-modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5000;
+    padding: 20px;
+}
+
+.modal-container-styled {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 550px;
+    gap: 0;
+}
+
+.modal-header-badge {
+    background-color: rgba(139, 29, 34, 0.45); /* 🔴 SOLO ESTE CUADRO */
+    backdrop-filter: blur(6px);               /* efecto vidrio */
+    color: #ffffff;
+    padding: 12px 30px;
+    border-radius: 15px;
+    font-size: 1.4rem;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 5001;
+    margin-left: 20px;
+    margin-bottom: -15px;
+}
+
+
+.news-modal-card {
+    background: #ffffff;
+    width: 100%;
+    padding: 45px 40px 40px 40px;
+    border-radius: 35px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    position: relative;
+    animation: modalSlideUp 0.4s ease-out;
+}
+
+.close-modal-x {
+    position: absolute;
+    top: 25px; right: 30px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #1e293b;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.modal-tag-date {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 15px;
+}
+
+.modal-news-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #0c1c3d;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.modal-news-text {
+    font-size: 1.05rem;
+    color: #475569;
+    line-height: 1.6;
+}
+
+/* --- 9. FOOTER --- */
 .footer {
     background-color: var(--gris-claro);
     padding: 60px 10%;
@@ -217,37 +751,220 @@ body {
     color: #475569;
 }
 
-.social-group {
-    display: flex;
-    gap: 12px;
+/* --- 10. ANIMACIONES --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.social-icon {
-    width: 42px;
-    height: 42px;
-    background: var(--azul-oscuro-social);
-    border-radius: 8px;
+@keyframes tickerMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes modalSlideUp {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* --- MEJORA DEL INDICADOR DE EVENTOS --- */
+
+.calendar-day-item {
+    position: relative; /* Indispensable para que el punto se posicione respecto al número */
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    margin: auto;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    z-index: 1;
 }
 
-.social-icon svg {
-    width: 20px;
-    height: 20px;
-    stroke: white;
-    fill: none;
-    stroke-width: 2;
+/* El Punto distintivo */
+.calendar-day-item.has-event::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;       /* Lo bajamos un poco para que no tape el número */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    background-color: var(--rojo-inst); /* Usa tu variable de color institucional */
+    border-radius: 50%;
+    z-index: 2;
 }
 
-/* --- 6. ANIMACIONES --- */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Cuando el día está seleccionado, el punto se vuelve blanco para que resalte sobre el fondo rojo */
+.selected-day.has-event::after {
+    background-color: white !important;
+}
+
+/* Estilo para los eventos en la barra lateral (mejorando el diseño de la tarjeta) */
+.event-item-card {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 12px;
+    border-left: 4px solid var(--rojo-inst);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.event-item-card:hover {
+    transform: scale(1.02);
+}
+
+.no-events-msg {
+    text-align: center;
+    color: #94a3b8;
+    margin-top: 30px;
+    font-style: italic;
+}
+/* --- ESTILO PARA DÍAS CON EVENTOS --- */
+
+.calendar-day-item {
+    position: relative; /* Necesario para posicionar el punto indicador */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    margin: auto;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+/* 1. Cambio de color de fondo sutil para días con eventos */
+/* Cambio de color de fondo para días con eventos en el calendario */
+.calendar-day-item.has-event {
+    background-color: rgba(139, 29, 34, 0.23); /* Mismo tono que las noticias */
+    color: var(--rojo-inst);
+    font-weight: bold;
+}
+
+/* 2. Añadir un punto distintivo debajo del número (Estilo iOS/Android) */
+.calendar-day-item.has-event::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    width: 6px;
+    height: 6px;
+    background-color: var(--rojo-inst);
+    border-radius: 50%;
+}
+
+/* 3. Ajuste cuando el día con evento está seleccionado */
+.calendar-day-item.selected-day.has-event {
+    background-color: var(--rojo-inst) !important;
+    color: white !important;
+}
+
+.calendar-day-item.selected-day.has-event::after {
+    background-color: white; /* El punto se vuelve blanco para contrastar */
+}
+
+/* Overlay del Modal de Contacto */
+.contact-modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* Tarjeta del Modal */
+.contact-modal-card {
+    background: white;
+    width: 90%;
+    max-width: 400px;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    position: relative;
+    text-align: center;
+    animation: modalSlideUp 0.3s ease-out;
+}
+
+.modal-title {
+    color: var(--rojo-inst);
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.modal-subtitle {
+    font-size: 0.95rem;
+    color: #64748b;
+    margin-bottom: 25px;
+}
+
+/* Input y Botón */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.contact-input {
+    padding: 12px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.contact-input:focus {
+    border-color: var(--rojo-inst);
+}
+
+.btn-send-email {
+    background: var(--rojo-inst);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-send-email:hover {
+    background: var(--rojo-hover);
+}
+
+/* WhatsApp */
+.whatsapp-section {
+    border-top: 1px solid #f1f5f9;
+    padding-top: 20px;
+}
+
+.whatsapp-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #25D366;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    margin-top: 10px;
+    transition: transform 0.2s;
+}
+
+.whatsapp-link:hover {
+    transform: scale(1.05);
+}
+
+.wa-icon {
+    width: 24px;
+    height: 24px;
 }

@@ -5,8 +5,28 @@ body {
   background-color: #ffffff;
   color: #2b2b2b;
 }
-h1{
+
+h1 {
   color: #5f0f14;
+  font-weight: 700;
+}
+
+/* TÍTULOS SECUNDARIOS */
+h2 {
+  color: #5f0f14;
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin-bottom: 1.8rem;
+}
+
+h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #85272d;
+  margin-top: 0.6rem;
+  border-radius: 2px;
 }
 
 /* =====================================================
@@ -14,24 +34,111 @@ h1{
 ===================================================== */
 section.bg-white {
   background-color: #ffffff !important;
+  margin: 0;
+}
+
+
+/* =====================================================
+   ESPACIADO GENERAL DE SECCIONES
+===================================================== */
+section {
+  scroll-margin-top: 90px;
+}
+
+section.container,
+section.bg-light {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
 }
 
 /* =====================================================
-   CARDS
+   FILTROS TIPO TABS (SIN JS)
+===================================================== */
+
+/* Ocultar radios */
+.project-filter input[type="radio"] {
+  display: none !important;
+  visibility: hidden;
+  position: absolute;
+}
+
+/* Contenedor de filtros */
+.filters {
+  border-bottom: 1px solid #e6ded2;
+  padding-bottom: 1rem;
+}
+
+/* Botones base */
+.filters .btn {
+  background-color: #f7f5f2;
+  border: 1px solid #e6ded2;
+  color: #5f0f14;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 0.45rem 1.1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Hover */
+.filters .btn:hover {
+  background-color: #85272d;
+  color: #ffffff;
+  border-color: #85272d;
+}
+
+/* Botón activo */
+#filter-all:checked ~ .filters label[for="filter-all"],
+#filter-software:checked ~ .filters label[for="filter-software"],
+#filter-sistemas:checked ~ .filters label[for="filter-sistemas"] {
+  background-color: #85272d;
+  color: #ffffff;
+  border-color: #85272d;
+}
+
+/* =====================================================
+   FILTRADO DE PROYECTOS
+===================================================== */
+.project-item {
+  display: none;
+}
+
+#filter-all:checked ~ .projects .project-item {
+  display: block;
+}
+
+#filter-software:checked ~ .projects .project-item.software {
+  display: block;
+}
+
+#filter-sistemas:checked ~ .projects .project-item.sistemas {
+  display: block;
+}
+
+/* =====================================================
+   GRID DE PROYECTOS
+===================================================== */
+.projects {
+  row-gap: 2.2rem;
+}
+
+/* =====================================================
+   CARDS DE PROYECTOS
 ===================================================== */
 .project-card {
-  border: none;
-  border-radius: 12px;
-  overflow: hidden;
   background-color: #ffffff;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  border-radius: 16px;
+  overflow: hidden;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .project-card:hover {
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
-  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
 }
 
 /* =====================================================
@@ -47,30 +154,47 @@ section.bg-white {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 /* =====================================================
-   TEXTO DE LA CARD
+   CUERPO DE LA CARD
 ===================================================== */
-.card-title {
-  color: #2b2b2b;
-}
-
-.card-text {
-  color: #6b6b6b;
+.project-card .card-body {
+  padding: 1.5rem 1.5rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 /* =====================================================
    CATEGORÍA
 ===================================================== */
 .card-category {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   color: #85272dad;
-  display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+/* =====================================================
+   TEXTO
+===================================================== */
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2b2b2b;
+  line-height: 1.4;
+  margin-bottom: 0.4rem;
+}
+
+.card-text {
+  font-size: 0.85rem;
+  color: #6b6b6b;
+  line-height: 1.5;
+  margin-bottom: 1.3rem;
 }
 
 /* =====================================================
@@ -81,42 +205,187 @@ section.bg-white {
   border: none;
   color: #ffffff;
   font-weight: 600;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  border-radius: 10px;
+  padding: 0.6rem 0;
+  font-size: 0.85rem;
+  margin-top: auto;
+  transition: background-color 0.25s ease;
 }
 
 .btn-dark-custom:hover {
   background-color: #780c13;
-  color: #ffffff;
 }
 
 /* =====================================================
-   FILTROS
+   MODALES DE PROYECTOS
 ===================================================== */
 
-/* Botón activo */
-.btn.btn-dark {
-  background-color: #85272d;
-  border-color: #85272d;
-  color: #ffffff;
+/* Contenedor general del modal */
+.modal-content {
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
 }
 
-.btn.btn-dark:hover {
-  background-color: #780c13;
-  border-color: #780c13;
+/* Header del modal */
+.modal-header {
+  border-bottom: 1px solid #e6ded2;
+  padding: 1.2rem 1.6rem;
 }
 
-/* Botones inactivos */
-.btn.btn-light {
-  background-color: #f7f5f2;
-  border: 1px solid #e6ded2;
+.modal-title {
   color: #5f0f14;
-  font-weight: 500;
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 
-.btn.btn-light:hover {
+/* Botón cerrar */
+.modal-header .btn-close {
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+.modal-header .btn-close:hover {
+  opacity: 1;
+}
+
+/* Body del modal */
+.modal-body {
+  padding: 1.6rem;
+  font-size: 0.9rem;
+  color: #4f4f4f;
+  line-height: 1.6;
+}
+
+/* Títulos internos */
+.modal-body h6 {
+  color: #5f0f14;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+/* Listas de integrantes */
+.modal-body ul {
+  padding-left: 1.2rem;
+  margin-bottom: 1.4rem;
+}
+
+.modal-body ul li {
+  font-size: 0.88rem;
+  margin-bottom: 0.3rem;
+}
+
+/* Galería dentro del modal */
+.modal-body img {
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal-body img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+}
+
+/* Video dentro del modal */
+.modal-body .ratio {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
+}
+
+/* Footer del modal */
+.modal-footer {
+  border-top: 1px solid #e6ded2;
+  padding: 1rem 1.6rem;
+}
+
+/* Botón cerrar del footer */
+.modal-footer .btn-secondary {
+  background-color: #f7f5f2;
+  color: #5f0f14;
+  border: 1px solid #e6ded2;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.45rem 1.4rem;
+  transition: all 0.25s ease;
+}
+
+.modal-footer .btn-secondary:hover {
   background-color: #85272d;
   color: #ffffff;
   border-color: #85272d;
+}
+
+
+/* =====================================================
+   VIDEOS
+===================================================== */
+.ratio {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+}
+
+.ratio + p {
+  font-size: 0.85rem;
+  color: #6b6b6b;
+}
+
+/* =====================================================
+   GALERÍA DE FOTOS
+===================================================== */
+.bg-light img {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+.bg-light img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+}
+
+/* Galería clickable */
+.gallery-img {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal oscuro tipo lightbox */
+#galleryModal .modal-content {
+  background-color: transparent;
+}
+
+#galleryModal img {
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+
+/* =====================================================
+   TESTIMONIOS
+===================================================== */
+section.container .card {
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section.container .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+section.container .card-body p {
+  font-size: 0.9rem;
+  color: #4f4f4f;
+  line-height: 1.6;
 }
 
 /* =====================================================

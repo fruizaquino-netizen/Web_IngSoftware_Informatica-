@@ -1,95 +1,77 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>¿Quiénes Somos? | UNISTMO</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>{{ hero().titulo }}</h1>
+    <p>{{ hero().subtitulo }}</p>
+    <p>{{ hero().descripcion }}</p>
+  </div>
+</section>
 
-  <!-- ================= HERO ================= -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>¿Quiénes Somos?</h1>
-      <p>Formamos líderes en el área de software y hardware</p>
-      <p>
-        capaces de diseñar, desarrollar e implementar soluciones tecnológicas,
-        gestionando proyectos de sistemas y participando en equipos multidisciplinarios.
-      </p>
-    </div>
-  </section>
+<!-- ================= QUIÉNES SOMOS ================= -->
+<section class="about-section">
+  <div class="about-card">
+    <h2>Nuestra Misión y Visión</h2>
 
-  <!-- ================= QUIÉNES SOMOS ================= -->
-  <section class="about-section">
-    <div class="about-card">
+    <div class="about-grid">
 
-      <h2>Nuestra Misión y Enfoque Regional</h2>
-
-      <div class="about-grid">
-
-        <!-- TEXTO -->
-        <div class="about-text">
-          <p>
-            Somos una institución comprometida con el desarrollo integral de nuestros estudiantes,
-            formando profesionales de excelencia que contribuyan activamente al progreso de nuestra región.
-          </p>
-
-          <p>
-            Nuestro enfoque regional nos permite vincularnos directamente con las
-            necesidades del sector productivo y social, generando soluciones innovadoras y pertinentes.
-          </p>
-        </div>
-
-        <!-- VALORES -->
-        <div class="values-card">
-          <h3>Valores Institucionales</h3>
-          <ul class="values-list">
-            <li>Excelencia académica</li>
-            <li>Compromiso social</li>
-            <li>Innovación y tecnología</li>
-            <li>Desarrollo sostenible</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= INDICADORES INSTITUCIONALES ================= -->
-  <section class="stats-section">
-    <div class="stats-grid">
-
-      <div class="stat-card">
-        <span class="stat-number">20+</span>
-        <p class="stat-text">Años de experiencia</p>
+      <!-- TEXTO MISIÓN Y VISIÓN -->
+      <div class="about-text">
+        @for (item of infoInstitucional(); track item.texto) {
+          <p>{{ item.texto }}</p>
+        }
       </div>
 
-      <div class="stat-card">
-        <span class="stat-number">5,000+</span>
-        <p class="stat-text">Estudiantes activos</p>
-      </div>
-
-      <div class="stat-card">
-        <span class="stat-number">150+</span>
-        <p class="stat-text">Docentes calificados</p>
-      </div>
-
-      <div class="stat-card">
-        <span class="stat-number">90%</span>
-        <p class="stat-text">Tasa de empleabilidad</p>
+      <!-- VALORES -->
+      <div class="values-card">
+        <h3>Valores Institucionales</h3>
+        <ul class="values-list">
+          @for (valor of valores(); track valor) {
+            <li>{{ valor }}</li>
+          }
+        </ul>
       </div>
 
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ================= CTA ================= -->
-  <section class="cta">
-    <h2>Conoce el plan de estudios</h2>
-    <p>
-      Descubre nuestra oferta educativa y encuentra el programa ideal para tu desarrollo profesional.
-    </p>
-    <a href="#" class="btn">Ver Plan de Estudios</a>
-  </section>
+<!-- ================= INDICADORES INSTITUCIONALES ================= -->
+<section class="stats-section">
+  <div class="stats-grid">
+    @for (stat of stats(); track stat.texto) {
+      <div class="stat-card">
+        <span class="stat-number">{{ stat.numero }}</span>
+        <p class="stat-text">{{ stat.texto }}</p>
+      </div>
+    }
+  </div>
+</section>
 
-</body>
-</html>
+<!-- ================= CTA ================= -->
+<section class="cta">
+  <h2>{{ cta().titulo }}</h2>
+  <p>{{ cta().descripcion }}</p>
+
+  <!-- BOTÓN QUE FUNCIONA CON ANGULAR ROUTER -->
+  <a routerLink="/planEstudios" class="btn">Ver Plan de Estudios</a>
+</section>
+
+ <!-- Recorrido virtual -->
+<section class="tour-section">
+  <h2>Recorrido Virtual</h2>
+
+  <div class="visor">
+    <img
+      [src]="tour()[currentStep()].img"
+      alt="Recorrido virtual"
+    />
+
+    <div class="controls">
+      @for (control of tour()[currentStep()].controls; track control.label) {
+        <button (click)="goTo(control.target)">
+          {{ control.label }}
+        </button>
+      }
+    </div>
+  </div>
+</section>

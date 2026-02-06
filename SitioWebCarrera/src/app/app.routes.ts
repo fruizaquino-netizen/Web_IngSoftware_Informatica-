@@ -1,36 +1,58 @@
 import { Routes } from '@angular/router';
-import {InicioPageComponent} from './pages/inicio/inicio-pages.component';
-import {QuienesSomosPageComponent} from './pages/quienesSomos/quienesSomos-page.component';
-import {PlanEstudiosPageComponent} from './pages/planEstudio/PlanEstudio-page.component';
-import {ProyectoPageComponent} from './pages/proyectos/proyectos-page.component';
-import {DocentesPageComponent} from './pages/docentes/docentes-pages.component';
-import {AspirantesPageComponent} from './pages/aspirantes/aspirantes-pages.component';
+import { InicioPageComponent } from './pages/inicio/inicio-pages.component';
+
 export const routes: Routes = [
-
   {
-  path:'',
-  component:InicioPageComponent
-
-},
-{
- path: 'quienesSomos',
- component:QuienesSomosPageComponent,
-},
-{
- path: 'planEstudios',
- component:PlanEstudiosPageComponent,
-},
-{
- path: 'proyectos',
- component:ProyectoPageComponent,
-},
-{
- path: 'docentes',
- component:DocentesPageComponent,
-},
-{
- path: 'aspirantes',
- component:AspirantesPageComponent,
-},
-{ path: '**', redirectTo: '' }
+    path: '',
+    component: InicioPageComponent
+  },
+  {
+    path: 'quienesSomos', // <--- Esta es la ruta que usaremos
+    loadComponent: () => import('./pages/quienesSomos/quienesSomos-page.component')
+      .then(m => m.QuienesSomosPageComponent)
+  },
+  {
+    path: 'planEstudios',
+    loadComponent: () => import('./pages/planEstudio/PlanEstudio-page.component')
+      .then(m => m.PlanEstudiosPageComponent)
+  },
+  {
+    path: 'proyectos',
+    loadComponent: () => import('./pages/proyectos/proyectos-page.component')
+      .then(m => m.ProyectoPageComponent)
+  },
+  {
+    path: 'docentes',
+    loadComponent: () => import('./pages/docentes/docentes-pages.component')
+      .then(m => m.DocentesPageComponent)
+  },
+  {
+    path: 'aspirantes',
+    loadComponent: () => import('./pages/aspirantes/aspirantes-pages.component')
+      .then(m => m.AspirantesPageComponent)
+  },
+  {
+    path: 'excelecia-academica',
+    loadComponent: () => import('./pages/inicio/excelencia/excelencia.component')
+      .then(m => m.ExcelenciaComponent)
+  },
+  {
+    path: 'tecnologia-avanzada',
+    loadComponent: () => import('./pages/inicio/tecnologia/tecnologia.component')
+      .then(m => m.TecnologiaComponent)
+  },
+  {
+    path: 'vinculacion-regional',
+    loadComponent: () => import('./pages/inicio/vinculacion/vinculacion.component')
+      .then(m => m.VinculacionComponent)
+  },
+  {
+  path: 'docente/:nombre',
+  loadComponent: () => import('./pages/docentes-perfil/docentes-perfil.component')
+    .then(m => m.DocentesPerfilComponent)
+  },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];

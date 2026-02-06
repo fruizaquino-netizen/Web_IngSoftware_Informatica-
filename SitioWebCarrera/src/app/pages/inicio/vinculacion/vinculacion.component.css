@@ -1,0 +1,64 @@
+/* Contenedor principal */
+.vinculacion-container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 20px;
+  font-family: sans-serif; /* Asegúrate de tener una fuente limpia */
+}
+
+/* Título Principal - Ahora con rojo sólido */
+.vinculacion-container h1 {
+  text-align: center;
+  color: #8B1D22; /* Color sólido sin transparencia */
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+}
+
+/* Texto de introducción */
+.intro {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* Bloques de información */
+.info {
+  margin-bottom: 30px;
+}
+
+/* Subtítulos - Ahora con rojo sólido */
+.info h2 {
+  color: #8B1D22;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+/* Listas */
+.info ul {
+  padding-left: 20px;
+}
+
+.info li {
+  margin-bottom: 8px;
+  color: #333;
+}
+
+/* Botón Secundario */
+.btn-secondary {
+  padding: 12px 25px;
+  background-color: #8B1D22; /* Fondo rojo sólido */
+  color: white !important; /* Forzamos el blanco para que resalte */
+  border-radius: 6px;
+  transition: background-color 0.3s, transform 0.2s;
+  border: none;
+  font-weight: bold;
+}
+
+/* Efecto al pasar el mouse por el botón */
+.btn-secondary:hover {
+  background-color: #A52329; /* Un rojo un poco más vivo para el feedback */
+  transform: translateY(-2px); /* Pequeño salto hacia arriba */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}

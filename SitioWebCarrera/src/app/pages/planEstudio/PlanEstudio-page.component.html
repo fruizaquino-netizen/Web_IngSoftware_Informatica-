@@ -1,7 +1,10 @@
+
+<!-- ================= PLAN DE ESTUDIOS (SECCIÓN AISLADA) ================= -->
+<section class="plan-wrapper">
     <!-- ================= ENCABEZADO ================= -->
     <header class="header">
         <!-- Título principal de la página -->
-        <h1>Plan de Estudios</h1>
+        <h1 >Plan de Estudios</h1>
 
         <!-- Descripción general del plan académico -->
         <p>
@@ -14,7 +17,7 @@
     <main class="container">
 
         <!-- ================= CARD: PLAN DE ESTUDIOS POR SEMESTRE ================= -->
-        <section class="card">
+        <div class="card">
 
             <!-- Radios ocultos:
                  Sirven para controlar qué pestaña (semestre) se muestra
@@ -22,6 +25,14 @@
             <input type="radio" name="tabs" id="tab1" checked>
             <input type="radio" name="tabs" id="tab2">
             <input type="radio" name="tabs" id="tab3">
+            <input type="radio" name="tabs" id="tab4">
+            <input type="radio" name="tabs" id="tab5">
+            <input type="radio" name="tabs" id="tab6">
+            <input type="radio" name="tabs" id="tab7">
+            <input type="radio" name="tabs" id="tab8">
+            <input type="radio" name="tabs" id="tab9">
+            <input type="radio" name="tabs" id="tabop">
+
 
             <!-- ================= PESTAÑAS ================= -->
             <div class="tabs">
@@ -29,151 +40,238 @@
                 <label for="tab1" class="tab">Semestre 1</label>
                 <label for="tab2" class="tab">Semestre 2</label>
                 <label for="tab3" class="tab">Semestre 3</label>
+                <label for="tab4" class="tab">Semestre 4</label>
+                <label for="tab5" class="tab">Semestre 5</label>
+                <label for="tab6" class="tab">Semestre 6</label>
+                <label for="tab7" class="tab">Semestre 7</label>
+                <label for="tab8" class="tab">Semestre 8</label>
+                <label for="tab9" class="tab">Semestre 9</label>
+                <label for="tabop" class="tab">Optativas</label>
+
             </div>
 
             <!-- ================= CONTENIDO SEMESTRE 1 ================= -->
-            <div class="tab-content content-1">
+ <div class="tab-content content-1">
+<div class="card-header">
+    <h2>Materias del Semestre 1</h2>
 
-                <!-- Encabezado del card del semestre -->
-                <div class="card-header">
-                    <h2>Materias del Semestre 1</h2>
+    <a
+      href="assets/pdf/PlanEstudios.pdf"
+      download
+      class="btn-pdf"
+    >
+      Descargar Plan en PDF
+    </a>
+</div>
 
-                    <!-- Botón decorativo para descarga del plan en PDF -->
-                    <button class="btn-pdf">Descargar Plan en PDF</button>
-                </div>
 
-                <!-- Contenedor de materias -->
-                <div class="subjects">
+  <div class="subjects">
+    <div class="subject"><div><h3>Metodología de la Investigación</h3><span>6 créditos</span></div><span class="badge">Básico</span></div>
+    <div class="subject"><div><h3>Fundamentos Matemáticos para la Ingeniería</h3><span>7 créditos</span></div><span class="badge">Básico</span></div>
+    <div class="subject"><div><h3>Lógica Matemática</h3><span>7 créditos</span></div><span class="badge">Básico</span></div>
+    <div class="subject"><div><h3>Programación I</h3><span>4 créditos</span></div><span class="badge">Básico</span></div>
+    <div class="subject"><div><h3>Fundamentos de Programación Estructurada</h3><span>7 créditos</span></div><span class="badge">Básico</span></div>
+    <div class="subject"><div><h3>Administración</h3><span>5 créditos</span></div><span class="badge">Básico</span></div>
+  </div>
+</div>
 
-                    <!-- Materia individual -->
-                    <div class="subject">
-                        <div>
-                            <h3>Matemáticas I</h3>
-                            <span>5 créditos</span>
-                        </div>
-                        <!-- Nivel de formación -->
-                        <span class="badge">Básico</span>
-                    </div>
-
-                    <div class="subject">
-                        <div>
-                            <h3>Programación I</h3>
-                            <span>6 créditos</span>
-                        </div>
-                        <span class="badge">Básico</span>
-                    </div>
-
-                    <div class="subject">
-                        <div>
-                            <h3>Introducción a la Ingeniería</h3>
-                            <span>4 créditos</span>
-                        </div>
-                        <span class="badge">Básico</span>
-                    </div>
-
-                    <div class="subject">
-                        <div>
-                            <h3>Comunicación Oral y Escrita</h3>
-                            <span>3 créditos</span>
-                        </div>
-                        <span class="badge">Básico</span>
-                    </div>
-
-                </div>
-            </div>
 
             <!-- ================= CONTENIDO SEMESTRE 2 ================= -->
-            <div class="tab-content content-2">
+ <div class="tab-content content-2">
+  <div class="card-header">
+    <h2>Materias del Semestre 2</h2>
+    <a
+      href="assets/pdf/PlanEstudios.pdf"
+      download
+      class="btn-pdf"
+    >
+      Descargar Plan en PDF
+    </a>
+</div>
 
-                <div class="card-header">
-                    <h2>Materias del Semestre 2</h2>
-                    <button class="btn-pdf">Descargar Plan en PDF</button>
-                </div>
+  <div class="subjects">
+    <div class="subject"><div><h3>Física</h3><span>6 créditos</span></div><span class="badge">Básico</span></div>
+    <div class="subject"><div><h3>Cálculo Diferencial e Integral</h3><span>7 créditos</span></div><span class="badge">Básico</span></div>
+    <div class="subject"><div><h3>Matemáticas Discretas</h3><span>7 créditos</span></div><span class="badge">Básico</span></div>
+    <div class="subject"><div><h3>Teoría General de Sistemas</h3><span>4 créditos</span></div><span class="badge">Básico</span></div>
+    <div class="subject"><div><h3>Estructura de Datos</h3><span>7 créditos</span></div><span class="badge">Ascendente</span></div>
+    <div class="subject"><div><h3>Contabilidad y Finanzas</h3><span>5 créditos</span></div><span class="badge">Básico</span></div>
+  </div>
+</div>
 
-                <div class="subjects">
-
-                    <div class="subject">
-                        <div>
-                            <h3>Matemáticas II</h3>
-                            <span>5 créditos</span>
-                        </div>
-                        <span class="badge">Básico</span>
-                    </div>
-
-                    <div class="subject">
-                        <div>
-                            <h3>Programación II</h3>
-                            <span>6 créditos</span>
-                        </div>
-                        <span class="badge">Ascendente</span>
-                    </div>
-
-                    <div class="subject">
-                        <div>
-                            <h3>Bases de Datos I</h3>
-                            <span>5 créditos</span>
-                        </div>
-                        <span class="badge">Ascendente</span>
-                    </div>
-
-                    <div class="subject">
-                        <div>
-                            <h3>Estructuras de Datos</h3>
-                            <span>5 créditos</span>
-                        </div>
-                        <span class="badge">Ascendente</span>
-                    </div>
-
-                </div>
-            </div>
 
             <!-- ================= CONTENIDO SEMESTRE 3 ================= -->
-            <div class="tab-content content-3">
+  <div class="tab-content content-3">
+  <div class="card-header">
+    <h2>Materias del Semestre 3</h2>
+    <a
+      href="assets/pdf/PlanEstudios.pdf"
+      download
+      class="btn-pdf"
+    >
+      Descargar Plan en PDF
+    </a>
+</div>
 
-                <div class="card-header">
-                    <h2>Materias del Semestre 3</h2>
-                    <button class="btn-pdf">Descargar Plan en PDF</button>
-                </div>
+  <div class="subjects">
+    <div class="subject"><div><h3>Electrónica I</h3><span>6 créditos</span></div><span class="badge">Ascendente</span></div>
+    <div class="subject"><div><h3>Teoría de Algoritmos y Complejidad</h3><span>6 créditos</span></div><span class="badge">Ascendente</span></div>
+    <div class="subject"><div><h3>Álgebra Lineal</h3><span>6 créditos</span></div><span class="badge">Ascendente</span></div>
+    <div class="subject"><div><h3>Sistemas Operativos</h3><span>6 créditos</span></div><span class="badge">Pavimentante</span></div>
+    <div class="subject"><div><h3>Paradigmas de Programación</h3><span>7 créditos</span></div><span class="badge">Pavimentante</span></div>
+    <div class="subject"><div><h3>Liderazgo y Emprendimiento</h3><span>5 créditos</span></div><span class="badge">Básico</span></div>
+  </div>
+</div>
+            <!-- ================= CONTENIDO SEMESTRE 4 ================= -->
+<div class="tab-content content-4">
+  <div class="card-header">
+    <h2>Materias del Semestre 4</h2>
+    <a
+      href="assets/pdf/PlanEstudios.pdf"
+      download
+      class="btn-pdf"
+    >
+      Descargar Plan en PDF
+    </a>
+</div>
 
-                <div class="subjects">
+  <div class="subjects">
+    <div class="subject"><div><h3>Electrónica II</h3><span>6 créditos</span></div><span class="badge">Ascendente</span></div>
+    <div class="subject"><div><h3>Probabilidad y Estadística</h3><span>5 créditos</span></div><span class="badge">Ascendente</span></div>
+    <div class="subject"><div><h3>Métodos Numéricos</h3><span>5 créditos</span></div><span class="badge">Ascendente</span></div>
+    <div class="subject"><div><h3>Redes de Computadoras</h3><span>7 créditos</span></div><span class="badge">Pavimentante</span></div>
+    <div class="subject"><div><h3>Programación Orientada a Objetos</h3><span>7 créditos</span></div><span class="badge">Pavimentante</span></div>
+    <div class="subject"><div><h3>Diseño de Bases de Datos</h3><span>7 créditos</span></div><span class="badge">Pavimentante</span></div>
+  </div>
+</div>
 
-                    <div class="subject">
-                        <div>
-                            <h3>Algoritmos Avanzados</h3>
-                            <span>6 créditos</span>
-                        </div>
-                        <span class="badge">Pavimentante</span>
-                    </div>
+            <!-- ================= CONTENIDO SEMESTRE 5 ================= -->
+<div class="tab-content content-5">
+  <div class="card-header">
+    <h2>Materias del Semestre 5</h2>
+    <a
+      href="assets/pdf/PlanEstudios.pdf"
+      download
+      class="btn-pdf"
+    >
+      Descargar Plan en PDF
+    </a>
+</div>
 
-                    <div class="subject">
-                        <div>
-                            <h3>Desarrollo Web</h3>
-                            <span>6 créditos</span>
-                        </div>
-                        <span class="badge">Pavimentante</span>
-                    </div>
+  <div class="subjects">
+    <div class="subject"><div><h3>Arquitectura de Computadoras</h3><span>5 créditos</span></div><span class="badge">Pavimentante</span></div>
+    <div class="subject"><div><h3>Modelos de Optimización para Toma de Decisiones</h3><span>5 créditos</span></div><span class="badge">Pavimentante</span></div>
+    <div class="subject"><div><h3>Ingeniería de Software I</h3><span>7 créditos</span></div><span class="badge">Pavimentante</span></div>
+    <div class="subject"><div><h3>Servidores y Seguridad</h3><span>7 créditos</span></div><span class="badge">Pavimentante</span></div>
+    <div class="subject"><div><h3>Sistemas Distribuidos</h3><span>6 créditos</span></div><span class="badge">Pavimentante</span></div>
+    <div class="subject"><div><h3>Implementación de Bases de Datos</h3><span>7 créditos</span></div><span class="badge">Pavimentante</span></div>
+  </div>
+</div>
 
-                    <div class="subject">
-                        <div>
-                            <h3>Ingeniería de Software</h3>
-                            <span>5 créditos</span>
-                        </div>
-                        <span class="badge">Pavimentante</span>
-                    </div>
+            <!-- ================= CONTENIDO SEMESTRE 6 ================= -->
+<div class="tab-content content-6">
+  <div class="card-header">
+    <h2>Materias del Semestre 6</h2>
+    <a
+      href="assets/pdf/PlanEstudios.pdf"
+      download
+      class="btn-pdf"
+    >
+      Descargar Plan en PDF
+    </a>
+</div>
 
-                    <div class="subject">
-                        <div>
-                            <h3>Redes de Computadoras</h3>
-                            <span>5 créditos</span>
-                        </div>
-                        <span class="badge">Ascendente</span>
-                    </div>
+  <div class="subjects">
+    <div class="subject"><div><h3>Derecho y Legislación Informática</h3><span>4 créditos</span></div><span class="badge">Formativo</span></div>
+    <div class="subject"><div><h3>Desarrollo de Aplicaciones Web I</h3><span>7 créditos</span></div><span class="badge">Pavimentante</span></div>
+    <div class="subject"><div><h3>Ingeniería de Software II</h3><span>7 créditos</span></div><span class="badge">Pavimentante</span></div>
+    <div class="subject"><div><h3>Interfaz Humano Computadora</h3><span>5 créditos</span></div><span class="badge">Formativo</span></div>
+    <div class="subject"><div><h3>Redes Inteligentes</h3><span>6 créditos</span></div><span class="badge">Pavimentante</span></div>
+    <div class="subject"><div><h3>Bases de Datos Avanzadas</h3><span>5 créditos</span></div><span class="badge">Pavimentante</span></div>
+  </div>
+</div>
 
-                </div>
-            </div>
+            <!-- ================= CONTENIDO SEMESTRE 7 ================= -->
+<div class="tab-content content-7">
+  <div class="card-header">
+    <h2>Materias del Semestre 7</h2>
+    <a
+      href="assets/pdf/PlanEstudios.pdf"
+      download
+      class="btn-pdf"
+    >
+      Descargar Plan en PDF
+    </a>
+</div>
 
-        </section>
+  <div class="subjects">
+    <div class="subject"><div><h3>Proyectos de Tecnologías de Información</h3><span>5 créditos</span></div><span class="badge">Terminal</span></div>
+    <div class="subject"><div><h3>Desarrollo de Aplicaciones Web II</h3><span>7 créditos</span></div><span class="badge">Terminal</span></div>
+    <div class="subject"><div><h3>Calidad de Software</h3><span>6 créditos</span></div><span class="badge">Terminal</span></div>
+    <div class="subject"><div><h3>Fundamentos de Inteligencia Artificial</h3><span>8 créditos</span></div><span class="badge">Terminal</span></div>
+    <div class="subject"><div><h3>Aprendizaje Automático</h3><span>7 créditos</span></div><span class="badge">Terminal</span></div>
+    <div class="subject"><div><h3>Ciencia de Datos</h3><span>6 créditos</span></div><span class="badge">Terminal</span></div>
+  </div>
+</div>
 
+            <!-- ================= CONTENIDO SEMESTRE 8 ================= -->
+<div class="tab-content content-8">
+  <div class="card-header">
+    <h2>Materias del Semestre 8</h2>
+    <a
+      href="assets/pdf/PlanEstudios.pdf"
+      download
+      class="btn-pdf"
+    >
+      Descargar Plan en PDF
+    </a>
+</div>
+
+  <div class="subjects">
+    <div class="subject"><div><h3>Cómputo en la Nube</h3><span>5 créditos</span></div><span class="badge">Terminal</span></div>
+    <div class="subject"><div><h3>Desarrollo de Soluciones Tecnológicas</h3><span>7 créditos</span></div><span class="badge">Terminal</span></div>
+    <div class="subject"><div><h3>Desarrollo de Sistemas Inteligentes</h3><span>7 créditos</span></div><span class="badge">Terminal</span></div>
+    <div class="subject"><div><h3>Optativa I</h3><span>6 créditos</span></div><span class="badge">Optativa</span></div>
+    <div class="subject"><div><h3>Optativa II</h3><span>6 créditos</span></div><span class="badge">Optativa</span></div>
+  </div>
+</div>
+
+            <!-- ================= CONTENIDO SEMESTRE 9 ================= -->
+<div class="tab-content content-9">
+  <div class="card-header">
+    <h2>Materias del Semestre 9</h2>
+    <a
+      href="assets/pdf/PlanEstudios.pdf"
+      download
+      class="btn-pdf"
+    >
+      Descargar Plan en PDF
+    </a>
+</div>
+
+  <div class="subjects">
+    <div class="subject"><div><h3>Seminario de Titulación</h3><span>6 créditos</span></div><span class="badge">Terminal</span></div>
+    <div class="subject"><div><h3>Estancia Profesional</h3><span>14 créditos</span></div><span class="badge">Terminal</span></div>
+  </div>
+</div>
+
+            <!-- ================= CONTENIDO OPTATIVAS ================= -->
+<div class="tab-content content-optativas">
+  <div class="card-header">
+    <h2>Materias Optativas</h2>
+  </div>
+
+  <div class="subjects">
+    <div class="subject"><div><h3>Procesamiento de Lenguaje Natural</h3><span>6 créditos</span></div><span class="badge">IA</span></div>
+    <div class="subject"><div><h3>Visión Computacional</h3><span>6 créditos</span></div><span class="badge">IA</span></div>
+    <div class="subject"><div><h3>Robótica</h3><span>6 créditos</span></div><span class="badge">IA</span></div>
+    <div class="subject"><div><h3>Sistemas IoT</h3><span>6 créditos</span></div><span class="badge">Hardware</span></div>
+    <div class="subject"><div><h3>Redes Avanzadas</h3><span>6 créditos</span></div><span class="badge">TI</span></div>
+  </div>
+</div>
+
+
+</div>
         <!-- ================= NIVELES DE FORMACIÓN ================= -->
         <section class="card">
             <h2>Niveles de Formación</h2>
@@ -210,7 +308,7 @@
 
             </div>
         </section>
-
+<br>
         <!-- ================= DURACIÓN Y MODALIDAD ================= -->
         <section class="double-card">
 
@@ -227,8 +325,5 @@
                     Modalidad presencial con actividades prácticas en laboratorios
                     especializados y proyectos reales.
                 </p>
-            </div>
-
-        </section>
-
-    </main>
+        </div>
+</section>

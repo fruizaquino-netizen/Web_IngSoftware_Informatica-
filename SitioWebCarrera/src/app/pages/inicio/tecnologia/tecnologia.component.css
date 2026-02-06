@@ -1,0 +1,100 @@
+/* Contenedor principal */
+.tecnologia-container {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 25px;
+    color: #1e293b;
+    font-family: sans-serif;
+}
+
+/* Título Principal - Ahora en rojo sólido */
+.tecnologia-title {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    color: #8B1D22; /* Rojo unificado */
+}
+
+.tecnologia-intro {
+    font-size: 1.1rem;
+    max-width: 900px;
+    line-height: 1.7;
+    margin-bottom: 60px;
+    color: #475569;
+}
+
+.tecnologia-section {
+    margin-bottom: 50px;
+}
+
+/* Subtítulos de sección */
+.tecnologia-section h2 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: #8B1D22; /* Rojo sólido */
+}
+
+.tecnologia-section p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #334155;
+    max-width: 900px;
+}
+
+.tecnologia-section ul {
+    margin-top: 15px;
+    padding-left: 20px;
+}
+
+.tecnologia-section li {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #334155;
+}
+
+/* Estilo para el Botón "Volver a Inicio" (btn-secondary) */
+.btn-secondary {
+    padding: 12px 25px;
+    background-color: #8B1D22; /* Rojo sólido */
+    color: white !important;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #A52329;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 29, 34, 0.3);
+}
+
+/* Estilo para el Botón Primario (si decides usarlo más adelante) */
+.btn-primary {
+    background: linear-gradient(135deg, #8B1D22, #6d161a);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 14px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 28px rgba(139, 29, 34, 0.45);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .tecnologia-title {
+        font-size: 2.2rem;
+    }
+
+    .tecnologia-intro {
+        font-size: 1rem;
+    }
+}
