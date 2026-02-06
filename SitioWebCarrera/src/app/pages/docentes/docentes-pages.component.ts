@@ -52,7 +52,6 @@ export class DocentesPageComponent {
       descripcion: 'Especialista en arquitectura de software y metodologías ágiles. Lidera proyectos de transformación digital corporativa.',
       email: 'fbenitez@bianni.unistmo.edu.mx',
       publicaciones: [
-        
         { titulo: 'Huerta Luis, Ruiz Juan, Cabrera Nubia, Montiel Luis, Benítez Felipe, Ramírez Víctor, Data Mining: Impact of Daily Activities on Student Performance", International Journal of Innovation and Applied Studies, Vol. 14, Issue 4, (2016), 927-935. ', anio: 2016, enlace: '#' },
         { titulo: 'Huerta Luis, Santiago Pablo, Ruiz Juan, Cabrera Nubia, Oscar de la Rosa, Benítez Felipe, "A Virtual Learning Environment for Elementary Algebra Based on Games and the Principles of Cognitive Theory", International Journal of Innovation and Applied Studies, Vol. 12, Issue 1, (2015), 243-251', anio: 2015, enlace: '#' },
         { titulo: 'F. Benítez, “Solución de ecuaciones no lineales mediante métodos asintóticos”, Revista de Ciencia e Ingeniería del Instituto Tecnológico Superior de Coatzacoalcos, Coatzacoalcos, Ver., Año 2, No. 2 (Enero-Diciembre 2015), 284-289. ISSN: 2395-907X. ', anio: 2015, enlace: '#' },
