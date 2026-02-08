@@ -15,11 +15,13 @@
     <div class="about-grid">
 
       <!-- TEXTO MISI�f�"N Y VISI�f�"N -->
-      <div class="about-text">
-        @for (item of infoInstitucional(); track item.texto) {
-          <p>{{ item.texto }}</p>
-        }
-      </div>
+      <div class="about-text values-card">
+         <h3>{{ content().QUIENES_SOMOS.MISSION_TITLE }}</h3>
+
+     @for (item of infoInstitucional(); track item.texto) {
+        <p>{{ item.texto }}</p>
+      }
+    </div>
 
       <!-- VALORES -->
       <div class="values-card">
