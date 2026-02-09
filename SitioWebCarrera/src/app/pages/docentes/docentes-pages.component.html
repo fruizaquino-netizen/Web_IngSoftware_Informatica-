@@ -1,11 +1,12 @@
 ﻿<div class="main-wrapper">
+<div class="main-wrapper">
   <section class="docentes-section py-5">
     <div class="container">
       
       <header class="mb-5 position-relative header-container">
-        <h1 class="display-4 fw-bold text-dark mb-2">{{ content().DOCENTES.TITLE }}</h1>
+        <h1 class="display-4 fw-bold text-dark mb-2">Docentes</h1>
         <p class="lead text-secondary subtitle-text">
-          {{ content().DOCENTES.SUBTITLE }}
+          Liderazgo académico y experiencia profesional al servicio de tu formación.
         </p>
         <div class="animated-underline"></div>
       </header>
@@ -32,7 +33,7 @@
                 <p class="teacher-role small mb-4">{{ docente.cargo }}</p>
                 
                 <button class="btn-ultra-profile" (click)="abrirPerfil(docente)">
-                  <span>{{ content().DOCENTES.VIEW_PROFILE }}</span>
+                  <span>Ver Perfil</span>
                   <div class="btn-icon">
                     <i class="bi bi-chevron-right"></i>
                   </div>
@@ -68,7 +69,7 @@
 
               <div class="contact-info text-start px-3">
                 <div class="mb-3">
-                  <label class="small text-uppercase text-muted fw-bold d-block">{{ content().DOCENTES.EMAIL_LABEL }}</label>
+                  <label class="small text-uppercase text-muted fw-bold d-block">Correo Electrónico</label>
                   <span class="text-dark"><i class="bi bi-envelope-at me-2"></i>{{ docenteSeleccionado()?.email }}</span>
                 </div>
               </div>
@@ -76,21 +77,21 @@
 
             <div class="col-12 col-lg-8">
               <div class="mb-4">
-                <h4 class="fw-bold text-dark border-bottom pb-2">{{ content().DOCENTES.PRO_DESCRIPTION }}</h4>
+                <h4 class="fw-bold text-dark border-bottom pb-2">Descripcion Profesional</h4>
                 <p class="text-muted" style="text-align: justify;">
                   {{ docenteSeleccionado()?.descripcion }}
                 </p>
               </div>
 
               <div class="mb-0">
-                <h4 class="fw-bold text-dark border-bottom pb-2">{{ content().DOCENTES.PUBLICATIONS }}</h4>
+                <h4 class="fw-bold text-dark border-bottom pb-2">Publicaciones Científicas</h4>
                 <div class="table-responsive">
                   <table class="table-premium">
                     <thead>
                       <tr>
-                        <th>{{ content().DOCENTES.TABLE_TITLE }}</th>
-                        <th class="text-center">{{ content().DOCENTES.TABLE_YEAR }}</th>
-                        <th class="text-end">{{ content().DOCENTES.TABLE_ACTION }}</th>
+                        <th>Título</th>
+                        <th class="text-center">Año</th>
+                        <th class="text-end">Acción</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -100,14 +101,14 @@
                           <td class="text-center text-muted">{{ pub.anio }}</td>
                           <td class="text-end">
                             <a [href]="pub.enlace" target="_blank" class="link-pub">
-                              {{ content().DOCENTES.VIEW }} <i class="bi bi-box-arrow-up-right ms-1"></i>
+                              Ver <i class="bi bi-box-arrow-up-right ms-1"></i>
                             </a>
                           </td>
                         </tr>
                       } @empty {
                         <tr>
                           <td colspan="3" class="text-center py-4 text-muted italic">
-                            {{ content().DOCENTES.NO_PUBLICATIONS }}
+                            No hay publicaciones registradas actualmente.
                           </td>
                         </tr>
                       }
@@ -122,5 +123,3 @@
     </div>
   }
 </div>
-
-
