@@ -1,4 +1,4 @@
-import { Component, signal, computed, effect, inject } from '@angular/core';
+﻿import { Component, signal, computed, effect, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslationService } from '../../services/translation.service';
@@ -12,24 +12,24 @@ interface Egresado {
 const defaultContent = {
   EGRESADOS: {
     TITLE: 'Registro de los Egresados',
-    SUBTITLE: 'Informaciï¿½fï¿½fï¿½,�,³n estadï¿½fï¿½fï¿½,�,­stica y acadï¿½fï¿½fï¿½,�,©mica de los egresados de la carrera.',
-    BY_YEAR: 'Egresados por Aï¿½fï¿½fï¿½,�,±o',
-    BY_MODALITY: 'Egresados por Modalidad',
+    SUBTITLE: 'Información estadística y académica de los egresados de la carrera.',
+    BY_YEAR: 'Egresados por Año',
+    BY_MODALITY: 'Titulados por Modalidad',
     FILTER_ALL: 'Todos',
     FILTER_TESIS: 'Tesis',
     FILTER_CENEVAL: 'CENEVAL',
     FILTER_EXPERIENCE: 'Experiencia',
     SINGULAR: 'egresado',
     PLURAL: 'egresados',
-    TOTAL_PREFIX: 'Total de egresados',
+    TOTAL_PREFIX: 'Total de Titulados',
     TOTAL_REGISTERED: 'registrados',
     TOTAL_IN_MODALITY: 'en modalidad',
-    LIST_TITLE: 'Listado de Egresados',
+    LIST_TITLE: 'Listado de Titulados',
     TABLE_NAME: 'Nombre',
-    TABLE_YEAR: 'Aï¿½fï¿½fï¿½,�,±o',
+    TABLE_YEAR: 'Año',
     TABLE_MODALITY: 'Modalidad',
     NO_RESULTS: 'No hay egresados para la modalidad seleccionada.',
-    MODAL_TITLE: 'Generaciï¿½fï¿½fï¿½,�,³n',
+    MODAL_TITLE: 'Generación',
     MODAL_CLOSE: 'Cerrar'
   }
 };
@@ -90,7 +90,7 @@ export class EgresadosPagesComponent {
     );
   });
 
-  //  Conteo automï¿½fï¿½fï¿½,�,¡tico por aï¿½fï¿½fï¿½,�,±o
+  //  Conteo automático por año
   conteoPorAnio = computed(() => {
     const conteo: Record<number, number> = {};
 
@@ -101,41 +101,41 @@ export class EgresadosPagesComponent {
     return conteo;
   });
 
-  //  Lista de aï¿½fï¿½fï¿½,�,±os disponibles (ordenados)
+  //  Lista de años disponibles (ordenados)
   aniosDisponibles = computed(() =>
     Object.keys(this.conteoPorAnio())
       .map(anio => Number(anio))
       .sort()
   );
-// Aï¿½fï¿½fï¿½,�,±o seleccionado para el modal
-anioSeleccionado = signal<number | null>(null);
+  // Año seleccionado para el modal
+  anioSeleccionado = signal<number | null>(null);
 
-// Egresados del aï¿½fï¿½fï¿½,�,±o seleccionado
-egresadosPorAnioSeleccionado = computed(() => {
-  if (this.anioSeleccionado() === null) {
-    return [];
+  // Egresados del año seleccionado
+  egresadosPorAnioSeleccionado = computed(() => {
+    if (this.anioSeleccionado() === null) {
+      return [];
+    }
+
+    return this.egresados().filter(
+      e => e.anio === this.anioSeleccionado()
+    );
+  });
+
+  // Abrir modal
+  abrirModalPorAnio(anio: number) {
+    this.anioSeleccionado.set(anio);
   }
 
-  return this.egresados().filter(
-    e => e.anio === this.anioSeleccionado()
-  );
-});
+  // Cerrar modal
+  cerrarModal() {
+    this.anioSeleccionado.set(null);
+  }
 
-// Abrir modal
-abrirModalPorAnio(anio: number) {
-  this.anioSeleccionado.set(anio);
-}
-
-// Cerrar modal
-cerrarModal() {
-  this.anioSeleccionado.set(null);
-}
-
-// Total dinï¿½fï¿½fï¿½,�,¡mico segï¿½fï¿½fï¿½,�,ºn el filtro activo
-totalSegunFiltro = computed(() => {
-  return this.egresadosFiltrados().length;
-});
-  //  Acciï¿½fï¿½fï¿½,�,³n de botones
+  // Total dinámico según el filtro activo
+  totalSegunFiltro = computed(() => {
+    return this.egresadosFiltrados().length;
+  });
+  //  Acción de botones
   cambiarFiltro(filtro: 'todos' | 'tesis' | 'ceneval' | 'experiencia') {
     this.filtroActivo.set(filtro);
   }
@@ -148,4 +148,3 @@ totalSegunFiltro = computed(() => {
     return labels.FILTER_EXPERIENCE;
   }
 }
-

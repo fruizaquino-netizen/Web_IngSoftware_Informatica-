@@ -1,19 +1,19 @@
-{
+﻿{
   "EGRESADOS": {
     "TITLE": "Graduate Registry",
     "SUBTITLE": "Statistical and academic information about the program graduates.",
     "BY_YEAR": "Graduates by Year",
-    "BY_MODALITY": "Graduates by Modality",
+    "BY_MODALITY": "Degree Holders by Modality",
     "FILTER_ALL": "All",
     "FILTER_TESIS": "Thesis",
     "FILTER_CENEVAL": "CENEVAL",
     "FILTER_EXPERIENCE": "Experience",
     "SINGULAR": "graduate",
     "PLURAL": "graduates",
-    "TOTAL_PREFIX": "Total graduates",
+    "TOTAL_PREFIX": "Total degree holders",
     "TOTAL_REGISTERED": "registered",
     "TOTAL_IN_MODALITY": "in modality",
-    "LIST_TITLE": "Graduate List",
+    "LIST_TITLE": "Degree Holders List",
     "TABLE_NAME": "Name",
     "TABLE_YEAR": "Year",
     "TABLE_MODALITY": "Modality",

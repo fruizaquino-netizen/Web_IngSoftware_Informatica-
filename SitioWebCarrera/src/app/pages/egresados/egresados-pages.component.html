@@ -1,4 +1,4 @@
-<section class="egresados-container">
+﻿<section class="egresados-container">
 
   <header class="egresados-header">
     <h1>{{ content().EGRESADOS.TITLE }}</h1>
@@ -107,7 +107,7 @@
 
     <div class="modal-header">
       <h3>{{ content().EGRESADOS.MODAL_TITLE }} {{ anioSeleccionado() }}</h3>
-      <button class="btn-cerrar" (click)="cerrarModal()">â�o�-</button>
+      <button class="btn-cerrar" type="button" aria-label="Cerrar" (click)="cerrarModal()">×</button>
     </div>
 
     <div class="modal-body">
