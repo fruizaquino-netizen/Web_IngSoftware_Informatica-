@@ -1,0 +1,121 @@
+﻿{
+  "text": {
+    "pageTitle": "Study Plan",
+    "pageDescription": "Explore the curriculum structure of our academic program, designed to provide comprehensive and progressive training.",
+    "pdfLabel": "Download Plan PDF",
+    "optativasTitle": "Elective Courses",
+    "levelsTitle": "Training Levels",
+    "semesterLabel": "Semester",
+    "semesterSubjectsTitle": "Subjects for Semester",
+    "optativasTab": "Electives",
+    "creditsLabel": "credits"
+  },
+  "pdfUrl": "assets/pdf/PlanEstudios.pdf",
+  "semesters": [
+    {
+      "subjects": [
+        { "name": "Research Methodology", "credits": 6, "level": "Basic" },
+        { "name": "Mathematical Foundations for Engineering", "credits": 7, "level": "Basic" },
+        { "name": "Mathematical Logic", "credits": 7, "level": "Basic" },
+        { "name": "Programming I", "credits": 4, "level": "Basic" },
+        { "name": "Structured Programming Fundamentals", "credits": 7, "level": "Basic" },
+        { "name": "Administration", "credits": 5, "level": "Basic" }
+      ]
+    },
+    {
+      "subjects": [
+        { "name": "Physics", "credits": 6, "level": "Basic" },
+        { "name": "Differential and Integral Calculus", "credits": 7, "level": "Basic" },
+        { "name": "Discrete Mathematics", "credits": 7, "level": "Basic" },
+        { "name": "General Systems Theory", "credits": 4, "level": "Basic" },
+        { "name": "Data Structures", "credits": 7, "level": "Ascending" },
+        { "name": "Accounting and Finance", "credits": 5, "level": "Basic" }
+      ]
+    },
+    {
+      "subjects": [
+        { "name": "Electronics I", "credits": 6, "level": "Ascending" },
+        { "name": "Algorithm Theory and Complexity", "credits": 6, "level": "Ascending" },
+        { "name": "Linear Algebra", "credits": 6, "level": "Ascending" },
+        { "name": "Operating Systems", "credits": 6, "level": "Paving" },
+        { "name": "Programming Paradigms", "credits": 7, "level": "Paving" },
+        { "name": "Leadership and Entrepreneurship", "credits": 5, "level": "Basic" }
+      ]
+    },
+    {
+      "subjects": [
+        { "name": "Electronics II", "credits": 6, "level": "Ascending" },
+        { "name": "Probability and Statistics", "credits": 5, "level": "Ascending" },
+        { "name": "Numerical Methods", "credits": 5, "level": "Ascending" },
+        { "name": "Computer Networks", "credits": 7, "level": "Paving" },
+        { "name": "Object-Oriented Programming", "credits": 7, "level": "Paving" },
+        { "name": "Database Design", "credits": 7, "level": "Paving" }
+      ]
+    },
+    {
+      "subjects": [
+        { "name": "Computer Architecture", "credits": 5, "level": "Paving" },
+        { "name": "Optimization Models for Decision Making", "credits": 5, "level": "Paving" },
+        { "name": "Software Engineering I", "credits": 7, "level": "Paving" },
+        { "name": "Servers and Security", "credits": 7, "level": "Paving" },
+        { "name": "Distributed Systems", "credits": 6, "level": "Paving" },
+        { "name": "Database Implementation", "credits": 7, "level": "Paving" }
+      ]
+    },
+    {
+      "subjects": [
+        { "name": "IT Law and Legislation", "credits": 4, "level": "Formative" },
+        { "name": "Web Application Development I", "credits": 7, "level": "Paving" },
+        { "name": "Software Engineering II", "credits": 7, "level": "Paving" },
+        { "name": "Human-Computer Interaction", "credits": 5, "level": "Formative" },
+        { "name": "Intelligent Networks", "credits": 6, "level": "Paving" },
+        { "name": "Advanced Databases", "credits": 5, "level": "Paving" }
+      ]
+    },
+    {
+      "subjects": [
+        { "name": "Information Technology Projects", "credits": 5, "level": "Terminal" },
+        { "name": "Web Application Development II", "credits": 7, "level": "Terminal" },
+        { "name": "Software Quality", "credits": 6, "level": "Terminal" },
+        { "name": "Fundamentals of Artificial Intelligence", "credits": 8, "level": "Terminal" },
+        { "name": "Machine Learning", "credits": 7, "level": "Terminal" },
+        { "name": "Data Science", "credits": 6, "level": "Terminal" }
+      ]
+    },
+    {
+      "subjects": [
+        { "name": "Cloud Computing", "credits": 5, "level": "Terminal" },
+        { "name": "Technological Solution Development", "credits": 7, "level": "Terminal" },
+        { "name": "Intelligent Systems Development", "credits": 7, "level": "Terminal" },
+        { "name": "Elective I", "credits": 6, "level": "Elective" },
+        { "name": "Elective II", "credits": 6, "level": "Elective" }
+      ]
+    },
+    {
+      "subjects": [
+        { "name": "Degree Seminar", "credits": 6, "level": "Terminal" },
+        { "name": "Professional Internship", "credits": 14, "level": "Terminal" }
+      ]
+    }
+  ],
+  "optativas": [
+    { "name": "Natural Language Processing", "credits": 6, "level": "AI" },
+    { "name": "Computer Vision", "credits": 6, "level": "AI" },
+    { "name": "Robotics", "credits": 6, "level": "AI" },
+    { "name": "IoT Systems", "credits": 6, "level": "Hardware" },
+    { "name": "Advanced Networks", "credits": 6, "level": "IT" }
+  ],
+  "levels": [
+    { "code": "B", "name": "Basic", "description": "Essential foundations" },
+    { "code": "A", "name": "Ascending", "description": "Intermediate development" },
+    { "code": "P", "name": "Paving", "description": "Advanced specialization" }
+  ],
+  "programInfo": {
+    "durationTitle": "Program Duration",
+    "durationText": "Total duration of 9 semesters (4.5 years).",
+    "modalityTitle": "Modality",
+    "modalityText": "On-campus format with practical activities in specialized labs and real-world projects."
+  }
+}
+
+

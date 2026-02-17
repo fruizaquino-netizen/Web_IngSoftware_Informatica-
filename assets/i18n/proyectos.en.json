@@ -1,0 +1,79 @@
+{
+  "text": {
+    "projectsTitle": "Projects",
+    "projectsDescription": "Learn about the research and technology projects carried out by our students and faculty.",
+    "galleryTitle": "Gallery",
+    "videosTitle": "Videos",
+    "imagesTitle": "Images",
+    "watchMore": "See More",
+    "close": "Close",
+    "members": "Members",
+    "gallery": "Gallery",
+    "video": "Video",
+    "videoFallback": "Your browser does not support HTML5 video."
+  },
+  "filters": [
+    { "id": "filter-all", "key": "all", "label": "All" },
+    { "id": "filter-software", "key": "software", "label": "Software Development" },
+    { "id": "filter-sistemas", "key": "sistemas", "label": "Intelligent Systems" }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "categoryKey": "software",
+      "categoryLabel": "Software Development",
+      "title": "Autonomous Arduino Cart",
+      "summary": "Scale autonomous vehicle controlled by Arduino with smart sensors.",
+      "image": "assets/img/proy1.jpg",
+      "modal": {
+        "description": "Project focused on developing a scale autonomous cart using Arduino and ultrasonic sensors for obstacle detection and real-time decision-making.",
+        "members": ["Ulises Diaz", "Yahir Antonio", "Fernando Gawalek"],
+        "gallery": ["assets/img/proy1.jpg", "assets/img/carrito1.jpg", "assets/img/carrito2.jpg"],
+        "videoUrl": "https://www.youtube.com/embed/VIDEO_ID"
+      }
+    },
+    {
+      "id": 2,
+      "categoryKey": "software",
+      "categoryLabel": "Software Development",
+      "title": "Pressure Meter with Charts",
+      "summary": "Measurement system with real-time graphical visualization.",
+      "image": "assets/img/proy2.jpeg",
+      "modal": {
+        "description": "Pressure measurement system that visualizes data in real time with dynamic charts. The project integrates electronic sensors and software for information analysis.",
+        "members": ["Carlos Méndez", "María López", "Fernando Ruiz"],
+        "gallery": ["assets/img/proy2.jpeg"]
+      }
+    },
+    {
+      "id": 3,
+      "categoryKey": "sistemas",
+      "categoryLabel": "Intelligent Systems",
+      "title": "People Detection Sensor",
+      "summary": "Smart sensor for automatic human presence detection.",
+      "image": "assets/img/sensor.jpg",
+      "modal": {
+        "description": "Intelligent systems project focused on automatic human presence detection using infrared sensors, applicable to security and access control.",
+        "members": ["Andrea Torres", "Juan Castillo", "Diego Herrera"],
+        "gallery": ["assets/img/sensor.jpg"]
+      }
+    },
+    {
+      "id": 4,
+      "categoryKey": "sistemas",
+      "categoryLabel": "Intelligent Systems",
+      "title": "Voice-Controlled Drone",
+      "summary": "Smart drone programmed to obey voice commands.",
+      "image": "assets/img/proy4.png",
+      "modal": {
+        "description": "Smart drone programmed to execute actions through voice commands. The system uses speech recognition and control logic for basic flight maneuvers.",
+        "members": ["Pedro Sánchez", "Lucía Moreno", "Daniel Cruz"],
+        "gallery": ["assets/img/proy4.png"]
+      }
+    }
+  ],
+  "videos": [
+    { "src": "assets/videos/IDDSI.mp4", "caption": "IDSSI program overview." },
+    { "src": "assets/videos/LicInf_Fer.mp4", "caption": "General promotion of the Informatics program." }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "sitioOficial": "https://www.unistmo.edu.mx",
+  "redesOficiales": {
+    "facebook": "Universidad del Istmo (UNISTMO) �?" Universidad del Istmo, SUNEO",
+    "instagram": "@suneo_unistmo"
+  },
+  "contactosCarrera": {
+    "facebook": "https://www.facebook.com/InformaticaUnistmo",
+    "instagram": "https://www.instagram.com/idssi.unistmo/",
+    "youtube": "https://www.youtube.com/@informaticaunistmo7398",
+    "x": "https://x.com/IUnistmo",
+    "whatsappJefatura": "https://wa.me/529721155207"
+  },
+  "campusIxtepec": {
+    "direccion": "Carretera Chihuitan�?"Ixtepec S/N, C.P. 70110, Ciudad Ixtepec, Oaxaca.",
+    "departamento": "Servicios Escolares",
+    "telefono": "(971) 712 70 50 ext. 212 y 213",
+    "correo": "servesc@bianni.unistmo.edu.mx"
+  },
+  "oficinasGenerales": [
+    {
+      "nombre": "Vice-Rectoría de Relaciones y Recursos �?" Ciudad de México",
+      "telefono": "(55) 4623 7562",
+      "correo": "vice-relaciones@mixteco.utm.mx"
+    },
+    {
+      "nombre": "Vice-Rectoría de Relaciones y Recursos �?" Oaxaca de Juárez",
+      "telefono": "(951) 132 53 30",
+      "correo": "vice_relaciones@angel.umar.mx"
+    }
+  ]
+}
