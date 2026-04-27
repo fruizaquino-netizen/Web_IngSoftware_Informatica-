@@ -31,7 +31,7 @@
                 <h3 class="h5 fw-bold text-dark mb-1">{{ docente.nombre }}</h3>
                 <p class="teacher-role small mb-4">{{ docente.cargo }}</p>
                 
-                <button class="btn-ultra-profile">
+                <button class="btn-ultra-profile" (click)="abrirPerfil(docente)">
                   <span>Ver Perfil</span>
                   <div class="btn-icon">
                     <i class="bi bi-chevron-right"></i>
@@ -45,4 +45,84 @@
       </div>
     </div>
   </section>
+
+  @if (docenteSeleccionado()) {
+    <div class="modal-overlay" (click)="cerrarPerfil()">
+      <div class="modal-content-premium" (click)="$event.stopPropagation()">
+        
+        <button class="close-btn" (click)="cerrarPerfil()">&times;</button>
+        
+        <div class="container-fluid p-0">
+          <div class="row g-4">
+            <div class="col-12 col-lg-4 text-center border-end-lg">
+              <div class="profile-detail-header mb-4">
+                <img [src]="docenteSeleccionado()?.imagen" 
+                     [alt]="docenteSeleccionado()?.nombre"
+                     class="rounded-circle mb-3 shadow-sm"
+                     style="width: 150px; height: 150px; object-fit: cover; border: 4px solid var(--unistmo-gold);">
+                <h2 class="h4 fw-bold text-dark">{{ docenteSeleccionado()?.nombre }}</h2>
+                <span class="badge" style="background-color: var(--unistmo-wine); color: white;">
+                  {{ docenteSeleccionado()?.especialidad }}
+                </span>
+              </div>
+
+              <div class="contact-info text-start px-3">
+                <div class="mb-3">
+                  <label class="small text-uppercase text-muted fw-bold d-block">Correo Electrónico</label>
+                  <span class="text-dark"><i class="bi bi-envelope-at me-2"></i>{{ docenteSeleccionado()?.email }}</span>
+                </div>
+                <div class="mb-3">
+                  <label class="small text-uppercase text-muted fw-bold d-block">Teléfono</label>
+                  <span class="text-dark"><i class="bi bi-telephone me-2"></i>{{ docenteSeleccionado()?.telefono }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-8">
+              <div class="mb-4">
+                <h4 class="fw-bold text-dark border-bottom pb-2">Biografía Profesional</h4>
+                <p class="text-muted" style="text-align: justify;">
+                  {{ docenteSeleccionado()?.descripcion }}
+                </p>
+              </div>
+
+              <div class="mb-0">
+                <h4 class="fw-bold text-dark border-bottom pb-2">Publicaciones Científicas</h4>
+                <div class="table-responsive">
+                  <table class="table-premium">
+                    <thead>
+                      <tr>
+                        <th>Título</th>
+                        <th class="text-center">Año</th>
+                        <th class="text-end">Acción</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (pub of docenteSeleccionado()?.publicaciones; track pub.titulo) {
+                        <tr>
+                          <td class="fw-medium" style="max-width: 300px;">{{ pub.titulo }}</td>
+                          <td class="text-center text-muted">{{ pub.anio }}</td>
+                          <td class="text-end">
+                            <a [href]="pub.enlace" target="_blank" class="link-pub">
+                              Ver <i class="bi bi-box-arrow-up-right ms-1"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      } @empty {
+                        <tr>
+                          <td colspan="3" class="text-center py-4 text-muted italic">
+                            No hay publicaciones registradas actualmente.
+                          </td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
 </div>

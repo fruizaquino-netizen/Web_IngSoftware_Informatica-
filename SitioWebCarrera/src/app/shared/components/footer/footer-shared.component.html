@@ -3,43 +3,43 @@
 
         <!-- ===== COLUMNA 1 ===== -->
     <div class="footer-column">
-      <h3>Footer / Soporte</h3>
+      <h3>{{ content().FOOTER.TITLE }}</h3>
       <ul class="footer-list">
         <li>
           <a href="/descargas/manuales" target="_blank" rel="noopener noreferrer">
-            Zona de Descargas
+            {{ content().FOOTER.DOWNLOADS }}
           </a>
         </li>
         <li>
           <a href="/formularios/solicitud-inscripcion.pdf" download>
-            Formularios
+            {{ content().FOOTER.FORMS }}
           </a>
         </li>
         <li>
           <a href="/documentos/reglamento-estudiantil.pdf" target="_blank">
-            Reglamentos
+            {{ content().FOOTER.RULES }}
           </a>
         </li>
         <li>
           <a href="/pdf/guia-academica.pdf" download>
-            Documentos
+            {{ content().FOOTER.DOCUMENTS }}
           </a>
         </li>
       </ul>
     </div>
     <!-- ===== COLUMNA 2 ===== -->
     <div class="footer-column">
-      <h3>Recursos</h3>
+      <h3>{{ content().FOOTER.RESOURCES_TITLE }}</h3>
       <ul class="footer-list">
-        <li>Formularios en línea</li>
-        <li>Reglamento estudiantil</li>
-        <li>Documentos académicos</li>
+        <li>{{ content().FOOTER.ONLINE_FORMS }}</li>
+        <li>{{ content().FOOTER.STUDENT_RULES }}</li>
+        <li>{{ content().FOOTER.ACADEMIC_DOCS }}</li>
       </ul>
     </div>
 
     <!-- ===== COLUMNA 3 ===== -->
     <div class="footer-column">
-      <h3>Síguenos</h3>
+      <h3>{{ content().FOOTER.FOLLOW }}</h3>
 
       <div class="social-group">
 
@@ -97,5 +97,5 @@
       </div>
     </div>
   </div>
-  <h5>© 2026 UNISTMO. Todos los derechos reservados.</h5>
+  <h5>{{ content().FOOTER.COPYRIGHT }}</h5>
 </footer>

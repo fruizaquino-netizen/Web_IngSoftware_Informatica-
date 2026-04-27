@@ -1,8 +1,7 @@
-
-<!-- ================= TESTIMONIOS TICKER ================= -->
+﻿<!-- ================= TESTIMONIOS TICKER ================= -->
 <div class="news-ticker-container testimonios-ticker">
   <div class="ticker-label">
-    TESTIMONIOS
+    {{ content().ASPIRANTES.TICKER_LABEL }}
   </div>
   <div class="ticker-wrap">
     <div class="ticker-move">
@@ -30,97 +29,66 @@
 <section class="aspirantes">
   <!-- HEADER -->
   <header class="header">
-    <h1>Aspirantes</h1>
+    <h1>{{ content().ASPIRANTES.TITLE }}</h1>
     <p>
-      Inicia tu camino hacia la excelencia profesional. Conoce el proceso de
-      admisión y los requisitos para formar parte de nuestra comunidad universitaria.
+      {{ content().ASPIRANTES.INTRO }}
     </p>
   </header>
- <!-- PROCESO -->
-<section class="proceso-box">
-  <h2>Proceso de Admisión</h2>
-  <div class="pasos">
-    <div class="paso-card">
-      <div class="icono-circulo">📝</div>
-      <span class="paso-num">Paso 1</span>
-      <h3>Solicita tu Ficha</h3>
-      <p>Completa el formulario de registro en línea y obtén tu ficha de admisión.</p>
+  <!-- PROCESO -->
+  <section class="proceso-box">
+    <h2>{{ content().ASPIRANTES.PROCESS_TITLE }}</h2>
+    <div class="pasos">
+      <ng-container *ngFor="let step of content().ASPIRANTES.STEPS; let i = index; let last = last">
+        <div class="paso-card">
+          <div class="icono-circulo">{{ i === 0 ? '📝' : i === 1 ? '✍️' : '🎓' }}</div>
+          <span class="paso-num">{{ step.NUMBER }}</span>
+          <h3>{{ step.TITLE }}</h3>
+          <p>{{ step.TEXT }}</p>
+        </div>
+        <div class="linea" *ngIf="!last"></div>
+      </ng-container>
     </div>
-    <div class="linea"></div>
-    <div class="paso-card">
-      <div class="icono-circulo">✍️</div>
-      <span class="paso-num">Paso 2</span>
-      <h3>Presenta tu Examen</h3>
-      <p>Realiza el examen de admisión en la fecha y hora asignadas.</p>
-    </div>
-    <div class="linea"></div>
-    <div class="paso-card">
-      <div class="icono-circulo">🎓</div>
-      <span class="paso-num">Paso 3</span>
-      <h3>Inscríbete</h3>
-      <p>Si apruebas, completa tu inscripción y comienza tu carrera universitaria.</p>
-    </div>
-  </div>
-<a
-  class="btn-principal"
-  href="https://www.unistmo.edu.mx/web/p_ensenanza/escolares.html"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  Iniciar registro
-</a>
-</section>
+    <a
+      class="btn-principal"
+      href="https://www.unistmo.edu.mx/web/p_ensenanza/escolares.html"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {{ content().ASPIRANTES.REGISTER_BUTTON }}
+    </a>
+  </section>
   <!-- INFO -->
   <section class="info">
     <div class="info-card">
-      <h3>Requisitos de Admisión</h3>
+      <h3>{{ content().ASPIRANTES.REQUIREMENTS_TITLE }}</h3>
       <ul>
-        <li>Certificado de bachillerato o constancia de estudios</li>
-        <li>Acta de nacimiento (original y copia)</li>
-        <li>CURP (original y copia)</li>
-        <li>6 fotografías tamaño infantil</li>
-        <li>Comprobante de domicilio</li>
+        <li *ngFor="let req of content().ASPIRANTES.REQUIREMENTS">{{ req }}</li>
       </ul>
     </div>
     <div class="info-card">
-      <h3>Fechas Importantes</h3>
-      <div class="fecha">
-        <strong>Registro en Línea</strong>
-        <span>Enero - Junio 2026</span>
-      </div>
-      <div class="fecha">
-        <strong>Examen de Admisión</strong>
-        <span>15 de Julio 2026</span>
-      </div>
-      <div class="fecha">
-        <strong>Publicación de Resultados</strong>
-        <span>25 de Julio 2026</span>
-      </div>
-      <div class="fecha">
-        <strong>Inscripciones</strong>
-        <span>1 - 15 de Agosto 2026</span>
+      <h3>{{ content().ASPIRANTES.DATES_TITLE }}</h3>
+      <div class="fecha" *ngFor="let fecha of content().ASPIRANTES.DATES">
+        <strong>{{ fecha.LABEL }}</strong>
+        <span>{{ fecha.VALUE }}</span>
       </div>
     </div>
   </section>
   <!-- CTA -->
   <section class="cta">
-    <h2>¿Necesitas más información?</h2>
+    <h2>{{ content().ASPIRANTES.CTA_TITLE }}</h2>
     <p>
-      Nuestro equipo de atención a aspirantes está listo para resolver todas tus
-      dudas sobre el proceso de admisión.
+      {{ content().ASPIRANTES.CTA_TEXT }}
     </p>
-<div class="cta-botones">
-  <a href="https://www.unistmo.edu.mx/web/p_ensenanza/ingreso/FORMATO_SOLICITUD_FICHA_LICENCIATURA.pdf" class="btn-cta">
-    Contactar Admisiones
-  </a>
-  <a href="https://www.unistmo.edu.mx/web/p_ensenanza/ingreso/FORMATO_SOLICITUD_FICHA_LICENCIATURA.pdf" class="btn-cta" target="_blank">
-    Descargar Guía
-  </a>
-</div>
+    <div class="cta-botones">
+      <a href="https://www.unistmo.edu.mx/web/p_ensenanza/ingreso/FORMATO_SOLICITUD_FICHA_LICENCIATURA.pdf" class="btn-cta">
+        {{ content().ASPIRANTES.CTA_CONTACT }}
+      </a>
+      <a href="https://www.unistmo.edu.mx/web/p_ensenanza/ingreso/FORMATO_SOLICITUD_FICHA_LICENCIATURA.pdf" class="btn-cta" target="_blank">
+        {{ content().ASPIRANTES.CTA_GUIDE }}
+      </a>
+    </div>
   </section>
 </section>
-
-
 
 <!-- ================= MODAL TESTIMONIO ================= -->
 <div
@@ -135,7 +103,7 @@
   >
     <div class="modal-content rounded-4 p-4">
       <div class="modal-header border-0">
-        <h5 class="modal-title">Testimonio de Egresado</h5>
+        <h5 class="modal-title">{{ content().ASPIRANTES.MODAL_TITLE }}</h5>
         <button class="btn-close" (click)="closeTestimonio()"></button>
       </div>
       <div class="modal-body">

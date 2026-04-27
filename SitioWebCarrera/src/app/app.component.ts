@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslationService } from './services/translation.service';
 import { ChatbotComponent } from './shared/components/chatbot/chatbot.component';
@@ -14,6 +14,6 @@ import { ChatbotComponent } from './shared/components/chatbot/chatbot.component'
 })
 export class AppComponent {
    constructor(public TranslationService: TranslationService) {
-  this.TranslationService.changeLanguage('español');
+  this.TranslationService.changeLanguage('es');
 }
 }

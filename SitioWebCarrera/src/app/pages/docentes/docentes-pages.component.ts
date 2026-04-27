@@ -1,3 +1,4 @@
+
 import { Component, signal } from '@angular/core';
 
 // Interfaz para las publicaciones científicas
@@ -23,11 +24,10 @@ interface Docente {
   templateUrl: './docentes-pages.component.html',
   styleUrls: ['./docentes-pages.component.css']
 })
+
 export class DocentesPageComponent {
 
-  // Signal para controlar qué docente se muestra en el detalle (modal)
   public docenteSeleccionado = signal<Docente | null>(null);
-
   // Signal con la lista completa de docentes y sus trayectorias
   public docentes = signal<Docente[]>([
     {
@@ -71,7 +71,7 @@ export class DocentesPageComponent {
       nombre: 'Dr. Luis David Huerta Hernández',
       especialidad: 'Dr. En Sistemas Computacionales',
       cargo: 'Profesor Investigador Asociado C, Jefe de carrera de la Licenciatura en Informática, Comité del servicio de la cafetería UNISTMO y Vocal en el comité de adquisiciones de la UNISTMO',
-      imagen: 'assets/docente3.png',
+      imagen: 'assets/img/Luis.png',
       descripcion: 'Reconocimiento de Patrones.',
       email: 'ldhuerth@gmail.com, luisdh2@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -85,8 +85,8 @@ export class DocentesPageComponent {
       nombre: 'M. en I. Carlos Edgardo Cruz Pérez',
       especialidad: 'Maestría en Ingeniería en Tecnología de la Información',
       cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática y de la Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
-      imagen: 'assets/docente4.png',
-      descripcion: 'Ciberseguridad.',
+      imagen: 'assets/img/Carlos.png',
+      descripcion: 'Ciberseguridad Avanzada.',
       email: 'carloscruz@bianni.unistmo.edu.mx',
       publicaciones: [
         { titulo: 'Hernández Montiel, L. Velázquez Vázquez, J. & Cruz Pérez, C. (2021). Reducción y clasificación de una base de datos de audio mediante redes neuronales artificiales y minería de datos para el diagnóstico de pacientes con enfermedad De Parkinson . Research in Computing Science Vol 150 No 5, pp. 141–154. ', anio: 2021, enlace: '#' },
@@ -98,7 +98,7 @@ export class DocentesPageComponent {
       nombre: 'M. en I.A. Nayeli Joaquinita Meléndez Acosta',
       especialidad: 'Maestría en Inteligencia Artificial. Facultad de Física e Inteligencia Artificial, Universidad Veracruzana, México.',
       cargo: 'Profesor-Investigador de tiempo completo en la Universidad de Istmo, campus Ixtepec, adscrito a la Licenciatura en Informática',
-      imagen: 'assets/docente5.png',
+      imagen: 'assets/img/Nayeli.jpg',
       descripcion: 'Inteligencia Artificial: Aprendizaje Automático, ciencia de datos, reconocimiento de patrones, algoritmos bio-inspirados, visión por computadora, procesamiento de imágenes y redes neuronales.',
       email: 'nayelim@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -140,7 +140,7 @@ export class DocentesPageComponent {
       nombre: 'M. en C. Cosijopii García García',
       especialidad: 'Maestría en ciencias en el área de ciencias computacionales',
       cargo: 'Profesor Asociado B asignado a la licenciatura en Informática Universidad del Istmo Campus Ixtepec. [Oct 2024 - Presente]',
-      imagen: 'assets/docente6.png',
+      imagen: 'assets/img/Cosijopi.jpg',
       descripcion: 'Optimización Multiobjetivo.',
       email: 'cosijopii@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -159,7 +159,7 @@ export class DocentesPageComponent {
       nombre: 'M. en C. Oscar Alonso de la Rosa Aguilar',
       especialidad: 'Maestría en Ciencias de la Computación',
       cargo: 'Profesor-Investigador de tiempo completo.',
-      imagen: 'assets/docente6.png',
+      imagen: 'assets/img/Oscar.jpg',
       descripcion: 'Análisis de datos.',
       email: 'odelarosa@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -170,7 +170,7 @@ export class DocentesPageComponent {
       nombre: 'M. en E. y C. Edgar Manuel Cano Cruz',
       especialidad: 'Maestría en Electrónica y Computación con especialidad en Sistemas Inteligentes Aplicados',
       cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática e Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
-      imagen: 'assets/docente6.png',
+      imagen: 'assets/img/Cano.png',
       descripcion: 'Sistemas empotrados.',
       email: 'ie.edgarcano@gmail.com',
       publicaciones: [
@@ -185,9 +185,18 @@ export class DocentesPageComponent {
         { titulo: 'Cano, E., Ruiz, J., & Huerta, L. (2013). Gateway for Bluetooth and CAN Communications Protocols. Journal of Theoretical and Applied Information Technology, 55(3). ISSN: 1992-8645. ', anio: 2013, enlace: '#' },
         { titulo: 'E. Cano and I. Garcia. (2011). "Design and Development of a BlueBee Gateway for Bluetooth and ZigBee Wireless Protocols," 2011 IEEE Electronics, Robotics and Automotive Mechanics Conference, Cuernavaca, Mexico, 2011, pp. 366-370, doi: 10.1109/CERMA.2011.67.', anio: 2011, enlace: '#' }
       ]
+    },
+    {
+      nombre: 'Lic. Florentino Ruiz Aquino',
+      especialidad: 'Licenciado en Informática',
+      cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática e Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
+      imagen: 'assets/img/Tino.jpeg',
+      descripcion: 'Sistemas Inteligentes.',
+      email: 'FRuizAquino@gmail.com',
+      publicaciones: [
+      ]
     }
   ]);
-
   /**
    * Abre el modal asignando el docente seleccionado
    */

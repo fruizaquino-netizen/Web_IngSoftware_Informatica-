@@ -1,20 +1,21 @@
-﻿import { Component, computed, effect, signal } from '@angular/core';
+import { Component, computed, effect, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslationService } from '../../services/translation.service';
 
 const defaultContent = {
   text: {
     projectsTitle: 'Proyectos',
     projectsDescription:
-      'Conoce los proyectos de investigación y desarrollo tecnológico realizados por nuestros estudiantes y docentes.',
-    galleryTitle: 'Galería',
+      'Conoce los proyectos de investigaciï¿½f�,³n y desarrollo tecnolï¿½f�,³gico realizados por nuestros estudiantes y docentes.',
+    galleryTitle: 'Galerï¿½f�,­a',
     videosTitle: 'Videos',
-    imagesTitle: 'Imágenes',
-    watchMore: 'Ver Más',
+    imagesTitle: 'Imï¿½f�,¡genes',
+    watchMore: 'Ver Mï¿½f�,¡s',
     close: 'Cerrar',
     members: 'Integrantes',
-    gallery: 'Galería',
+    gallery: 'Galerï¿½f�,­a',
     video: 'Video',
     videoFallback: 'Tu navegador no soporta videos HTML5.'
   },
@@ -28,13 +29,13 @@ const defaultContent = {
       id: 1,
       categoryKey: 'software',
       categoryLabel: 'Desarrollo de Software',
-      title: 'Carrito Autónomo con Arduino',
+      title: 'Carrito Autï¿½f�,³nomo con Arduino',
       summary:
-        'Vehículo autónomo a escala controlado por Arduino con sensores inteligentes.',
+        'Vehï¿½f�,­culo autï¿½f�,³nomo a escala controlado por Arduino con sensores inteligentes.',
       image: 'assets/img/proy1.jpg',
       modal: {
         description:
-          'Proyecto enfocado en el desarrollo de un carrito autónomo a escala utilizando Arduino y sensores ultrasónicos para la detección de obstáculos y toma de decisiones en tiempo real.',
+          'Proyecto enfocado en el desarrollo de un carrito autï¿½f�,³nomo a escala utilizando Arduino y sensores ultrasï¿½f�,³nicos para la detecciï¿½f�,³n de obstï¿½f�,¡culos y toma de decisiones en tiempo real.',
         members: ['Ulises Diaz', 'Yahir Antonio', 'Fernando Gawalek'],
         gallery: [
           'assets/img/proy1.jpg',
@@ -48,14 +49,14 @@ const defaultContent = {
       id: 2,
       categoryKey: 'software',
       categoryLabel: 'Desarrollo de Software',
-      title: 'Medidor de Presión con Gráficas',
+      title: 'Medidor de Presiï¿½f�,³n con Grï¿½f�,¡ficas',
       summary:
-        'Sistema de medición con visualización gráfica en tiempo real.',
+        'Sistema de mediciï¿½f�,³n con visualizaciï¿½f�,³n grï¿½f�,¡fica en tiempo real.',
       image: 'assets/img/proy2.jpeg',
       modal: {
         description:
-          'Sistema de medición de presión que permite visualizar datos en tiempo real mediante gráficas dinámicas. El proyecto integra sensores electrónicos y software para el análisis de información.',
-        members: ['Carlos Méndez', 'María López', 'Fernando Ruiz'],
+          'Sistema de mediciï¿½f�,³n de presiï¿½f�,³n que permite visualizar datos en tiempo real mediante grï¿½f�,¡ficas dinï¿½f�,¡micas. El proyecto integra sensores electrï¿½f�,³nicos y software para el anï¿½f�,¡lisis de informaciï¿½f�,³n.',
+        members: ['Carlos Mï¿½f�,©ndez', 'Marï¿½f�,­a Lï¿½f�,³pez', 'Fernando Ruiz'],
         gallery: ['assets/img/proy2.jpeg']
       }
     },
@@ -63,13 +64,13 @@ const defaultContent = {
       id: 3,
       categoryKey: 'sistemas',
       categoryLabel: 'Sistemas Inteligentes',
-      title: 'Sensor de Detección de Personas',
+      title: 'Sensor de Detecciï¿½f�,³n de Personas',
       summary:
-        'Sensor inteligente para detección automática de presencia humana.',
+        'Sensor inteligente para detecciï¿½f�,³n automï¿½f�,¡tica de presencia humana.',
       image: 'assets/img/sensor.jpg',
       modal: {
         description:
-          'Proyecto de sistemas inteligentes enfocado en la detección automática de presencia humana mediante sensores infrarrojos, aplicable a seguridad y control de accesos.',
+          'Proyecto de sistemas inteligentes enfocado en la detecciï¿½f�,³n automï¿½f�,¡tica de presencia humana mediante sensores infrarrojos, aplicable a seguridad y control de accesos.',
         members: ['Andrea Torres', 'Juan Castillo', 'Diego Herrera'],
         gallery: ['assets/img/sensor.jpg']
       }
@@ -84,8 +85,8 @@ const defaultContent = {
       image: 'assets/img/proy4.png',
       modal: {
         description:
-          'Dron inteligente programado para ejecutar acciones mediante comandos de voz. El sistema utiliza reconocimiento de voz y lógica de control para maniobras básicas de vuelo.',
-        members: ['Pedro Sánchez', 'Lucía Moreno', 'Daniel Cruz'],
+          'Dron inteligente programado para ejecutar acciones mediante comandos de voz. El sistema utiliza reconocimiento de voz y lï¿½f�,³gica de control para maniobras bï¿½f�,¡sicas de vuelo.',
+        members: ['Pedro Sï¿½f�,¡nchez', 'Lucï¿½f�,­a Moreno', 'Daniel Cruz'],
         gallery: ['assets/img/proy4.png']
       }
     }
@@ -93,11 +94,11 @@ const defaultContent = {
   videos: [
     {
       src: 'assets/videos/IDDSI.mp4',
-      caption: 'Presentación de la carrera IDSSI.'
+      caption: 'Presentaciï¿½f�,³n de la carrera IDSSI.'
     },
     {
       src: 'assets/videos/LicInf_Fer.mp4',
-      caption: 'Promocion general de la carrera de Informática.'
+      caption: 'Promocion general de la carrera de Informï¿½f�,¡tica.'
     }
   ]
 };
@@ -111,14 +112,16 @@ const defaultContent = {
 })
 
 export class ProyectoPageComponent {
+  public translation = inject(TranslationService);
   constructor(
     private sanitizer: DomSanitizer,
     private http: HttpClient
   ) {
     effect(() => {
-      const lang = this.locale();
+      const lang = this.translation.currentLang();
+      const fileLang = lang === 'en' ? 'en' : lang === 'zapoteco' ? 'zapoteco' : 'es';
       this.http
-        .get(`assets/i18n/proyectos.${lang}.json`)
+        .get(`assets/i18n/proyectos.${fileLang}.json`)
         .subscribe((data) => {
           this.content.set(data as typeof defaultContent);
           const keys = new Set(this.content().filters.map((f) => f.key));
@@ -128,8 +131,6 @@ export class ProyectoPageComponent {
         });
     });
   }
-
-  locale = signal<'es' | 'en'>('es');
   content = signal(defaultContent);
 
   activeFilter = signal<'all' | 'software' | 'sistemas'>('all');
@@ -144,7 +145,7 @@ export class ProyectoPageComponent {
   });
 
   galleryImages = signal([
-    // Áreas físicas
+    // ï¿½f�,reas fï¿½f�,­sicas
     'assets/img/Electronica1.jpg',
     'assets/img/Elect.jpg',
     'assets/img/SalaRedes.jpg',
@@ -170,10 +171,6 @@ export class ProyectoPageComponent {
 
   activeImage = signal(0);
   galleryOpen = signal(false);
-
-  setLocale(lang: 'es' | 'en') {
-    this.locale.set(lang);
-  }
 
   openGallery(index: number) {
     this.activeImage.set(index);
@@ -208,3 +205,8 @@ export class ProyectoPageComponent {
     this.activeFilter.set(key);
   }
 }
+
+
+
+
+

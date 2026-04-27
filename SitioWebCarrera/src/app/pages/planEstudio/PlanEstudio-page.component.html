@@ -1,5 +1,5 @@
-
-<!-- ================= PLAN DE ESTUDIOS (SECCIÓN AISLADA) ================= -->
+﻿
+<!-- ================= PLAN DE ESTUDIOS (SECCIï¿½fï¿½"N AISLADA) ================= -->
 <section class="plan-wrapper">
     <!-- ================= ENCABEZADO ================= -->
     <header class="header">
@@ -25,7 +25,7 @@
             <input type="radio" name="tabs" id="tabop">
 
 
-            <!-- ================= PESTAÑAS ================= -->
+            <!-- ================= PESTAï¿½fï¿½'AS ================= -->
             <div class="tabs">
                 <!-- Cada label activa un radio y muestra su contenido -->
                 <label
@@ -33,9 +33,9 @@
                     [for]="'tab' + (i + 1)"
                     class="tab"
                 >
-                    Semestre {{ i + 1 }}
+                    {{ content().text.semesterLabel }} {{ i + 1 }}
                 </label>
-                <label for="tabop" class="tab">Optativas</label>
+                <label for="tabop" class="tab">{{ content().text.optativasTab }}</label>
 
             </div>
 
@@ -43,9 +43,9 @@
             <ng-container *ngFor="let sem of semesters(); let i = index">
                 <div class="tab-content" [ngClass]="'content-' + (i + 1)">
                     <div class="card-header">
-                        <h2>Materias del Semestre {{ i + 1 }}</h2>
+                        <h2>Materias del {{ content().text.semesterLabel }} {{ i + 1 }}</h2>
                         <a [href]="pdfUrl()" download class="btn-pdf">
-                            Descargar Plan en PDF
+                            {{ pdfLabel() }}
                         </a>
                     </div>
 
@@ -53,7 +53,7 @@
                         <div class="subject" *ngFor="let subj of sem.subjects">
                             <div>
                                 <h3>{{ subj.name }}</h3>
-                                <span>{{ subj.credits }} créditos</span>
+                                <span>{{ subj.credits }} {{ content().text.creditsLabel }}</span>
                             </div>
                             <span class="badge">{{ subj.level }}</span>
                         </div>
@@ -64,14 +64,14 @@
             <!-- ================= CONTENIDO OPTATIVAS ================= -->
 <div class="tab-content content-optativas">
   <div class="card-header">
-    <h2>Materias Optativas</h2>
+    <h2>{{ optativasTitle() }}</h2>
   </div>
 
   <div class="subjects">
     <div class="subject" *ngFor="let subj of optativas()">
       <div>
         <h3>{{ subj.name }}</h3>
-        <span>{{ subj.credits }} créditos</span>
+        <span>{{ subj.credits }} {{ content().text.creditsLabel }}</span>
       </div>
       <span class="badge">{{ subj.level }}</span>
     </div>
@@ -80,9 +80,9 @@
 
 
 </div>
-        <!-- ================= NIVELES DE FORMACIÓN ================= -->
+        <!-- ================= NIVELES DE FORMACIï¿½fï¿½"N ================= -->
         <section class="card">
-            <h2>Niveles de Formación</h2>
+            <h2>{{ levelsTitle() }}</h2>
 
             <!-- Contenedor de niveles -->
             <div class="levels">
@@ -99,7 +99,7 @@
             </div>
         </section>
 <br>
-        <!-- ================= DURACIÓN Y MODALIDAD ================= -->
+        <!-- ================= DURACIï¿½fï¿½"N Y MODALIDAD ================= -->
         <section class="double-card">
 
             <!-- Duración del programa -->
@@ -114,3 +114,5 @@
                 <p>{{ programInfo().modalityText }}</p>
         </div>
 </section>
+
+

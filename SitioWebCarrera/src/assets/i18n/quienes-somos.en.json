@@ -1,0 +1,50 @@
+{
+  "QUIENES_SOMOS": {
+    "HERO": {
+      "TITLE": "About Us",
+      "SUBTITLE": "We train leaders in software and hardware",
+      "DESCRIPTION": "Professionals capable of designing, developing, and implementing innovative technological solutions, managing information systems projects and participating in multidisciplinary teams. They have skills in programming, databases, networks, software development, and the application of emerging technologies to solve real problems in organizations and society."
+    },
+    "MISSION_TITLE": "Our Mission and Vision",
+    "MISSION_TEXTS": [
+      "To train leading professionals in the design, development, and application of intelligent systems and software, meeting needs in the public and private sectors at national and international levels, driving social development through comprehensive and multidisciplinary education.",
+      "To consolidate as a leading program in the training of analytical professionals with solid computing knowledge for the development of intelligent systems and software, providing innovative technological solutions with national and international recognition, contributing to the global environment and positively impacting society."
+    ],
+    "VALUES_TITLE": "Institutional Values",
+    "VALUES": [
+      "Discipline and Respect",
+      "Responsibility and Tolerance",
+      "Loyalty and Honesty",
+      "Integrity and Social Solidarity",
+      "Academic excellence",
+      "Social commitment",
+      "Innovation and technology",
+      "Sustainable development"
+    ],
+    "STATS": [
+      { "NUMBER": "23+", "TEXT": "Years of experience" },
+      { "NUMBER": "863+", "TEXT": "Active students" },
+      { "NUMBER": "228+", "TEXT": "Qualified faculty" },
+      { "NUMBER": "90%", "TEXT": "Employability rate" }
+    ],
+    "CTA": {
+      "TITLE": "Learn about our program's study plan",
+      "DESCRIPTION": "Discover our educational offering in information technologies, where you can train as a computing professional or as a Software Development and Intelligent Systems Engineer. Both programs are designed to provide solid skills in programming, systems administration, databases, web and mobile development, as well as the design and implementation of innovative technological solutions that respond to current industry and society needs.",
+      "BUTTON": "View Study Plan"
+    },
+    "TOUR": {
+      "TITLE": "Virtual Tour",
+      "ALT": "Virtual tour",
+      "CONTROLS": {
+        "START": "â�-¶ Start tour",
+        "LEFT_ELECTRONICS": "â¬�. Electronics",
+        "RIGHT_BUILDING": "â�z¡ Building",
+        "DOWN_BACK": "â¬�? Back",
+        "UP_FORWARD": "â¬�? Forward",
+        "LEFT_ENTER": "â¬�. Enter",
+        "DOWN_RETURN": "â¬�? Return",
+        "LEFT_BACK": "â¬�. Back"
+      }
+    }
+  }
+}

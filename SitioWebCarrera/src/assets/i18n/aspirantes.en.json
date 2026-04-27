@@ -1,0 +1,46 @@
+{
+  "ASPIRANTES": {
+    "TICKER_LABEL": "TESTIMONIALS",
+    "TITLE": "Applicants",
+    "INTRO": "Start your path to professional excellence. Learn about the admission process and the requirements to join our university community.",
+    "PROCESS_TITLE": "Admission Process",
+    "STEPS": [
+      {
+        "NUMBER": "Step 1",
+        "TITLE": "Request Your Form",
+        "TEXT": "Complete the online registration form and obtain your admission form."
+      },
+      {
+        "NUMBER": "Step 2",
+        "TITLE": "Take the Exam",
+        "TEXT": "Take the admission exam on the assigned date and time."
+      },
+      {
+        "NUMBER": "Step 3",
+        "TITLE": "Enroll",
+        "TEXT": "If you pass, complete your enrollment and start your university career."
+      }
+    ],
+    "REGISTER_BUTTON": "Start registration",
+    "REQUIREMENTS_TITLE": "Admission Requirements",
+    "REQUIREMENTS": [
+      "High school certificate or proof of studies",
+      "Birth certificate (original and copy)",
+      "CURP (original and copy)",
+      "6 child-size photos",
+      "Proof of address"
+    ],
+    "DATES_TITLE": "Important Dates",
+    "DATES": [
+      { "LABEL": "Online Registration", "VALUE": "January - June 2026" },
+      { "LABEL": "Admission Exam", "VALUE": "July 15, 2026" },
+      { "LABEL": "Results Publication", "VALUE": "July 25, 2026" },
+      { "LABEL": "Enrollments", "VALUE": "August 1 - 15, 2026" }
+    ],
+    "CTA_TITLE": "Need more information?",
+    "CTA_TEXT": "Our admissions team is ready to answer all your questions about the admission process.",
+    "CTA_CONTACT": "Contact Admissions",
+    "CTA_GUIDE": "Download Guide",
+    "MODAL_TITLE": "Graduate Testimonial"
+  }
+}

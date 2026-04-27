@@ -1,5 +1,7 @@
-import { Component, signal, computed } from '@angular/core';
+﻿import { Component, signal, computed, effect, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslationService } from '../../services/translation.service';
 
 interface Egresado {
   nombre: string;
@@ -7,14 +9,43 @@ interface Egresado {
   modalidad: 'tesis' | 'ceneval' | 'experiencia';
 }
 
+const defaultContent = {
+  EGRESADOS: {
+    TITLE: 'Registro de los Egresados',
+    SUBTITLE: 'Información estadística y académica de los egresados de la carrera.',
+    BY_YEAR: 'Egresados por Año',
+    BY_MODALITY: 'Titulados por Modalidad',
+    FILTER_ALL: 'Todos',
+    FILTER_TESIS: 'Tesis',
+    FILTER_CENEVAL: 'CENEVAL',
+    FILTER_EXPERIENCE: 'Experiencia',
+    SINGULAR: 'egresado',
+    PLURAL: 'egresados',
+    TOTAL_PREFIX: 'Total de Titulados',
+    TOTAL_REGISTERED: 'registrados',
+    TOTAL_IN_MODALITY: 'en modalidad',
+    LIST_TITLE: 'Listado de Titulados',
+    TABLE_NAME: 'Nombre',
+    TABLE_YEAR: 'Año',
+    TABLE_MODALITY: 'Modalidad',
+    NO_RESULTS: 'No hay egresados para la modalidad seleccionada.',
+    MODAL_TITLE: 'Generación',
+    MODAL_CLOSE: 'Cerrar'
+  }
+};
+
 @Component({
   selector: 'app-egresados-pages',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './egresados-pages.component.html',
   styleUrl: './egresados-pages.component.css'
 })
 export class EgresadosPagesComponent {
+  private http = inject(HttpClient);
+  private translation = inject(TranslationService);
+
+  content = signal(defaultContent);
 
   //  Datos base
   egresados = signal<Egresado[]>([
@@ -36,6 +67,18 @@ export class EgresadosPagesComponent {
 
   //  Filtro activo
   filtroActivo = signal<'todos' | 'tesis' | 'ceneval' | 'experiencia'>('todos');
+
+  constructor() {
+    effect(() => {
+      const lang = this.translation.currentLang();
+      const fileLang = lang === 'en' ? 'en' : lang === 'zapoteco' ? 'zapoteco' : 'es';
+      this.http
+        .get(`assets/i18n/egresados.${fileLang}.json`)
+        .subscribe((data) => {
+          this.content.set(data as typeof defaultContent);
+        });
+    });
+  }
 
   //  Lista filtrada (reemplaza al pipe)
   egresadosFiltrados = computed(() => {
@@ -64,36 +107,44 @@ export class EgresadosPagesComponent {
       .map(anio => Number(anio))
       .sort()
   );
-// Año seleccionado para el modal
-anioSeleccionado = signal<number | null>(null);
+  // Año seleccionado para el modal
+  anioSeleccionado = signal<number | null>(null);
 
-// Egresados del año seleccionado
-egresadosPorAnioSeleccionado = computed(() => {
-  if (this.anioSeleccionado() === null) {
-    return [];
+  // Egresados del año seleccionado
+  egresadosPorAnioSeleccionado = computed(() => {
+    if (this.anioSeleccionado() === null) {
+      return [];
+    }
+
+    return this.egresados().filter(
+      e => e.anio === this.anioSeleccionado()
+    );
+  });
+
+  // Abrir modal
+  abrirModalPorAnio(anio: number) {
+    this.anioSeleccionado.set(anio);
   }
 
-  return this.egresados().filter(
-    e => e.anio === this.anioSeleccionado()
-  );
-});
+  // Cerrar modal
+  cerrarModal() {
+    this.anioSeleccionado.set(null);
+  }
 
-// Abrir modal
-abrirModalPorAnio(anio: number) {
-  this.anioSeleccionado.set(anio);
-}
-
-// Cerrar modal
-cerrarModal() {
-  this.anioSeleccionado.set(null);
-}
-
-// Total dinámico según el filtro activo
-totalSegunFiltro = computed(() => {
-  return this.egresadosFiltrados().length;
-});
+  // Total dinámico según el filtro activo
+  totalSegunFiltro = computed(() => {
+    return this.egresadosFiltrados().length;
+  });
   //  Acción de botones
   cambiarFiltro(filtro: 'todos' | 'tesis' | 'ceneval' | 'experiencia') {
     this.filtroActivo.set(filtro);
+  }
+
+  getFiltroLabel(filtro: 'todos' | 'tesis' | 'ceneval' | 'experiencia'): string {
+    const labels = this.content().EGRESADOS;
+    if (filtro === 'todos') return labels.FILTER_ALL;
+    if (filtro === 'tesis') return labels.FILTER_TESIS;
+    if (filtro === 'ceneval') return labels.FILTER_CENEVAL;
+    return labels.FILTER_EXPERIENCE;
   }
 }

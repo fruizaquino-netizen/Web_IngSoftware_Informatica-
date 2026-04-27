@@ -1,0 +1,46 @@
+﻿{
+  "ASPIRANTES": {
+    "TICKER_LABEL": "TESTIMONIOS",
+    "TITLE": "Aspirantes",
+    "INTRO": "Inicia tu camino hacia la excelencia profesional. Conoce el proceso de admisión y los requisitos para formar parte de nuestra comunidad universitaria.",
+    "PROCESS_TITLE": "Proceso de Admisión",
+    "STEPS": [
+      {
+        "NUMBER": "Paso 1",
+        "TITLE": "Solicita tu Ficha",
+        "TEXT": "Completa el formulario de registro en línea y obtén tu ficha de admisión."
+      },
+      {
+        "NUMBER": "Paso 2",
+        "TITLE": "Presenta tu Examen",
+        "TEXT": "Realiza el examen de admisión en la fecha y hora asignadas."
+      },
+      {
+        "NUMBER": "Paso 3",
+        "TITLE": "Inscríbete",
+        "TEXT": "Si apruebas, completa tu inscripción y comienza tu carrera universitaria."
+      }
+    ],
+    "REGISTER_BUTTON": "Iniciar registro",
+    "REQUIREMENTS_TITLE": "Requisitos de Admisión",
+    "REQUIREMENTS": [
+      "Certificado de bachillerato o constancia de estudios",
+      "Acta de nacimiento (original y copia)",
+      "CURP (original y copia)",
+      "6 fotografías tamaño infantil",
+      "Comprobante de domicilio"
+    ],
+    "DATES_TITLE": "Fechas Importantes",
+    "DATES": [
+      { "LABEL": "Registro en Línea", "VALUE": "Enero - Junio 2026" },
+      { "LABEL": "Examen de Admisión", "VALUE": "15 de Julio 2026" },
+      { "LABEL": "Publicación de Resultados", "VALUE": "25 de Julio 2026" },
+      { "LABEL": "Inscripciones", "VALUE": "1 - 15 de Agosto 2026" }
+    ],
+    "CTA_TITLE": "¿Necesitas más información?",
+    "CTA_TEXT": "Nuestro equipo de atención a aspirantes está listo para resolver todas tus dudas sobre el proceso de admisión.",
+    "CTA_CONTACT": "Contactar Admisiones",
+    "CTA_GUIDE": "Descargar Guía",
+    "MODAL_TITLE": "Testimonio de Egresado"
+  }
+}

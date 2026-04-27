@@ -1,0 +1,97 @@
+{
+  "INICIO": {
+    "NEWS_TICKER": "Diidxa cubi",
+    "CALENDAR_BUTTON": "Ca' dxi guendaridagulisaa",
+    "HERO_TITLE": "Guendanacuubi sti' xquendabiaani'  binni laanu",
+    "HERO_BUTTON": "Bizulu' ne laadu",
+    "FEATURES": [
+      {
+        "TITLE": "Guenda nandxo' sti' guendariene",
+        "TEXT": "Runi guendariziidi' nandxó' ni ruyubi guendariani' sti' binni"
+      },
+      {
+        "TITLE": "Xquenda biaani' ni ma' didi",
+        "TEXT": "Guedarucui' na cubi' ne xquendabiaani' sti ni ma' zaniiru'"
+      },
+      {
+        "TITLE": "Guenda ridagulisaa sti' ca guidxi",
+        "TEXT": "Guendaridagulisaa ne ca binni laanu ni ruyubi gunii dxiña'"
+      }
+    ],
+    "CTA": {
+      "TITLE": "¿Bizulu' ne laadu?",
+      "TEXT": "Guyuu' lade guidxi ni napa guendariene stinu.",
+      "BUTTON_MORE": "Gunna' jma",
+      "BUTTON_CONTACT": "Guni' ne laadu"
+    },
+    "CONTACT_MODAL": {
+      "TITLE": "Guni' ne laadu",
+      "SUBTITLE": "Completa los datos para enviarnos un correo.",
+      "PLACEHOLDER_NAME": "Nombre completo",
+      "PLACEHOLDER_EMAIL": "tu@correo.com",
+      "PLACEHOLDER_MESSAGE": "¿En qué podemos ayudarte?",
+      "SEND_BUTTON": "Enviar por Gmail",
+      "WHATSAPP_TEXT": "Chatea con nosotros",
+      "OR": "o también",
+      "VALIDATION": "Por favor, completa todos los campos para continuar."
+    },
+    "NEWS_MODAL": {
+      "HEADER": "Noticias Informática"
+    },
+    "CALENDAR": {
+      "MONTHS": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+      "DAYS": ["LUN", "MAR", "MIE", "JUE", "VIE", "SAB", "DOM"],
+      "SIDEBAR_TITLE": "Próximos Eventos",
+      "NO_EVENTS": "No hay eventos para este día."
+    },
+    "NEWS": [
+      {
+        "TITLE": "Nuevo Laboratorio de IA",
+        "DATE": "25 de Mayo, 2024",
+        "CONTENT": "Se inaugura el centro de cómputo avanzado para proyectos de Inteligencia Artificial en el campus Ixtepec."
+      },
+      {
+        "TITLE": "Convenio con Google Cloud",
+        "DATE": "18 de Mayo, 2024",
+        "CONTENT": "Alumnos de Informática tendrán acceso a certificaciones oficiales de la nube de Google."
+      },
+      {
+        "TITLE": "Hackathon Regional",
+        "DATE": "12 de Mayo, 2024",
+        "CONTENT": "Participa en el próximo encuentro de desarrollo de software para el Istmo."
+      }
+    ],
+    "EVENTS": [
+      { "DAY": 1, "MONTH": 0, "TITLE": "Día Inhábil", "TIME": "Todo el día", "DESC": "Año Nuevo" },
+      { "DAY": 2, "MONTH": 0, "TITLE": "Fin de Vacaciones", "TIME": "08:00 AM", "DESC": "Reincorporación" },
+      { "DAY": 19, "MONTH": 0, "TITLE": "Exámenes Parciales", "TIME": "09:00 AM", "DESC": "3er Parcial (Inicia)" },
+      { "DAY": 26, "MONTH": 0, "TITLE": "Exámenes Parciales", "TIME": "04:00 PM", "DESC": "3er Parcial (Termina)" },
+      { "DAY": 30, "MONTH": 0, "TITLE": "Exámenes Ordinarios", "TIME": "09:00 AM", "DESC": "Inician exámenes ordinarios" },
+      { "DAY": 2, "MONTH": 1, "TITLE": "Día Inhábil", "TIME": "Todo el día", "DESC": "Constitución Mexicana" },
+      { "DAY": 9, "MONTH": 1, "TITLE": "Fin de Semestre", "TIME": "05:00 PM", "DESC": "Cierre Ciclo A" },
+      { "DAY": 13, "MONTH": 1, "TITLE": "Exámenes Extraordinarios", "TIME": "09:00 AM", "DESC": "Periodo de regularización" },
+      { "DAY": 23, "MONTH": 1, "TITLE": "Inscripciones", "TIME": "08:00 AM", "DESC": "Reinscripciones Ciclo B" },
+      { "DAY": 2, "MONTH": 2, "TITLE": "Inicio de Semestre", "TIME": "08:00 AM", "DESC": "Ciclo 2025-2026 B" },
+      { "DAY": 12, "MONTH": 2, "TITLE": "Examen Especial", "TIME": "10:00 AM", "DESC": "Evaluación especial" },
+      { "DAY": 16, "MONTH": 2, "TITLE": "Día Inhábil", "TIME": "Todo el día", "DESC": "Natalicio de Benito Juárez" },
+      { "DAY": 30, "MONTH": 2, "TITLE": "Vacaciones", "TIME": "Todo el día", "DESC": "Semana Santa" },
+      { "DAY": 6, "MONTH": 3, "TITLE": "Exámenes Parciales", "TIME": "09:00 AM", "DESC": "1er Parcial Ciclo B" },
+      { "DAY": 13, "MONTH": 3, "TITLE": "Regreso de Vacaciones", "TIME": "08:00 AM", "DESC": "Fin periodo semana santa" },
+      { "DAY": 1, "MONTH": 4, "TITLE": "Día Inhábil", "TIME": "Todo el día", "DESC": "Día del Trabajo" },
+      { "DAY": 6, "MONTH": 4, "TITLE": "Exámenes Parciales", "TIME": "09:00 AM", "DESC": "2do Parcial Ciclo B" },
+      { "DAY": 23, "MONTH": 4, "TITLE": "Examen de Ingreso", "TIME": "08:00 AM", "DESC": "Primer examen de admisión" },
+      { "DAY": 10, "MONTH": 5, "TITLE": "Exámenes Parciales", "TIME": "09:00 AM", "DESC": "3er Parcial Ciclo B" },
+      { "DAY": 23, "MONTH": 5, "TITLE": "Exámenes Ordinarios", "TIME": "09:00 AM", "DESC": "Periodo ordinario Ciclo B" },
+      { "DAY": 30, "MONTH": 5, "TITLE": "Fin de Semestre", "TIME": "05:00 PM", "DESC": "Cierre Ciclo B" },
+      { "DAY": 1, "MONTH": 6, "TITLE": "Examen de Ingreso", "TIME": "08:00 AM", "DESC": "Segundo examen de admisión" },
+      { "DAY": 3, "MONTH": 6, "TITLE": "Exámenes Extraordinarios", "TIME": "09:00 AM", "DESC": "Regularización Ciclo B" },
+      { "DAY": 13, "MONTH": 6, "TITLE": "Vacaciones", "TIME": "Todo el día", "DESC": "Periodo de verano" },
+      { "DAY": 27, "MONTH": 6, "TITLE": "Curso Propedéutico", "TIME": "08:00 AM", "DESC": "Inicio propedéutico y verano" },
+      { "DAY": 12, "MONTH": 7, "TITLE": "Exámenes Verano", "TIME": "09:00 AM", "DESC": "1er Parcial (Verano)" },
+      { "DAY": 28, "MONTH": 7, "TITLE": "Exámenes Verano", "TIME": "09:00 AM", "DESC": "2do Parcial (Verano)" },
+      { "DAY": 14, "MONTH": 8, "TITLE": "Exámenes Verano", "TIME": "09:00 AM", "DESC": "3er Parcial (Verano)" },
+      { "DAY": 16, "MONTH": 8, "TITLE": "Día Inhábil", "TIME": "Todo el día", "DESC": "Independencia de México" },
+      { "DAY": 18, "MONTH": 8, "TITLE": "Fin de Cursos", "TIME": "05:00 PM", "DESC": "Termina propedéutico/verano" }
+    ]
+  }
+}

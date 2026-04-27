@@ -96,3 +96,27 @@
   }
 
 }
+
+.lang-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  display: inline-block;
+}
+
+.navbar-nav,
+.navbar-nav li {
+  list-style: none;
+}
+
+
+.language-toggle::after {
+  display: none;
+}
+
+.language-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+

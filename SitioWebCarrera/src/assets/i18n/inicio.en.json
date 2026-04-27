@@ -1,0 +1,97 @@
+{
+  "INICIO": {
+    "NEWS_TICKER": "NEWS",
+    "CALENDAR_BUTTON": "EVENT CALENDAR",
+    "HERO_TITLE": "Technological innovation with a human sense",
+    "HERO_BUTTON": "Start your admission process here",
+    "FEATURES": [
+      {
+        "TITLE": "Academic Excellence",
+        "TEXT": "High-quality educational programs focused on integral development."
+      },
+      {
+        "TITLE": "Advanced Technology",
+        "TEXT": "Modern infrastructure and cutting-edge technological resources."
+      },
+      {
+        "TITLE": "Regional Linkage",
+        "TEXT": "Direct connection with the region's productive sector."
+      }
+    ],
+    "CTA": {
+      "TITLE": "Ready to begin?",
+      "TEXT": "Join our university community.",
+      "BUTTON_MORE": "Learn more",
+      "BUTTON_CONTACT": "Contact us"
+    },
+    "CONTACT_MODAL": {
+      "TITLE": "Direct Contact",
+      "SUBTITLE": "Fill in the details to send us an email.",
+      "PLACEHOLDER_NAME": "Full name",
+      "PLACEHOLDER_EMAIL": "you@email.com",
+      "PLACEHOLDER_MESSAGE": "How can we help you?",
+      "SEND_BUTTON": "Send via Gmail",
+      "WHATSAPP_TEXT": "Chat with us",
+      "OR": "or also",
+      "VALIDATION": "Please complete all fields to continue."
+    },
+    "NEWS_MODAL": {
+      "HEADER": "Informatics News"
+    },
+    "CALENDAR": {
+      "MONTHS": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      "DAYS": ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
+      "SIDEBAR_TITLE": "Upcoming Events",
+      "NO_EVENTS": "There are no events for this day."
+    },
+    "NEWS": [
+      {
+        "TITLE": "New AI Laboratory",
+        "DATE": "May 25, 2024",
+        "CONTENT": "The advanced computing center for Artificial Intelligence projects is inaugurated at the Ixtepec campus."
+      },
+      {
+        "TITLE": "Agreement with Google Cloud",
+        "DATE": "May 18, 2024",
+        "CONTENT": "Informatics students will have access to official Google Cloud certifications."
+      },
+      {
+        "TITLE": "Regional Hackathon",
+        "DATE": "May 12, 2024",
+        "CONTENT": "Join the upcoming software development event for the Isthmus region."
+      }
+    ],
+    "EVENTS": [
+      { "DAY": 1, "MONTH": 0, "TITLE": "Holiday", "TIME": "All day", "DESC": "New Year's Day" },
+      { "DAY": 2, "MONTH": 0, "TITLE": "End of Holidays", "TIME": "08:00 AM", "DESC": "Return" },
+      { "DAY": 19, "MONTH": 0, "TITLE": "Midterm Exams", "TIME": "09:00 AM", "DESC": "3rd Midterm (Starts)" },
+      { "DAY": 26, "MONTH": 0, "TITLE": "Midterm Exams", "TIME": "04:00 PM", "DESC": "3rd Midterm (Ends)" },
+      { "DAY": 30, "MONTH": 0, "TITLE": "Regular Exams", "TIME": "09:00 AM", "DESC": "Regular exams start" },
+      { "DAY": 2, "MONTH": 1, "TITLE": "Holiday", "TIME": "All day", "DESC": "Mexican Constitution" },
+      { "DAY": 9, "MONTH": 1, "TITLE": "End of Semester", "TIME": "05:00 PM", "DESC": "End of Cycle A" },
+      { "DAY": 13, "MONTH": 1, "TITLE": "Extraordinary Exams", "TIME": "09:00 AM", "DESC": "Make-up period" },
+      { "DAY": 23, "MONTH": 1, "TITLE": "Enrollment", "TIME": "08:00 AM", "DESC": "Re-enrollment Cycle B" },
+      { "DAY": 2, "MONTH": 2, "TITLE": "Semester Starts", "TIME": "08:00 AM", "DESC": "2025-2026 Cycle B" },
+      { "DAY": 12, "MONTH": 2, "TITLE": "Special Exam", "TIME": "10:00 AM", "DESC": "Special evaluation" },
+      { "DAY": 16, "MONTH": 2, "TITLE": "Holiday", "TIME": "All day", "DESC": "Benito Juárez's Birthday" },
+      { "DAY": 30, "MONTH": 2, "TITLE": "Vacation", "TIME": "All day", "DESC": "Holy Week" },
+      { "DAY": 6, "MONTH": 3, "TITLE": "Midterm Exams", "TIME": "09:00 AM", "DESC": "1st Midterm Cycle B" },
+      { "DAY": 13, "MONTH": 3, "TITLE": "Return from Vacation", "TIME": "08:00 AM", "DESC": "End of Holy Week break" },
+      { "DAY": 1, "MONTH": 4, "TITLE": "Holiday", "TIME": "All day", "DESC": "Labor Day" },
+      { "DAY": 6, "MONTH": 4, "TITLE": "Midterm Exams", "TIME": "09:00 AM", "DESC": "2nd Midterm Cycle B" },
+      { "DAY": 23, "MONTH": 4, "TITLE": "Admission Exam", "TIME": "08:00 AM", "DESC": "First admission exam" },
+      { "DAY": 10, "MONTH": 5, "TITLE": "Midterm Exams", "TIME": "09:00 AM", "DESC": "3rd Midterm Cycle B" },
+      { "DAY": 23, "MONTH": 5, "TITLE": "Regular Exams", "TIME": "09:00 AM", "DESC": "Regular period Cycle B" },
+      { "DAY": 30, "MONTH": 5, "TITLE": "End of Semester", "TIME": "05:00 PM", "DESC": "End of Cycle B" },
+      { "DAY": 1, "MONTH": 6, "TITLE": "Admission Exam", "TIME": "08:00 AM", "DESC": "Second admission exam" },
+      { "DAY": 3, "MONTH": 6, "TITLE": "Extraordinary Exams", "TIME": "09:00 AM", "DESC": "Make-up Cycle B" },
+      { "DAY": 13, "MONTH": 6, "TITLE": "Vacation", "TIME": "All day", "DESC": "Summer break" },
+      { "DAY": 27, "MONTH": 6, "TITLE": "Prep Course", "TIME": "08:00 AM", "DESC": "Prep and summer start" },
+      { "DAY": 12, "MONTH": 7, "TITLE": "Summer Exams", "TIME": "09:00 AM", "DESC": "1st Midterm (Summer)" },
+      { "DAY": 28, "MONTH": 7, "TITLE": "Summer Exams", "TIME": "09:00 AM", "DESC": "2nd Midterm (Summer)" },
+      { "DAY": 14, "MONTH": 8, "TITLE": "Summer Exams", "TIME": "09:00 AM", "DESC": "3rd Midterm (Summer)" },
+      { "DAY": 16, "MONTH": 8, "TITLE": "Holiday", "TIME": "All day", "DESC": "Mexican Independence" },
+      { "DAY": 18, "MONTH": 8, "TITLE": "End of Courses", "TIME": "05:00 PM", "DESC": "Prep/summer ends" }
+    ]
+  }
+}
