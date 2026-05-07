@@ -113,6 +113,9 @@ const defaultContent = {
 
 export class ProyectoPageComponent {
   public translation = inject(TranslationService);
+  private readonly proyectosApiUrl = 'http://localhost:3000/api/proyectos';
+  private readonly galeriaApiUrl = 'http://localhost:3000/api/galeria';
+  private readonly videosApiUrl = 'http://localhost:3000/api/videos';
   constructor(
     private sanitizer: DomSanitizer,
     private http: HttpClient
@@ -128,6 +131,9 @@ export class ProyectoPageComponent {
           if (!keys.has(this.activeFilter())) {
             this.activeFilter.set('all');
           }
+          this.cargarProyectos();
+          this.cargarGaleria();
+          this.cargarVideos();
         });
     });
   }
@@ -203,6 +209,86 @@ export class ProyectoPageComponent {
 
   setActiveFilter(key: 'all' | 'software' | 'sistemas') {
     this.activeFilter.set(key);
+  }
+
+  private cargarProyectos(): void {
+    this.http
+      .get<Array<{
+        id: string;
+        categoryKey: 'software' | 'sistemas';
+        categoryLabel: string;
+        title: string;
+        summary: string;
+        image: string;
+        description: string;
+        videoUrl?: string | null;
+        miembros?: Array<{ nombre: string }>;
+        galeria?: Array<{ url: string }>;
+      }>>(this.proyectosApiUrl)
+      .subscribe({
+        next: (projects) => {
+          if (!Array.isArray(projects) || projects.length === 0) {
+            return;
+          }
+
+          this.content.update((current) => ({
+            ...current,
+            projects: projects.map((project, index) => ({
+              id: index + 1,
+              categoryKey: project.categoryKey,
+              categoryLabel: project.categoryLabel,
+              title: project.title,
+              summary: project.summary,
+              image: project.image,
+              modal: {
+                description: project.description,
+                members: (project.miembros || []).map((miembro) => miembro.nombre),
+                gallery: (project.galeria || []).map((imagen) => imagen.url),
+                videoUrl: project.videoUrl || ''
+              }
+            }))
+          }));
+        },
+        error: () => {
+          // Conservamos el respaldo local.
+        }
+      });
+  }
+
+  private cargarGaleria(): void {
+    this.http
+      .get<Array<{ url: string }>>(this.galeriaApiUrl)
+      .subscribe({
+        next: (items) => {
+          if (Array.isArray(items) && items.length > 0) {
+            this.galleryImages.set(items.map((item) => item.url));
+          }
+        },
+        error: () => {
+          // Conservamos la galeria local.
+        }
+      });
+  }
+
+  private cargarVideos(): void {
+    this.http
+      .get<Array<{ src: string; caption?: string; titulo?: string }>>(this.videosApiUrl)
+      .subscribe({
+        next: (videos) => {
+          if (Array.isArray(videos) && videos.length > 0) {
+            this.content.update((current) => ({
+              ...current,
+              videos: videos.map((video) => ({
+                src: video.src,
+                caption: video.caption || video.titulo || ''
+              }))
+            }));
+          }
+        },
+        error: () => {
+          // Conservamos los videos locales.
+        }
+      });
   }
 }
 

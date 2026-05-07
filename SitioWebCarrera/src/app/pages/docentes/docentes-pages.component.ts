@@ -1,5 +1,5 @@
-
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 // Interfaz para las publicaciones científicas
 interface Publicacion {
@@ -21,11 +21,19 @@ interface Docente {
 
 @Component({
   selector: 'docentes',
+  standalone: true,
+  imports: [HttpClientModule],
   templateUrl: './docentes-pages.component.html',
   styleUrls: ['./docentes-pages.component.css']
 })
 
 export class DocentesPageComponent {
+  private http = inject(HttpClient);
+  private readonly apiUrl = 'http://localhost:3000/api/docentes';
+
+  constructor() {
+    this.cargarDocentes();
+  }
 
   public docenteSeleccionado = signal<Docente | null>(null);
   // Signal con la lista completa de docentes y sus trayectorias
@@ -213,5 +221,18 @@ export class DocentesPageComponent {
     this.docenteSeleccionado.set(null);
     // Restaurar el scroll del body
     document.body.style.overflow = 'auto';
+  }
+
+  private cargarDocentes(): void {
+    this.http.get<Docente[]>(this.apiUrl).subscribe({
+      next: (docentes) => {
+        if (Array.isArray(docentes) && docentes.length > 0) {
+          this.docentes.set(docentes);
+        }
+      },
+      error: () => {
+        // Si la API aun no esta disponible, conservamos el respaldo local.
+      }
+    });
   }
 }

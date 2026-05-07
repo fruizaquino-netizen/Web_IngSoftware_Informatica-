@@ -115,6 +115,8 @@ const defaultContent = {
 export class InicioPageComponent {
   private http = inject(HttpClient);
   private translation = inject(TranslationService);
+  private readonly noticiasApiUrl = 'http://localhost:3000/api/noticias';
+  private readonly eventosApiUrl = 'http://localhost:3000/api/eventos';
 
   content = signal(defaultContent);
 
@@ -157,6 +159,8 @@ export class InicioPageComponent {
         .subscribe((data) => {
           this.content.set(data as typeof defaultContent);
           this.applyContent();
+          this.cargarNoticias();
+          this.cargarEventos();
         });
     });
   }
@@ -290,5 +294,46 @@ export class InicioPageComponent {
 
     // Cerramos el modal después de abrir la pestaña
     this.toggleContactModal();
+  }
+  private cargarNoticias(): void {
+    this.http
+      .get<Array<{ titulo: string; contenido: string; descripcion?: string; fechaTexto?: string; fecha?: string }>>(this.noticiasApiUrl)
+      .subscribe({
+        next: (noticias) => {
+          if (Array.isArray(noticias) && noticias.length > 0) {
+            this.noticias = noticias.map((noticia) => ({
+              titulo: noticia.titulo,
+              fecha: noticia.fechaTexto || noticia.fecha || '',
+              contenido: noticia.contenido || noticia.descripcion || ''
+            }));
+          }
+        },
+        error: () => {
+          // Mantenemos el respaldo cargado desde i18n.
+        }
+      });
+  }
+
+  private cargarEventos(): void {
+    this.http
+      .get<Array<{ dia?: number; mes?: number; titulo: string; hora?: string; descripcion: string }>>(this.eventosApiUrl)
+      .subscribe({
+        next: (eventos) => {
+          if (Array.isArray(eventos) && eventos.length > 0) {
+            this.todosLosEventos = eventos.map((evento) => ({
+              dia: evento.dia ?? 0,
+              mes: evento.mes ?? 0,
+              titulo: evento.titulo,
+              hora: evento.hora || '',
+              descripcion: evento.descripcion
+            }));
+            this.selectedDay = null;
+            this.eventosDelDia = [];
+          }
+        },
+        error: () => {
+          // Si la API no esta lista todavia, seguimos con los eventos locales.
+        }
+      });
   }
 }
