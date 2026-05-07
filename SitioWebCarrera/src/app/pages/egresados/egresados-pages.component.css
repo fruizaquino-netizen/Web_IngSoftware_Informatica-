@@ -151,7 +151,7 @@ th {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Asegura que esté encima de todo */
+  z-index: 9999; /* Asegura que esté encima de todo */
   backdrop-filter: blur(4px); /* Efecto borroso opcional y moderno */
   animation: fadeIn 0.3s ease;
 }
@@ -160,14 +160,18 @@ th {
   background-color: white;
   padding: 25px;
   border-radius: 12px;
-  width: 90%;
-  max-width: 500px; /* Ancho máximo de la ventanita */
+  width: 95%;
+  max-width: 650px; /* Ancho máximo de la ventanita */
   box-shadow: 0 15px 30px rgba(0,0,0,0.2);
   border-top: 6px solid #8b1d1d; /* Usando tu color institucional */
   position: relative;
   animation: slideUp 0.3s ease;
+  margin-top: 20px;
 }
-
+.modal-body {
+  max-height: 400px;
+  overflow-y: auto;
+}
 .modal-header {
   display: flex;
   justify-content: space-between;

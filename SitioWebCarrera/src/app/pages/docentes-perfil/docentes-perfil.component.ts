@@ -1,10 +1,12 @@
+import { BreadcrumbComponent } from './../../shared/breadcrumb/breadcrumb.component';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-docentes-perfil',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,BreadcrumbComponent],
   templateUrl: './docentes-perfil.component.html',
   styleUrls: ['./docentes-perfil.component.css']
 })

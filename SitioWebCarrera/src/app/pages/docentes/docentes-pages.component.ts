@@ -1,5 +1,6 @@
 
 import { Component, signal } from '@angular/core';
+import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
 
 // Interfaz para las publicaciones científicas
 interface Publicacion {
@@ -22,7 +23,8 @@ interface Docente {
 @Component({
   selector: 'docentes',
   templateUrl: './docentes-pages.component.html',
-  styleUrls: ['./docentes-pages.component.css']
+  styleUrls: ['./docentes-pages.component.css'],
+  imports: [BreadcrumbComponent]
 })
 
 export class DocentesPageComponent {

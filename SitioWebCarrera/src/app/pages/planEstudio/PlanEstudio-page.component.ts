@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslationService } from '../../services/translation.service';
 import { RouterModule } from '@angular/router';
+import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
 
 type Subject = {
   name: string;
@@ -47,7 +48,7 @@ const defaultContent = {
 };
 
 @Component({
-  imports: [CommonModule, HttpClientModule, RouterModule],
+  imports: [CommonModule, HttpClientModule, RouterModule, BreadcrumbComponent],
   standalone: true,
   selector: 'planEstudios',
   templateUrl: './PlanEstudio-page.component.html',

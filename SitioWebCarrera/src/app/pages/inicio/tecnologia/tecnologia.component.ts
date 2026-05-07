@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core'; // 1. Importamos OnInit
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-tecnologia',
   standalone: true, // Mantén esto si tus otros componentes también lo son
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, BreadcrumbComponent],
   templateUrl: './tecnologia.component.html',
   styleUrls: ['./tecnologia.component.css']
 })

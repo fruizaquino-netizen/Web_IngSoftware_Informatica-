@@ -2,6 +2,7 @@
 import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslationService } from '../../services/translation.service';
+import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
 
 interface HeroInfo {
   titulo: string;
@@ -89,7 +90,7 @@ const defaultContent = {
 
 @Component({
   standalone: true,
-  imports: [RouterModule, HttpClientModule],
+  imports: [RouterModule, HttpClientModule,BreadcrumbComponent],
   selector: 'quienes-somos-page',
   templateUrl: './quienesSomos-page.component.html',
   styleUrls: ['./quienesSomos-page.component.css']

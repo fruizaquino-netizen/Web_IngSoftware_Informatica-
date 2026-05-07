@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslationService } from '../../services/translation.service';
+import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
 
 const defaultContent = {
   text: {
@@ -106,7 +107,7 @@ const defaultContent = {
 @Component({
   selector: 'proyecto',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, BreadcrumbComponent],
   templateUrl: './proyectos-page.component.html',
   styleUrls: ['./proyectos-page.component.css']
 })

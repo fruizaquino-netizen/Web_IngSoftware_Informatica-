@@ -1,7 +1,9 @@
-﻿import { Component, signal, computed, effect, inject } from '@angular/core';
+﻿
+import { Component, signal, computed, effect, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslationService } from '../../services/translation.service';
+import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
 
 interface Egresado {
   nombre: string;
@@ -37,7 +39,7 @@ const defaultContent = {
 @Component({
   selector: 'app-egresados-pages',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, BreadcrumbComponent],
   templateUrl: './egresados-pages.component.html',
   styleUrl: './egresados-pages.component.css'
 })
