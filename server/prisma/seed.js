@@ -8,29 +8,49 @@ const prisma = new PrismaClient();
 const projectRoot = path.join(__dirname, '..', '..');
 const siteRoot = path.join(projectRoot, 'SitioWebCarrera');
 const i18nRoot = path.join(siteRoot, 'src', 'assets', 'i18n');
+const docentesImagesRoot = path.join(siteRoot, 'src', 'assets', 'img', 'Docentes');
+const docentesImagesAssetRoot = 'assets/img/Docentes';
+
+const docentesImageFiles = fs.existsSync(docentesImagesRoot)
+  ? fs.readdirSync(docentesImagesRoot, { withFileTypes: true })
+    .filter((entry) => entry.isFile())
+    .map((entry) => entry.name)
+  : [];
+
+const docenteImageNeedlesByEmail = {
+  'correo@unistmo.edu.mx': ['Gerardo Rafael Alfaro Cruz'],
+  'fbenitez@bianni.unistmo.edu.mx': ['FelipeBen'],
+  'ldhuerth@gmail.com, luisdh2@bianni.unistmo.edu.mx': ['LuisDavidHuerta'],
+  'carloscruz@bianni.unistmo.edu.mx': ['Carlos Edgardo Cruz'],
+  'nayelim@bianni.unistmo.edu.mx': ['Nayeli Joaquinita'],
+  'fglez@bianni.unistmo.edu.mx': ['iconoH'],
+  'cosijopii@bianni.unistmo.edu.mx': ['CosijopiiGarc'],
+  'odelarosa@bianni.unistmo.edu.mx': ['OscarAlonso'],
+  'ie.edgarcano@gmail.com': ['iconoH']
+};
 
 const galleryImages = [
-  'assets/img/Electronica1.jpg',
-  'assets/img/Elect.jpg',
-  'assets/img/SalaRedes.jpg',
-  'assets/img/Auditorio.jpg',
-  'assets/img/Estatua.jpg',
-  'assets/img/Electronica2.jpg',
-  'assets/img/ConcursoAltar1.jpg',
-  'assets/img/ConcursoAltar2.jpg',
-  'assets/img/Viaje_EscNaval1.jpg',
-  'assets/img/Viaje_EscNaval2.jpg',
-  'assets/img/Viaje_EscNaval3.jpg',
-  'assets/img/Viaje_Supercool.jpg',
-  'assets/img/Viaje_Thyssenkrupp1.png',
-  'assets/img/Viaje_Thyssenkrupp2.png',
-  'assets/img/Viaje_Thyssenkrupp3.jpg',
-  'assets/img/Viaje_Thyssenkrupp4.jpg',
-  'assets/img/Viaje_UDLAP1.jpg',
-  'assets/img/Viaje_UDLAP2.jpg',
-  'assets/img/Viaje_UDLAP3.jpg',
-  'assets/img/Viaje_UniVeracruz.jpg',
-  'assets/img/Curso_2023.jpg'
+  'assets/img/Galeria/Electronica1.jpg',
+  'assets/img/Galeria/Elect.jpg',
+  'assets/img/Galeria/SalaRedes.jpg',
+  'assets/img/Galeria/Auditorio.jpg',
+  'assets/img/Galeria/Estatua.jpg',
+  'assets/img/Galeria/Electronica2.jpg',
+  'assets/img/Galeria/ConcursoAltar1.jpg',
+  'assets/img/Galeria/ConcursoAltar2.jpg',
+  'assets/img/Galeria/Viaje_EscNaval1.jpg',
+  'assets/img/Galeria/Viaje_EscNaval2.jpg',
+  'assets/img/Galeria/Viaje_EscNaval3.jpg',
+  'assets/img/Galeria/Viaje_Supercool.jpg',
+  'assets/img/Galeria/Viaje_Thyssenkrupp1.png',
+  'assets/img/Galeria/Viaje_Thyssenkrupp2.png',
+  'assets/img/Galeria/Viaje_Thyssenkrupp3.jpg',
+  'assets/img/Galeria/Viaje_Thyssenkrupp4.jpg',
+  'assets/img/Galeria/Viaje_UDLAP1.jpg',
+  'assets/img/Galeria/Viaje_UDLAP2.jpg',
+  'assets/img/Galeria/Viaje_UDLAP3.jpg',
+  'assets/img/Galeria/Viaje_UniVeracruz.jpg',
+  'assets/img/Galeria/Curso_2023.jpg'
 ];
 
 const egresados = [
@@ -60,6 +80,39 @@ function readJson(relativePath) {
   const cleanContent = content.trim().replace(/^\uFEFF/, '');
 
   return JSON.parse(cleanContent);
+}
+
+function findDocenteImageFile(docente) {
+  const needles = docenteImageNeedlesByEmail[docente.email] || [];
+
+  for (const needle of needles) {
+    const imageFile = docentesImageFiles.find((fileName) => fileName.includes(needle));
+
+    if (imageFile) {
+      return imageFile;
+    }
+  }
+
+  if (docente.imagen) {
+    const imageFileName = path.basename(decodeURI(docente.imagen));
+    const imageFile = docentesImageFiles.find((fileName) => fileName === imageFileName);
+
+    if (imageFile) {
+      return imageFile;
+    }
+  }
+
+  return docentesImageFiles.find((fileName) => fileName === 'iconoH.png') || null;
+}
+
+function getDocenteImagePath(docente) {
+  const imageFile = findDocenteImageFile(docente);
+
+  if (!imageFile) {
+    return docente.imagen;
+  }
+
+  return encodeURI(`${docentesImagesAssetRoot}/${imageFile}`);
 }
 
 function parseSpanishDate(dateText) {
@@ -126,7 +179,7 @@ async function main() {
         nombre: docente.nombre,
         especialidad: docente.especialidad,
         cargo: docente.cargo,
-        imagen: docente.imagen,
+        imagen: getDocenteImagePath(docente),
         descripcion: docente.descripcion,
         email: docente.email,
         publicaciones: {

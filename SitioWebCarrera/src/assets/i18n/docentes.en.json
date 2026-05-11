@@ -17,7 +17,7 @@
       "nombre": "Lic. Gerardo Rafael Alfaro Cruz",
       "especialidad": "BA in Humanities - UAM",
       "cargo": " Full‑time professor at Universidad del Istmo, Campus Ixtepec.",
-      "imagen": "assets/docente1.png",
+      "imagen": "assets/img/Docentes/Lic_Gerardo%20Rafael%20Alfaro%20Cruz.jpg",
       "descripcion": "List updated research lines.",
       "email": "correo@unistmo.edu.mx",
       "publicaciones": [
@@ -52,7 +52,7 @@
       "nombre": "Dr. en C. Felipe Benítez Domínguez",
       "especialidad": "Participation in the poster session of the 3rd International Congress on Renewable Energies 2019. November 13–15, 2019, Universidad del Mar. Huatulco, Oaxaca.",
       "cargo": "Research Professor at Universidad del Istmo, Campus Cd. Ixtepec, Oax. September 2006 – present",
-      "imagen": "assets/docente2.png",
+      "imagen": "assets/img/Docentes/Dr_FelipeBen%C3%ADtezDom%C3%ADnguez.png",
       "descripcion": "Specialist in software architecture and agile methodologies. Leads corporate digital transformation projects.",
       "email": "fbenitez@bianni.unistmo.edu.mx",
       "publicaciones": [
@@ -122,7 +122,7 @@
       "nombre": "Dr. Luis David Huerta Hernández",
       "especialidad": "PhD in Computer Systems",
       "cargo": "Associate Research Professor C, Head of the BSc in Computer Science, Committee member of the UNISTMO cafeteria service and member of the UNISTMO procurement committee",
-      "imagen": "assets/docente3.png",
+      "imagen": "assets/img/Docentes/Dr_LuisDavidHuertaHern%C3%A1ndez.jpg",
       "descripcion": "Pattern Recognition.",
       "email": "ldhuerth@gmail.com, luisdh2@bianni.unistmo.edu.mx",
       "publicaciones": [
@@ -152,7 +152,7 @@
       "nombre": "M. en I. Carlos Edgardo Cruz Pérez",
       "especialidad": "Master’s in Information Technology Engineering",
       "cargo": "Full‑time Research Professor in the BSc in Computer Science and the BSc in Software Engineering and Intelligent Systems",
-      "imagen": "assets/docente4.png",
+      "imagen": "assets/img/Docentes/M.I_Carlos%20Edgardo%20Cruz%20P%C3%A9rez.png",
       "descripcion": "Cybersecurity.",
       "email": "carloscruz@bianni.unistmo.edu.mx",
       "publicaciones": [
@@ -177,7 +177,7 @@
       "nombre": "M. en I.A. Nayeli Joaquinita Meléndez Acosta",
       "especialidad": "Master’s in Artificial Intelligence. Faculty of Physics and Artificial Intelligence, Universidad Veracruzana, Mexico.",
       "cargo": "Full‑time Research Professor at Universidad del Istmo, campus Ixtepec, assigned to the BSc in Computer Science",
-      "imagen": "assets/docente5.png",
+      "imagen": "assets/img/Docentes/M.IA_Nayeli%20Joaquinita%20Mel%C3%A9ndez%20Acosta.jpg",
       "descripcion": "Artificial Intelligence: Machine Learning, data science, pattern recognition, bio‑inspired algorithms, computer vision, image processing, and neural networks.",
       "email": "nayelim@bianni.unistmo.edu.mx",
       "publicaciones": [
@@ -272,7 +272,7 @@
       "nombre": " Dr. Francisco Alejandro González Horta",
       "especialidad": "Postdoctoral fellow in Computing, 2013-2014. Department of Computing, CINVESTAV-IPN, Zacatenco, Mexico City, Mexico, CP 07360.",
       "cargo": "Tenured Research Professor “A” (2015‑present). BSc in Computer Science, BSc in Software Engineering and Intelligent Systems. UNISTMO Campus Ixtepec. Ciudad Ixtepec, Oaxaca, Mexico, CP 70110.",
-      "imagen": "assets/docente6.png",
+      "imagen": "assets/img/Docentes/iconoH.png",
       "descripcion": "Mobility management in heterogeneous overlapping wireless networks.",
       "email": "fglez@bianni.unistmo.edu.mx",
       "publicaciones": [
@@ -302,7 +302,7 @@
       "nombre": "M. en C. Cosijopii García García",
       "especialidad": "Master’s in Science in the area of Computer Science",
       "cargo": "Associate Professor B assigned to the BSc in Computer Science, Universidad del Istmo Campus Ixtepec. [Oct 2024 - Present]",
-      "imagen": "assets/docente6.png",
+      "imagen": "assets/img/Docentes/M.C_CosijopiiGarc%C3%ADaGarc%C3%ADa.png",
       "descripcion": "Multi‑objective optimization.",
       "email": "cosijopii@bianni.unistmo.edu.mx",
       "publicaciones": [
@@ -355,9 +355,9 @@
     },
     {
       "nombre": "M. en C. Oscar Alonso de la Rosa Aguilar",
-      "especialidad": "Master’s in Computer Science",
-      "cargo": "Full‑time Research Professor.",
-      "imagen": "assets/docente6.png",
+      "especialidad": "Master's in Computer Science",
+      "cargo": "Full-time Research Professor.",
+      "imagen": "assets/img/Docentes/M.C_OscarAlonso%20delaRosaAguilar.jpg",
       "descripcion": "Data analysis.",
       "email": "odelarosa@bianni.unistmo.edu.mx",
       "publicaciones": [
@@ -369,10 +369,88 @@
       ]
     },
     {
+      "nombre": "Ing. Jofran Benítez Dolores",
+      "especialidad": "Computer science, mechatronics engineering and Front-End development with React, JavaScript, TypeScript, HTML, CSS, Node.js, UX/UI and cloud applications.",
+      "cargo": "Frontend Engineer at Tata Consultancy Services; previous experience as Front-end Developer at KARE, React Developer at Arroyo Consulting LLC and front-end developer at IT4PYMES.",
+      "imagen": "assets/img/Docentes/Ing_JofranBenitezDolores.png",
+      "descripcion": "Front-End Developer with experience building and redesigning dynamic web applications, integrating APIs, developing CRUD applications and optimizing interfaces and user journeys through UX analysis tools such as Hotjar and Maze.",
+      "email": "LinkedIn: www.linkedin.com/in/jofran-benítez",
+      "publicaciones": []
+    },
+    {
+      "nombre": "Lic. Florentino Ruiz Aquino",
+      "especialidad": "Computer Engineering degree from Universidad del Istmo.",
+      "cargo": "Software developer at 2H Software SA de CV and web developer at Onikom.",
+      "imagen": "assets/img/Docentes/Lic_FlorentinoRuizAquino.png",
+      "descripcion": "Software developer with experience in responsive web applications, PHP frameworks and web solutions that integrate Raspberry devices through webIOPi.",
+      "email": "LinkedIn: www.linkedin.com/in/florentino-ruiz-aquino-57951b117",
+      "publicaciones": []
+    },
+    {
+      "nombre": "M. C. José Antonio Huesca Chávez",
+      "especialidad": "Master's in Industrial Administration from CETYS; bachelor's degree in Electronic Engineering with a specialization in communications from Instituto Tecnológico de Oaxaca.",
+      "cargo": "Research professor in the BSc in Computer Science at Universidad del Istmo.",
+      "imagen": "assets/img/Docentes/M.C_Jos%C3%A9AntonioHuescaCh%C3%A1vez.png",
+      "descripcion": "Academic with a research line in entrepreneurial development and experience in teacher training, industrial administration, electronics, communications, English and Six Sigma.",
+      "email": "jahuesca@unistmo.edu.mx",
+      "publicaciones": [
+        {
+          "titulo": "On the data mining process for classification of fetal death causes.",
+          "anio": 2015,
+          "enlace": "#"
+        },
+        {
+          "titulo": "Business strategy models and designs.",
+          "anio": 2011,
+          "enlace": "#"
+        },
+        {
+          "titulo": "Speech segmentation algorithm based on fuzzy memberships.",
+          "anio": 2010,
+          "enlace": "#"
+        },
+        {
+          "titulo": "Heat transmission equation.",
+          "anio": 2009,
+          "enlace": "#"
+        },
+        {
+          "titulo": "Job placement: guide to facilitate job searching.",
+          "anio": 2020,
+          "enlace": "#"
+        },
+        {
+          "titulo": "The exercise of leadership in human resources efficiency: case of a wind energy company.",
+          "anio": 2019,
+          "enlace": "#"
+        },
+        {
+          "titulo": "Analysis of innovation in SMEs from the Oaxacan Isthmus in relation to the COTEC model.",
+          "anio": 2018,
+          "enlace": "#"
+        },
+        {
+          "titulo": "The administrative process in micro and small enterprises from the Oaxacan Isthmus.",
+          "anio": 2017,
+          "enlace": "#"
+        },
+        {
+          "titulo": "Analysis of beef consumption behavior in the Oaxacan Isthmus.",
+          "anio": 2016,
+          "enlace": "#"
+        },
+        {
+          "titulo": "Family businesses and regional development.",
+          "anio": 2014,
+          "enlace": "#"
+        }
+      ]
+    },
+    {
       "nombre": "M. en E. y C. Edgar Manuel Cano Cruz",
-      "especialidad": "Master’s in Electronics and Computing with specialization in Applied Intelligent Systems",
-      "cargo": "Full‑time Research Professor of the BSc in Computer Science and BSc in Software Engineering and Intelligent Systems",
-      "imagen": "assets/docente6.png",
+      "especialidad": "Master's in Electronics and Computing with specialization in Applied Intelligent Systems",
+      "cargo": "Full-time Research Professor of the BSc in Computer Science and BSc in Software Engineering and Intelligent Systems",
+      "imagen": "assets/img/Docentes/iconoH.png",
       "descripcion": "Embedded systems.",
       "email": "ie.edgarcano@gmail.com",
       "publicaciones": [

@@ -39,7 +39,7 @@ export class DocentesPageComponent {
       nombre: 'Lic. Gerardo Rafael Alfaro Cruz',
       especialidad: 'Licenciatura en humanidades - UAM',
       cargo: ' Profesor de tiempo completo de la Universidad del Istmo, Campus Ixtepec.',
-      imagen: 'assets/docente1.png',
+      imagen: 'assets/img/Docentes/Lic_Gerardo%20Rafael%20Alfaro%20Cruz.jpg',
       descripcion: 'Listar las líneas de investigación actualizadas.',
       email: 'correo@unistmo.edu.mx',
       publicaciones: [
@@ -54,7 +54,7 @@ export class DocentesPageComponent {
       nombre: 'Dr. en C. Felipe Benítez Domínguez',
       especialidad: 'Participación en la sesión de poster del 3er Congreso Internacional en Energías Renovables 2019. 13 al 15 de noviembre de 2019, Universidad del Mar. Huatulco, Oaxaca.',
       cargo: 'Profesor-Investigador en la Universidad del Istmo, Campus Cd. Ixtepec, Oax. Septiembre de 2006 – actual',
-      imagen: 'assets/docente2.png',
+      imagen: 'assets/img/Docentes/Dr_FelipeBen%C3%ADtezDom%C3%ADnguez.png',
       descripcion: 'Especialista en arquitectura de software y metodologías ágiles. Lidera proyectos de transformación digital corporativa.',
       email: 'fbenitez@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -76,7 +76,7 @@ export class DocentesPageComponent {
       nombre: 'Dr. Luis David Huerta Hernández',
       especialidad: 'Dr. En Sistemas Computacionales',
       cargo: 'Profesor Investigador Asociado C, Jefe de carrera de la Licenciatura en Informática, Comité del servicio de la cafetería UNISTMO y Vocal en el comité de adquisiciones de la UNISTMO',
-      imagen: 'assets/img/Luis.png',
+      imagen: 'assets/img/Docentes/Dr_LuisDavidHuertaHern%C3%A1ndez.jpg',
       descripcion: 'Reconocimiento de Patrones.',
       email: 'ldhuerth@gmail.com, luisdh2@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -90,7 +90,7 @@ export class DocentesPageComponent {
       nombre: 'M. en I. Carlos Edgardo Cruz Pérez',
       especialidad: 'Maestría en Ingeniería en Tecnología de la Información',
       cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática y de la Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
-      imagen: 'assets/img/Carlos.png',
+      imagen: 'assets/img/Docentes/M.I_Carlos%20Edgardo%20Cruz%20P%C3%A9rez.png',
       descripcion: 'Ciberseguridad.',
       email: 'carloscruz@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -103,7 +103,7 @@ export class DocentesPageComponent {
       nombre: 'M. en I.A. Nayeli Joaquinita Meléndez Acosta',
       especialidad: 'Maestría en Inteligencia Artificial. Facultad de Física e Inteligencia Artificial, Universidad Veracruzana, México.',
       cargo: 'Profesor-Investigador de tiempo completo en la Universidad de Istmo, campus Ixtepec, adscrito a la Licenciatura en Informática',
-      imagen: 'assets/img/Nayeli.jpg',
+      imagen: 'assets/img/Docentes/M.IA_Nayeli%20Joaquinita%20Mel%C3%A9ndez%20Acosta.jpg',
       descripcion: 'Inteligencia Artificial: Aprendizaje Automático, ciencia de datos, reconocimiento de patrones, algoritmos bio-inspirados, visión por computadora, procesamiento de imágenes y redes neuronales.',
       email: 'nayelim@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -131,7 +131,7 @@ export class DocentesPageComponent {
       nombre: ' Dr. Francisco Alejandro González Horta',
       especialidad: 'Postdoctorado en Computación, 2013-2014. Departamento de Computación, CINVESTAV-IPN, Zacatenco, Ciudad de México, México, CP 07360.',
       cargo: 'Profesor Investigador Titular “A” (2015-presente). Licenciatura en Informática, Ingeniería en Desarrollo de Software y Sistemas Inteligentes. UNISTMO Campus Ixtepec. Ciudad Ixtepec, Oaxaca, México, CP 70110.',
-      imagen: 'assets/docente6.png',
+      imagen: 'assets/img/Docentes/iconoH.png',
       descripcion: 'Gestión de la movilidad en redes inalámbricas heterogéneas sobrepuestas.',
       email: 'fglez@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -145,7 +145,7 @@ export class DocentesPageComponent {
       nombre: 'M. en C. Cosijopii García García',
       especialidad: 'Maestría en ciencias en el área de ciencias computacionales',
       cargo: 'Profesor Asociado B asignado a la licenciatura en Informática Universidad del Istmo Campus Ixtepec. [Oct 2024 - Presente]',
-      imagen: 'assets/img/Cosijopi.jpg',
+      imagen: 'assets/img/Docentes/M.C_CosijopiiGarc%C3%ADaGarc%C3%ADa.png',
       descripcion: 'Optimización Multiobjetivo.',
       email: 'cosijopii@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -164,7 +164,7 @@ export class DocentesPageComponent {
       nombre: 'M. en C. Oscar Alonso de la Rosa Aguilar',
       especialidad: 'Maestría en Ciencias de la Computación',
       cargo: 'Profesor-Investigador de tiempo completo.',
-      imagen: 'assets/img/Oscar.jpg',
+      imagen: 'assets/img/Docentes/M.C_OscarAlonso%20delaRosaAguilar.jpg',
       descripcion: 'Análisis de datos.',
       email: 'odelarosa@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -175,7 +175,7 @@ export class DocentesPageComponent {
       nombre: 'M. en E. y C. Edgar Manuel Cano Cruz',
       especialidad: 'Maestría en Electrónica y Computación con especialidad en Sistemas Inteligentes Aplicados',
       cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática e Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
-      imagen: 'assets/img/Cano.png',
+      imagen: 'assets/img/Docentes/iconoH.png',
       descripcion: 'Sistemas empotrados.',
       email: 'ie.edgarcano@gmail.com',
       publicaciones: [
@@ -192,24 +192,42 @@ export class DocentesPageComponent {
       ]
     },
     {
-      nombre: 'Lic. Florentino Ruiz Aquino',
-      especialidad: 'Licenciado en Informática',
-      cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática e Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
-      imagen: 'assets/img/Tino.jpeg',
-      descripcion: 'Sistemas Inteligentes.',
-      email: 'ie.edgarcano@gmail.com',
+      nombre: 'Ing. Jofran Benítez Dolores',
+      especialidad: 'Ciencias de la computación, ingeniería mecatrónica y desarrollo Front-End con React, JavaScript, TypeScript, HTML, CSS, Node.js, UX/UI y aplicaciones cloud.',
+      cargo: 'Frontend Engineer en Tata Consultancy Services; experiencia previa como Front-end Developer en KARE, React Developer en Arroyo Consulting LLC y desarrollador front-end en IT4PYMES.',
+      imagen: 'assets/img/Docentes/Ing_JofranBenitezDolores.png',
+      descripcion: 'Desarrollador Front-End con experiencia en construcción y rediseño de aplicaciones web dinámicas, integración de APIs, desarrollo de aplicaciones CRUD y optimización de interfaces y recorridos de usuario mediante herramientas de análisis UX como Hotjar y Maze.',
+      email: 'LinkedIn: www.linkedin.com/in/jofran-benítez',
+      publicaciones: []
+    },
+    {
+      nombre: 'M. en C. José Antonio Huesca Chávez',
+      especialidad: 'Maestría en Administración Industrial por CETYS; licenciatura en Ingeniería Electrónica con especialidad en comunicaciones por el Instituto Tecnológico de Oaxaca.',
+      cargo: 'Profesor investigador en la Licenciatura en Informática de la Universidad del Istmo.',
+      imagen: 'assets/img/Docentes/M.C_Jos%C3%A9AntonioHuescaCh%C3%A1vez.png',
+      descripcion: 'Académico con línea de investigación en desarrollo emprendedor y experiencia en formación docente, administración industrial, electrónica, comunicaciones, inglés y Six Sigma.',
+      email: 'jahuesca@unistmo.edu.mx',
       publicaciones: [
-        { titulo: 'García, I., & Cano, E. (2018). A computer game for teaching and learning algebra topics at undergraduate level. Computer Applications in Engineering Education, 26(2), 326–340. doi:10.1002/cae.21887', anio: 2018, enlace: '#' },
-        { titulo: 'Algredo Badillo , I. ., Sarmiento Torres, E. D., Atonal Nolasco, C. ., Cano Cruz, E. M., & Arellano Pimentel, J. (2015). Aplicación móvil para la automatización del método explicativo-ilustrativo para la enseñanza de idiomas. Programación matemática Y Software, 7(2), 1–7.', anio: 2015, enlace: 'https://doi.org/10.30973/progmat/2015.7.2/1' },
-        { titulo: 'Cano-Cruz, E. M., & López-Orozco, F. (2015). Design and development of a lowcost and portable meteorological system: MeteoBlue. Advanced Science Letters, 21(1), 83–87.', anio: 2015, enlace: 'doi.org/10.1166/asl.2015.5760' },
-        { titulo: 'Edgar Manuel Cano Cruz, Juan Andrés Velázquez Cruz, Juan Gabriel Ruiz Ruiz, Luis David Huerta Hernández. (2015). Video Games in Teaching-Learning Processes: A Brief Review. International Journal of Secondary Education, 2(6), 102-105. ISSN: 2376-7464. ', anio: 2015, enlace: 'doi.org/10.11648/j.ijsedu.20140206.12' },
-        { titulo: 'Edgar Manuel Cano Cruz, Juan Gabriel Ruiz Ruiz. (2015). Educational Software to Teaching-Learning the Zapotec Language of the Istmo of Tehuantepec. Science Journal of Education, 3(2), 16-21. ISSN: 2329-0900.', anio: 2015, enlace: 'doi.org/10.11648/j.sjedu.20150302.11' },
-        { titulo: 'Edgar Manuel Cano Cruz, Juan Gabriel Ruiz Ruiz. (2015), Portable Weather System for Measure and Monitoring Temperature, Relative Humidity, and Pressure, Based on Bluetooth Communication, American Journal of Networks and Communications. Vol. 4, No. 3, 2015, pp. 49-53. ISSN: 2326-893X.', anio: 2015, enlace: '#' },
-        { titulo: 'I. A. Garcia, E. M. Cano (2014). Designing and implementing a constructionist approach for improving the teaching–learning process in the embedded systems and wireless communications areas. Computer Applications in Engineering Education. Volume22, Issue3.', anio: 2014, enlace: 'doi: 10.1002/cae.20574.' },
-        { titulo: 'Cano, E. M., Ruiz, J. G., & Garcia, I. A. (2013). Integrating a learning constructionist environment and the instructional design approach into the definition of a basic course for embedded systems design. Computer Applications in Engineering Education, 23(1), 36–53.', anio: 2013, enlace: 'doi:10.1002/cae.21574' },
-        { titulo: 'Cano, E., Ruiz, J., & Huerta, L. (2013). Gateway for Bluetooth and CAN Communications Protocols. Journal of Theoretical and Applied Information Technology, 55(3). ISSN: 1992-8645. ', anio: 2013, enlace: '#' },
-        { titulo: 'E. Cano and I. Garcia. (2011). "Design and Development of a BlueBee Gateway for Bluetooth and ZigBee Wireless Protocols," 2011 IEEE Electronics, Robotics and Automotive Mechanics Conference, Cuernavaca, Mexico, 2011, pp. 366-370, doi: 10.1109/CERMA.2011.67.', anio: 2011, enlace: '#' }
+        { titulo: 'On the data mining process for classification of fetal death causes.', anio: 2015, enlace: '#' },
+        { titulo: 'Modelos y diseños de estrategias de negocio.', anio: 2011, enlace: '#' },
+        { titulo: 'Speech segmentation algorithm based on fuzzy memberships.', anio: 2010, enlace: '#' },
+        { titulo: 'Ecuación de transmisión de calor.', anio: 2009, enlace: '#' },
+        { titulo: 'Inserción laboral: guía para facilitar la búsqueda de empleo.', anio: 2020, enlace: '#' },
+        { titulo: 'El ejercicio del liderazgo en la eficiencia de los recursos humanos: caso de una empresa eólica.', anio: 2019, enlace: '#' },
+        { titulo: 'Análisis de la innovación de las PYMES del istmo oaxaqueño en relación al modelo COTEC.', anio: 2018, enlace: '#' },
+        { titulo: 'El proceso administrativo en las micro y pequeñas empresas del istmo oaxaqueño.', anio: 2017, enlace: '#' },
+        { titulo: 'Análisis del comportamiento en el consumo de carne bovina en el istmo oaxaqueño.', anio: 2016, enlace: '#' },
+        { titulo: 'Empresas familiares y desarrollo regional.', anio: 2014, enlace: '#' }
       ]
+    },
+    {
+      nombre: 'Lic. Florentino Ruiz Aquino',
+      especialidad: 'Ingeniería informática por la Universidad del Istmo.',
+      cargo: 'Desarrollador de software en 2H Software SA de CV y desarrollador web en Onikom.',
+      imagen: 'assets/img/Docentes/Lic_FlorentinoRuizAquino.png',
+      descripcion: 'Desarrollador de software con experiencia en aplicaciones web responsivas, manejo de frameworks PHP y desarrollo de soluciones web con integración de dispositivos Raspberry mediante webIOPi.',
+      email: 'LinkedIn: www.linkedin.com/in/florentino-ruiz-aquino-57951b117',
+      publicaciones: []
     }
   ]);
 
