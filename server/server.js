@@ -1,9 +1,22 @@
 ﻿require('dotenv').config();
+const { PrismaClient } = require('@prisma/client');
+
+// Usar una sola instancia global para evitar errores de inicialización
+const prisma = new PrismaClient({
+  log: ['error', 'info', 'query', 'warn'],
+});
+
+// Prueba de conexión inmediata al arrancar
+prisma.$connect()
+  .then(() => console.log('✅ Conexión exitosa a MongoDB con Prisma'))
+  .catch((err) => console.error('❌ Error conectando a la base de datos:', err));
+
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const { GoogleGenAI } = require('@google/genai');
+
 
 const app = express();
 app.use(cors());
@@ -300,6 +313,296 @@ app.post('/api/chat', async (req, res) => {
     }
 
     res.status(500).json({ error: 'Error procesando la solicitud' });
+  }
+});
+
+function parseApiDate(value) {
+  if (!value) {
+    return undefined;
+  }
+
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? undefined : date;
+}
+
+app.get('/api/health', (req, res) => {
+  res.json({ ok: true });
+});
+
+// --- RUTAS DE NOTICIAS ---
+app.get('/api/noticias', async (req, res) => {
+  try {
+    const noticias = await prisma.noticia.findMany({
+      orderBy: { fecha: 'desc' }
+    });
+    res.json(noticias);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener noticias' });
+  }
+});
+
+app.post('/api/noticias', async (req, res) => {
+  try {
+    const { titulo, contenido, descripcion, imagenUrl, fecha, fechaTexto } = req.body;
+    const nuevaNoticia = await prisma.noticia.create({
+      data: {
+        titulo,
+        contenido: contenido || descripcion || '',
+        descripcion: descripcion || contenido || '',
+        imagenUrl,
+        fechaTexto,
+        fecha: parseApiDate(fecha) || new Date()
+      }
+    });
+    res.json(nuevaNoticia);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al crear noticia' });
+  }
+});
+
+// --- RUTAS DE EVENTOS ---
+app.get('/api/eventos', async (req, res) => {
+  try {
+    const eventos = await prisma.evento.findMany({
+      orderBy: [{ mes: 'asc' }, { dia: 'asc' }]
+    });
+    res.json(eventos);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener eventos' });
+  }
+});
+
+app.post('/api/eventos', async (req, res) => {
+  try {
+    const { titulo, nombre, fecha, lugar, descripcion, hora, dia, mes } = req.body;
+    const nuevoEvento = await prisma.evento.create({
+      data: {
+        titulo: titulo || nombre,
+        fecha: parseApiDate(fecha),
+        lugar,
+        descripcion,
+        hora,
+        dia,
+        mes
+      }
+    });
+    res.json(nuevoEvento);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al crear evento' });
+  }
+});
+
+// --- RUTAS DE DOCENTES ---
+app.get('/api/docentes', async (req, res) => {
+  try {
+    const docentes = await prisma.docente.findMany({
+      include: {
+        publicaciones: {
+          orderBy: [{ anio: 'desc' }, { titulo: 'asc' }]
+        }
+      },
+      orderBy: { nombre: 'asc' }
+    });
+    res.json(docentes);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener docentes' });
+  }
+});
+
+app.post('/api/docentes', async (req, res) => {
+  try {
+    const {
+      nombre,
+      especialidad,
+      cargo,
+      imagen,
+      descripcion,
+      email,
+      publicaciones = []
+    } = req.body;
+
+    const docente = await prisma.docente.create({
+      data: {
+        nombre,
+        especialidad,
+        cargo,
+        imagen,
+        descripcion,
+        email,
+        publicaciones: {
+          create: publicaciones.map((publicacion) => ({
+            titulo: publicacion.titulo,
+            anio: publicacion.anio,
+            enlace: publicacion.enlace || '#'
+          }))
+        }
+      },
+      include: { publicaciones: true }
+    });
+
+    res.json(docente);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al crear docente' });
+  }
+});
+
+// --- RUTAS DE EGRESADOS ---
+app.get('/api/egresados', async (req, res) => {
+  try {
+    const where = req.query.modalidad
+      ? { modalidad: String(req.query.modalidad) }
+      : undefined;
+
+    const egresados = await prisma.egresado.findMany({
+      where,
+      orderBy: [{ anio: 'asc' }, { nombre: 'asc' }]
+    });
+
+    res.json(egresados);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener egresados' });
+  }
+});
+
+app.post('/api/egresados', async (req, res) => {
+  try {
+    const { nombre, anio, modalidad } = req.body;
+    const egresado = await prisma.egresado.create({
+      data: {
+        nombre,
+        anio,
+        modalidad
+      }
+    });
+    res.json(egresado);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al crear egresado' });
+  }
+});
+
+// --- RUTAS DE PROYECTOS ---
+app.get('/api/proyectos', async (req, res) => {
+  try {
+    const where = req.query.categoryKey
+      ? { categoryKey: String(req.query.categoryKey) }
+      : undefined;
+
+    const proyectos = await prisma.proyecto.findMany({
+      where,
+      include: {
+        miembros: { orderBy: { nombre: 'asc' } },
+        galeria: true
+      },
+      orderBy: [{ categoryLabel: 'asc' }, { title: 'asc' }]
+    });
+
+    res.json(proyectos);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener proyectos' });
+  }
+});
+
+app.post('/api/proyectos', async (req, res) => {
+  try {
+    const {
+      categoryKey,
+      categoryLabel,
+      title,
+      summary,
+      image,
+      description,
+      videoUrl,
+      miembros = [],
+      galeria = []
+    } = req.body;
+
+    const proyecto = await prisma.proyecto.create({
+      data: {
+        categoryKey,
+        categoryLabel,
+        title,
+        summary,
+        image,
+        description,
+        videoUrl,
+        miembros: {
+          create: miembros.map((miembro) => ({
+            nombre: miembro.nombre || miembro
+          }))
+        },
+        galeria: {
+          create: galeria.map((item) => ({
+            url: item.url || item
+          }))
+        }
+      },
+      include: {
+        miembros: true,
+        galeria: true
+      }
+    });
+
+    res.json(proyecto);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al crear proyecto' });
+  }
+});
+
+// --- RUTAS DE GALERIA ---
+app.get('/api/galeria', async (req, res) => {
+  try {
+    const galeria = await prisma.galeriaItem.findMany({
+      orderBy: { createdAt: 'asc' }
+    });
+    res.json(galeria);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener galeria' });
+  }
+});
+
+app.post('/api/galeria', async (req, res) => {
+  try {
+    const { titulo, categoria, url, tipo } = req.body;
+    const item = await prisma.galeriaItem.create({
+      data: {
+        titulo,
+        categoria,
+        url,
+        tipo
+      }
+    });
+    res.json(item);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al crear item de galeria' });
+  }
+});
+
+// --- RUTAS DE VIDEOS ---
+app.get('/api/videos', async (req, res) => {
+  try {
+    const videos = await prisma.videoInstitucional.findMany({
+      orderBy: { createdAt: 'asc' }
+    });
+    res.json(videos);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener videos' });
+  }
+});
+
+app.post('/api/videos', async (req, res) => {
+  try {
+    const { titulo, caption, src, thumbnailUrl } = req.body;
+    const video = await prisma.videoInstitucional.create({
+      data: {
+        titulo,
+        caption,
+        src,
+        thumbnailUrl
+      }
+    });
+    res.json(video);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al crear video' });
   }
 });
 

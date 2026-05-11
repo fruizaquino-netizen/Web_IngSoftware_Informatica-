@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum ModalidadTitulacion {
+  tesis
+  ceneval
+  experiencia
+}
+
+enum TipoMedia {
+  imagen
+  video
+}
+
+model Noticia {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  titulo      String
+  contenido   String
+  descripcion String?
+  imagenUrl   String?
+  fechaTexto  String?
+  fecha       DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Evento {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  titulo      String
+  descripcion String
+  hora        String?
+  lugar       String?
+  dia         Int?
+  mes         Int?
+  fecha       DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Docente {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  nombre        String
+  especialidad  String
+  cargo         String
+  imagen        String
+  descripcion   String
+  email         String        @unique
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  publicaciones Publicacion[]
+}
+
+model Publicacion {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  titulo    String
+  anio      Int
+  enlace    String
+  docenteId String   @db.ObjectId
+  createdAt DateTime @default(now())
+  docente   Docente  @relation(fields: [docenteId], references: [id], onDelete: Cascade)
+}
+
+model Egresado {
+  id        String               @id @default(auto()) @map("_id") @db.ObjectId
+  nombre    String
+  anio      Int
+  modalidad ModalidadTitulacion
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+}
+
+model Proyecto {
+  id            String            @id @default(auto()) @map("_id") @db.ObjectId
+  categoryKey   String
+  categoryLabel String
+  title         String
+  summary       String
+  image         String
+  description   String
+  videoUrl      String?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  miembros      ProyectoMiembro[]
+  galeria       ProyectoImagen[]
+}
+
+model ProyectoMiembro {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  nombre     String
+  proyectoId String   @db.ObjectId
+  createdAt  DateTime @default(now())
+  proyecto   Proyecto @relation(fields: [proyectoId], references: [id], onDelete: Cascade)
+}
+
+model ProyectoImagen {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  url        String
+  proyectoId String   @db.ObjectId
+  createdAt  DateTime @default(now())
+  proyecto   Proyecto @relation(fields: [proyectoId], references: [id], onDelete: Cascade)
+}
+
+model GaleriaItem {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  titulo    String?
+  categoria String?
+  url       String
+  tipo      TipoMedia @default(imagen)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model VideoInstitucional {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  titulo       String
+  caption      String?
+  src          String
+  thumbnailUrl String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

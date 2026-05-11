@@ -46,6 +46,7 @@ const defaultContent = {
 export class EgresadosPagesComponent {
   private http = inject(HttpClient);
   private translation = inject(TranslationService);
+  private readonly apiUrl = 'http://localhost:3000/api/egresados';
 
   content = signal(defaultContent);
 
@@ -71,6 +72,8 @@ export class EgresadosPagesComponent {
   filtroActivo = signal<'todos' | 'tesis' | 'ceneval' | 'experiencia'>('todos');
 
   constructor() {
+    this.cargarEgresados();
+
     effect(() => {
       const lang = this.translation.currentLang();
       const fileLang = lang === 'en' ? 'en' : lang === 'zapoteco' ? 'zapoteco' : 'es';
@@ -148,5 +151,18 @@ export class EgresadosPagesComponent {
     if (filtro === 'tesis') return labels.FILTER_TESIS;
     if (filtro === 'ceneval') return labels.FILTER_CENEVAL;
     return labels.FILTER_EXPERIENCE;
+  }
+
+  private cargarEgresados(): void {
+    this.http.get<Egresado[]>(this.apiUrl).subscribe({
+      next: (egresados) => {
+        if (Array.isArray(egresados) && egresados.length > 0) {
+          this.egresados.set(egresados);
+        }
+      },
+      error: () => {
+        // Si la API no responde, usamos la lista local.
+      }
+    });
   }
 }
