@@ -37,6 +37,11 @@ export const routes: Routes = [
       .then(m => m.AspirantesPageComponent)
   },
   {
+    path: 'admin',
+    loadComponent: () => import('./pages/admin-panel/admin-panel.component')
+      .then(m => m.AdminPanelComponent)
+  },
+  {
     path: 'excelecia-academica',
     loadComponent: () => import('./pages/inicio/excelencia/excelencia.component')
       .then(m => m.ExcelenciaComponent)

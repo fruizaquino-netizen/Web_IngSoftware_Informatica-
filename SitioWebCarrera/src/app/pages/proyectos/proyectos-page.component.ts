@@ -227,7 +227,7 @@ export class ProyectoPageComponent {
       }>>(this.proyectosApiUrl)
       .subscribe({
         next: (projects) => {
-          if (!Array.isArray(projects) || projects.length === 0) {
+          if (!Array.isArray(projects)) {
             return;
           }
 
@@ -260,7 +260,7 @@ export class ProyectoPageComponent {
       .get<Array<{ url: string }>>(this.galeriaApiUrl)
       .subscribe({
         next: (items) => {
-          if (Array.isArray(items) && items.length > 0) {
+          if (Array.isArray(items)) {
             this.galleryImages.set(items.map((item) => item.url));
           }
         },
@@ -275,7 +275,7 @@ export class ProyectoPageComponent {
       .get<Array<{ src: string; caption?: string; titulo?: string }>>(this.videosApiUrl)
       .subscribe({
         next: (videos) => {
-          if (Array.isArray(videos) && videos.length > 0) {
+          if (Array.isArray(videos)) {
             this.content.update((current) => ({
               ...current,
               videos: videos.map((video) => ({

@@ -1,5 +1,6 @@
 ﻿require('dotenv').config();
 const { PrismaClient } = require('@prisma/client');
+const crypto = require('crypto');
 
 // Usar una sola instancia global para evitar errores de inicialización
 const prisma = new PrismaClient({
@@ -21,6 +22,17 @@ const { GoogleGenAI } = require('@google/genai');
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+const AUTH_SECRET = process.env.AUTH_SECRET || 'dev-secret-change-me';
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
+const TOKEN_TTL_MS = 1000 * 60 * 60 * 8;
+
+if (!process.env.AUTH_SECRET || !process.env.ADMIN_USERNAME || !process.env.ADMIN_PASSWORD) {
+  console.warn(
+    '⚠️  Configura AUTH_SECRET, ADMIN_USERNAME y ADMIN_PASSWORD en server/.env para producción.'
+  );
+}
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
@@ -362,12 +374,138 @@ function parseApiDate(value) {
     return undefined;
   }
 
+  if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    const [year, month, day] = value.split('-').map(Number);
+    return new Date(year, month - 1, day);
+  }
+
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? undefined : date;
 }
 
+function formatSpanishDate(date) {
+  if (!date) {
+    return undefined;
+  }
+
+  return new Intl.DateTimeFormat('es-MX', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  }).format(date);
+}
+
+function safeEqual(a, b) {
+  const left = Buffer.from(String(a || ''));
+  const right = Buffer.from(String(b || ''));
+
+  if (left.length !== right.length) {
+    return false;
+  }
+
+  return crypto.timingSafeEqual(left, right);
+}
+
+function base64UrlEncode(value) {
+  return Buffer.from(JSON.stringify(value)).toString('base64url');
+}
+
+function base64UrlDecode(value) {
+  return JSON.parse(Buffer.from(value, 'base64url').toString('utf8'));
+}
+
+function signToken(payload) {
+  const encodedPayload = base64UrlEncode(payload);
+  const signature = crypto
+    .createHmac('sha256', AUTH_SECRET)
+    .update(encodedPayload)
+    .digest('base64url');
+
+  return `${encodedPayload}.${signature}`;
+}
+
+function verifyToken(token) {
+  if (!token || typeof token !== 'string' || !token.includes('.')) {
+    return null;
+  }
+
+  try {
+    const [encodedPayload, signature] = token.split('.');
+    const expectedSignature = crypto
+      .createHmac('sha256', AUTH_SECRET)
+      .update(encodedPayload)
+      .digest('base64url');
+
+    if (!safeEqual(signature, expectedSignature)) {
+      return null;
+    }
+
+    const payload = base64UrlDecode(encodedPayload);
+    if (!payload?.exp || payload.exp < Date.now()) {
+      return null;
+    }
+
+    return payload;
+  } catch (error) {
+    return null;
+  }
+}
+
+function requireAuth(req, res, next) {
+  const authHeader = req.headers.authorization || '';
+  const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
+  const payload = verifyToken(token);
+
+  if (!payload) {
+    return res.status(401).json({ error: 'No autorizado' });
+  }
+
+  req.user = payload;
+  next();
+}
+
+function normalizePublicaciones(publicaciones = []) {
+  return publicaciones.map((publicacion) => ({
+    titulo: publicacion.titulo,
+    anio: Number(publicacion.anio),
+    enlace: publicacion.enlace || '#'
+  }));
+}
+
+function normalizeMiembros(miembros = []) {
+  return miembros.map((miembro) => ({
+    nombre: typeof miembro === 'string' ? miembro : miembro.nombre
+  }));
+}
+
+function normalizeProyectoGaleria(galeria = []) {
+  return galeria.map((item) => ({
+    url: typeof item === 'string' ? item : item.url
+  }));
+}
+
 app.get('/api/health', (req, res) => {
   res.json({ ok: true });
+});
+
+app.post('/api/auth/login', (req, res) => {
+  const { username, password } = req.body;
+
+  if (!safeEqual(username, ADMIN_USERNAME) || !safeEqual(password, ADMIN_PASSWORD)) {
+    return res.status(401).json({ error: 'Credenciales incorrectas' });
+  }
+
+  const token = signToken({
+    sub: ADMIN_USERNAME,
+    role: 'admin',
+    exp: Date.now() + TOKEN_TTL_MS
+  });
+
+  res.json({
+    token,
+    tokenType: 'Bearer',
+    expiresIn: TOKEN_TTL_MS / 1000
+  });
 });
 
 // --- RUTAS DE NOTICIAS ---
@@ -382,22 +520,53 @@ app.get('/api/noticias', async (req, res) => {
   }
 });
 
-app.post('/api/noticias', async (req, res) => {
+app.post('/api/noticias', requireAuth, async (req, res) => {
   try {
     const { titulo, contenido, descripcion, imagenUrl, fecha, fechaTexto } = req.body;
+    const parsedDate = parseApiDate(fecha) || new Date();
     const nuevaNoticia = await prisma.noticia.create({
       data: {
         titulo,
         contenido: contenido || descripcion || '',
         descripcion: descripcion || contenido || '',
         imagenUrl,
-        fechaTexto,
-        fecha: parseApiDate(fecha) || new Date()
+        fechaTexto: fechaTexto || formatSpanishDate(parsedDate),
+        fecha: parsedDate
       }
     });
-    res.json(nuevaNoticia);
+    res.status(201).json(nuevaNoticia);
   } catch (error) {
     res.status(500).json({ error: 'Error al crear noticia' });
+  }
+});
+
+app.put('/api/noticias/:id', requireAuth, async (req, res) => {
+  try {
+    const { titulo, contenido, descripcion, imagenUrl, fecha, fechaTexto } = req.body;
+    const parsedDate = parseApiDate(fecha);
+    const noticia = await prisma.noticia.update({
+      where: { id: req.params.id },
+      data: {
+        titulo,
+        contenido,
+        descripcion,
+        imagenUrl,
+        fechaTexto: fechaTexto || formatSpanishDate(parsedDate),
+        fecha: parsedDate
+      }
+    });
+    res.json(noticia);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al actualizar noticia' });
+  }
+});
+
+app.delete('/api/noticias/:id', requireAuth, async (req, res) => {
+  try {
+    await prisma.noticia.delete({ where: { id: req.params.id } });
+    res.json({ ok: true });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar noticia' });
   }
 });
 
@@ -413,23 +582,55 @@ app.get('/api/eventos', async (req, res) => {
   }
 });
 
-app.post('/api/eventos', async (req, res) => {
+app.post('/api/eventos', requireAuth, async (req, res) => {
   try {
     const { titulo, nombre, fecha, lugar, descripcion, hora, dia, mes } = req.body;
+    const parsedDate = parseApiDate(fecha);
     const nuevoEvento = await prisma.evento.create({
       data: {
         titulo: titulo || nombre,
-        fecha: parseApiDate(fecha),
+        fecha: parsedDate,
         lugar,
         descripcion,
         hora,
-        dia,
-        mes
+        dia: dia ?? parsedDate?.getDate(),
+        mes: mes ?? parsedDate?.getMonth()
       }
     });
-    res.json(nuevoEvento);
+    res.status(201).json(nuevoEvento);
   } catch (error) {
     res.status(500).json({ error: 'Error al crear evento' });
+  }
+});
+
+app.put('/api/eventos/:id', requireAuth, async (req, res) => {
+  try {
+    const { titulo, nombre, fecha, lugar, descripcion, hora, dia, mes } = req.body;
+    const parsedDate = parseApiDate(fecha);
+    const evento = await prisma.evento.update({
+      where: { id: req.params.id },
+      data: {
+        titulo: titulo || nombre,
+        fecha: parsedDate,
+        lugar,
+        descripcion,
+        hora,
+        dia: dia ?? parsedDate?.getDate(),
+        mes: mes ?? parsedDate?.getMonth()
+      }
+    });
+    res.json(evento);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al actualizar evento' });
+  }
+});
+
+app.delete('/api/eventos/:id', requireAuth, async (req, res) => {
+  try {
+    await prisma.evento.delete({ where: { id: req.params.id } });
+    res.json({ ok: true });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar evento' });
   }
 });
 
@@ -450,7 +651,7 @@ app.get('/api/docentes', async (req, res) => {
   }
 });
 
-app.post('/api/docentes', async (req, res) => {
+app.post('/api/docentes', requireAuth, async (req, res) => {
   try {
     const {
       nombre,
@@ -471,19 +672,64 @@ app.post('/api/docentes', async (req, res) => {
         descripcion,
         email,
         publicaciones: {
-          create: publicaciones.map((publicacion) => ({
-            titulo: publicacion.titulo,
-            anio: publicacion.anio,
-            enlace: publicacion.enlace || '#'
-          }))
+          create: normalizePublicaciones(publicaciones)
         }
+      },
+      include: { publicaciones: true }
+    });
+
+    res.status(201).json(docente);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al crear docente' });
+  }
+});
+
+app.put('/api/docentes/:id', requireAuth, async (req, res) => {
+  try {
+    const {
+      nombre,
+      especialidad,
+      cargo,
+      imagen,
+      descripcion,
+      email,
+      publicaciones
+    } = req.body;
+
+    const docente = await prisma.docente.update({
+      where: { id: req.params.id },
+      data: {
+        nombre,
+        especialidad,
+        cargo,
+        imagen,
+        descripcion,
+        email,
+        ...(Array.isArray(publicaciones)
+          ? {
+              publicaciones: {
+                deleteMany: {},
+                create: normalizePublicaciones(publicaciones)
+              }
+            }
+          : {})
       },
       include: { publicaciones: true }
     });
 
     res.json(docente);
   } catch (error) {
-    res.status(500).json({ error: 'Error al crear docente' });
+    res.status(500).json({ error: 'Error al actualizar docente' });
+  }
+});
+
+app.delete('/api/docentes/:id', requireAuth, async (req, res) => {
+  try {
+    await prisma.publicacion.deleteMany({ where: { docenteId: req.params.id } });
+    await prisma.docente.delete({ where: { id: req.params.id } });
+    res.json({ ok: true });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar docente' });
   }
 });
 
@@ -505,7 +751,7 @@ app.get('/api/egresados', async (req, res) => {
   }
 });
 
-app.post('/api/egresados', async (req, res) => {
+app.post('/api/egresados', requireAuth, async (req, res) => {
   try {
     const { nombre, anio, modalidad } = req.body;
     const egresado = await prisma.egresado.create({
@@ -515,9 +761,35 @@ app.post('/api/egresados', async (req, res) => {
         modalidad
       }
     });
-    res.json(egresado);
+    res.status(201).json(egresado);
   } catch (error) {
     res.status(500).json({ error: 'Error al crear egresado' });
+  }
+});
+
+app.put('/api/egresados/:id', requireAuth, async (req, res) => {
+  try {
+    const { nombre, anio, modalidad } = req.body;
+    const egresado = await prisma.egresado.update({
+      where: { id: req.params.id },
+      data: {
+        nombre,
+        anio,
+        modalidad
+      }
+    });
+    res.json(egresado);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al actualizar egresado' });
+  }
+});
+
+app.delete('/api/egresados/:id', requireAuth, async (req, res) => {
+  try {
+    await prisma.egresado.delete({ where: { id: req.params.id } });
+    res.json({ ok: true });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar egresado' });
   }
 });
 
@@ -543,7 +815,7 @@ app.get('/api/proyectos', async (req, res) => {
   }
 });
 
-app.post('/api/proyectos', async (req, res) => {
+app.post('/api/proyectos', requireAuth, async (req, res) => {
   try {
     const {
       categoryKey,
@@ -567,15 +839,64 @@ app.post('/api/proyectos', async (req, res) => {
         description,
         videoUrl,
         miembros: {
-          create: miembros.map((miembro) => ({
-            nombre: miembro.nombre || miembro
-          }))
+          create: normalizeMiembros(miembros)
         },
         galeria: {
-          create: galeria.map((item) => ({
-            url: item.url || item
-          }))
+          create: normalizeProyectoGaleria(galeria)
         }
+      },
+      include: {
+        miembros: true,
+        galeria: true
+      }
+    });
+
+    res.status(201).json(proyecto);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al crear proyecto' });
+  }
+});
+
+app.put('/api/proyectos/:id', requireAuth, async (req, res) => {
+  try {
+    const {
+      categoryKey,
+      categoryLabel,
+      title,
+      summary,
+      image,
+      description,
+      videoUrl,
+      miembros,
+      galeria
+    } = req.body;
+
+    const proyecto = await prisma.proyecto.update({
+      where: { id: req.params.id },
+      data: {
+        categoryKey,
+        categoryLabel,
+        title,
+        summary,
+        image,
+        description,
+        videoUrl,
+        ...(Array.isArray(miembros)
+          ? {
+              miembros: {
+                deleteMany: {},
+                create: normalizeMiembros(miembros)
+              }
+            }
+          : {}),
+        ...(Array.isArray(galeria)
+          ? {
+              galeria: {
+                deleteMany: {},
+                create: normalizeProyectoGaleria(galeria)
+              }
+            }
+          : {})
       },
       include: {
         miembros: true,
@@ -585,7 +906,18 @@ app.post('/api/proyectos', async (req, res) => {
 
     res.json(proyecto);
   } catch (error) {
-    res.status(500).json({ error: 'Error al crear proyecto' });
+    res.status(500).json({ error: 'Error al actualizar proyecto' });
+  }
+});
+
+app.delete('/api/proyectos/:id', requireAuth, async (req, res) => {
+  try {
+    await prisma.proyectoMiembro.deleteMany({ where: { proyectoId: req.params.id } });
+    await prisma.proyectoImagen.deleteMany({ where: { proyectoId: req.params.id } });
+    await prisma.proyecto.delete({ where: { id: req.params.id } });
+    res.json({ ok: true });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar proyecto' });
   }
 });
 
@@ -601,7 +933,7 @@ app.get('/api/galeria', async (req, res) => {
   }
 });
 
-app.post('/api/galeria', async (req, res) => {
+app.post('/api/galeria', requireAuth, async (req, res) => {
   try {
     const { titulo, categoria, url, tipo } = req.body;
     const item = await prisma.galeriaItem.create({
@@ -612,9 +944,36 @@ app.post('/api/galeria', async (req, res) => {
         tipo
       }
     });
-    res.json(item);
+    res.status(201).json(item);
   } catch (error) {
     res.status(500).json({ error: 'Error al crear item de galeria' });
+  }
+});
+
+app.put('/api/galeria/:id', requireAuth, async (req, res) => {
+  try {
+    const { titulo, categoria, url, tipo } = req.body;
+    const item = await prisma.galeriaItem.update({
+      where: { id: req.params.id },
+      data: {
+        titulo,
+        categoria,
+        url,
+        tipo
+      }
+    });
+    res.json(item);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al actualizar item de galeria' });
+  }
+});
+
+app.delete('/api/galeria/:id', requireAuth, async (req, res) => {
+  try {
+    await prisma.galeriaItem.delete({ where: { id: req.params.id } });
+    res.json({ ok: true });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar item de galeria' });
   }
 });
 
@@ -630,7 +989,7 @@ app.get('/api/videos', async (req, res) => {
   }
 });
 
-app.post('/api/videos', async (req, res) => {
+app.post('/api/videos', requireAuth, async (req, res) => {
   try {
     const { titulo, caption, src, thumbnailUrl } = req.body;
     const video = await prisma.videoInstitucional.create({
@@ -641,9 +1000,36 @@ app.post('/api/videos', async (req, res) => {
         thumbnailUrl
       }
     });
-    res.json(video);
+    res.status(201).json(video);
   } catch (error) {
     res.status(500).json({ error: 'Error al crear video' });
+  }
+});
+
+app.put('/api/videos/:id', requireAuth, async (req, res) => {
+  try {
+    const { titulo, caption, src, thumbnailUrl } = req.body;
+    const video = await prisma.videoInstitucional.update({
+      where: { id: req.params.id },
+      data: {
+        titulo,
+        caption,
+        src,
+        thumbnailUrl
+      }
+    });
+    res.json(video);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al actualizar video' });
+  }
+});
+
+app.delete('/api/videos/:id', requireAuth, async (req, res) => {
+  try {
+    await prisma.videoInstitucional.delete({ where: { id: req.params.id } });
+    res.json({ ok: true });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar video' });
   }
 });
 

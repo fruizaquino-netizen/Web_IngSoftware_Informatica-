@@ -154,7 +154,7 @@ export class EgresadosPagesComponent {
   private cargarEgresados(): void {
     this.http.get<Egresado[]>(this.apiUrl).subscribe({
       next: (egresados) => {
-        if (Array.isArray(egresados) && egresados.length > 0) {
+        if (Array.isArray(egresados)) {
           this.egresados.set(egresados);
         }
       },

@@ -1,0 +1,149 @@
+<section class="admin-shell">
+  <header class="admin-header">
+    <div>
+      <p class="eyebrow">Administracion</p>
+      <h1>AdminPanel</h1>
+      <p class="subtitle">Gestiona la informacion publicada en MongoDB Atlas.</p>
+    </div>
+
+    @if (isAuthenticated()) {
+      <button type="button" class="ghost-button" (click)="logout()">Cerrar sesion</button>
+    }
+  </header>
+
+  @if (!isAuthenticated()) {
+    <form class="login-panel" [formGroup]="loginForm" (ngSubmit)="login()">
+      <h2>Acceso de administrador</h2>
+      <label>
+        Usuario
+        <input type="text" formControlName="username" autocomplete="username" />
+      </label>
+      <label>
+        Contrasena
+        <input type="password" formControlName="password" autocomplete="current-password" />
+      </label>
+      <button type="submit" class="primary-button">Entrar</button>
+    </form>
+  } @else {
+    <div class="admin-layout">
+      <nav class="section-nav" aria-label="Secciones administrativas">
+        @for (section of sections; track section.key) {
+          <button
+            type="button"
+            [class.active]="section.key === activeKey()"
+            (click)="selectSection(section.key)"
+          >
+            {{ section.label }}
+          </button>
+        }
+      </nav>
+
+      <main class="content-panel">
+        <div class="panel-toolbar">
+          <div>
+            <h2>{{ activeSection().label }}</h2>
+            <span>{{ records().length }} registro(s)</span>
+          </div>
+          <button type="button" class="primary-button" (click)="openCreateForm()">Agregar Nuevo</button>
+        </div>
+
+        @if (message()) {
+          <div class="notice success">{{ message() }}</div>
+        }
+
+        @if (error()) {
+          <div class="notice error">{{ error() }}</div>
+        }
+
+        @if (formVisible()) {
+          <form class="record-form" [formGroup]="dataForm" (ngSubmit)="submitForm()">
+            <div class="form-heading">
+              <h3>{{ editingRecord() ? 'Editar registro' : 'Agregar nuevo registro' }}</h3>
+              <button type="button" class="icon-button" (click)="cancelForm()" aria-label="Cerrar formulario">
+                x
+              </button>
+            </div>
+
+            <div class="form-grid">
+              @for (field of activeSection().fields; track field.key) {
+                <label [class.wide]="field.wide">
+                  {{ field.label }}
+
+                  @if (field.type === 'textarea') {
+                    <textarea
+                      [formControlName]="field.key"
+                      [placeholder]="field.placeholder || ''"
+                      rows="4"
+                    ></textarea>
+                  } @else if (field.type === 'select') {
+                    <select [formControlName]="field.key">
+                      <option value="">Selecciona una opcion</option>
+                      @for (option of field.options || []; track option.value) {
+                        <option [value]="option.value">{{ option.label }}</option>
+                      }
+                    </select>
+                  } @else {
+                    <input
+                      [type]="field.type"
+                      [formControlName]="field.key"
+                      [placeholder]="field.placeholder || ''"
+                    />
+                  }
+                </label>
+              }
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="ghost-button" (click)="cancelForm()">Cancelar</button>
+              <button type="submit" class="primary-button">
+                {{ editingRecord() ? 'Guardar cambios' : 'Crear registro' }}
+              </button>
+            </div>
+          </form>
+        }
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                @for (column of activeSection().tableColumns; track column.key) {
+                  <th>{{ column.label }}</th>
+                }
+                <th class="actions-column">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if (loading()) {
+                <tr>
+                  <td [attr.colspan]="activeSection().tableColumns.length + 1" class="empty-cell">
+                    Cargando registros...
+                  </td>
+                </tr>
+              } @else {
+                @for (record of records(); track record[activeSection().idKey]) {
+                  <tr>
+                    @for (column of activeSection().tableColumns; track column.key) {
+                      <td>{{ displayValue(record, column.key) }}</td>
+                    }
+                    <td class="row-actions">
+                      <button type="button" class="edit-button" (click)="openEditForm(record)">Editar</button>
+                      <button type="button" class="delete-button" (click)="deleteRecord(record)">
+                        Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                } @empty {
+                  <tr>
+                    <td [attr.colspan]="activeSection().tableColumns.length + 1" class="empty-cell">
+                      No hay registros en esta seccion.
+                    </td>
+                  </tr>
+                }
+              }
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  }
+</section>

@@ -238,7 +238,7 @@ export class DocentesPageComponent {
   private cargarDocentes(): void {
     this.http.get<Docente[]>(this.docentesApiUrl).subscribe({
       next: (docentes) => {
-        if (Array.isArray(docentes) && docentes.length > 0) {
+        if (Array.isArray(docentes)) {
           this.docentes.set(docentes);
         }
       },
