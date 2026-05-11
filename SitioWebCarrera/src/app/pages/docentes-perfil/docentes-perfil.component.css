@@ -1,1 +1,172 @@
-﻿
+.perfil-docente {
+  background: #f6f7fb;
+  min-height: 100vh;
+  padding: 48px 16px;
+}
+
+.perfil-docente__container {
+  margin: 0 auto;
+  max-width: 1180px;
+}
+
+.perfil-docente__back {
+  align-items: center;
+  color: #6f1231;
+  display: inline-flex;
+  font-weight: 700;
+  gap: 8px;
+  margin-bottom: 24px;
+  text-decoration: none;
+}
+
+.perfil-docente__layout {
+  align-items: start;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(260px, 360px) 1fr;
+}
+
+.perfil-docente__summary,
+.perfil-docente__content section,
+.perfil-docente__state {
+  background: #ffffff;
+  border: 1px solid #e3e7ef;
+  border-radius: 8px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+}
+
+.perfil-docente__summary {
+  padding: 28px;
+  text-align: center;
+}
+
+.perfil-docente__image {
+  border: 5px solid #c9a227;
+  border-radius: 50%;
+  height: 168px;
+  object-fit: cover;
+  width: 168px;
+}
+
+.perfil-docente__summary h1 {
+  color: #1f2937;
+  font-size: 1.55rem;
+  line-height: 1.25;
+  margin: 20px 0 12px;
+}
+
+.perfil-docente__specialty {
+  background: #6f1231;
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 8px 12px;
+}
+
+.perfil-docente__role {
+  color: #475569;
+  line-height: 1.6;
+  margin-top: 16px;
+}
+
+.perfil-docente__contact {
+  border-top: 1px solid #e5e7eb;
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+  padding-top: 20px;
+  text-align: left;
+}
+
+.perfil-docente__contact span {
+  align-items: center;
+  color: #334155;
+  display: flex;
+  gap: 10px;
+  overflow-wrap: anywhere;
+}
+
+.perfil-docente__content {
+  display: grid;
+  gap: 24px;
+}
+
+.perfil-docente__content section {
+  padding: 28px;
+}
+
+.perfil-docente__content h2 {
+  border-bottom: 2px solid #c9a227;
+  color: #1f2937;
+  font-size: 1.35rem;
+  margin: 0 0 18px;
+  padding-bottom: 12px;
+}
+
+.perfil-docente__content p {
+  color: #475569;
+  line-height: 1.75;
+  margin: 0;
+  text-align: justify;
+}
+
+.perfil-docente__table-wrap {
+  overflow-x: auto;
+}
+
+.perfil-docente table {
+  border-collapse: collapse;
+  min-width: 640px;
+  width: 100%;
+}
+
+.perfil-docente th,
+.perfil-docente td {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 14px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.perfil-docente th {
+  color: #64748b;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.perfil-docente td {
+  color: #334155;
+}
+
+.perfil-docente td:nth-child(2),
+.perfil-docente td:nth-child(3) {
+  white-space: nowrap;
+}
+
+.perfil-docente td a {
+  color: #6f1231;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.perfil-docente__state {
+  color: #475569;
+  font-size: 1rem;
+  padding: 28px;
+}
+
+.perfil-docente__state--error {
+  color: #991b1b;
+}
+
+@media (max-width: 860px) {
+  .perfil-docente {
+    padding: 32px 12px;
+  }
+
+  .perfil-docente__layout {
+    grid-template-columns: 1fr;
+  }
+}

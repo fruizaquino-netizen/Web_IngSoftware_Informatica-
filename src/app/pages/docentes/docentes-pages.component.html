@@ -71,10 +71,12 @@
                   <label class="small text-uppercase text-muted fw-bold d-block">Correo Electrónico</label>
                   <span class="text-dark"><i class="bi bi-envelope-at me-2"></i>{{ docenteSeleccionado()?.email }}</span>
                 </div>
-                <div class="mb-3">
-                  <label class="small text-uppercase text-muted fw-bold d-block">Teléfono</label>
-                  <span class="text-dark"><i class="bi bi-telephone me-2"></i>{{ docenteSeleccionado()?.telefono }}</span>
-                </div>
+                @if (docenteSeleccionado()?.telefono) {
+                  <div class="mb-3">
+                    <label class="small text-uppercase text-muted fw-bold d-block">Teléfono</label>
+                    <span class="text-dark"><i class="bi bi-telephone me-2"></i>{{ docenteSeleccionado()?.telefono }}</span>
+                  </div>
+                }
               </div>
             </div>
 

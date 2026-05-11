@@ -33,15 +33,15 @@ const defaultContent = {
       title: 'Carrito Autï¿½f�,³nomo con Arduino',
       summary:
         'Vehï¿½f�,­culo autï¿½f�,³nomo a escala controlado por Arduino con sensores inteligentes.',
-      image: 'assets/img/proy1.jpg',
+      image: 'assets/img/Proyectos/proy1.jpg',
       modal: {
         description:
           'Proyecto enfocado en el desarrollo de un carrito autï¿½f�,³nomo a escala utilizando Arduino y sensores ultrasï¿½f�,³nicos para la detecciï¿½f�,³n de obstï¿½f�,¡culos y toma de decisiones en tiempo real.',
         members: ['Ulises Diaz', 'Yahir Antonio', 'Fernando Gawalek'],
         gallery: [
-          'assets/img/proy1.jpg',
-          'assets/img/carrito1.jpg',
-          'assets/img/carrito2.jpg'
+          'assets/img/Proyectos/proy1.jpg',
+          'assets/img/Proyectos/carrito1.jpg',
+          'assets/img/Proyectos/carrito2.jpg'
         ],
         videoUrl: 'https://www.youtube.com/embed/VIDEO_ID'
       }
@@ -53,12 +53,12 @@ const defaultContent = {
       title: 'Medidor de Presiï¿½f�,³n con Grï¿½f�,¡ficas',
       summary:
         'Sistema de mediciï¿½f�,³n con visualizaciï¿½f�,³n grï¿½f�,¡fica en tiempo real.',
-      image: 'assets/img/proy2.jpeg',
+      image: 'assets/img/Proyectos/proy2.jpeg',
       modal: {
         description:
           'Sistema de mediciï¿½f�,³n de presiï¿½f�,³n que permite visualizar datos en tiempo real mediante grï¿½f�,¡ficas dinï¿½f�,¡micas. El proyecto integra sensores electrï¿½f�,³nicos y software para el anï¿½f�,¡lisis de informaciï¿½f�,³n.',
         members: ['Carlos Mï¿½f�,©ndez', 'Marï¿½f�,­a Lï¿½f�,³pez', 'Fernando Ruiz'],
-        gallery: ['assets/img/proy2.jpeg']
+        gallery: ['assets/img/Proyectos/proy2.jpeg']
       }
     },
     {
@@ -68,12 +68,12 @@ const defaultContent = {
       title: 'Sensor de Detecciï¿½f�,³n de Personas',
       summary:
         'Sensor inteligente para detecciï¿½f�,³n automï¿½f�,¡tica de presencia humana.',
-      image: 'assets/img/sensor.jpg',
+      image: 'assets/img/Proyectos/sensor.jpg',
       modal: {
         description:
           'Proyecto de sistemas inteligentes enfocado en la detecciï¿½f�,³n automï¿½f�,¡tica de presencia humana mediante sensores infrarrojos, aplicable a seguridad y control de accesos.',
         members: ['Andrea Torres', 'Juan Castillo', 'Diego Herrera'],
-        gallery: ['assets/img/sensor.jpg']
+        gallery: ['assets/img/Proyectos/sensor.jpg']
       }
     },
     {
@@ -83,12 +83,12 @@ const defaultContent = {
       title: 'Dron Comandado por Voz',
       summary:
         'Dron inteligente programado para obedecer comandos por voz.',
-      image: 'assets/img/proy4.png',
+      image: 'assets/img/Proyectos/proy4.png',
       modal: {
         description:
           'Dron inteligente programado para ejecutar acciones mediante comandos de voz. El sistema utiliza reconocimiento de voz y lï¿½f�,³gica de control para maniobras bï¿½f�,¡sicas de vuelo.',
         members: ['Pedro Sï¿½f�,¡nchez', 'Lucï¿½f�,­a Moreno', 'Daniel Cruz'],
-        gallery: ['assets/img/proy4.png']
+        gallery: ['assets/img/Proyectos/proy4.png']
       }
     }
   ],
@@ -153,27 +153,27 @@ export class ProyectoPageComponent {
 
   galleryImages = signal([
     // ï¿½f�,reas fï¿½f�,­sicas
-    'assets/img/Electronica1.jpg',
-    'assets/img/Elect.jpg',
-    'assets/img/SalaRedes.jpg',
-    'assets/img/Auditorio.jpg',
-    'assets/img/Estatua.jpg',
-    'assets/img/Electronica2.jpg',
-    'assets/img/ConcursoAltar1.jpg',
-    'assets/img/ConcursoAltar2.jpg',
-    'assets/img/Viaje_EscNaval1.jpg',
-    'assets/img/Viaje_EscNaval2.jpg',
-    'assets/img/Viaje_EscNaval3.jpg',
-    'assets/img/Viaje_Supercool.jpg',
-    'assets/img/Viaje_Thyssenkrupp1.png',
-    'assets/img/Viaje_Thyssenkrupp2.png',
-    'assets/img/Viaje_Thyssenkrupp3.jpg',
-    'assets/img/Viaje_Thyssenkrupp4.jpg',
-    'assets/img/Viaje_UDLAP1.jpg',
-    'assets/img/Viaje_UDLAP2.jpg',
-    'assets/img/Viaje_UDLAP3.jpg',
-    'assets/img/Viaje_UniVeracruz.jpg',
-    'assets/img/Curso_2023.jpg'
+    'assets/img/Galeria/Electronica1.jpg',
+    'assets/img/Galeria/Elect.jpg',
+    'assets/img/Galeria/SalaRedes.jpg',
+    'assets/img/Galeria/Auditorio.jpg',
+    'assets/img/Galeria/Estatua.jpg',
+    'assets/img/Galeria/Electronica2.jpg',
+    'assets/img/Galeria/ConcursoAltar1.jpg',
+    'assets/img/Galeria/ConcursoAltar2.jpg',
+    'assets/img/Galeria/Viaje_EscNaval1.jpg',
+    'assets/img/Galeria/Viaje_EscNaval2.jpg',
+    'assets/img/Galeria/Viaje_EscNaval3.jpg',
+    'assets/img/Galeria/Viaje_Supercool.jpg',
+    'assets/img/Galeria/Viaje_Thyssenkrupp1.png',
+    'assets/img/Galeria/Viaje_Thyssenkrupp2.png',
+    'assets/img/Galeria/Viaje_Thyssenkrupp3.jpg',
+    'assets/img/Galeria/Viaje_Thyssenkrupp4.jpg',
+    'assets/img/Galeria/Viaje_UDLAP1.jpg',
+    'assets/img/Galeria/Viaje_UDLAP2.jpg',
+    'assets/img/Galeria/Viaje_UDLAP3.jpg',
+    'assets/img/Galeria/Viaje_UniVeracruz.jpg',
+    'assets/img/Galeria/Curso_2023.jpg'
   ]);
 
   activeImage = signal(0);
@@ -228,7 +228,7 @@ export class ProyectoPageComponent {
       }>>(this.proyectosApiUrl)
       .subscribe({
         next: (projects) => {
-          if (!Array.isArray(projects) || projects.length === 0) {
+          if (!Array.isArray(projects)) {
             return;
           }
 
@@ -261,7 +261,7 @@ export class ProyectoPageComponent {
       .get<Array<{ url: string }>>(this.galeriaApiUrl)
       .subscribe({
         next: (items) => {
-          if (Array.isArray(items) && items.length > 0) {
+          if (Array.isArray(items)) {
             this.galleryImages.set(items.map((item) => item.url));
           }
         },
@@ -276,7 +276,7 @@ export class ProyectoPageComponent {
       .get<Array<{ src: string; caption?: string; titulo?: string }>>(this.videosApiUrl)
       .subscribe({
         next: (videos) => {
-          if (Array.isArray(videos) && videos.length > 0) {
+          if (Array.isArray(videos)) {
             this.content.update((current) => ({
               ...current,
               videos: videos.map((video) => ({

@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
   --unistmo-wine: #9d2449;
@@ -147,7 +147,7 @@ body {
 
 /* ESTADO HOVER: El secreto está en asegurar el color blanco */
 .btn-ultra-profile:hover {
-  color: #d13636 !important; /* Forzado total */
+  color: #ffffff !important; /* Forzado total */
 }
 
 .btn-ultra-profile:hover::after {

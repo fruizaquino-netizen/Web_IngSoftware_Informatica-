@@ -24,11 +24,11 @@
       "categoryLabel": "Desarrollo de Software",
       "title": "Carrito Autónomo con Arduino",
       "summary": "Vehículo autónomo a escala controlado por Arduino con sensores inteligentes.",
-      "image": "assets/img/proy1.jpg",
+      "image": "assets/img/Proyectos/proy1.jpg",
       "modal": {
         "description": "Proyecto enfocado en el desarrollo de un carrito autónomo a escala utilizando Arduino y sensores ultrasónicos para la detección de obstáculos y toma de decisiones en tiempo real.",
         "members": ["Ulises Diaz", "Yahir Antonio", "Fernando Gawalek"],
-        "gallery": ["assets/img/proy1.jpg", "assets/img/carrito1.jpg", "assets/img/carrito2.jpg"],
+        "gallery": ["assets/img/Proyectos/proy1.jpg", "assets/img/Proyectos/carrito1.jpg", "assets/img/Proyectos/carrito2.jpg"],
         "videoUrl": "https://www.youtube.com/embed/VIDEO_ID"
       }
     },
@@ -38,11 +38,11 @@
       "categoryLabel": "Desarrollo de Software",
       "title": "Medidor de Presión con Gráficas",
       "summary": "Sistema de medición con visualización gráfica en tiempo real.",
-      "image": "assets/img/proy2.jpeg",
+      "image": "assets/img/Proyectos/proy2.jpeg",
       "modal": {
         "description": "Sistema de medición de presión que permite visualizar datos en tiempo real mediante gráficas dinámicas. El proyecto integra sensores electrónicos y software para el análisis de información.",
         "members": ["Carlos Méndez", "María López", "Fernando Ruiz"],
-        "gallery": ["assets/img/proy2.jpeg"]
+        "gallery": ["assets/img/Proyectos/proy2.jpeg"]
       }
     },
     {
@@ -51,11 +51,11 @@
       "categoryLabel": "Sistemas Inteligentes",
       "title": "Sensor de Detección de Personas",
       "summary": "Sensor inteligente para detección automática de presencia humana.",
-      "image": "assets/img/sensor.jpg",
+      "image": "assets/img/Proyectos/sensor.jpg",
       "modal": {
         "description": "Proyecto de sistemas inteligentes enfocado en la detección automática de presencia humana mediante sensores infrarrojos, aplicable a seguridad y control de accesos.",
         "members": ["Andrea Torres", "Juan Castillo", "Diego Herrera"],
-        "gallery": ["assets/img/sensor.jpg"]
+        "gallery": ["assets/img/Proyectos/sensor.jpg"]
       }
     },
     {
@@ -64,11 +64,11 @@
       "categoryLabel": "Sistemas Inteligentes",
       "title": "Dron Comandado por Voz",
       "summary": "Dron inteligente programado para obedecer comandos por voz.",
-      "image": "assets/img/proy4.png",
+      "image": "assets/img/Proyectos/proy4.png",
       "modal": {
         "description": "Dron inteligente programado para ejecutar acciones mediante comandos de voz. El sistema utiliza reconocimiento de voz y lógica de control para maniobras básicas de vuelo.",
         "members": ["Pedro Sánchez", "Lucía Moreno", "Daniel Cruz"],
-        "gallery": ["assets/img/proy4.png"]
+        "gallery": ["assets/img/Proyectos/proy4.png"]
       }
     }
   ],

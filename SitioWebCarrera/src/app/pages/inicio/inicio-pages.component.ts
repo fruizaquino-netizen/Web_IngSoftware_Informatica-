@@ -300,7 +300,7 @@ export class InicioPageComponent {
       .get<Array<{ titulo: string; contenido: string; descripcion?: string; fechaTexto?: string; fecha?: string }>>(this.noticiasApiUrl)
       .subscribe({
         next: (noticias) => {
-          if (Array.isArray(noticias) && noticias.length > 0) {
+          if (Array.isArray(noticias)) {
             this.noticias = noticias.map((noticia) => ({
               titulo: noticia.titulo,
               fecha: noticia.fechaTexto || noticia.fecha || '',
@@ -319,7 +319,7 @@ export class InicioPageComponent {
       .get<Array<{ dia?: number; mes?: number; titulo: string; hora?: string; descripcion: string }>>(this.eventosApiUrl)
       .subscribe({
         next: (eventos) => {
-          if (Array.isArray(eventos) && eventos.length > 0) {
+          if (Array.isArray(eventos)) {
             this.todosLosEventos = eventos.map((evento) => ({
               dia: evento.dia ?? 0,
               mes: evento.mes ?? 0,
