@@ -1,5 +1,78 @@
-﻿<h1>Perfil del docente</h1>
-<p>Aquí se mostrará la información del docente.</p>
+<section class="perfil-docente">
+  <div class="perfil-docente__container">
+    <a routerLink="/docentes" class="perfil-docente__back">
+      <i class="bi bi-arrow-left"></i>
+      Volver a docentes
+    </a>
 
+    @if (cargando()) {
+      <div class="perfil-docente__state">Cargando perfil...</div>
+    } @else if (error()) {
+      <div class="perfil-docente__state perfil-docente__state--error">{{ error() }}</div>
+    } @else if (docente()) {
+      <article class="perfil-docente__layout">
+        <aside class="perfil-docente__summary">
+          <img
+            [src]="docente()?.imagen"
+            [alt]="docente()?.nombre"
+            class="perfil-docente__image"
+            onerror="this.src='https://ui-avatars.com/api/?name=Docente&background=cbd5e1&color=333d47&size=512'"
+          >
+          <h1>{{ docente()?.nombre }}</h1>
+          <p class="perfil-docente__specialty">{{ docente()?.especialidad }}</p>
+          <p class="perfil-docente__role">{{ docente()?.cargo }}</p>
 
+          <div class="perfil-docente__contact">
+            <span><i class="bi bi-envelope-at"></i>{{ docente()?.email }}</span>
+            @if (docente()?.telefono) {
+              <span><i class="bi bi-telephone"></i>{{ docente()?.telefono }}</span>
+            }
+          </div>
+        </aside>
 
+        <div class="perfil-docente__content">
+          <section>
+            <h2>Biografia profesional</h2>
+            <p>{{ docente()?.descripcion }}</p>
+          </section>
+
+          <section>
+            <h2>Publicaciones cientificas</h2>
+            <div class="perfil-docente__table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Titulo</th>
+                    <th>Anio</th>
+                    <th>Enlace</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (publicacion of docente()?.publicaciones; track publicacion.titulo) {
+                    <tr>
+                      <td>{{ publicacion.titulo }}</td>
+                      <td>{{ publicacion.anio }}</td>
+                      <td>
+                        <a [href]="publicacion.enlace" target="_blank" rel="noopener">
+                          Ver
+                        </a>
+                      </td>
+                    </tr>
+                  } @empty {
+                    <tr>
+                      <td colspan="3">No hay publicaciones registradas actualmente.</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </article>
+    } @else {
+      <div class="perfil-docente__state perfil-docente__state--error">
+        No se encontro el docente solicitado.
+      </div>
+    }
+  </div>
+</section>

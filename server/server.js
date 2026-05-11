@@ -54,9 +54,12 @@ const knowledge = {
 };
 
 const systemPrompt =
-  'Eres el asistente oficial de la carrera de Ingeniería en Desarrollo de Software y Sistemas Inteligentes. ' +
-  'Responde solo con la información disponible en la base de conocimiento proporcionada. ' +
-  'Si no hay información suficiente, indica que no está disponible y sugiere consultar el sitio oficial.';
+  'Eres el Asistente Virtual de la Ingeniería en Desarrollo de Software y Sistemas Inteligentes de la UNISTMO. ' +
+  'Responde siempre de forma amable, clara y breve. ' +
+  'Cuando la información tenga varios datos, sepárala con viñetas usando "- " y resalta etiquetas importantes con **negritas**. ' +
+  'No uses Markdown si la respuesta es una frase corta. ' +
+  'Usa únicamente la información incluida en la base de conocimiento JSON proporcionada. ' +
+  'Si la respuesta no está en los JSON, indica amablemente que no cuentas con esa información y sugiere consultar el sitio oficial o contactar a la carrera.';
 
 const sectionMap = [
   { key: 'plan', sections: ['planEstudios'] },
@@ -241,7 +244,51 @@ function localAnswer(message) {
   return lines.join('\n').trim();
 }
 
-const USE_DIRECT_FALLBACK = true;
+const USE_DIRECT_FALLBACK = false;
+
+const allowedModels = [
+  'gemini-2.5-flash-lite'
+];
+
+function normalizeHistory(history) {
+  if (!Array.isArray(history)) {
+    return [];
+  }
+
+  return history
+    .filter((item) => item?.role === 'user' || item?.role === 'model')
+    .map((item) => ({
+      role: item.role,
+      parts: Array.isArray(item.parts)
+        ? item.parts
+            .filter((part) => typeof part?.text === 'string' && part.text.trim())
+            .map((part) => ({ text: part.text }))
+        : []
+    }))
+    .filter((item) => item.parts.length > 0);
+}
+
+function extractResponseText(response) {
+  if (typeof response?.text === 'string') {
+    return response.text;
+  }
+
+  if (typeof response?.text === 'function') {
+    return response.text();
+  }
+
+  if (typeof response?.response?.text === 'function') {
+    return response.response.text();
+  }
+
+  return (
+    response?.candidates?.[0]?.content?.parts ||
+    response?.response?.candidates?.[0]?.content?.parts ||
+    []
+  )
+    .map((part) => part.text || '')
+    .join('');
+}
 
 function isQuotaError(error) {
   const msg = String(error?.message || '').toLowerCase();
@@ -255,64 +302,58 @@ function isQuotaError(error) {
 
 app.post('/api/chat', async (req, res) => {
   try {
-    const { message, history, modelId } = req.body;
+    const { prompt, message, history, modelId } = req.body;
+    const userPrompt = typeof prompt === 'string' ? prompt : message;
+
+    if (!userPrompt || typeof userPrompt !== 'string' || !userPrompt.trim()) {
+      return res.status(400).json({
+        error: 'Por favor envía una pregunta válida para el asistente.'
+      });
+    }
 
     if (USE_DIRECT_FALLBACK) {
-      const fallback = localAnswer(message || '');
+      const fallback = localAnswer(userPrompt);
       return res.json({ text: fallback, fallback: true });
     }
 
-    const allowedModels = [
-      'gemini-2.0-flash',
-      'gemini-2.5-flash',
-      'gemini-2.0-flash-lite'
-    ];
-
     const selectedModel = allowedModels.includes(modelId)
       ? modelId
-      : 'gemini-2.5-flash';
+      : 'gemini-2.5-flash-lite';
 
-    const contextText = buildContext(message);
+    const contextPrompt =
+      'Base de conocimiento (JSON):\n' +
+      JSON.stringify(buildContext(userPrompt), null, 2) +
+      '\nFin de la base de conocimiento.\n\n' +
+      'Pregunta del usuario: ' +
+      userPrompt;
 
     const response = await ai.models.generateContent({
       model: selectedModel,
+      config: {
+        systemInstruction: systemPrompt
+      },
       contents: [
-        {
-          role: 'user',
-          parts: [
-            { text: systemPrompt },
-            {
-              text:
-                'Base de conocimiento (JSON):\n' +
-                JSON.stringify(contextText, null, 2) +
-                '\nFin de la base de conocimiento.'
-            }
-          ]
-        },
-        ...(history || []),
-        { role: 'user', parts: [{ text: message }] }
+        ...normalizeHistory(history),
+        { role: 'user', parts: [{ text: contextPrompt }] }
       ]
     });
 
     const text =
-      (typeof response?.text === 'function' && response.text()) ||
-      (typeof response?.response?.text === 'function' &&
-        response.response.text()) ||
-      response?.response?.candidates?.[0]?.content?.parts
-        ?.map((part) => part.text || '')
-        .join('') ||
-      '';
+      extractResponseText(response).trim() ||
+      'Lo siento, no pude generar una respuesta con la información disponible.';
 
     res.json({ text });
   } catch (error) {
     console.error('Error en Gemini:', error);
 
     if (isQuotaError(error)) {
-      const fallback = localAnswer(req.body?.message || '');
+      const fallback = localAnswer(req.body?.prompt || req.body?.message || '');
       return res.json({ text: fallback, fallback: true });
     }
 
-    res.status(500).json({ error: 'Error procesando la solicitud' });
+    res.status(500).json({
+      error: 'Lo siento, el asistente no pudo responder en este momento. Intenta de nuevo más tarde.'
+    });
   }
 });
 

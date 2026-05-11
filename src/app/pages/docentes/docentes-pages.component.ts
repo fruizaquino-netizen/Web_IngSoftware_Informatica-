@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject, signal } from '@angular/core';
 
 // Interfaz para las publicaciones científicas
 interface Publicacion {
@@ -15,16 +16,21 @@ interface Docente {
   imagen: string;
   descripcion: string;
   email: string;
+  telefono?: string;
   publicaciones: Publicacion[];
 }
 
 @Component({
   selector: 'docentes',
+  standalone: true,
   templateUrl: './docentes-pages.component.html',
   styleUrls: ['./docentes-pages.component.css']
 })
 
 export class DocentesPageComponent {
+
+  private readonly http = inject(HttpClient);
+  private readonly docentesApiUrl = 'http://localhost:3000/api/docentes';
 
   public docenteSeleccionado = signal<Docente | null>(null);
   // Signal con la lista completa de docentes y sus trayectorias
@@ -70,7 +76,7 @@ export class DocentesPageComponent {
       nombre: 'Dr. Luis David Huerta Hernández',
       especialidad: 'Dr. En Sistemas Computacionales',
       cargo: 'Profesor Investigador Asociado C, Jefe de carrera de la Licenciatura en Informática, Comité del servicio de la cafetería UNISTMO y Vocal en el comité de adquisiciones de la UNISTMO',
-      imagen: 'assets/docente3.png',
+      imagen: 'assets/img/Luis.png',
       descripcion: 'Reconocimiento de Patrones.',
       email: 'ldhuerth@gmail.com, luisdh2@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -84,7 +90,7 @@ export class DocentesPageComponent {
       nombre: 'M. en I. Carlos Edgardo Cruz Pérez',
       especialidad: 'Maestría en Ingeniería en Tecnología de la Información',
       cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática y de la Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
-      imagen: 'assets/docente4.png',
+      imagen: 'assets/img/Carlos.png',
       descripcion: 'Ciberseguridad.',
       email: 'carloscruz@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -97,7 +103,7 @@ export class DocentesPageComponent {
       nombre: 'M. en I.A. Nayeli Joaquinita Meléndez Acosta',
       especialidad: 'Maestría en Inteligencia Artificial. Facultad de Física e Inteligencia Artificial, Universidad Veracruzana, México.',
       cargo: 'Profesor-Investigador de tiempo completo en la Universidad de Istmo, campus Ixtepec, adscrito a la Licenciatura en Informática',
-      imagen: 'assets/docente5.png',
+      imagen: 'assets/img/Nayeli.jpg',
       descripcion: 'Inteligencia Artificial: Aprendizaje Automático, ciencia de datos, reconocimiento de patrones, algoritmos bio-inspirados, visión por computadora, procesamiento de imágenes y redes neuronales.',
       email: 'nayelim@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -139,7 +145,7 @@ export class DocentesPageComponent {
       nombre: 'M. en C. Cosijopii García García',
       especialidad: 'Maestría en ciencias en el área de ciencias computacionales',
       cargo: 'Profesor Asociado B asignado a la licenciatura en Informática Universidad del Istmo Campus Ixtepec. [Oct 2024 - Presente]',
-      imagen: 'assets/docente6.png',
+      imagen: 'assets/img/Cosijopi.jpg',
       descripcion: 'Optimización Multiobjetivo.',
       email: 'cosijopii@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -158,7 +164,7 @@ export class DocentesPageComponent {
       nombre: 'M. en C. Oscar Alonso de la Rosa Aguilar',
       especialidad: 'Maestría en Ciencias de la Computación',
       cargo: 'Profesor-Investigador de tiempo completo.',
-      imagen: 'assets/docente6.png',
+      imagen: 'assets/img/Oscar.jpg',
       descripcion: 'Análisis de datos.',
       email: 'odelarosa@bianni.unistmo.edu.mx',
       publicaciones: [
@@ -169,7 +175,7 @@ export class DocentesPageComponent {
       nombre: 'M. en E. y C. Edgar Manuel Cano Cruz',
       especialidad: 'Maestría en Electrónica y Computación con especialidad en Sistemas Inteligentes Aplicados',
       cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática e Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
-      imagen: 'assets/docente6.png',
+      imagen: 'assets/img/Cano.png',
       descripcion: 'Sistemas empotrados.',
       email: 'ie.edgarcano@gmail.com',
       publicaciones: [
@@ -189,7 +195,7 @@ export class DocentesPageComponent {
       nombre: 'Lic. Florentino Ruiz Aquino',
       especialidad: 'Licenciado en Informática',
       cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática e Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
-      imagen: 'assets/docente6.png',
+      imagen: 'assets/img/Tino.jpeg',
       descripcion: 'Sistemas Inteligentes.',
       email: 'ie.edgarcano@gmail.com',
       publicaciones: [
@@ -206,6 +212,23 @@ export class DocentesPageComponent {
       ]
     }
   ]);
+
+  constructor() {
+    this.cargarDocentes();
+  }
+
+  private cargarDocentes(): void {
+    this.http.get<Docente[]>(this.docentesApiUrl).subscribe({
+      next: (docentes) => {
+        if (Array.isArray(docentes) && docentes.length > 0) {
+          this.docentes.set(docentes);
+        }
+      },
+      error: (error) => {
+        console.error('Error al cargar docentes desde la API:', error);
+      }
+    });
+  }
 
   /**
    * Abre el modal asignando el docente seleccionado

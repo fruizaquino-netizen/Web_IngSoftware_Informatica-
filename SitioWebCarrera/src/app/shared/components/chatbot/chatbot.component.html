@@ -11,22 +11,25 @@
   <div class="chat-window" *ngIf="isOpen">
     <div class="chat-header">
       <span class="chat-title">Chat de Soporte</span>
-      <select [(ngModel)]="selectedModel" class="model-selector">
-        <option *ngFor="let m of availableModels" [value]="m">
-          {{ m }}
-        </option>
-      </select>
-      <button class="close-btn" (click)="toggleChat()">×</button>
+      <button
+        class="minimize-btn"
+        type="button"
+        (click)="toggleChat()"
+        aria-label="Minimizar chat"
+        title="Minimizar chat">
+        <span aria-hidden="true"></span>
+      </button>
     </div>
 
-    <div class="chat-body">
+    <div class="chat-body" #chatBody>
       <div
         *ngFor="let msg of messages"
         [class]="'message ' + (msg.sender === 'user' ? 'user-msg' : 'bot-msg')">
-        {{ msg.text }}
+        <div class="message-content" [innerHTML]="msg.html"></div>
       </div>
-      <div *ngIf="isLoading" class="loading">
-        Pensando ({{ selectedModel }}) ...
+      <div *ngIf="isLoading" class="typing-indicator" aria-live="polite">
+        <span class="typing-spinner" aria-hidden="true"></span>
+        <span>Escribiendo...</span>
       </div>
     </div>
 
@@ -34,8 +37,11 @@
       <input
         [(ngModel)]="userMessage"
         (keyup.enter)="sendMessage()"
+        [disabled]="isLoading"
         placeholder="Escribe aquí..." />
-      <button (click)="sendMessage()">Enviar</button>
+      <button (click)="sendMessage()" [disabled]="isLoading || !userMessage.trim()">
+        {{ isLoading ? 'Enviando...' : 'Enviar' }}
+      </button>
     </div>
   </div>
 </div>

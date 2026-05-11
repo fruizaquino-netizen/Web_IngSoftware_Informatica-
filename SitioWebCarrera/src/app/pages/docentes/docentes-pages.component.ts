@@ -1,5 +1,5 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 // Interfaz para las publicaciones científicas
 interface Publicacion {
@@ -16,24 +16,21 @@ interface Docente {
   imagen: string;
   descripcion: string;
   email: string;
+  telefono?: string;
   publicaciones: Publicacion[];
 }
 
 @Component({
   selector: 'docentes',
   standalone: true,
-  imports: [HttpClientModule],
   templateUrl: './docentes-pages.component.html',
   styleUrls: ['./docentes-pages.component.css']
 })
 
 export class DocentesPageComponent {
-  private http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:3000/api/docentes';
 
-  constructor() {
-    this.cargarDocentes();
-  }
+  private readonly http = inject(HttpClient);
+  private readonly docentesApiUrl = 'http://localhost:3000/api/docentes';
 
   public docenteSeleccionado = signal<Docente | null>(null);
   // Signal con la lista completa de docentes y sus trayectorias
@@ -94,7 +91,7 @@ export class DocentesPageComponent {
       especialidad: 'Maestría en Ingeniería en Tecnología de la Información',
       cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática y de la Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
       imagen: 'assets/img/Carlos.png',
-      descripcion: 'Ciberseguridad Avanzada.',
+      descripcion: 'Ciberseguridad.',
       email: 'carloscruz@bianni.unistmo.edu.mx',
       publicaciones: [
         { titulo: 'Hernández Montiel, L. Velázquez Vázquez, J. & Cruz Pérez, C. (2021). Reducción y clasificación de una base de datos de audio mediante redes neuronales artificiales y minería de datos para el diagnóstico de pacientes con enfermedad De Parkinson . Research in Computing Science Vol 150 No 5, pp. 141–154. ', anio: 2021, enlace: '#' },
@@ -200,11 +197,39 @@ export class DocentesPageComponent {
       cargo: 'Profesor Investigador de Tiempo Completo de la Licenciatura en Informática e Ingeniería en Desarrollo de Software y Sistemas Inteligentes',
       imagen: 'assets/img/Tino.jpeg',
       descripcion: 'Sistemas Inteligentes.',
-      email: 'FRuizAquino@gmail.com',
+      email: 'ie.edgarcano@gmail.com',
       publicaciones: [
+        { titulo: 'García, I., & Cano, E. (2018). A computer game for teaching and learning algebra topics at undergraduate level. Computer Applications in Engineering Education, 26(2), 326–340. doi:10.1002/cae.21887', anio: 2018, enlace: '#' },
+        { titulo: 'Algredo Badillo , I. ., Sarmiento Torres, E. D., Atonal Nolasco, C. ., Cano Cruz, E. M., & Arellano Pimentel, J. (2015). Aplicación móvil para la automatización del método explicativo-ilustrativo para la enseñanza de idiomas. Programación matemática Y Software, 7(2), 1–7.', anio: 2015, enlace: 'https://doi.org/10.30973/progmat/2015.7.2/1' },
+        { titulo: 'Cano-Cruz, E. M., & López-Orozco, F. (2015). Design and development of a lowcost and portable meteorological system: MeteoBlue. Advanced Science Letters, 21(1), 83–87.', anio: 2015, enlace: 'doi.org/10.1166/asl.2015.5760' },
+        { titulo: 'Edgar Manuel Cano Cruz, Juan Andrés Velázquez Cruz, Juan Gabriel Ruiz Ruiz, Luis David Huerta Hernández. (2015). Video Games in Teaching-Learning Processes: A Brief Review. International Journal of Secondary Education, 2(6), 102-105. ISSN: 2376-7464. ', anio: 2015, enlace: 'doi.org/10.11648/j.ijsedu.20140206.12' },
+        { titulo: 'Edgar Manuel Cano Cruz, Juan Gabriel Ruiz Ruiz. (2015). Educational Software to Teaching-Learning the Zapotec Language of the Istmo of Tehuantepec. Science Journal of Education, 3(2), 16-21. ISSN: 2329-0900.', anio: 2015, enlace: 'doi.org/10.11648/j.sjedu.20150302.11' },
+        { titulo: 'Edgar Manuel Cano Cruz, Juan Gabriel Ruiz Ruiz. (2015), Portable Weather System for Measure and Monitoring Temperature, Relative Humidity, and Pressure, Based on Bluetooth Communication, American Journal of Networks and Communications. Vol. 4, No. 3, 2015, pp. 49-53. ISSN: 2326-893X.', anio: 2015, enlace: '#' },
+        { titulo: 'I. A. Garcia, E. M. Cano (2014). Designing and implementing a constructionist approach for improving the teaching–learning process in the embedded systems and wireless communications areas. Computer Applications in Engineering Education. Volume22, Issue3.', anio: 2014, enlace: 'doi: 10.1002/cae.20574.' },
+        { titulo: 'Cano, E. M., Ruiz, J. G., & Garcia, I. A. (2013). Integrating a learning constructionist environment and the instructional design approach into the definition of a basic course for embedded systems design. Computer Applications in Engineering Education, 23(1), 36–53.', anio: 2013, enlace: 'doi:10.1002/cae.21574' },
+        { titulo: 'Cano, E., Ruiz, J., & Huerta, L. (2013). Gateway for Bluetooth and CAN Communications Protocols. Journal of Theoretical and Applied Information Technology, 55(3). ISSN: 1992-8645. ', anio: 2013, enlace: '#' },
+        { titulo: 'E. Cano and I. Garcia. (2011). "Design and Development of a BlueBee Gateway for Bluetooth and ZigBee Wireless Protocols," 2011 IEEE Electronics, Robotics and Automotive Mechanics Conference, Cuernavaca, Mexico, 2011, pp. 366-370, doi: 10.1109/CERMA.2011.67.', anio: 2011, enlace: '#' }
       ]
     }
   ]);
+
+  constructor() {
+    this.cargarDocentes();
+  }
+
+  private cargarDocentes(): void {
+    this.http.get<Docente[]>(this.docentesApiUrl).subscribe({
+      next: (docentes) => {
+        if (Array.isArray(docentes) && docentes.length > 0) {
+          this.docentes.set(docentes);
+        }
+      },
+      error: (error) => {
+        console.error('Error al cargar docentes desde la API:', error);
+      }
+    });
+  }
+
   /**
    * Abre el modal asignando el docente seleccionado
    */
@@ -221,18 +246,5 @@ export class DocentesPageComponent {
     this.docenteSeleccionado.set(null);
     // Restaurar el scroll del body
     document.body.style.overflow = 'auto';
-  }
-
-  private cargarDocentes(): void {
-    this.http.get<Docente[]>(this.apiUrl).subscribe({
-      next: (docentes) => {
-        if (Array.isArray(docentes) && docentes.length > 0) {
-          this.docentes.set(docentes);
-        }
-      },
-      error: () => {
-        // Si la API aun no esta disponible, conservamos el respaldo local.
-      }
-    });
   }
 }
