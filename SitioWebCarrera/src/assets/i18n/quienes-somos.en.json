@@ -36,14 +36,14 @@
       "TITLE": "Virtual Tour",
       "ALT": "Virtual tour",
       "CONTROLS": {
-        "START": "â�-¶ Start tour",
-        "LEFT_ELECTRONICS": "â¬�. Electronics",
-        "RIGHT_BUILDING": "â�z¡ Building",
-        "DOWN_BACK": "â¬�? Back",
-        "UP_FORWARD": "â¬�? Forward",
-        "LEFT_ENTER": "â¬�. Enter",
-        "DOWN_RETURN": "â¬�? Return",
-        "LEFT_BACK": "â¬�. Back"
+        "START": "▶ Start tour",
+        "LEFT_ELECTRONICS": "⬅ Electronics",
+        "RIGHT_BUILDING": "➡ Building",
+        "DOWN_BACK": "⬇ Back",
+        "UP_FORWARD": "⬆ Forward",
+        "LEFT_ENTER": "⬅ Enter",
+        "DOWN_RETURN": "⬇ Return",
+        "LEFT_BACK": "⬅ Back"
       }
     }
   }
