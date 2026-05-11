@@ -57,7 +57,9 @@
     </div>
     <a
       class="btn-principal"
-      href="https://www.unistmo.edu.mx/web/p_ensenanza/escolares.html"
+      href="https://www.unistmo.edu.mx/web/p_ensenanza/ingreso/FORMATO_SOLICITUD_FICHA_LICENCIATURA.pdf"
+
+
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -87,13 +89,23 @@
       {{ content().ASPIRANTES.CTA_TEXT }}
     </p>
     <div class="cta-botones">
-      <a href="https://www.unistmo.edu.mx/web/p_ensenanza/ingreso/FORMATO_SOLICITUD_FICHA_LICENCIATURA.pdf" class="btn-cta">
-        {{ content().ASPIRANTES.CTA_CONTACT }}
-      </a>
-      <a href="https://www.unistmo.edu.mx/web/p_ensenanza/ingreso/FORMATO_SOLICITUD_FICHA_LICENCIATURA.pdf" class="btn-cta" target="_blank">
-        {{ content().ASPIRANTES.CTA_GUIDE }}
-      </a>
-    </div>
+  <!-- BOTÓN DE CONTACTO: Ahora abre el correo directamente -->
+  <a
+    href="mailto:escolares@unistmo.edu.mx?subject=Informes sobre la Licenciatura en Informática"
+    class="btn-cta"
+  >
+    {{ content().ASPIRANTES.CTA_CONTACT }}
+  </a>
+
+  <!-- BOTÓN DE GUÍA: Ahora redirige a la web de la UNISTMO y tiene el nuevo nombre -->
+  <a
+    href="https://www.unistmo.edu.mx/web/p_ensenanza/escolares.html"
+    class="btn-cta"
+    target="_blank"
+  >
+    {{ content().ASPIRANTES.CTA_GUIDE }}
+  </a>
+</div>
   </section>
 </section>
 
@@ -128,3 +140,4 @@
     </div>
   </div>
 </div>
+

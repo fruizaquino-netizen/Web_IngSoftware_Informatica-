@@ -50,7 +50,7 @@ const defaultContent = {
     CTA_TEXT:
       'Nuestro equipo de atención a aspirantes está listo para resolver todas tus dudas sobre el proceso de admisión.',
     CTA_CONTACT: 'Contactar Admisiones',
-    CTA_GUIDE: 'Descargar Guía',
+    CTA_GUIDE: 'Ver requisitos',
     MODAL_TITLE: 'Testimonio de Egresado'
   }
 };
