@@ -4,17 +4,17 @@ import { TranslationService } from '../../../services/translation.service';
 
 const defaultContent = {
   FOOTER: {
-    TITLE: 'Footer / Soporte',
+    TITLE: 'Carrera de Informática',
     DOWNLOADS: 'Zona de Descargas',
     FORMS: 'Formularios',
     RULES: 'Reglamentos',
     DOCUMENTS: 'Documentos',
-    RESOURCES_TITLE: 'Recursos',
+    RESOURCES_TITLE: 'Recursos Académicos',
     ONLINE_FORMS: 'Formularios en línea',
     STUDENT_RULES: 'Reglamento estudiantil',
     ACADEMIC_DOCS: 'Documentos académicos',
-    FOLLOW: 'Síguenos',
-    COPYRIGHT: 'ï¿½,�,© 2026 UNISTMO. Todos los derechos reservados.'
+    FOLLOW: 'Redes Oficiales',
+    COPYRIGHT: '© 2026 UNISTMO. Todos los derechos reservados.'
   }
 };
 
@@ -35,10 +35,12 @@ export class FooterSharedComponent {
     effect(() => {
       const lang = this.translation.currentLang();
       const fileLang = lang === 'en' ? 'en' : lang === 'zapoteco' ? 'zapoteco' : 'es';
+
       this.http
         .get(`assets/i18n/footer.${fileLang}.json`)
-        .subscribe((data) => {
-          this.content.set(data as typeof defaultContent);
+        .subscribe({
+          next: (data) => this.content.set(data as typeof defaultContent),
+          error: () => this.content.set(defaultContent) // Fallback por seguridad
         });
     });
   }
