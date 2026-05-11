@@ -65,6 +65,7 @@ body {
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 800;
     margin-bottom: 24px;
+    color: #ffffff !important;
     text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     animation: fadeInUp 0.8s ease-out;
 }
@@ -104,7 +105,7 @@ body {
 
 .ticker-label {
     background: var(--rojo-inst);
-    color: rgb(0, 0, 0);
+    color: #000000;
     padding: 0 25px;
     height: 100%;
     display: flex;
@@ -158,7 +159,7 @@ body {
 
 .ticker-calendar-btn {
     background: var(--rojo-inst);
-    color: rgb(0, 0, 0);
+    color: #080808;
     border: none;
     height: 100%;
     display: flex;
@@ -403,8 +404,9 @@ body {
 }
 
 .btn-secondary:hover {
-    background: var(--rojo-inst);
-    color: white;
+    background: #ffffff;
+    color: var(--rojo-inst);
+    border-color: var(--rojo-inst);
     transform: translateY(-4px) scale(1.05);
     box-shadow: 0 12px 28px rgba(139, 29, 34, 0.35);
 }

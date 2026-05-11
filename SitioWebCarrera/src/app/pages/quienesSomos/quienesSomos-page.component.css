@@ -5,12 +5,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-base);
 }
 
 body {
-  background-color: #faf7f7;
-  color: #4b2c2c;
+  background-color: var(--color-white);
+  color: var(--color-gray-900);
 }
 
 /* =========================
@@ -202,11 +202,13 @@ body {
 .cta h2 {
   font-size: 28px;
   margin-bottom: 12px;
+  color: #ffffff;
 }
 
 .cta p {
   font-size: 17px;
   margin-bottom: 30px;
+  color: #f8fafc;
 }
 
 .btn {
@@ -383,6 +385,61 @@ body {
 #s20:checked ~ section #c20,
 #s21:checked ~ section #c21{
   display:flex;
+}
+
+/* Unificacion visual */
+.hero {
+  width: 100%;
+  margin-top: 20px;
+  padding: 64px 20px;
+  background-color: var(--color-wine);
+  border: none;
+  border-radius: 0;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 2.6vw, 2.6rem);
+}
+
+.about-card,
+.values-card,
+.stat-card,
+.visor {
+  border-color: var(--color-beige-border);
+  border-radius: 8px;
+}
+
+.about-card h2,
+.values-card h3,
+.stat-number,
+.tour-section h2 {
+  color: var(--color-wine);
+}
+
+.about-text p,
+.values-list li,
+.stat-text {
+  color: var(--color-gray-700);
+}
+
+.values-card,
+.visor {
+  background-color: var(--color-beige);
+}
+
+.cta,
+.controls button {
+  background-color: var(--color-wine);
+}
+
+.btn {
+  color: var(--color-wine);
+  background-color: var(--color-white);
+  border-radius: 8px;
+}
+
+.tour-section {
+  font-family: var(--font-base);
 }
 
 

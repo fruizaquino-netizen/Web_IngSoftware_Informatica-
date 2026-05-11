@@ -131,20 +131,16 @@ export class InicioPageComponent {
   // --- Variables para Eventos ---
   selectedDay: number | null = null;
   eventosDelDia: any[] = [];
-  todosLosEventos = defaultContent.INICIO.EVENTS.map((e) => ({
-    dia: e.DAY,
-    mes: e.MONTH,
-    titulo: e.TITLE,
-    hora: e.TIME,
-    descripcion: e.DESC
-  }));
+  todosLosEventos: Array<{
+    dia: number;
+    mes: number;
+    titulo: string;
+    hora: string;
+    descripcion: string;
+  }> = [];
 
   // --- Noticias ---
-  noticias = defaultContent.INICIO.NEWS.map((n) => ({
-    titulo: n.TITLE,
-    fecha: n.DATE,
-    contenido: n.CONTENT
-  }));
+  noticias: Array<{ titulo: string; fecha: string; contenido: string }> = [];
 
   selectedNews: any = null;
 
@@ -169,18 +165,6 @@ export class InicioPageComponent {
     const data = this.content().INICIO;
     this.monthNames = data.CALENDAR.MONTHS;
     this.daysOfWeek = data.CALENDAR.DAYS;
-    this.noticias = data.NEWS.map((n) => ({
-      titulo: n.TITLE,
-      fecha: n.DATE,
-      contenido: n.CONTENT
-    }));
-    this.todosLosEventos = data.EVENTS.map((e) => ({
-      dia: e.DAY,
-      mes: e.MONTH,
-      titulo: e.TITLE,
-      hora: e.TIME,
-      descripcion: e.DESC
-    }));
     this.selectedNews = null;
     this.selectedDay = null;
     this.eventosDelDia = [];
@@ -308,8 +292,9 @@ export class InicioPageComponent {
             }));
           }
         },
-        error: () => {
-          // Mantenemos el respaldo cargado desde i18n.
+        error: (error) => {
+          console.error('Error al cargar noticias desde la API:', error);
+          this.noticias = [];
         }
       });
   }
@@ -331,8 +316,11 @@ export class InicioPageComponent {
             this.eventosDelDia = [];
           }
         },
-        error: () => {
-          // Si la API no esta lista todavia, seguimos con los eventos locales.
+        error: (error) => {
+          console.error('Error al cargar eventos desde la API:', error);
+          this.todosLosEventos = [];
+          this.selectedDay = null;
+          this.eventosDelDia = [];
         }
       });
   }

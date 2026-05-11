@@ -236,6 +236,7 @@ export class DocentesPageComponent {
   ]);
 
   constructor() {
+    this.docentes.set([]);
     this.cargarDocentes();
   }
 
@@ -248,6 +249,7 @@ export class DocentesPageComponent {
       },
       error: (error) => {
         console.error('Error al cargar docentes desde la API:', error);
+        this.docentes.set([]);
       }
     });
   }

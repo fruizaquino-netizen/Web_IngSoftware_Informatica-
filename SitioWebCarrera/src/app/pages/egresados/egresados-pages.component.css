@@ -1,28 +1,32 @@
 /* HEADER 150*/
 .egresados-header {
+  max-width: 1150px;
   margin: 0 auto 50px;
+  padding: 40px 16px 0;
 }
 .egresados-header h1 {
-  font-size: 34px;
-  color: #5f0f14;
-  margin-bottom: 20px;
+  font-size: clamp(2rem, 2.6vw, 2.6rem);
+  color: var(--color-wine);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
 }
 .egresados-container {
   margin-top: 40px;
 }
 .egresados-header p {
-  color: #111827;
+  max-width: 800px;
+  color: var(--color-gray-500);
 }
 /* SECCIONES */
 .egresados-section {
-  width: 1150px;
+  width: min(1150px, calc(100% - 32px));
   margin: 0 auto 40px;
 }
 .egresados-section h2 {
-  font-size: 26px;
-  color: #141313;
+  font-size: 1.6rem;
+  color: var(--color-wine);
   margin-bottom: 20px;
-  border-left: 6px solid #998a02d4;
+  border-left: 6px solid var(--color-wine-soft);
   padding-left: 13px;
 }
 /* CARDS POR Aï¿½fï¿½'O */
@@ -33,9 +37,9 @@
 }
 /*Aqui!!!!!!!!!!!!*/
 .card-anio {
-  background-color: #f3efef;
-  border: 1.2px solid #d7a1a1;
-  border-radius: 10px;
+  background-color: var(--color-beige);
+  border: 1.2px solid var(--color-beige-border);
+  border-radius: 8px;
   padding: 15px 20px;
   min-width: 200px;
   text-align: center;
@@ -51,7 +55,7 @@
   display: block;
   font-size: 26px;
   font-weight: 700;
-  color: #8b1d1d;
+  color: var(--color-wine);
 }
 .card-anio .cantidad {
   color: #616161;
@@ -64,17 +68,17 @@
   flex-wrap: wrap;
 }
 .filtro {
-  background-color: #f3efef;
-  border: 1.2px solid #d7a1a1;
-  color: #8b1d1d;
+  background-color: var(--color-beige);
+  border: 1.2px solid var(--color-beige-border);
+  color: var(--color-wine);
   padding: 10px 32px;
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
 }
 .filtro.activo {
-  background-color: #8b1d1d;
-  color: #ffffff;
+  background-color: var(--color-wine);
+  color: var(--color-white);
 }
 
 .tabla-container {
@@ -88,7 +92,7 @@ table {
   border-collapse: collapse;
 }
 thead {
-  background-color: #f3efef;
+  background-color: var(--color-beige);
 }
 th,
 td {
@@ -102,7 +106,7 @@ th {
   font-size: 18px;
 }
 .badge {
-  background-color: #f3efef;
+  background-color: var(--color-beige);
   color: #0f0101;
   padding: 10px 16px;
   border-radius: 12px;
@@ -112,11 +116,12 @@ th {
   display: flex;
   align-items: center;
   gap: 25px;
-  background-color: #f3efef;
+  width: min(1150px, calc(100% - 32px));
+  background-color: var(--color-beige);
   padding: 10px 20px;
-  border-left: 6px solid #998a02d4;
+  border-left: 6px solid var(--color-wine-soft);
   border-radius: 10px;
-  margin-bottom: 40px;
+  margin: 0 auto 40px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 .total-label {
@@ -124,8 +129,8 @@ th {
   font-size: 17px;
 }
 .total-badge {
-  background-color: #8b1d1d;
-  color: #ffffff;
+  background-color: var(--color-wine);
+  color: var(--color-white);
   font-size: 20px;
   font-weight: 700;
   padding: 8px 18px;
@@ -163,7 +168,7 @@ th {
   width: 95%;
   max-width: 650px; /* Ancho máximo de la ventanita */
   box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-  border-top: 6px solid #8b1d1d; /* Usando tu color institucional */
+  border-top: 6px solid var(--color-wine);
   position: relative;
   animation: slideUp 0.3s ease;
   margin-top: 20px;
@@ -183,7 +188,7 @@ th {
 
 .modal-header h3 {
   margin: 0;
-  color: #5f0f14;
+  color: var(--color-wine);
   font-size: 24px;
 }
 
@@ -197,7 +202,7 @@ th {
 }
 
 .btn-cerrar:hover {
-  color: #8b1d1d;
+  color: var(--color-wine);
 }
 
 /* Estilos específicos para la tabla dentro del modal */
@@ -207,10 +212,10 @@ th {
 }
 
 .modal-table th {
-  background-color: #f3efef;
+  background-color: var(--color-beige);
   padding: 12px;
   text-align: left;
-  color: #8b1d1d;
+  color: var(--color-wine);
   font-size: 16px;
 }
 

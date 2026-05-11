@@ -4,6 +4,11 @@
   padding: 40px 20px 20px;
   font-family: 'Inter', 'Segoe UI', sans-serif;
   color: #333;
+    width: 100%;
+    background-color: var(--color-beige);
+    padding: 50px 20px;
+    border-top: 1px solid var(--color-beige-border);
+    font-family: var(--font-base);
 }
 
 .footer-container {
@@ -28,6 +33,11 @@
   font-size: 1rem;
   margin-bottom: 12px;
   color: #000;
+/* ===== TITULOS ===== */
+.footer-column h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: var(--color-gray-900);
 }
 
 /* Color guinda para los datos importantes */
@@ -35,6 +45,12 @@
   color: #7a1111;
 }
 
+.footer-list li {
+    font-size: 15px;
+    color: var(--color-gray-700);
+}
+
+/* ===== REDES SOCIALES ===== */
 .social-group {
   display: flex;
   gap: 20px;
@@ -46,6 +62,16 @@
   transition: transform 0.2s ease;
   display: flex;
   align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-wine);
+    color: var(--color-white);
+    display: inline-flex;        /* centra fácil */
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
 }
 
 .social-icon svg {
@@ -56,6 +82,11 @@
 .social-icon:hover {
   transform: scale(1.1);
   color: #5a0a0a;
+.footer h5 {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--color-gray-500);
+    font-size: 14px;
 }
 
 .footer-bottom {

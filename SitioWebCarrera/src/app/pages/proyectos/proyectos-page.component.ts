@@ -121,13 +121,24 @@ export class ProyectoPageComponent {
     private sanitizer: DomSanitizer,
     private http: HttpClient
   ) {
+    this.content.update((current) => ({
+      ...current,
+      projects: [],
+      videos: []
+    }));
+    this.galleryImages.set([]);
+
     effect(() => {
       const lang = this.translation.currentLang();
       const fileLang = lang === 'en' ? 'en' : lang === 'zapoteco' ? 'zapoteco' : 'es';
       this.http
         .get(`assets/i18n/proyectos.${fileLang}.json`)
         .subscribe((data) => {
-          this.content.set(data as typeof defaultContent);
+          this.content.set({
+            ...(data as typeof defaultContent),
+            projects: [],
+            videos: []
+          });
           const keys = new Set(this.content().filters.map((f) => f.key));
           if (!keys.has(this.activeFilter())) {
             this.activeFilter.set('all');
@@ -250,8 +261,12 @@ export class ProyectoPageComponent {
             }))
           }));
         },
-        error: () => {
-          // Conservamos el respaldo local.
+        error: (error) => {
+          console.error('Error al cargar proyectos desde la API:', error);
+          this.content.update((current) => ({
+            ...current,
+            projects: []
+          }));
         }
       });
   }
@@ -265,8 +280,9 @@ export class ProyectoPageComponent {
             this.galleryImages.set(items.map((item) => item.url));
           }
         },
-        error: () => {
-          // Conservamos la galeria local.
+        error: (error) => {
+          console.error('Error al cargar galeria desde la API:', error);
+          this.galleryImages.set([]);
         }
       });
   }
@@ -286,8 +302,12 @@ export class ProyectoPageComponent {
             }));
           }
         },
-        error: () => {
-          // Conservamos los videos locales.
+        error: (error) => {
+          console.error('Error al cargar videos desde la API:', error);
+          this.content.update((current) => ({
+            ...current,
+            videos: []
+          }));
         }
       });
   }
