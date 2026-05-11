@@ -4,6 +4,7 @@ import { NavbarSharedComponent } from './shared/components/navbar/navbar-shared.
 import { FooterSharedComponent } from './shared/components/footer/footer-shared.component';
 import { HeaderSharedComponent } from './shared/components/header/header-shared.component';
 import { ChatbotComponent } from './shared/components/chatbot/chatbot.component';
+import { ScrollTopComponent } from './shared/scroll-top/scroll-top.component';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,8 @@ import { ChatbotComponent } from './shared/components/chatbot/chatbot.component'
     NavbarSharedComponent,
     FooterSharedComponent,
     HeaderSharedComponent,
-    ChatbotComponent
+    ChatbotComponent,
+    ScrollTopComponent
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'

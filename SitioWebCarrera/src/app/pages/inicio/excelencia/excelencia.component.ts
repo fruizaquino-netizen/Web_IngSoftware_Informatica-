@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core'; // 1. Agregamos OnInit aquí
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.component';
+
 
 @Component({
   selector: 'app-excelencia',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, BreadcrumbComponent],
   templateUrl: './excelencia.component.html',
   styleUrl: './excelencia.component.css'
 })

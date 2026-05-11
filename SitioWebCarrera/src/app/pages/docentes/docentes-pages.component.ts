@@ -1,3 +1,6 @@
+
+
+import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 
@@ -24,7 +27,8 @@ interface Docente {
   selector: 'docentes',
   standalone: true,
   templateUrl: './docentes-pages.component.html',
-  styleUrls: ['./docentes-pages.component.css']
+  styleUrls: ['./docentes-pages.component.css'],
+  imports: [BreadcrumbComponent]
 })
 
 export class DocentesPageComponent {

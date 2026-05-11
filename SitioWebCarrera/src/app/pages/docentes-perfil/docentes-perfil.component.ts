@@ -1,3 +1,5 @@
+import { BreadcrumbComponent } from './../../shared/breadcrumb/breadcrumb.component';
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -19,10 +21,11 @@ interface Docente {
   publicaciones: Publicacion[];
 }
 
+
 @Component({
   selector: 'app-docentes-perfil',
   standalone: true,
-  imports: [RouterLink],
+  imports: [CommonModule,BreadcrumbComponent,RouterLink],
   templateUrl: './docentes-perfil.component.html',
   styleUrls: ['./docentes-perfil.component.css']
 })

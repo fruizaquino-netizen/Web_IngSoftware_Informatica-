@@ -1,4 +1,11 @@
-﻿<section class="egresados-container">
+﻿<app-breadcrumb
+  [items]="[
+    { label: 'Inicio', link: '/' },
+    { label: 'Egresados' }
+  ]">
+</app-breadcrumb>
+
+<section class="egresados-container">
 
   <header class="egresados-header">
     <h1>{{ content().EGRESADOS.TITLE }}</h1>

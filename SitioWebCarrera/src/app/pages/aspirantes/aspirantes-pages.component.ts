@@ -2,6 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslationService } from '../../services/translation.service';
+import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
 
 const defaultContent = {
   ASPIRANTES: {
@@ -49,7 +50,7 @@ const defaultContent = {
     CTA_TEXT:
       'Nuestro equipo de atención a aspirantes está listo para resolver todas tus dudas sobre el proceso de admisión.',
     CTA_CONTACT: 'Contactar Admisiones',
-    CTA_GUIDE: 'Descargar Guía',
+    CTA_GUIDE: 'Ver requisitos',
     MODAL_TITLE: 'Testimonio de Egresado'
   }
 };
@@ -57,7 +58,7 @@ const defaultContent = {
 @Component({
   selector: 'app-aspirantes-pages',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, BreadcrumbComponent],
   templateUrl: './aspirantes-pages.component.html',
   styleUrls: ['./aspirantes-pages.component.css']
 })
