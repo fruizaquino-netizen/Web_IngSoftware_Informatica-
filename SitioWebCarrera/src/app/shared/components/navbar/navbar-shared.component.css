@@ -1,13 +1,19 @@
 /* Franja superior institucional */
+:host {
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+  display: block;
+}
+
 .top-bar-institucional {
   height: 6px;
   background-color: var(--color-wine);
 }
 
 .navbar-sticky {
-  position: sticky;
-  top: 0;
-  z-index: 1030;
+  position: relative;
+  z-index: 1;
   background-color: var(--color-white);
   transition: box-shadow 0.25s ease, background-color 0.25s ease;
 }
