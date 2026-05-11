@@ -182,7 +182,13 @@ export class AdminPanelComponent {
         { key: 'fecha', label: 'Fecha', type: 'date' },
         { key: 'imagenUrl', label: 'URL de imagen', type: 'url', wide: true },
         { key: 'descripcion', label: 'Descripcion corta', type: 'textarea', wide: true },
-        { key: 'contenido', label: 'Contenido', type: 'textarea', required: true, wide: true }
+        {
+          key: 'contenido',
+          label: 'Contenido',
+          type: 'textarea',
+          wide: true,
+          placeholder: 'Opcional. Si lo dejas vacio se usara la descripcion corta.'
+        }
       ]
     },
     {
@@ -301,6 +307,7 @@ export class AdminPanelComponent {
   submitForm(): void {
     if (this.dataForm.invalid) {
       this.dataForm.markAllAsTouched();
+      this.error.set(`Completa los campos obligatorios: ${this.invalidRequiredLabels().join(', ')}.`);
       return;
     }
 
@@ -399,6 +406,11 @@ export class AdminPanelComponent {
   private buildPayload(rawValue: any): any {
     const payload = { ...rawValue };
 
+    if (this.activeKey() === 'noticias') {
+      payload.contenido = String(payload.contenido || payload.descripcion || '').trim();
+      payload.descripcion = String(payload.descripcion || payload.contenido || '').trim();
+    }
+
     if ('anio' in payload && payload.anio !== '') {
       payload.anio = Number(payload.anio);
     }
@@ -474,6 +486,12 @@ export class AdminPanelComponent {
     return new HttpHeaders({
       Authorization: `Bearer ${this.token()}`
     });
+  }
+
+  private invalidRequiredLabels(): string[] {
+    return this.activeSection().fields
+      .filter((field) => field.required && this.dataForm.get(field.key)?.invalid)
+      .map((field) => field.label);
   }
 
   private describeHttpError(error: HttpErrorResponse, fallback: string): string {

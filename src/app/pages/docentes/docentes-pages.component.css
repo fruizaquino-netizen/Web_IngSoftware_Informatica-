@@ -1,153 +1,120 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
-:root {
-  --unistmo-wine: #9d2449;
-  --unistmo-wine-dark: #7a1b38;
-  --unistmo-gold: #c5a059;
-  --unistmo-gold-light: #e0c58e;
-  --unistmo-gray: #4d4d4d;
-  --bg-light: #f8fafd;
-  --jakarta: 'Plus Jakarta Sans', sans-serif;
-  --shadow-premium: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
-  --shadow-active: 0 30px 60px -12px rgba(157, 36, 73, 0.15);
+.docentes-section {
+  background: var(--color-white);
 }
 
-body {
-  font-family: var(--jakarta);
-  background-color: var(--bg-light);
-  color: var(--unistmo-gray);
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* --- HEADER --- */
 .header-container {
-  padding: 60px 0 30px 0;
-  margin-bottom: 40px;
+  padding: 1rem 0 0;
+  margin-bottom: 2rem;
 }
 
 .header-container h1 {
-  color: #1a1a1a;
-  font-weight: 800;
-  font-size: 3rem;
-  letter-spacing: -1px;
+  color: var(--color-wine);
+  font-size: clamp(2rem, 2.6vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 0.75rem;
 }
 
-.animated-underline {
-  width: 60px;
-  height: 6px;
-  background: linear-gradient(90deg, var(--unistmo-wine), var(--unistmo-gold));
-  border-radius: 50px;
-  transition: all 0.5s ease;
+.subtitle-text {
+  max-width: 800px;
+  color: var(--color-gray-500) !important;
+  font-size: 1rem;
 }
 
-/* --- TARJETAS --- */
 .premium-card {
-  background: #ffffff;
-  border-radius: 24px;
-  border: 1px solid rgba(0,0,0,0.03);
-  overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: var(--shadow-premium);
-  position: relative;
   height: 100%;
+  overflow: hidden;
+  position: relative;
+  background: var(--color-white);
+  border: 1px solid var(--color-beige-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .premium-card:hover {
-  transform: translateY(-12px);
-  box-shadow: var(--shadow-active);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .card-image-box {
-  position: relative;
-  height: 300px;
+  height: 260px;
   overflow: hidden;
+  background: var(--color-beige);
+}
+
+.image-zoom-container {
+  width: 100%;
+  height: 100%;
 }
 
 .image-zoom-container img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1.2s ease;
+  object-position: center;
+  transition: transform 0.8s ease;
 }
 
-.specialty-glass-badge {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  border-left: 4px solid var(--unistmo-wine);
-  padding: 10px 18px;
-  border-radius: 12px;
-  color: var(--unistmo-wine-dark);
-  font-size: 0.75rem;
-  font-weight: 800;
-  z-index: 5;
+.premium-card:hover .image-zoom-container img {
+  transform: scale(1.04);
 }
 
-/* --- CUERPO DE LA TARJETA --- */
 .card-body-premium {
-  padding: 30px;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .teacher-role {
-  color: var(--unistmo-gold);
+  color: var(--color-wine-soft);
   font-size: 0.85rem;
   font-weight: 700;
-  margin-bottom: 25px;
+  margin-bottom: 1.5rem;
 }
 
-/* --- BOTÓN SOLUCIONADO (ALTO CONTRASTE) --- */
 .btn-ultra-profile {
   position: relative;
   width: 100%;
-  padding: 16px;
-  background-color: transparent; /* Fondo transparente para ver el borde */
-  border: 2px solid var(--unistmo-wine);
-  border-radius: 16px;
-  color: var(--unistmo-wine); /* Color inicial */
-  font-weight: 800;
-  font-size: 1rem;
+  padding: 0.85rem 1rem;
+  overflow: hidden;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
+  color: var(--color-wine);
+  background-color: transparent;
+  border: 2px solid var(--color-wine);
+  border-radius: 10px;
   cursor: pointer;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  z-index: 1;
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: color 0.3s ease;
 }
 
-/* Capa de texto: Forzamos z-index muy alto */
-.btn-ultra-profile span, 
+.btn-ultra-profile span,
 .btn-ultra-profile i {
   position: relative;
-  z-index: 10; 
-  transition: color 0.3s ease; /* Sincronizado con el fondo */
+  z-index: 10;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Fondo animado */
 .btn-ultra-profile::after {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--unistmo-wine);
-  transform: scaleX(0); /* Animación de izquierda a derecha */
+  inset: 0;
+  z-index: 2;
+  background-color: var(--color-wine);
+  transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.4s cubic-bezier(0.5, 1, 0.89, 1);
-  z-index: 2; /* Por debajo del texto (10) */
+  transition: transform 0.35s ease;
 }
 
-/* ESTADO HOVER: El secreto está en asegurar el color blanco */
 .btn-ultra-profile:hover {
-  color: #ffffff !important; /* Forzado total */
+  color: var(--color-white) !important;
 }
 
 .btn-ultra-profile:hover::after {
@@ -155,48 +122,50 @@ body {
 }
 
 .btn-ultra-profile:hover i {
-  color: #ffffff !important;
+  color: var(--color-white) !important;
   transform: translateX(5px);
 }
 
-/* --- MODAL Y TABLA --- */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(12px);
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  background: rgba(31, 31, 31, 0.78);
+  backdrop-filter: blur(10px);
 }
 
 .modal-content-premium {
-  background: #ffffff;
+  position: relative;
   width: 90%;
   max-width: 900px;
   max-height: 85vh;
-  border-radius: 32px;
-  padding: 40px;
-  position: relative;
   overflow-y: auto;
+  background: var(--color-white);
+  border-radius: 16px;
+  padding: 40px;
 }
 
 .close-btn {
   position: absolute;
-  top: 20px; right: 20px;
-  width: 40px; height: 40px;
-  border-radius: 50%;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
   border: none;
-  background: #f1f5f9;
+  border-radius: 50%;
+  background: var(--color-beige);
+  color: var(--color-gray-700);
   cursor: pointer;
   font-size: 1.2rem;
-  transition: 0.3s;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .close-btn:hover {
-  background: var(--unistmo-wine);
-  color: white;
+  background: var(--color-wine);
+  color: var(--color-white);
 }
 
 .table-premium {
@@ -207,13 +176,23 @@ body {
 }
 
 .table-premium td {
-  background: #f8fafc;
+  background: var(--color-beige);
   padding: 15px 20px;
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 .link-pub {
-  color: var(--unistmo-wine);
+  color: var(--color-wine);
   font-weight: 700;
   text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .card-image-box {
+    height: 240px;
+  }
+
+  .modal-content-premium {
+    padding: 28px 20px;
+  }
 }

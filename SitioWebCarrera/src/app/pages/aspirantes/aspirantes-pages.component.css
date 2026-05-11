@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
+  font-family: var(--font-base), 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
 }
 
 html, body {
@@ -17,16 +17,30 @@ html, body {
   position: relative;
 }
 
+.aspirantes > .header,
+.aspirantes > .proceso-box,
+.aspirantes > .info,
+.aspirantes > .cta {
+  width: min(1150px, calc(100% - 32px));
+}
+
 /* ================= HEADER ================= */
 .header {
-  background-color: #ffffff;
-  padding: 30px 16px;
+  background-color: var(--color-white);
+  margin: 0 auto;
+  padding: 40px 0 30px;
 }
 
 .header h1 {
-  color: #5f0f14;
-  font-weight: 600;
-  margin-bottom: 20px;
+  color: var(--color-wine);
+  font-size: clamp(2rem, 2.6vw, 2.6rem);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.header p {
+  max-width: 800px;
+  color: var(--color-gray-500);
 }
 
 /* ================= TESTIMONIOS TICKER ================= */
@@ -114,7 +128,7 @@ html, body {
 
 /* ================= PROCESO ================= */
 .proceso-box {
-  max-width: 1200px;
+  max-width: 1150px;
   margin: 40px auto;
   padding: 50px 30px;
   background-color: #ffffff;
@@ -222,7 +236,6 @@ html, body {
 
 /* ================= INFO ================= */
 .info {
-  max-width: 1150px;
   margin: 50px auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -283,8 +296,12 @@ html, body {
   margin: 80px auto;
 }
 
+.cta h2 {
+  color: #ffffff;
+}
+
 .cta p {
-  color: #e5e7eb;
+  color: #f8fafc;
   margin-bottom: 36px;
 }
 
@@ -446,5 +463,46 @@ html, body {
   .btn-cta {
     width: 100%;
   }
+}
+
+/* Unificacion visual */
+.ticker-label,
+.icono-circulo:hover,
+.paso-card:hover .icono-circulo,
+.btn-principal,
+.cta,
+.modal-content::before {
+  background: var(--color-wine);
+  background-color: var(--color-wine);
+}
+
+.ticker-item .autor,
+.icono-circulo,
+.btn-close:hover {
+  color: var(--color-wine);
+}
+
+.proceso-box,
+.paso-card,
+.info-card,
+.cta,
+.modal-content {
+  border-radius: 8px;
+}
+
+.paso-card,
+.info-card,
+.btn-cta:hover {
+  background-color: var(--color-beige);
+  border-color: var(--color-beige-border);
+}
+
+.paso-card:hover,
+.info-card:hover {
+  border-color: var(--color-wine);
+}
+
+.icono-circulo {
+  border-color: var(--color-wine);
 }
 
