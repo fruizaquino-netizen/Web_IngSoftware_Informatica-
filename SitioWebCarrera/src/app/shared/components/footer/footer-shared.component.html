@@ -1,57 +1,36 @@
 <footer class="footer">
-  <div class="footer-grid">
-    <!-- Institución -->
-    <div class="footer-column">
-      <h3>{{ content().FOOTER.TITLE }}</h3>
-      <p class="footer-description">
-        Plataforma oficial de la carrera de Informática.
-        Recursos académicos y medios oficiales de contacto.
-      </p>
-      <ul class="footer-list">
-        <li><a href="/descargas/manuales">{{ content().FOOTER.DOWNLOADS }}</a></li>
-        <li><a href="/formularios/solicitud-inscripcion.pdf" download>{{ content().FOOTER.FORMS }}</a></li>
-        <li><a href="/documentos/reglamento-estudiantil.pdf" target="_blank">{{ content().FOOTER.RULES }}</a></li>
-      </ul>
-    </div>
+  <div class="footer-container">
 
-    <!-- Recursos -->
-    <div class="footer-column">
-      <h3>{{ content().FOOTER.RESOURCES_TITLE }}</h3>
-      <ul class="footer-list">
-        <li><a href="#">{{ content().FOOTER.ONLINE_FORMS }}</a></li>
-        <li><a href="#">{{ content().FOOTER.STUDENT_RULES }}</a></li>
-        <li><a href="#">{{ content().FOOTER.ACADEMIC_DOCS }}</a></li>
-      </ul>
-      <div class="footer-extra-links">
-        <a href="#">Aviso de privacidad</a>
-        <a href="#">Mapa del sitio</a>
-      </div>
-    </div>
-
-    <!-- Contacto -->
-    <div class="footer-column">
-      <h3>Contacto</h3>
+    <div class="footer-section">
+      <h3 class="footer-title">CONTACTO</h3>
       <div class="contact-info">
-        <p><strong>Correo:</strong> informatica@unistmo.edu.mx</p>
-        <p><strong>Teléfono:</strong> +52 972 115 5207</p>
-        <p><strong>Ubicación:</strong> Ixtepec, Oaxaca</p>
+        <p><strong>Correo:</strong> <span>informatica@unistmo.edu.mx</span></p>
+        <p><strong>Teléfono:</strong> <span>+52 972 115 5207</span></p>
+        <p><strong>Ubicación:</strong> <span>Ixtepec, Oaxaca</span></p>
       </div>
     </div>
 
-    <!-- Redes -->
-    <div class="footer-column">
-      <h3>{{ content().FOOTER.FOLLOW }}</h3>
+    <div class="footer-section">
+      <h3 class="footer-title">{{ content().FOOTER.FOLLOW }}</h3>
       <div class="social-group">
-        <!-- Facebook -->
         <a href="https://www.facebook.com/InformaticaUnistmo" class="social-icon" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="currentColor"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="currentColor"/></svg>
         </a>
-        <!-- WhatsApp -->
+        <a href="https://www.instagram.com/idssi.unistmo/" class="social-icon" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="https://www.youtube.com/@informaticaunistmo7398" class="social-icon" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+        <a href="https://x.com/IUnistmo" class="social-icon" aria-label="X">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
         <a href="https://wa.me/529721155207" class="social-icon" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-4.821 4.754a9.167 9.167 0 0 1-4.677-1.277l-.335-.2-3.483.912.928-3.392-.219-.349A9.15 9.15 0 0 1 3.593 11.23c0-5.051 4.108-9.159 9.163-9.159 2.451 0 4.755.954 6.486 2.688 1.731 1.734 2.684 4.037 2.684 6.487 0 5.054-4.108 9.163-9.163 9.163" fill="currentColor"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.7 8.38 8.38 0 0 1 3.8.9L21 3z"></path><path d="M13.2 14.8c-.5.4-1.1.5-1.7.3-1.4-.4-2.5-1.5-2.9-2.9-.2-.6-.1-1.2.3-1.7l1.1-1.1c.3-.3.8-.3 1.1 0l1.2 1.2c.3.3.3.8 0 1.1l-.5.5c-.2.2-.2.5 0 .7.5.5 1 .9 1.5 1.5.2.2.5.2.7 0l.5-.5c.3-.3.8-.3 1.1 0l1.2 1.2c.3.3.3.8 0 1.1l-1.1 1.1z"></path></svg>
         </a>
       </div>
     </div>
+
   </div>
 
   <div class="footer-bottom">
