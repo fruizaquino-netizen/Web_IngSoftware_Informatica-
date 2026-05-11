@@ -1033,4 +1033,24 @@ app.delete('/api/videos/:id', requireAuth, async (req, res) => {
   }
 });
 
+const frontendDistPath = path.join(
+  __dirname,
+  '../dist/SitioWebCarrera/browser'
+);
+
+if (fs.existsSync(path.join(frontendDistPath, 'index.html'))) {
+  app.use(express.static(frontendDistPath));
+  app.get(/^\/(?!api(?:\/|$)).*/, (req, res) => {
+    res.sendFile(path.join(frontendDistPath, 'index.html'));
+  });
+} else {
+  app.get('/', (req, res) => {
+    res.json({
+      ok: true,
+      message: 'Servidor API funcionando. Abre el frontend en http://localhost:4200 o ejecuta npm run build para servirlo desde este puerto.',
+      health: '/api/health'
+    });
+  });
+}
+
 app.listen(3000, () => console.log('Proxy Gemini corriendo en puerto 3000'));

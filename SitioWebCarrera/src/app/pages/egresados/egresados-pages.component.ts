@@ -49,22 +49,7 @@ export class EgresadosPagesComponent {
   content = signal(defaultContent);
 
   //  Datos base
-  egresados = signal<Egresado[]>([
-    { nombre: 'Candy Beltran', anio: 2020, modalidad: 'ceneval' },
-    { nombre: 'Monserrat Diaz', anio: 2021, modalidad: 'ceneval' },
-    { nombre: 'Ricardo Hernandez', anio: 2022, modalidad: 'ceneval' },
-    { nombre: 'Mariano Cruz', anio: 2023, modalidad: 'tesis' },
-    { nombre: 'Maria Vazquez', anio: 2023, modalidad: 'tesis' },
-    { nombre: 'Juan Diego Ruiz', anio: 2024, modalidad: 'tesis' },
-    { nombre: 'Miranda Monraz', anio: 2024, modalidad: 'experiencia' },
-    { nombre: 'Blanca soto', anio: 2024, modalidad: 'experiencia' },
-    { nombre: 'Efren Gómez', anio: 2024, modalidad: 'tesis' },
-    { nombre: 'Chamber Ruiz', anio: 2024, modalidad: 'ceneval' },
-    { nombre: 'Clarissa Vazquez', anio: 2025, modalidad: 'ceneval' },
-    { nombre: 'Kevin Ramirez', anio: 2025, modalidad: 'experiencia' },
-    { nombre: 'Araceli Bautista', anio: 2025, modalidad: 'ceneval' }
-
-  ]);
+  egresados = signal<Egresado[]>([]);
 
   //  Filtro activo
   filtroActivo = signal<'todos' | 'tesis' | 'ceneval' | 'experiencia'>('todos');
@@ -158,8 +143,9 @@ export class EgresadosPagesComponent {
           this.egresados.set(egresados);
         }
       },
-      error: () => {
-        // Si la API no responde, usamos la lista local.
+      error: (error) => {
+        console.error('Error al cargar egresados desde la API:', error);
+        this.egresados.set([]);
       }
     });
   }
