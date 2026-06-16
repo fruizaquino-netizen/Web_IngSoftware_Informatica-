@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, PLATFORM_ID, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 type SectionKey = 'docentes' | 'egresados' | 'proyectos' | 'galeria' | 'noticias' | 'eventos';
@@ -39,6 +39,8 @@ const TOKEN_KEY = 'admin_panel_token';
 export class AdminPanelComponent {
   private readonly http = inject(HttpClient);
   private readonly fb = inject(FormBuilder);
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly isBrowser = isPlatformBrowser(this.platformId);
 
   readonly sections: AdminSection[] = [
     {
@@ -220,7 +222,7 @@ export class AdminPanelComponent {
   editingRecord = signal<any | null>(null);
   message = signal('');
   error = signal('');
-  token = signal(localStorage.getItem(TOKEN_KEY) || '');
+  token = signal('');
 
   activeSection = computed(() => this.sections.find((section) => section.key === this.activeKey())!);
   isAuthenticated = computed(() => Boolean(this.token()));
@@ -233,6 +235,10 @@ export class AdminPanelComponent {
   dataForm = this.fb.group({});
 
   constructor() {
+    if (this.isBrowser) {
+      this.token.set(localStorage.getItem(TOKEN_KEY) || '');
+    }
+
     if (this.isAuthenticated()) {
       this.loadSection();
     }
@@ -247,7 +253,9 @@ export class AdminPanelComponent {
     this.error.set('');
     this.http.post<{ token: string }>(`${API_BASE_URL}/auth/login`, this.loginForm.getRawValue()).subscribe({
       next: ({ token }) => {
-        localStorage.setItem(TOKEN_KEY, token);
+        if (this.isBrowser) {
+          localStorage.setItem(TOKEN_KEY, token);
+        }
         this.token.set(token);
         this.message.set('Sesion iniciada.');
         this.loadSection();
@@ -257,7 +265,9 @@ export class AdminPanelComponent {
   }
 
   logout(): void {
-    localStorage.removeItem(TOKEN_KEY);
+    if (this.isBrowser) {
+      localStorage.removeItem(TOKEN_KEY);
+    }
     this.token.set('');
     this.records.set([]);
     this.formVisible.set(false);
