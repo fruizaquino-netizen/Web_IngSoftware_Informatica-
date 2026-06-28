@@ -7,50 +7,38 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum ModalidadTitulacion {
-  tesis
-  ceneval
-  experiencia
-}
-
 enum TipoMedia {
   imagen
   video
 }
 
 model Noticia {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  titulo      String
-  contenido   String
-  descripcion String?
-  imagenUrl   String?
-  fechaTexto  String?
-  fecha       DateTime @default(now())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  titulo    String
+  fecha     DateTime @default(now())
+  contenido String
+  orden     Int?
 }
 
 model Evento {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
   titulo      String
-  descripcion String
-  hora        String?
-  lugar       String?
-  dia         Int?
-  mes         Int?
   fecha       DateTime?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  hora        String?
+  descripcion String
+  orden       Int?
 }
 
 model Docente {
   id            String        @id @default(auto()) @map("_id") @db.ObjectId
   nombre        String
+  apellidos     String
   especialidad  String
   cargo         String
   imagen        String
   descripcion   String
   email         String        @unique
+  orden         Int?
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
   publicaciones Publicacion[]
@@ -67,43 +55,46 @@ model Publicacion {
 }
 
 model Egresado {
-  id        String               @id @default(auto()) @map("_id") @db.ObjectId
+  id        String              @id @default(auto()) @map("_id") @db.ObjectId
   nombre    String
-  anio      Int
-  modalidad ModalidadTitulacion
-  createdAt DateTime             @default(now())
-  updatedAt DateTime             @updatedAt
+  apellidos String
+  ano       Int
+  modalidad String
+  foto      String?
+  orden     Int?
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
 }
 
 model Proyecto {
-  id            String            @id @default(auto()) @map("_id") @db.ObjectId
-  categoryKey   String
-  categoryLabel String
-  title         String
-  summary       String
-  image         String
-  description   String
-  videoUrl      String?
-  createdAt     DateTime          @default(now())
-  updatedAt     DateTime          @updatedAt
-  miembros      ProyectoMiembro[]
-  galeria       ProyectoImagen[]
+  id              String            @id @default(auto()) @map("_id") @db.ObjectId
+  categoria       String
+  title           String
+  summary         String
+  imagenPortada   String
+  description     String
+  galeriaProyecto String[]
+  orden           Int?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  miembros        ProyectoMiembro[]
 }
 
 model ProyectoMiembro {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   nombre     String
+  orden      Int?
   proyectoId String   @db.ObjectId
   createdAt  DateTime @default(now())
   proyecto   Proyecto @relation(fields: [proyectoId], references: [id], onDelete: Cascade)
 }
 
-model ProyectoImagen {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  url        String
-  proyectoId String   @db.ObjectId
-  createdAt  DateTime @default(now())
-  proyecto   Proyecto @relation(fields: [proyectoId], references: [id], onDelete: Cascade)
+model MiembroProyectoCatalogo {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  nombre    String   @unique
+  orden     Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model GaleriaItem {
@@ -112,6 +103,7 @@ model GaleriaItem {
   categoria String?
   url       String
   tipo      TipoMedia @default(imagen)
+  orden     Int?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }
@@ -124,4 +116,11 @@ model VideoInstitucional {
   thumbnailUrl String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+model UsuarioAdmin {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  usuario  String @unique
+  password String
+  role     String
 }

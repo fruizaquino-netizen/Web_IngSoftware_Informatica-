@@ -151,8 +151,17 @@
         </ul>
         <h6 class="fw-bold mt-4">{{ content().text.gallery }}</h6>
         <div class="row g-3">
-          <div class="col-md-4" *ngFor="let img of project.modal.gallery">
-            <img [src]="img" class="img-fluid rounded" [alt]="project.title">
+          <div class="col-md-4" *ngFor="let media of project.modal.gallery">
+            <video
+              *ngIf="$any(media).tipo === 'video' || isVideoMedia($any(media).url || media); else projectImage"
+              class="img-fluid rounded w-100"
+              controls>
+              <source [src]="$any(media).url || media">
+              {{ content().text.videoFallback }}
+            </video>
+            <ng-template #projectImage>
+              <img [src]="$any(media).url || media" class="img-fluid rounded" [alt]="project.title">
+            </ng-template>
           </div>
         </div>
         <ng-container *ngIf="project.modal.videoUrl as videoUrl">

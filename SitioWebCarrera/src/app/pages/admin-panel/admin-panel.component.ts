@@ -1,10 +1,12 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Component, PLATFORM_ID, computed, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnDestroy, PLATFORM_ID, computed, inject, signal } from '@angular/core';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NavigationStart, Router } from '@angular/router';
+import { Subscription, filter } from 'rxjs';
 
 type SectionKey = 'docentes' | 'egresados' | 'proyectos' | 'galeria' | 'noticias' | 'eventos';
-type FieldType = 'text' | 'number' | 'email' | 'date' | 'textarea' | 'select' | 'url';
+type FieldType = 'text' | 'number' | 'email' | 'date' | 'textarea' | 'select' | 'file';
 
 interface AdminField {
   key: string;
@@ -14,6 +16,9 @@ interface AdminField {
   options?: { label: string; value: string }[];
   placeholder?: string;
   wide?: boolean;
+  multiple?: boolean;
+  accept?: string;
+  otherKey?: string;
 }
 
 interface AdminSection {
@@ -28,6 +33,7 @@ interface AdminSection {
 
 const API_BASE_URL = 'http://localhost:3000/api';
 const TOKEN_KEY = 'admin_panel_token';
+const CUSTOM_OPTIONS_KEY = 'admin_panel_custom_options';
 
 @Component({
   selector: 'app-admin-panel',
@@ -36,11 +42,14 @@ const TOKEN_KEY = 'admin_panel_token';
   templateUrl: './admin-panel.component.html',
   styleUrl: './admin-panel.component.css'
 })
-export class AdminPanelComponent {
+export class AdminPanelComponent implements OnDestroy {
   private readonly http = inject(HttpClient);
   private readonly fb = inject(FormBuilder);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly router = inject(Router);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
+  private noticeTimeout: ReturnType<typeof setTimeout> | null = null;
+  private readonly routerSubscription: Subscription;
 
   readonly sections: AdminSection[] = [
     {
@@ -51,16 +60,43 @@ export class AdminPanelComponent {
       titleKey: 'nombre',
       tableColumns: [
         { key: 'nombre', label: 'Nombre' },
+        { key: 'apellidos', label: 'Apellidos' },
         { key: 'especialidad', label: 'Especialidad' },
         { key: 'email', label: 'Correo' }
       ],
       fields: [
-        { key: 'nombre', label: 'Nombre', type: 'text', required: true },
-        { key: 'especialidad', label: 'Especialidad', type: 'text', required: true },
-        { key: 'cargo', label: 'Cargo', type: 'textarea', required: true, wide: true },
-        { key: 'imagen', label: 'URL de imagen', type: 'url', required: true, wide: true },
-        { key: 'email', label: 'Correo', type: 'email', required: true },
-        { key: 'descripcion', label: 'Descripcion', type: 'textarea', required: true, wide: true },
+        { key: 'nombre', label: 'Nombre', type: 'text', required: true, placeholder: 'Ej. Ana Maria' },
+        { key: 'apellidos', label: 'Apellidos', type: 'text', required: true, placeholder: 'Ej. Perez Lopez' },
+        {
+          key: 'especialidad',
+          label: 'Especialidad',
+          type: 'select',
+          required: true,
+          otherKey: 'especialidadOtro',
+          options: [
+            { label: 'Desarrollo de Software', value: 'Desarrollo de Software' },
+            { label: 'Sistemas Inteligentes', value: 'Sistemas Inteligentes' },
+            { label: 'Redes y Telecomunicaciones', value: 'Redes y Telecomunicaciones' },
+            { label: 'Otros', value: 'Otros' }
+          ]
+        },
+        {
+          key: 'cargo',
+          label: 'Cargo',
+          type: 'select',
+          required: true,
+          wide: true,
+          otherKey: 'cargoOtro',
+          options: [
+            { label: 'Profesor investigador de tiempo completo', value: 'Profesor investigador de tiempo completo' },
+            { label: 'Profesor de asignatura', value: 'Profesor de asignatura' },
+            { label: 'Jefe de carrera', value: 'Jefe de carrera' },
+            { label: 'Otros', value: 'Otros' }
+          ]
+        },
+        { key: 'imagen', label: 'Imagen', type: 'file', required: true, wide: true, accept: 'image/*' },
+        { key: 'email', label: 'Correo', type: 'email', required: true, placeholder: 'correo@unistmo.edu.mx' },
+        { key: 'descripcion', label: 'Descripcion', type: 'textarea', required: true, wide: true, placeholder: 'Describe brevemente su perfil academico.' },
         {
           key: 'publicacionesTexto',
           label: 'Publicaciones',
@@ -78,21 +114,26 @@ export class AdminPanelComponent {
       titleKey: 'nombre',
       tableColumns: [
         { key: 'nombre', label: 'Nombre' },
-        { key: 'anio', label: 'Anio' },
+        { key: 'apellidos', label: 'Apellidos' },
+        { key: 'ano', label: 'Ano' },
         { key: 'modalidad', label: 'Modalidad' }
       ],
       fields: [
-        { key: 'nombre', label: 'Nombre', type: 'text', required: true },
-        { key: 'anio', label: 'Anio', type: 'number', required: true },
+        { key: 'nombre', label: 'Nombre', type: 'text', required: true, placeholder: 'Ej. Carlos' },
+        { key: 'apellidos', label: 'Apellidos', type: 'text', required: true, placeholder: 'Ej. Gomez Ruiz' },
+        { key: 'ano', label: 'Ano', type: 'number', required: true, placeholder: 'Ej. 2024' },
+        { key: 'foto', label: 'Foto de perfil', type: 'file', wide: true, accept: 'image/*' },
         {
           key: 'modalidad',
           label: 'Modalidad',
           type: 'select',
           required: true,
+          otherKey: 'modalidadOtro',
           options: [
             { label: 'Tesis', value: 'tesis' },
             { label: 'CENEVAL', value: 'ceneval' },
-            { label: 'Experiencia profesional', value: 'experiencia' }
+            { label: 'Experiencia profesional', value: 'experiencia' },
+            { label: 'Otros', value: 'Otros' }
           ]
         }
       ]
@@ -105,38 +146,42 @@ export class AdminPanelComponent {
       titleKey: 'title',
       tableColumns: [
         { key: 'title', label: 'Titulo' },
-        { key: 'categoryLabel', label: 'Categoria' },
+        { key: 'categoria', label: 'Categoria' },
         { key: 'summary', label: 'Resumen' }
       ],
       fields: [
-        { key: 'title', label: 'Titulo', type: 'text', required: true },
+        { key: 'title', label: 'Titulo', type: 'text', required: true, placeholder: 'Ej. Plataforma de seguimiento academico' },
         {
-          key: 'categoryKey',
+          key: 'categoria',
           label: 'Categoria',
           type: 'select',
           required: true,
+          otherKey: 'categoriaOtro',
           options: [
-            { label: 'Desarrollo de Software', value: 'software' },
-            { label: 'Sistemas Inteligentes', value: 'sistemas' }
+            { label: 'Desarrollo de Software', value: 'Desarrollo de Software' },
+            { label: 'Sistemas Inteligentes', value: 'Sistemas Inteligentes' },
+            { label: 'Otros', value: 'Otros' }
           ]
         },
-        { key: 'summary', label: 'Resumen', type: 'textarea', required: true, wide: true },
-        { key: 'image', label: 'URL de imagen', type: 'url', required: true, wide: true },
-        { key: 'videoUrl', label: 'URL de video', type: 'url', wide: true },
-        { key: 'description', label: 'Descripcion', type: 'textarea', required: true, wide: true },
+        { key: 'summary', label: 'Resumen', type: 'textarea', required: true, wide: true, placeholder: 'Resume el objetivo del proyecto en una o dos frases.' },
+        { key: 'imagenPortada', label: 'Imagen de portada', type: 'file', required: true, wide: true, accept: 'image/*' },
+        { key: 'description', label: 'Descripcion', type: 'textarea', required: true, wide: true, placeholder: 'Describe el problema, la solucion y los resultados principales.' },
         {
           key: 'miembrosTexto',
           label: 'Miembros',
-          type: 'textarea',
+          type: 'select',
           wide: true,
-          placeholder: 'Un nombre por linea'
+          multiple: true,
+          otherKey: 'miembroOtro',
+          placeholder: 'Selecciona uno o mas miembros'
         },
         {
-          key: 'galeriaTexto',
+          key: 'galeriaProyecto',
           label: 'Galeria del proyecto',
-          type: 'textarea',
+          type: 'file',
           wide: true,
-          placeholder: 'Una URL de imagen por linea'
+          multiple: true,
+          accept: 'image/*,video/*'
         }
       ]
     },
@@ -148,14 +193,11 @@ export class AdminPanelComponent {
       titleKey: 'titulo',
       tableColumns: [
         { key: 'titulo', label: 'Titulo' },
-        { key: 'categoria', label: 'Categoria' },
         { key: 'tipo', label: 'Tipo' },
-        { key: 'url', label: 'URL' }
+        { key: 'url', label: 'Archivo' }
       ],
       fields: [
-        { key: 'titulo', label: 'Titulo', type: 'text' },
-        { key: 'categoria', label: 'Categoria', type: 'text' },
-        { key: 'url', label: 'URL de imagen/video', type: 'url', required: true, wide: true },
+        { key: 'titulo', label: 'Titulo', type: 'text', placeholder: 'Ej. Feria de proyectos' },
         {
           key: 'tipo',
           label: 'Tipo',
@@ -165,6 +207,14 @@ export class AdminPanelComponent {
             { label: 'Imagen', value: 'imagen' },
             { label: 'Video', value: 'video' }
           ]
+        },
+        {
+          key: 'archivo',
+          label: 'Archivo',
+          type: 'file',
+          required: true,
+          wide: true,
+          accept: 'image/*'
         }
       ]
     },
@@ -176,20 +226,19 @@ export class AdminPanelComponent {
       titleKey: 'titulo',
       tableColumns: [
         { key: 'titulo', label: 'Titulo' },
-        { key: 'fechaTexto', label: 'Fecha' },
-        { key: 'descripcion', label: 'Descripcion' }
+        { key: 'fecha', label: 'Fecha' },
+        { key: 'contenido', label: 'Contenido' }
       ],
       fields: [
-        { key: 'titulo', label: 'Titulo', type: 'text', required: true },
+        { key: 'titulo', label: 'Titulo', type: 'text', required: true, placeholder: 'Ej. Convocatoria abierta' },
         { key: 'fecha', label: 'Fecha', type: 'date' },
-        { key: 'imagenUrl', label: 'URL de imagen', type: 'url', wide: true },
-        { key: 'descripcion', label: 'Descripcion corta', type: 'textarea', wide: true },
         {
           key: 'contenido',
           label: 'Contenido',
           type: 'textarea',
+          required: true,
           wide: true,
-          placeholder: 'Opcional. Si lo dejas vacio se usara la descripcion corta.'
+          placeholder: 'Escribe el contenido completo de la noticia.'
         }
       ]
     },
@@ -201,16 +250,15 @@ export class AdminPanelComponent {
       titleKey: 'titulo',
       tableColumns: [
         { key: 'titulo', label: 'Titulo' },
-        { key: 'dia', label: 'Dia' },
-        { key: 'mes', label: 'Mes' },
-        { key: 'lugar', label: 'Lugar' }
+        { key: 'fecha', label: 'Fecha' },
+        { key: 'hora', label: 'Hora' },
+        { key: 'descripcion', label: 'Descripcion' }
       ],
       fields: [
-        { key: 'titulo', label: 'Titulo', type: 'text', required: true },
-        { key: 'descripcion', label: 'Descripcion', type: 'textarea', required: true, wide: true },
+        { key: 'titulo', label: 'Titulo', type: 'text', required: true, placeholder: 'Ej. Taller de desarrollo web' },
+        { key: 'descripcion', label: 'Descripcion', type: 'textarea', required: true, wide: true, placeholder: 'Describe la actividad, publico objetivo y detalles relevantes.' },
         { key: 'fecha', label: 'Fecha', type: 'date', required: true },
-        { key: 'hora', label: 'Hora', type: 'text' },
-        { key: 'lugar', label: 'Lugar', type: 'text' }
+        { key: 'hora', label: 'Hora', type: 'text', placeholder: 'Ej. 10:00 AM' }
       ]
     }
   ];
@@ -223,6 +271,15 @@ export class AdminPanelComponent {
   message = signal('');
   error = signal('');
   token = signal('');
+  showPassword = signal(false);
+  submitAttempted = signal(false);
+  miembrosOptions = signal<{ label: string; value: string }[]>([]);
+  loadingMiembrosOptions = signal(false);
+  customOptions = signal<Record<string, string[]>>({});
+  removedFiles = signal<Set<string>>(new Set());
+  projectGalleryItems = signal<string[]>([]);
+  draggedRecordId = signal<string | null>(null);
+  dragOverRecordId = signal<string | null>(null);
 
   activeSection = computed(() => this.sections.find((section) => section.key === this.activeKey())!);
   isAuthenticated = computed(() => Boolean(this.token()));
@@ -233,15 +290,28 @@ export class AdminPanelComponent {
   });
 
   dataForm = this.fb.group({});
+  private selectedFiles: Record<string, File[]> = {};
+  private formSubscriptions: Subscription[] = [];
 
   constructor() {
+    this.routerSubscription = this.router.events
+      .pipe(filter((event) => event instanceof NavigationStart))
+      .subscribe(() => this.clearNotices());
+
     if (this.isBrowser) {
       this.token.set(localStorage.getItem(TOKEN_KEY) || '');
+      this.customOptions.set(this.loadCustomOptions());
     }
 
     if (this.isAuthenticated()) {
       this.loadSection();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.clearNoticeTimer();
+    this.clearFormSubscriptions();
+    this.routerSubscription.unsubscribe();
   }
 
   login(): void {
@@ -250,14 +320,14 @@ export class AdminPanelComponent {
       return;
     }
 
-    this.error.set('');
+    this.clearNotices();
     this.http.post<{ token: string }>(`${API_BASE_URL}/auth/login`, this.loginForm.getRawValue()).subscribe({
       next: ({ token }) => {
         if (this.isBrowser) {
           localStorage.setItem(TOKEN_KEY, token);
         }
         this.token.set(token);
-        this.message.set('Sesion iniciada.');
+        this.showSuccess('Sesion iniciada.');
         this.loadSection();
       },
       error: () => this.error.set('No se pudo iniciar sesion. Revisa usuario y contrasena.')
@@ -271,10 +341,11 @@ export class AdminPanelComponent {
     this.token.set('');
     this.records.set([]);
     this.formVisible.set(false);
-    this.message.set('');
+    this.clearNotices();
   }
 
   selectSection(key: SectionKey): void {
+    this.clearNotices();
     this.activeKey.set(key);
     this.cancelForm();
     this.loadSection();
@@ -297,24 +368,38 @@ export class AdminPanelComponent {
   }
 
   openCreateForm(): void {
+    this.clearNotices();
     this.editingRecord.set(null);
+    this.ensureMiembrosOptionsForCurrentSection();
     this.buildForm();
     this.formVisible.set(true);
+    this.scrollToForm();
   }
 
   openEditForm(record: any): void {
+    this.clearNotices();
     this.editingRecord.set(record);
+    this.ensureMiembrosOptionsForCurrentSection();
     this.buildForm(record);
     this.formVisible.set(true);
+    this.scrollToForm();
   }
 
   cancelForm(): void {
     this.formVisible.set(false);
     this.editingRecord.set(null);
+    this.selectedFiles = {};
+    this.removedFiles.set(new Set());
+    this.projectGalleryItems.set([]);
+    this.submitAttempted.set(false);
+    this.clearFormSubscriptions();
     this.dataForm = this.fb.group({});
   }
 
   submitForm(): void {
+    this.submitAttempted.set(true);
+    this.error.set('');
+
     if (this.dataForm.invalid) {
       this.dataForm.markAllAsTouched();
       this.error.set(`Completa los campos obligatorios: ${this.invalidRequiredLabels().join(', ')}.`);
@@ -322,7 +407,9 @@ export class AdminPanelComponent {
     }
 
     const record = this.editingRecord();
-    const payload = this.buildPayload(this.dataForm.getRawValue());
+    const rawValue = this.dataForm.getRawValue();
+    const pendingCustomOptions = this.extractCustomOptions(rawValue);
+    const payload = this.buildPayload(rawValue);
     const request = record
       ? this.http.put(`${this.activeSection().endpoint}/${record[this.activeSection().idKey]}`, payload, {
           headers: this.authHeaders()
@@ -331,8 +418,9 @@ export class AdminPanelComponent {
 
     request.subscribe({
       next: () => {
-        this.message.set(record ? 'Registro actualizado.' : 'Registro creado.');
+        this.saveCustomOptions(pendingCustomOptions);
         this.cancelForm();
+        this.showSuccess(record ? 'Registro actualizado con exito.' : 'Registro creado con exito.');
         this.loadSection();
       },
       error: (error) => this.error.set(this.describeHttpError(error, 'No se pudo guardar.'))
@@ -353,7 +441,7 @@ export class AdminPanelComponent {
       })
       .subscribe({
         next: () => {
-          this.message.set('Registro eliminado.');
+          this.showSuccess('Registro eliminado con exito.');
           this.loadSection();
         },
         error: (error) => this.error.set(this.describeHttpError(error, 'No se pudo eliminar.'))
@@ -374,22 +462,331 @@ export class AdminPanelComponent {
     return String(value);
   }
 
+  moveRecord(record: any, direction: -1 | 1): void {
+    const current = [...this.records()];
+    const index = current.findIndex((item) => item[this.activeSection().idKey] === record[this.activeSection().idKey]);
+    const nextIndex = index + direction;
+
+    if (index < 0 || nextIndex < 0 || nextIndex >= current.length) {
+      return;
+    }
+
+    [current[index], current[nextIndex]] = [current[nextIndex], current[index]];
+    this.persistRecordOrder(current);
+  }
+
+  onRecordDragStart(event: DragEvent, record: any): void {
+    const id = String(record?.[this.activeSection().idKey] || '');
+
+    if (!id) {
+      return;
+    }
+
+    this.draggedRecordId.set(id);
+    event.dataTransfer?.setData('text/plain', id);
+    event.dataTransfer?.setDragImage((event.currentTarget as HTMLElement), 18, 18);
+    if (event.dataTransfer) {
+      event.dataTransfer.effectAllowed = 'move';
+    }
+  }
+
+  onRecordDragOver(event: DragEvent, record: any): void {
+    const draggedId = this.draggedRecordId();
+    const targetId = String(record?.[this.activeSection().idKey] || '');
+
+    if (!draggedId || !targetId || draggedId === targetId) {
+      return;
+    }
+
+    event.preventDefault();
+    this.dragOverRecordId.set(targetId);
+    if (event.dataTransfer) {
+      event.dataTransfer.dropEffect = 'move';
+    }
+  }
+
+  onRecordDrop(event: DragEvent, record: any): void {
+    event.preventDefault();
+    const draggedId = this.draggedRecordId() || event.dataTransfer?.getData('text/plain');
+    const targetId = String(record?.[this.activeSection().idKey] || '');
+
+    this.draggedRecordId.set(null);
+    this.dragOverRecordId.set(null);
+
+    if (!draggedId || !targetId || draggedId === targetId) {
+      return;
+    }
+
+    const current = [...this.records()];
+    const fromIndex = current.findIndex((item) => String(item[this.activeSection().idKey]) === draggedId);
+    const toIndex = current.findIndex((item) => String(item[this.activeSection().idKey]) === targetId);
+
+    if (fromIndex < 0 || toIndex < 0) {
+      return;
+    }
+
+    const [moved] = current.splice(fromIndex, 1);
+    current.splice(toIndex, 0, moved);
+    this.persistRecordOrder(current);
+  }
+
+  onRecordDragEnd(): void {
+    this.draggedRecordId.set(null);
+    this.dragOverRecordId.set(null);
+  }
+
+  private persistRecordOrder(records: any[]): void {
+    this.records.set(records.map((item, orden) => ({ ...item, orden })));
+    this.http
+      .put(
+        `${API_BASE_URL}/${this.activeKey()}/reordenar`,
+        { ids: records.map((item) => item[this.activeSection().idKey]) },
+        { headers: this.authHeaders() }
+      )
+      .subscribe({
+        next: () => this.showSuccess('Orden actualizado.'),
+        error: (error) => this.error.set(this.describeHttpError(error, 'No se pudo actualizar el orden.'))
+      });
+  }
+
+  onFileChange(event: Event, field: AdminField): void {
+    const input = event.target as HTMLInputElement;
+    const files = Array.from(input.files || []);
+    this.selectedFiles[field.key] = field.multiple ? files : files.slice(0, 1);
+    if (this.selectedFiles[field.key].length) {
+      this.updateRemovedFile(field.key, false);
+    }
+    this.dataForm.get(field.key)?.setValue(this.selectedFiles[field.key].length ? 'selected' : '');
+    this.dataForm.get(field.key)?.markAsTouched();
+  }
+
+  optionsForField(field: AdminField): { label: string; value: string }[] {
+    if (this.activeKey() === 'proyectos' && field.key === 'miembrosTexto') {
+      const base = this.miembrosOptions();
+      return [...base, { label: 'Otros', value: 'Otros' }];
+    }
+
+    const baseOptions = field.options || [];
+    const customValues = this.customOptions()[this.customOptionKey(field)] || [];
+    const customOptions = customValues.map((value) => ({ label: value, value }));
+    const merged = [...baseOptions.filter((option) => option.value !== 'Otros'), ...customOptions];
+    const seen = new Set<string>();
+    const unique = merged.filter((option) => {
+      if (!option.value || seen.has(option.value)) {
+        return false;
+      }
+      seen.add(option.value);
+      return true;
+    });
+
+    return baseOptions.some((option) => option.value === 'Otros')
+      ? [...unique, { label: 'Otros', value: 'Otros' }]
+      : unique;
+  }
+
+  shouldShowOtherInput(field: AdminField): boolean {
+    const value = this.dataForm.get(field.key)?.value;
+    return Boolean(
+      field.otherKey &&
+        (value === 'Otros' || (Array.isArray(value) && value.includes('Otros')))
+    );
+  }
+
+  otherFieldError(field: AdminField): string {
+    return field.otherKey ? this.fieldError(field.otherKey) : '';
+  }
+
+  isFieldVisible(field: AdminField): boolean {
+    if (this.activeKey() === 'galeria' && field.key === 'archivo') {
+      return Boolean(this.dataForm.get('tipo')?.value);
+    }
+
+    return true;
+  }
+
+  fileAcceptForField(field: AdminField): string | null {
+    if (this.activeKey() === 'galeria' && field.key === 'archivo') {
+      return this.dataForm.get('tipo')?.value === 'video' ? 'video/*' : 'image/*';
+    }
+
+    return field.accept || null;
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword.update((visible) => !visible);
+  }
+
+  selectedFileNames(field: AdminField): string {
+    return (this.selectedFiles[field.key] || []).map((file) => file.name).join(', ');
+  }
+
+  projectGalleryPreviewUrl(value: string): string {
+    if (!value) {
+      return '';
+    }
+
+    if (/^(https?:)?\/\//i.test(value) || value.startsWith('data:') || value.startsWith('assets/')) {
+      return value;
+    }
+
+    return `assets/img/Proyectos/${encodeURIComponent(value)}`;
+  }
+
+  isVideoFile(value: string): boolean {
+    return /\.(mp4|webm|ogg|mov)$/i.test(value);
+  }
+
+  removeProjectGalleryItem(index: number): void {
+    this.projectGalleryItems.update((items) => items.filter((_, itemIndex) => itemIndex !== index));
+    this.dataForm.get('galeriaProyecto')?.markAsTouched();
+  }
+
+  moveProjectGalleryItem(index: number, direction: -1 | 1): void {
+    const items = [...this.projectGalleryItems()];
+    const nextIndex = index + direction;
+
+    if (nextIndex < 0 || nextIndex >= items.length) {
+      return;
+    }
+
+    [items[index], items[nextIndex]] = [items[nextIndex], items[index]];
+    this.projectGalleryItems.set(items);
+    this.dataForm.get('galeriaProyecto')?.markAsTouched();
+  }
+
+  existingFileLabel(field: AdminField): string {
+    const value = this.existingFileValue(field.key, this.editingRecord());
+    return value ? String(value).split(/[\\/]/).pop() || value : '';
+  }
+
+  existingFileUrl(field: AdminField): string {
+    const value = this.existingFileValue(field.key, this.editingRecord());
+
+    if (!value || this.isExistingFileRemoved(field.key)) {
+      return '';
+    }
+
+    const path = String(value);
+    if (/^(https?:)?\/\//i.test(path) || path.startsWith('data:') || path.startsWith('assets/')) {
+      return path;
+    }
+
+    const folderBySection: Record<SectionKey, string> = {
+      docentes: 'Docentes',
+      egresados: 'Egresados',
+      proyectos: 'Proyectos',
+      galeria: 'Galeria',
+      noticias: '',
+      eventos: ''
+    };
+    const folder = folderBySection[this.activeKey()];
+
+    return folder ? `assets/img/${folder}/${encodeURIComponent(path)}` : '';
+  }
+
+  hasExistingFile(field: AdminField): boolean {
+    return Boolean(this.existingFileValue(field.key, this.editingRecord()));
+  }
+
+  isExistingFileRemoved(key: string): boolean {
+    return this.removedFiles().has(key);
+  }
+
+  removeExistingFile(field: AdminField): void {
+    this.selectedFiles[field.key] = [];
+    this.updateRemovedFile(field.key, true);
+    this.dataForm.get(field.key)?.setValue('');
+    this.dataForm.get(field.key)?.markAsTouched();
+  }
+
+  restoreExistingFile(field: AdminField): void {
+    this.updateRemovedFile(field.key, false);
+    this.dataForm.get(field.key)?.setValue('selected');
+  }
+
+  isPreviewableFile(field: AdminField): boolean {
+    const value = this.existingFileValue(field.key, this.editingRecord()).toLowerCase();
+    const accept = this.fileAcceptForField(field) || '';
+
+    return accept.includes('image') || /\.(apng|avif|gif|jpe?g|png|webp|svg)$/i.test(value);
+  }
+
+  publicacionesPreviewLines(): string[] {
+    const value = this.dataForm.get('publicacionesTexto')?.value;
+    return this.parseLines(String(value || ''));
+  }
+
+  isLoginFieldInvalid(key: 'username' | 'password'): boolean {
+    const control = this.loginForm.get(key);
+    return Boolean(control?.invalid && control.touched);
+  }
+
+  isFieldInvalid(key: string): boolean {
+    const control = this.dataForm.get(key);
+    return Boolean(control?.invalid && (control.touched || this.submitAttempted()));
+  }
+
+  fieldError(key: string): string {
+    const control = this.dataForm.get(key);
+
+    if (!control || !this.isFieldInvalid(key)) {
+      return '';
+    }
+
+    if (control.hasError('required')) {
+      return 'Este campo es obligatorio.';
+    }
+
+    if (control.hasError('email')) {
+      return 'Ingresa un correo valido, por ejemplo nombre@dominio.com.';
+    }
+
+    return 'Revisa este campo.';
+  }
+
   private buildForm(record?: any): void {
+    this.clearFormSubscriptions();
     const controls: Record<string, any> = {};
 
     for (const field of this.activeSection().fields) {
-      controls[field.key] = [
-        this.valueForField(field.key, record),
-        field.required ? Validators.required : []
-      ];
+      const hasExistingFile = field.type === 'file' && Boolean(this.existingFileValue(field.key, record));
+      const validators = [];
+
+      const waitsForGalleryType = this.activeKey() === 'galeria' && field.key === 'archivo' && !record?.tipo;
+
+      if (field.required && !hasExistingFile && !waitsForGalleryType) {
+        validators.push(Validators.required);
+      }
+
+      if (field.type === 'email') {
+        validators.push(Validators.email);
+      }
+
+      const fieldValue = this.valueForField(field, record);
+
+      controls[field.key] = [fieldValue, validators];
+
+      if (field.otherKey) {
+        controls[field.otherKey] = [
+          this.valueForOtherField(field, fieldValue, record),
+          this.valueIncludesOther(fieldValue) ? [Validators.required] : []
+        ];
+      }
     }
 
     this.dataForm = this.fb.group(controls);
+    this.projectGalleryItems.set(this.existingProjectGallery(record));
+    this.setupDynamicControlRules();
   }
 
-  private valueForField(key: string, record?: any): string | number {
+  private valueForField(fieldOrKey: AdminField | string, record?: any): string | number | string[] {
+    const key = typeof fieldOrKey === 'string' ? fieldOrKey : fieldOrKey.key;
+    const field = typeof fieldOrKey === 'string'
+      ? this.activeSection().fields.find((item) => item.key === key)
+      : fieldOrKey;
+
     if (!record) {
-      return '';
+      return field?.multiple ? [] : '';
     }
 
     if (key === 'publicacionesTexto') {
@@ -398,43 +795,49 @@ export class AdminPanelComponent {
         .join('\n');
     }
 
-    if (key === 'miembrosTexto') {
-      return (record.miembros || []).map((item: any) => item.nombre || item).join('\n');
-    }
-
-    if (key === 'galeriaTexto') {
-      return (record.galeria || []).map((item: any) => item.url || item).join('\n');
+    if (field?.multiple && key === 'miembrosTexto') {
+      return (record.miembros || []).map((item: any) => item.nombre || item);
     }
 
     if (key === 'fecha' && record.fecha) {
       return String(record.fecha).slice(0, 10);
     }
 
+    if (field?.type === 'file') {
+      return this.existingFileValue(key, record) ? 'selected' : '';
+    }
+
+    if (field?.otherKey && record[key]) {
+      return this.optionsForField(field).some((option) => option.value === record[key]) ? record[key] : 'Otros';
+    }
+
     return record[key] ?? '';
+  }
+
+  private valueForOtherField(field: AdminField, fieldValue: string | number | string[], record?: any): string {
+    const value = record?.[field.key];
+
+    if (!record || fieldValue !== 'Otros' || value === undefined || value === null) {
+      return '';
+    }
+
+    return String(value);
   }
 
   private buildPayload(rawValue: any): any {
     const payload = { ...rawValue };
 
-    if (this.activeKey() === 'noticias') {
-      payload.contenido = String(payload.contenido || payload.descripcion || '').trim();
-      payload.descripcion = String(payload.descripcion || payload.contenido || '').trim();
+    for (const field of this.activeSection().fields) {
+      if (field.type === 'file') {
+        delete payload[field.key];
+        if (this.removedFiles().has(field.key)) {
+          payload[field.key] = '';
+        }
+      }
     }
 
-    if ('anio' in payload && payload.anio !== '') {
-      payload.anio = Number(payload.anio);
-    }
-
-    if ('dia' in payload && payload.dia !== '') {
-      payload.dia = Number(payload.dia);
-    }
-
-    if ('mes' in payload && payload.mes !== '') {
-      payload.mes = Number(payload.mes);
-    }
-
-    if (payload.categoryKey) {
-      payload.categoryLabel = this.categoryLabel(payload.categoryKey);
+    if ('ano' in payload && payload.ano !== '') {
+      payload.ano = Number(payload.ano);
     }
 
     if ('publicacionesTexto' in payload) {
@@ -442,35 +845,107 @@ export class AdminPanelComponent {
       delete payload.publicacionesTexto;
     }
 
+    for (const field of this.activeSection().fields) {
+      if (field.otherKey) {
+        const otherValue = String(payload[field.otherKey] || '').trim();
+        if (Array.isArray(payload[field.key])) {
+          payload[field.key] = payload[field.key].filter((value: string) => value !== 'Otros');
+          if (otherValue) {
+            payload[field.key] = [...payload[field.key], otherValue];
+          }
+        } else if (payload[field.key] === 'Otros' && otherValue) {
+          payload[field.key] = otherValue;
+        }
+        delete payload[field.otherKey];
+      }
+    }
+
     if ('miembrosTexto' in payload) {
-      payload.miembros = this.parseLines(payload.miembrosTexto).map((nombre) => ({ nombre }));
+      const miembros = Array.isArray(payload.miembrosTexto)
+        ? payload.miembrosTexto
+        : this.parseLines(payload.miembrosTexto);
+      payload.miembros = miembros.map((nombre: string) => ({ nombre }));
       delete payload.miembrosTexto;
     }
 
-    if ('galeriaTexto' in payload) {
-      payload.galeria = this.parseLines(payload.galeriaTexto).map((url) => ({ url }));
-      delete payload.galeriaTexto;
+    if (this.activeKey() === 'proyectos') {
+      payload.galeriaProyecto = this.projectGalleryItems();
     }
 
     for (const key of Object.keys(payload)) {
-      if (payload[key] === '') {
+      if (payload[key] === '' && !this.removedFiles().has(key)) {
         payload[key] = undefined;
       }
     }
 
-    return payload;
+    if (!this.usesMultipart()) {
+      return payload;
+    }
+
+    const formData = new FormData();
+    Object.entries(payload).forEach(([key, value]) => {
+      if (value === undefined || value === null) {
+        return;
+      }
+
+      formData.append(key, Array.isArray(value) || typeof value === 'object'
+        ? JSON.stringify(value)
+        : String(value)
+      );
+    });
+
+    for (const [key, files] of Object.entries(this.selectedFiles)) {
+      files.forEach((file) => formData.append(key, file));
+    }
+
+    return formData;
   }
 
-  private categoryLabel(categoryKey: string): string {
-    if (categoryKey === 'software') {
-      return 'Desarrollo de Software';
-    }
+  private setupDynamicControlRules(): void {
+    for (const field of this.activeSection().fields) {
+      if (field.otherKey) {
+        const control = this.dataForm.get(field.key);
+        const otherControl = this.dataForm.get(field.otherKey);
+        const subscription = control?.valueChanges.subscribe((value) => {
+          if (this.valueIncludesOther(value)) {
+            otherControl?.setValidators([Validators.required]);
+          } else {
+            otherControl?.clearValidators();
+            otherControl?.setValue('');
+          }
+          otherControl?.updateValueAndValidity();
+        });
 
-    if (categoryKey === 'sistemas') {
-      return 'Sistemas Inteligentes';
-    }
+        if (subscription) {
+          this.formSubscriptions.push(subscription);
+        }
+      }
 
-    return categoryKey;
+      if (this.activeKey() === 'galeria' && field.key === 'tipo') {
+        const archivoControl = this.dataForm.get('archivo') as AbstractControl | null;
+        const updateArchivoRequirement = (tipo: unknown) => {
+          if (tipo) {
+            archivoControl?.setValidators([Validators.required]);
+          } else {
+            archivoControl?.clearValidators();
+          }
+          archivoControl?.updateValueAndValidity();
+        };
+
+        updateArchivoRequirement(this.dataForm.get('tipo')?.value);
+
+        const subscription = this.dataForm.get('tipo')?.valueChanges.subscribe((tipo) => {
+          this.selectedFiles['archivo'] = [];
+          archivoControl?.setValue('');
+          archivoControl?.markAsUntouched();
+          updateArchivoRequirement(tipo);
+        });
+
+        if (subscription) {
+          this.formSubscriptions.push(subscription);
+        }
+      }
+    }
   }
 
   private parsePublicaciones(value: string): any[] {
@@ -492,16 +967,176 @@ export class AdminPanelComponent {
       .filter(Boolean);
   }
 
+  private existingFileValue(key: string, record?: any): string {
+    if (!record) {
+      return '';
+    }
+
+    if (key === 'galeriaProyecto') {
+      return '';
+    }
+
+    if (key === 'archivo') {
+      return record.url || '';
+    }
+
+    return record[key] || '';
+  }
+
+  private existingProjectGallery(record?: any): string[] {
+    if (!record || this.activeKey() !== 'proyectos') {
+      return [];
+    }
+
+    if (Array.isArray(record.galeriaProyecto)) {
+      return record.galeriaProyecto.filter(Boolean);
+    }
+
+    if (Array.isArray(record.galeria)) {
+      return record.galeria.map((item: any) => (typeof item === 'string' ? item : item.url)).filter(Boolean);
+    }
+
+    return [];
+  }
+
+  private customOptionKey(field: AdminField): string {
+    return `${this.activeKey()}:${field.key}`;
+  }
+
+  private loadCustomOptions(): Record<string, string[]> {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(CUSTOM_OPTIONS_KEY) || '{}');
+      return parsed && typeof parsed === 'object' ? parsed : {};
+    } catch {
+      return {};
+    }
+  }
+
+  private extractCustomOptions(rawValue: any): { key: string; value: string }[] {
+    return this.activeSection().fields
+      .filter((field) => field.otherKey && this.valueIncludesOther(rawValue[field.key]))
+      .map((field) => ({
+        key: this.customOptionKey(field),
+        value: String(rawValue[field.otherKey!] || '').trim()
+      }))
+      .filter((item) => item.value);
+  }
+
+  private saveCustomOptions(options: { key: string; value: string }[]): void {
+    if (!this.isBrowser || !options.length) {
+      return;
+    }
+
+    const next = { ...this.customOptions() };
+
+    for (const option of options) {
+      const current = next[option.key] || [];
+      if (!current.some((value) => value.toLowerCase() === option.value.toLowerCase())) {
+        next[option.key] = [...current, option.value].sort((a, b) => a.localeCompare(b));
+      }
+    }
+
+    this.customOptions.set(next);
+    localStorage.setItem(CUSTOM_OPTIONS_KEY, JSON.stringify(next));
+  }
+
+  private updateRemovedFile(key: string, removed: boolean): void {
+    const next = new Set(this.removedFiles());
+    if (removed) {
+      next.add(key);
+    } else {
+      next.delete(key);
+    }
+    this.removedFiles.set(next);
+  }
+
   private authHeaders(): HttpHeaders {
     return new HttpHeaders({
       Authorization: `Bearer ${this.token()}`
     });
   }
 
+  private usesMultipart(): boolean {
+    return this.activeSection().fields.some((field) => field.type === 'file');
+  }
+
+  private valueIncludesOther(value: unknown): boolean {
+    return value === 'Otros' || (Array.isArray(value) && value.includes('Otros'));
+  }
+
+  private ensureMiembrosOptionsForCurrentSection(): void {
+    if (this.activeKey() !== 'proyectos' || this.miembrosOptions().length || this.loadingMiembrosOptions()) {
+      return;
+    }
+
+    this.loadingMiembrosOptions.set(true);
+    this.http.get<any[]>(`${API_BASE_URL}/miembros-proyecto`).subscribe({
+      next: (miembros) => {
+        this.miembrosOptions.set((Array.isArray(miembros) ? miembros : []).map((miembro) => {
+          const fullName = String(miembro.nombre || '').trim();
+          return {
+            label: fullName || 'Miembro sin nombre',
+            value: fullName
+          };
+        }).filter((option) => option.value));
+        this.loadingMiembrosOptions.set(false);
+      },
+      error: () => {
+        this.loadingMiembrosOptions.set(false);
+        this.error.set('No se pudo cargar la lista de miembros de proyecto.');
+      }
+    });
+  }
+
+  private clearFormSubscriptions(): void {
+    this.formSubscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.formSubscriptions = [];
+  }
+
   private invalidRequiredLabels(): string[] {
-    return this.activeSection().fields
-      .filter((field) => field.required && this.dataForm.get(field.key)?.invalid)
-      .map((field) => field.label);
+    const labels: string[] = [];
+
+    for (const field of this.activeSection().fields) {
+      if (field.required && this.isFieldVisible(field) && this.dataForm.get(field.key)?.invalid) {
+        labels.push(field.label);
+      }
+
+      if (field.otherKey && this.dataForm.get(field.otherKey)?.invalid) {
+        labels.push(`${field.label} personalizada`);
+      }
+    }
+
+    return labels;
+  }
+
+  private scrollToForm(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  private showSuccess(message: string): void {
+    this.error.set('');
+    this.message.set(message);
+    this.clearNoticeTimer();
+    this.noticeTimeout = setTimeout(() => this.message.set(''), 3500);
+  }
+
+  private clearNotices(): void {
+    this.message.set('');
+    this.error.set('');
+    this.clearNoticeTimer();
+  }
+
+  private clearNoticeTimer(): void {
+    if (this.noticeTimeout) {
+      clearTimeout(this.noticeTimeout);
+      this.noticeTimeout = null;
+    }
   }
 
   private describeHttpError(error: HttpErrorResponse, fallback: string): string {
