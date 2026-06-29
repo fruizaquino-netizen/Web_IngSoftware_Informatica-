@@ -14,6 +14,7 @@ const defaultContent = {
     TEACHERS: 'Docentes',
     APPLICANTS: 'Aspirantes',
     GRADUATES: 'Egresados',
+    STUDENTS: 'Alumnos',
     LANGUAGE: 'Idioma',
     LANG_ES: 'Español',
     LANG_EN: 'English',

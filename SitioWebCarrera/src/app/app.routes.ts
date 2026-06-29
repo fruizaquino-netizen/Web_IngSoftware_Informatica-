@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { InicioPageComponent } from './pages/inicio/inicio-pages.component';
+import { AlumnosPageComponent } from './pages/alumnos/alumnos-pages.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,9 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/aspirantes/aspirantes-pages.component')
       .then(m => m.AspirantesPageComponent)
   },
+  {
+    path: 'alumnos', component: AlumnosPageComponent },
+
   {
     path: 'admin',
     loadComponent: () => import('./pages/admin-panel/admin-panel.component')

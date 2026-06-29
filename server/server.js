@@ -104,6 +104,7 @@ const knowledge = {
   general: readJsonFile(path.join(knowledgeDir, 'general.json')),
   objetivo: readJsonFile(path.join(knowledgeDir, 'objetivo.json')),
   perfilEgreso: readJsonFile(path.join(knowledgeDir, 'perfil_egreso.json')),
+  perfilIngreso: readJsonFile(path.join(knowledgeDir, 'perfil_ingreso.json')),  // ← nuevo
   campoLaboral: readJsonFile(path.join(knowledgeDir, 'campo_laboral.json')),
   planEstudios: readJsonFile(path.join(knowledgeDir, 'plan_estudios.json')),
   admision: readJsonFile(path.join(knowledgeDir, 'admision.json')),
@@ -111,7 +112,11 @@ const knowledge = {
   contacto: readJsonFile(path.join(knowledgeDir, 'contacto.json')),
   becas: readJsonFile(path.join(knowledgeDir, 'becas.json')),
   proyectos: readJsonFile(path.join(knowledgeDir, 'proyectos.json')),
-  quienesSomos: readJsonFile(path.join(knowledgeDir, 'quienes_somos.json'))
+  quienesSomos: readJsonFile(path.join(knowledgeDir, 'quienes_somos.json')),
+  docentes: readJsonFile(path.join(knowledgeDir, 'docentes.json')),            // ← nuevo
+  egresados: readJsonFile(path.join(knowledgeDir, 'egresados.json')),          // ← nuevo
+  calendario: readJsonFile(path.join(knowledgeDir, 'calendario.json')),        // ← nuevo
+  noticias: readJsonFile(path.join(knowledgeDir, 'noticias.json'))             // ← nuevo
 };
 
 const systemPrompt =
@@ -149,11 +154,32 @@ const sectionMap = [
   { key: 'aspirante', sections: ['general'] },
   { key: 'duracion', sections: ['general'] },
   { key: 'modalidad', sections: ['general'] },
-  { key: 'campus', sections: ['general'] }
+  { key: 'campus', sections: ['general'] },
+  { key: 'egresado', sections: ['egresados'] },
+  { key: 'titulacion', sections: ['egresados'] },
+  { key: 'tesis', sections: ['egresados'] },
+  { key: 'ceneval', sections: ['egresados'] },
+  { key: 'noticia', sections: ['noticias'] },
+  { key: 'evento', sections: ['calendario'] },
+  { key: 'calendario', sections: ['calendario'] },
+  { key: 'fecha', sections: ['calendario'] },
+  { key: 'ingres', sections: ['perfilIngreso', 'admision'] },
+  { key: 'requisito', sections: ['perfilIngreso', 'admision'] },
+  { key: 'docente', sections: ['docentes'] },
+  { key: 'profesor', sections: ['docentes'] },
+  { key: 'semestre', sections: ['calendario', 'planEstudios'] },
+{ key: 'inicia', sections: ['calendario'] },
+{ key: 'inicio', sections: ['calendario'] },
+{ key: 'vacacion', sections: ['calendario'] },
+{ key: 'parcial', sections: ['calendario'] },
+{ key: 'ordinario', sections: ['calendario'] },
 ];
 
 function buildContext(message) {
-  const msg = (message || '').toLowerCase();
+ const msg = (message || '')
+  .toLowerCase()
+  .normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '');
   const matchedSections = new Set();
 
   for (const rule of sectionMap) {
@@ -177,7 +203,10 @@ function buildContext(message) {
 }
 
 function localAnswer(message) {
-  const msg = (message || '').toLowerCase();
+  const msg = (message || '')
+  .toLowerCase()
+  .normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '');
   const matchedSections = new Set();
 
   for (const rule of sectionMap) {

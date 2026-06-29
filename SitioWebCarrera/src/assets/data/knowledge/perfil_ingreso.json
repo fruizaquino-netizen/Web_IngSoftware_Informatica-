@@ -1,0 +1,24 @@
+{
+  "descripcion": "El aspirante a ingresar a la Ingeniería en Desarrollo de Software y Sistemas Inteligentes debe contar con las siguientes características:",
+  "conocimientos": [
+    "Matemáticas básicas: álgebra, geometría y aritmética.",
+    "Comprensión lectora y expresión escrita en español.",
+    "Nociones básicas de computación e internet.",
+    "Lógica y razonamiento abstracto."
+  ],
+  "habilidades": [
+    "Capacidad de análisis y síntesis de información.",
+    "Pensamiento lógico y resolución de problemas.",
+    "Organización y administración del tiempo.",
+    "Disposición para el aprendizaje autónomo.",
+    "Comunicación oral y escrita efectiva."
+  ],
+  "actitudes": [
+    "Interés genuino por la tecnología y la informática.",
+    "Curiosidad intelectual y deseo de aprender.",
+    "Responsabilidad y compromiso con sus estudios.",
+    "Trabajo en equipo y respeto a la diversidad.",
+    "Actitud ética y honesta ante los retos académicos."
+  ],
+  "observacion": "No se requiere experiencia previa en programación para ingresar. El curso propedéutico ayuda a nivelar conocimientos básicos antes del inicio del primer semestre."
+}

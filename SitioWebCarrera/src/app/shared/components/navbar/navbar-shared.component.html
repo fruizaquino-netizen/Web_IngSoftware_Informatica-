@@ -91,6 +91,16 @@
               {{ content().NAVBAR.GRADUATES }}
             </a>
           </li>
+           <li class="nav-item">
+            <a
+    class="nav-link"
+    routerLink="/alumnos"
+    [class.active-link]="isActive('/alumnos')"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarInstitucional">
+    {{ content().NAVBAR.STUDENTS }}
+  </a>
+</li>
 
         <!-- Idiomas-->
         <li class="nav-item dropdown">

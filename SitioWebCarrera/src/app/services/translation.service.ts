@@ -7,11 +7,11 @@ import { HttpClient } from '@angular/common/http';
 export class TranslationService {
   public http = inject(HttpClient);
 
-  private readonly langFiles = {
-    es: 'assets/i18n/espaï¿½f�,±ol/espaï¿½f�,±ol.json',
-    en: 'assets/i18n/en.json',
-    zapoteco: 'assets/i18n/zapoteco/zapoteco.json'
-  } as const;
+ private readonly langFiles = {
+  es: 'assets/i18n/inicio.es.json',
+  en: 'assets/i18n/inicio.en.json',
+  zapoteco: 'assets/i18n/inicio.zapoteco.json'
+} as const;
 
   // Signal del idioma actual
   currentLang = signal<keyof typeof this.langFiles>('es');

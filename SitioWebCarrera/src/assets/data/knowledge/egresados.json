@@ -1,0 +1,30 @@
+{
+  "nota": "Los egresados de la carrera se han incorporado exitosamente al mercado laboral regional y nacional.",
+  "modalidadesTitulacion": [
+    {
+      "nombre": "Tesis",
+      "descripcion": "Elaboración y defensa de un trabajo de investigación original ante un jurado."
+    },
+    {
+      "nombre": "CENEVAL",
+      "descripcion": "Presentación y aprobación del Examen General de Egreso de Licenciatura (EGEL) aplicado por el CENEVAL."
+    },
+    {
+      "nombre": "Experiencia profesional",
+      "descripcion": "Acreditación mediante experiencia laboral comprobable en el área de la carrera."
+    }
+  ],
+  "requisitosGenerales": [
+    "Haber cubierto el 100% de los créditos del plan de estudios.",
+    "No tener adeudos académicos ni administrativos con la institución.",
+    "Haber realizado el servicio social y las prácticas profesionales.",
+    "Presentar la documentación requerida por Servicios Escolares."
+  ],
+  "camposLaborales": [
+    "Empresas de desarrollo de software a nivel local, regional y nacional.",
+    "Instituciones educativas y de investigación.",
+    "Organismos gubernamentales que requieran soluciones tecnológicas.",
+    "Emprendimiento propio en el sector tecnológico."
+  ],
+  "contactoEgresados": "Para más información sobre el proceso de titulación, acude a Servicios Escolares o consulta el sitio oficial de la UNISTMO."
+}

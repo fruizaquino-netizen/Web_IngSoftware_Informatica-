@@ -1,0 +1,12 @@
+{
+  "nota": "Las noticias y comunicados más recientes de la carrera se publican en la sección de Noticias del sitio web oficial.",
+  "informacion": "El sitio publica de forma regular información sobre eventos académicos, convocatorias, logros de alumnos y docentes, y actividades institucionales.",
+  "tiposNoticias": [
+    "Eventos académicos y culturales.",
+    "Convocatorias de becas y concursos.",
+    "Logros y reconocimientos de alumnos y docentes.",
+    "Actividades de vinculación con el sector productivo.",
+    "Avisos administrativos y cambios en el calendario escolar."
+  ],
+  "contactoNoticias": "Para enviar información o solicitar la publicación de una noticia, contacta a la jefatura de carrera en informatica@unistmo.edu.mx."
+}
