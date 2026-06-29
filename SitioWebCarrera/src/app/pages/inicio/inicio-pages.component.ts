@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslationService } from '../../services/translation.service';
+import { parseJsonWithBom } from '../../shared/json-helpers';
 
 const defaultContent = {
   INICIO: {
@@ -151,20 +152,21 @@ export class InicioPageComponent {
   this.cargarNoticias();
   this.cargarEventos();
 
-  effect(() => {
-    const lang = this.translation.currentLang();
-    const fileLang = lang === 'en' ? 'en' : lang === 'zapoteco' ? 'zapoteco' : 'es';
-    this.http
-      .get(`assets/i18n/inicio.${fileLang}.json`)
-      .subscribe((data) => {
-        this.content.set(data as typeof defaultContent);
-        this.applyContent();
-        // ✅ Re-cargar solo al cambiar idioma (para traducción futura)
-        this.cargarNoticias();
-        this.cargarEventos();
-      });
-  });
-}
+    effect(() => {
+      const lang = this.translation.currentLang();
+      const fileLang = lang === 'en' ? 'en' : lang === 'zapoteco' ? 'zapoteco' : 'es';
+      this.http
+        .get(`assets/i18n/inicio.${fileLang}.json`, { responseType: 'text' })
+        .subscribe((text) => {
+          this.content.set(
+            parseJsonWithBom<typeof defaultContent>(text, defaultContent, `inicio.${fileLang}.json`)
+          );
+          this.applyContent();
+          this.cargarNoticias();
+          this.cargarEventos();
+        });
+    });
+  }
 
   private applyContent() {
     const data = this.content().INICIO;

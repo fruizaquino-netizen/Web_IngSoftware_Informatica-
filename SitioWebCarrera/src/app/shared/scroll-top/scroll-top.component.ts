@@ -14,17 +14,22 @@ export class ScrollTopComponent {
 
   @HostListener('window:scroll')
   onWindowScroll() {
+    if (typeof window === 'undefined') {
+      return;
+    }
 
     this.isVisible = window.scrollY > 300;
   }
 
   scrollToTop() {
+    if (typeof window === 'undefined') {
+      return;
+    }
 
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
-
   }
 
 }

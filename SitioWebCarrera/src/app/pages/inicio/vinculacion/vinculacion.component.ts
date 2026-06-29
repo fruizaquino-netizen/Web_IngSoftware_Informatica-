@@ -1,20 +1,19 @@
-import { Component, OnInit } from '@angular/core'; // 1. Importamos OnInit
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-vinculacion',
-  standalone: true, // Aseguramos que sea Standalone como los otros
+  standalone: true,
   imports: [CommonModule, RouterLink, BreadcrumbComponent],
   templateUrl: './vinculacion.component.html',
   styleUrls: ['./vinculacion.component.css']
 })
-export class VinculacionComponent implements OnInit { // 2. Implementamos OnInit
-
+export class VinculacionComponent implements OnInit {
   ngOnInit(): void {
-    // 3. Al entrar a Vinculación, el scroll sube al inicio
-    window.scrollTo(0, 0);
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
   }
-
 }

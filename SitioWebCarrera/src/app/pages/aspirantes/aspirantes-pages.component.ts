@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslationService } from '../../services/translation.service';
 import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
+import { parseJsonWithBom } from '../../shared/json-helpers';
 
 const defaultContent = {
   ASPIRANTES: {
@@ -94,9 +95,11 @@ export class AspirantesPageComponent {
       const lang = this.translation.currentLang();
       const fileLang = lang === 'en' ? 'en' : lang === 'zapoteco' ? 'zapoteco' : 'es';
       this.http
-        .get(`assets/i18n/aspirantes.${fileLang}.json`)
-        .subscribe((data) => {
-          this.content.set(data as typeof defaultContent);
+        .get(`assets/i18n/aspirantes.${fileLang}.json`, { responseType: 'text' })
+        .subscribe((text) => {
+          this.content.set(
+            parseJsonWithBom<typeof defaultContent>(text, defaultContent, `aspirantes.${fileLang}.json`)
+          );
         });
     });
   }

@@ -1,20 +1,19 @@
-import { Component, OnInit } from '@angular/core'; // 1. Importamos OnInit
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-tecnologia',
-  standalone: true, // Mantén esto si tus otros componentes también lo son
+  standalone: true,
   imports: [CommonModule, RouterLink, BreadcrumbComponent],
   templateUrl: './tecnologia.component.html',
   styleUrls: ['./tecnologia.component.css']
 })
-export class TecnologiaComponent implements OnInit { // 2. Implementamos la interfaz
-
+export class TecnologiaComponent implements OnInit {
   ngOnInit(): void {
-    // 3. Al iniciar, mandamos el scroll al punto 0 de X y 0 de Y
-    window.scrollTo(0, 0);
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
   }
-
 }
