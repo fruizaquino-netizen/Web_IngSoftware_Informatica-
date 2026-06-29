@@ -12,6 +12,13 @@ enum TipoMedia {
   video
 }
 
+enum ModalidadTitulacion {
+  tesis
+  ceneval
+  experiencia
+  Otros
+}
+
 model Noticia {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   titulo      String
@@ -28,6 +35,10 @@ model Evento {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   titulo      String
   fecha       DateTime?
+  descripcion String?
+  hora        String?
+  dia         Int?
+  mes         Int?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

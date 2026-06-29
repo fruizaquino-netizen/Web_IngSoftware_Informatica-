@@ -32,6 +32,23 @@
       "DESCRIPTION": "Discover our educational offering in information technologies, where you can train as a computing professional or as a Software Development and Intelligent Systems Engineer. Both programs are designed to provide solid skills in programming, systems administration, databases, web and mobile development, as well as the design and implementation of innovative technological solutions that respond to current industry and society needs.",
       "BUTTON": "View Study Plan"
     },
+    "PROFILES": {
+      "TITLE": "Career Profiles",
+      "ENTRY_TITLE": "Entry Profile",
+      "ENTRY_ITEMS": [
+        "Interest in technology, programming, and problem solving.",
+        "Skills in logical and mathematical reasoning.",
+        "Willingness for self-directed learning and collaborative work.",
+        "Responsible, creative attitude committed to the local context."
+      ],
+      "GRADUATE_TITLE": "Graduate Profile",
+      "GRADUATE_ITEMS": [
+        "Designs, develops, and implements software solutions and intelligent systems.",
+        "Integrates databases, networks, software architecture, and emerging technologies.",
+        "Manages technology projects with quality, security, and social responsibility criteria.",
+        "Works in multidisciplinary teams to solve real needs for organizations and communities."
+      ]
+    },
     "TOUR": {
       "TITLE": "Virtual Tour",
       "ALT": "Virtual tour",

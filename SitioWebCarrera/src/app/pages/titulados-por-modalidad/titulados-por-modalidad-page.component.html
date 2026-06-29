@@ -1,0 +1,84 @@
+<app-breadcrumb
+  [items]="[
+    { label: 'Inicio', link: '/' },
+    { label: content().EGRESADOS.BY_MODALITY }
+  ]">
+</app-breadcrumb>
+
+<section class="egresados-page">
+  <header class="egresados-header">
+    <h1>{{ content().EGRESADOS.BY_MODALITY }}</h1>
+    <p>{{ content().EGRESADOS.SUBTITLE }}</p>
+  </header>
+
+  <section class="egresados-section">
+    <div class="filtros">
+      <button
+        class="filtro"
+        type="button"
+        [class.activo]="filtroActivo() === 'todos'"
+        (click)="cambiarFiltro('todos')">
+        {{ getFiltroLabel('todos') }}
+      </button>
+      <button
+        class="filtro"
+        type="button"
+        [class.activo]="filtroActivo() === 'tesis'"
+        (click)="cambiarFiltro('tesis')">
+        {{ getFiltroLabel('tesis') }}
+      </button>
+      <button
+        class="filtro"
+        type="button"
+        [class.activo]="filtroActivo() === 'ceneval'"
+        (click)="cambiarFiltro('ceneval')">
+        {{ getFiltroLabel('ceneval') }}
+      </button>
+      <button
+        class="filtro"
+        type="button"
+        [class.activo]="filtroActivo() === 'experiencia'"
+        (click)="cambiarFiltro('experiencia')">
+        {{ getFiltroLabel('experiencia') }}
+      </button>
+    </div>
+  </section>
+
+  <div class="total-egresados">
+    <span class="total-label">
+      {{ content().EGRESADOS.TOTAL_PREFIX }}
+      {{
+        filtroActivo() === 'todos'
+          ? content().EGRESADOS.TOTAL_REGISTERED
+          : content().EGRESADOS.TOTAL_IN_MODALITY + ' ' + getFiltroLabel(filtroActivo())
+      }}
+    </span>
+    <span class="total-badge">{{ totalSegunFiltro() }}</span>
+  </div>
+
+  <section class="egresados-section">
+    <h2>{{ content().EGRESADOS.LIST_TITLE }}</h2>
+
+    <div class="tabla-container">
+      <table>
+        <thead>
+          <tr>
+            <th>{{ content().EGRESADOS.TABLE_NAME }}</th>
+            <th>{{ content().EGRESADOS.TABLE_YEAR }}</th>
+            <th>{{ content().EGRESADOS.TABLE_MODALITY }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let egresado of egresadosFiltrados()">
+            <td>{{ egresado.nombre }}</td>
+            <td>{{ egresado.anio }}</td>
+            <td><span class="badge">{{ getFiltroLabel(egresado.modalidad) }}</span></td>
+          </tr>
+          <tr *ngIf="egresadosFiltrados().length === 0">
+            <td colspan="3" class="empty-row">{{ content().EGRESADOS.NO_RESULTS }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>

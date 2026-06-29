@@ -15,7 +15,7 @@
 </section>
 
 <!-- ================= QUI�f�?NES SOMOS ================= -->
-<section class="about-section">
+<section class="about-section" id="quienes-somos">
   <div class="about-card">
     <h2>{{ content().QUIENES_SOMOS.MISSION_TITLE }}</h2>
 
@@ -65,22 +65,3 @@
   <a routerLink="/planEstudios" class="btn">{{ content().QUIENES_SOMOS.CTA.BUTTON }}</a>
 </section>
 
- <!-- Recorrido virtual -->
-<section class="tour-section">
-  <h2>{{ content().QUIENES_SOMOS.TOUR.TITLE }}</h2>
-
-  <div class="visor">
-    <img
-      [src]="tour()[currentStep()].img"
-      [alt]="content().QUIENES_SOMOS.TOUR.ALT"
-    />
-
-    <div class="controls">
-      @for (control of tour()[currentStep()].controls; track control.key) {
-        <button (click)="goTo(control.target)">
-          {{ content().QUIENES_SOMOS.TOUR.CONTROLS[control.key] }}
-        </button>
-      }
-    </div>
-  </div>
-</section>

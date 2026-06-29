@@ -8,6 +8,7 @@ import { ScrollTopComponent } from './shared/scroll-top/scroll-top.component';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [
     RouterOutlet,
     NavbarSharedComponent,

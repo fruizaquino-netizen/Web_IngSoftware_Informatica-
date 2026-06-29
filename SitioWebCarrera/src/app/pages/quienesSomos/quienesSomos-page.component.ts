@@ -72,6 +72,23 @@ const defaultContent = {
         'Descubre nuestra oferta educativa en el área de tecnologías de la información, donde podrás formarte como profesional en Informática o como Ingeniero/a en Desarrollo de Software y Sistemas Inteligentes. Ambas carreras están diseñadas para brindarte competencias sólidas en programación, administración de sistemas, bases de datos, desarrollo web y móvil, así como el diseño e implementación de soluciones tecnológicas innovadoras que responden a las necesidades actuales de la industria y la sociedad.',
       BUTTON: 'Ver Plan de Estudios'
     },
+    PROFILES: {
+      TITLE: 'Perfiles de la Carrera',
+      ENTRY_TITLE: 'Perfil de Ingreso',
+      ENTRY_ITEMS: [
+        'Interés por la tecnología, la programación y la solución de problemas.',
+        'Habilidad para el razonamiento lógico y matemático.',
+        'Disposición para el aprendizaje autónomo y el trabajo colaborativo.',
+        'Actitud responsable, creativa y comprometida con su entorno.'
+      ],
+      GRADUATE_TITLE: 'Perfil de Egreso',
+      GRADUATE_ITEMS: [
+        'Diseña, desarrolla e implementa soluciones de software y sistemas inteligentes.',
+        'Integra bases de datos, redes, arquitectura de software y tecnologías emergentes.',
+        'Gestiona proyectos tecnológicos con criterios de calidad, seguridad y responsabilidad social.',
+        'Participa en equipos multidisciplinarios para resolver necesidades reales de organizaciones y comunidades.'
+      ]
+    },
     TOUR: {
       TITLE: 'Recorrido Virtual',
       ALT: 'Recorrido virtual',

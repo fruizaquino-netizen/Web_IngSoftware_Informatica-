@@ -1,0 +1,35 @@
+<app-breadcrumb
+  [items]="[
+    { label: 'Inicio', link: '/' },
+    { label: content().ASPIRANTES.REQUIREMENTS_TITLE }
+  ]">
+</app-breadcrumb>
+
+<section class="requirements-page">
+  <header class="page-header">
+    <h1>{{ content().ASPIRANTES.REQUIREMENTS_TITLE }}</h1>
+  </header>
+
+  <div class="info-grid">
+    <article class="info-card">
+      <h2>{{ content().ASPIRANTES.REQUIREMENTS_TITLE }}</h2>
+      <ul>
+        <li *ngFor="let req of content().ASPIRANTES.REQUIREMENTS">{{ req }}</li>
+      </ul>
+      <a
+        href="https://www.unistmo.edu.mx/web/p_ensenanza/escolares.html"
+        target="_blank"
+        rel="noopener noreferrer">
+        {{ content().ASPIRANTES.CTA_GUIDE }}
+      </a>
+    </article>
+
+    <article class="info-card">
+      <h2>{{ content().ASPIRANTES.DATES_TITLE }}</h2>
+      <div class="date-row" *ngFor="let fecha of content().ASPIRANTES.DATES">
+        <strong>{{ fecha.LABEL }}</strong>
+        <span>{{ fecha.VALUE }}</span>
+      </div>
+    </article>
+  </div>
+</section>

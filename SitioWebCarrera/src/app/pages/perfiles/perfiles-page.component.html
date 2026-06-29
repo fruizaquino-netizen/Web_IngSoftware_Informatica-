@@ -1,0 +1,30 @@
+<app-breadcrumb
+  [items]="[
+    { label: 'Inicio', link: '/' },
+    { label: content().QUIENES_SOMOS.PROFILES.TITLE }
+  ]">
+</app-breadcrumb>
+
+<section class="profiles-page">
+  <header class="profiles-header">
+    <h1>{{ content().QUIENES_SOMOS.PROFILES.TITLE }}</h1>
+  </header>
+
+  <div class="profiles-grid">
+    <article class="profile-card">
+      <h2>{{ content().QUIENES_SOMOS.PROFILES.ENTRY_TITLE }}</h2>
+      <ul>
+        <li *ngFor="let item of content().QUIENES_SOMOS.PROFILES.ENTRY_ITEMS">
+          {{ item }}
+        </li>
+      </ul>
+    </article>
+
+    <article class="profile-card graduate-card">
+      <h2>{{ content().QUIENES_SOMOS.PROFILES.GRADUATE_TITLE }}</h2>
+      <p *ngFor="let text of content().QUIENES_SOMOS.PROFILES.GRADUATE_TEXTS">
+        {{ text }}
+      </p>
+    </article>
+  </div>
+</section>

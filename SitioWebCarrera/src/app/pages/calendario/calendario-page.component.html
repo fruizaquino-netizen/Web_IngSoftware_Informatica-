@@ -1,0 +1,23 @@
+<app-breadcrumb
+  [items]="[
+    { label: 'Inicio', link: '/' },
+    { label: 'Calendario Escolar' }
+  ]">
+</app-breadcrumb>
+
+<section class="document-page">
+  <header class="document-header">
+    <h1>Calendario Escolar</h1>
+    <p>Consulta el calendario escolar oficial 2025-2026.</p>
+    <div class="document-actions">
+      <a [href]="calendarUrl" target="_blank" rel="noopener noreferrer">Ver en otra pestaña</a>
+      <a [href]="calendarUrl" download target="_blank" rel="noopener noreferrer">Descargar calendario</a>
+    </div>
+  </header>
+
+  <iframe
+    class="document-frame"
+    [attr.src]="calendarUrl"
+    title="Calendario escolar 2025-2026">
+  </iframe>
+</section>

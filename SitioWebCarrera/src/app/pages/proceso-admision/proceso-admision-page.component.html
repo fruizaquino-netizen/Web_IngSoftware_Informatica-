@@ -1,0 +1,30 @@
+<app-breadcrumb
+  [items]="[
+    { label: 'Inicio', link: '/' },
+    { label: content().ASPIRANTES.PROCESS_TITLE }
+  ]">
+</app-breadcrumb>
+
+<section class="admission-page">
+  <header class="page-header">
+    <h1>{{ content().ASPIRANTES.PROCESS_TITLE }}</h1>
+    <p>{{ content().ASPIRANTES.INTRO }}</p>
+  </header>
+
+  <div class="steps-grid">
+    <article class="step-card" *ngFor="let step of content().ASPIRANTES.STEPS; let i = index">
+      <div class="step-icon">{{ i === 0 ? '1' : i === 1 ? '2' : '3' }}</div>
+      <span>{{ step.NUMBER }}</span>
+      <h2>{{ step.TITLE }}</h2>
+      <p>{{ step.TEXT }}</p>
+    </article>
+  </div>
+
+  <a
+    class="primary-action"
+    href="https://www.unistmo.edu.mx/web/p_ensenanza/ingreso/FORMATO_SOLICITUD_FICHA_LICENCIATURA.pdf"
+    target="_blank"
+    rel="noopener noreferrer">
+    {{ content().ASPIRANTES.REGISTER_BUTTON }}
+  </a>
+</section>

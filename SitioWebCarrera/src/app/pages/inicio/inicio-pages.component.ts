@@ -138,6 +138,7 @@ export class InicioPageComponent {
     titulo: string;
     hora: string;
     descripcion: string;
+    fecha?: string;
   }> = [];
 
   // --- Noticias ---
@@ -308,16 +309,17 @@ export class InicioPageComponent {
 
   private cargarEventos(): void {
     this.http
-      .get<Array<{ dia?: number; mes?: number; titulo: string; hora?: string; descripcion: string }>>(this.eventosApiUrl)
+      .get<Array<{ dia?: number; mes?: number; titulo: string; hora?: string; descripcion?: string; fecha?: string }>>(this.eventosApiUrl)
       .subscribe({
         next: (eventos) => {
           if (Array.isArray(eventos)) {
             this.todosLosEventos = eventos.map((evento) => ({
-              dia: evento.dia ?? 0,
-              mes: evento.mes ?? 0,
+              dia: evento.dia ?? (evento.fecha ? new Date(evento.fecha).getDate() : 0),
+              mes: evento.mes ?? (evento.fecha ? new Date(evento.fecha).getMonth() : 0),
               titulo: evento.titulo,
               hora: evento.hora || '',
-              descripcion: evento.descripcion
+              descripcion: evento.descripcion || '',
+              fecha: evento.fecha
             }));
             this.selectedDay = null;
             this.eventosDelDia = [];

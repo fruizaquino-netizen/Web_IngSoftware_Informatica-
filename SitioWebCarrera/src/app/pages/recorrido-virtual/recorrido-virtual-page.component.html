@@ -1,0 +1,23 @@
+<app-breadcrumb
+  [items]="[
+    { label: 'Inicio', link: '/' },
+    { label: content().QUIENES_SOMOS.TOUR.TITLE }
+  ]">
+</app-breadcrumb>
+
+<section class="tour-page">
+  <h1>{{ content().QUIENES_SOMOS.TOUR.TITLE }}</h1>
+
+  <div class="visor">
+    <img
+      [src]="tour()[currentStep()].img"
+      [alt]="content().QUIENES_SOMOS.TOUR.ALT"
+    />
+
+    <div class="controls">
+      <button *ngFor="let control of tour()[currentStep()].controls" (click)="goTo(control.target)">
+        {{ content().QUIENES_SOMOS.TOUR.CONTROLS[control.key] }}
+      </button>
+    </div>
+  </div>
+</section>

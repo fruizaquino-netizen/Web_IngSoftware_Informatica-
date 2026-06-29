@@ -37,7 +37,6 @@ const defaultContent = {
 export class ProyectoPageComponent {
   public translation = inject(TranslationService);
   private readonly proyectosApiUrl = 'http://localhost:3000/api/proyectos';
-  private readonly videosApiUrl = 'http://localhost:3000/api/videos';
 
   content = signal<any>(defaultContent);
   activeFilter = signal<'all' | 'software' | 'sistemas'>('all');
@@ -62,7 +61,6 @@ export class ProyectoPageComponent {
             this.activeFilter.set('all');
           }
           this.cargarProyectos();
-          this.cargarVideos();
         });
     });
   }
@@ -106,19 +104,6 @@ export class ProyectoPageComponent {
             }
           }))
         }));
-      }
-    });
-  }
-
-  private cargarVideos(): void {
-    this.http.get<any[]>(this.videosApiUrl).subscribe({
-      next: (videos) => {
-        if (Array.isArray(videos)) {
-          this.content.update((current) => ({
-            ...current,
-            videos: videos.map((v) => ({ src: v.src, caption: v.caption || v.titulo || '' }))
-          }));
-        }
       }
     });
   }

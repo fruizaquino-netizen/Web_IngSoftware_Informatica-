@@ -1,0 +1,81 @@
+<app-breadcrumb
+  [items]="[
+    { label: 'Inicio', link: '/' },
+    { label: content().ALUMNOS.GALLERY_TITLE }
+  ]">
+</app-breadcrumb>
+
+<section class="gallery-page">
+  <header class="gallery-header">
+    <h1>{{ content().ALUMNOS.GALLERY_TITLE }}</h1>
+    <p>{{ content().ALUMNOS.SUBTITLE }}</p>
+  </header>
+
+  <section class="carousel-section" *ngIf="items().length > 0; else sinContenido">
+    <div class="carousel-stage">
+      <button class="carousel-btn" type="button" (click)="prev()">&#8249;</button>
+
+      <div class="carousel-track">
+        <div
+          *ngFor="let item of items(); let i = index"
+          class="carousel-slide"
+          [class.active]="i === currentIndex()">
+          <img
+            [src]="item.url"
+            [alt]="item.titulo || 'Foto de alumnos'"
+            class="carousel-media"
+            (click)="openModal(item)"
+          />
+          <div class="slide-caption" *ngIf="item.titulo">
+            {{ item.titulo }}
+            <span class="slide-cat" *ngIf="item.categoria"> · {{ item.categoria }}</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-btn" type="button" (click)="next()">&#8250;</button>
+    </div>
+
+    <div class="carousel-dots">
+      <button
+        *ngFor="let item of items(); let i = index"
+        class="dot"
+        type="button"
+        [class.active]="i === currentIndex()"
+        [attr.aria-label]="'Ver imagen ' + (i + 1)"
+        (click)="goTo(i)">
+      </button>
+    </div>
+
+    <div class="thumbnails">
+      <button
+        *ngFor="let item of items(); let i = index"
+        class="thumb-item"
+        type="button"
+        [class.active]="i === currentIndex()"
+        (click)="goTo(i)">
+        <img [src]="item.url" [alt]="item.titulo || ''" />
+      </button>
+    </div>
+  </section>
+
+  <ng-template #sinContenido>
+    <div class="empty-state">
+      <p>{{ content().ALUMNOS.EMPTY }}</p>
+    </div>
+  </ng-template>
+</section>
+
+<div class="modal-overlay" *ngIf="isModalOpen()" (click)="closeModal()">
+  <div class="modal-media-box" (click)="$event.stopPropagation()">
+    <button class="modal-close" type="button" aria-label="Cerrar" (click)="closeModal()">&times;</button>
+    <img
+      [src]="selectedItem()!.url"
+      [alt]="selectedItem()!.titulo || ''"
+      class="modal-img"
+    />
+    <div class="modal-caption" *ngIf="selectedItem()?.titulo">
+      {{ selectedItem()!.titulo }}
+    </div>
+  </div>
+</div>

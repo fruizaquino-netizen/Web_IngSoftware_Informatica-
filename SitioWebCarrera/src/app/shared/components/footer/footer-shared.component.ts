@@ -1,6 +1,7 @@
 import { Component, effect, inject, signal, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { TranslationService } from '../../../services/translation.service';
 import { parseJsonWithBom } from '../../json-helpers';
 
@@ -14,7 +15,7 @@ const defaultContent = {
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [HttpClientModule, RouterModule],
   templateUrl: './footer-shared.component.html',
   styleUrls: ['./footer-shared.component.css']
 })

@@ -1,0 +1,169 @@
+.egresados-page {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.egresados-header {
+  margin-bottom: 32px;
+}
+
+.egresados-header h1 {
+  font-size: clamp(2rem, 2.6vw, 2.6rem);
+  color: var(--color-wine);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.egresados-header p {
+  max-width: 800px;
+  color: var(--color-gray-500);
+}
+
+.egresados-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card-anio {
+  background-color: var(--color-beige);
+  border: 1.2px solid var(--color-beige-border);
+  border-radius: 8px;
+  padding: 18px 22px;
+  min-width: 200px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(199, 37, 37, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-anio:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.anio {
+  display: block;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-wine);
+}
+
+.cantidad {
+  color: #616161;
+  margin-top: 8px;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+  padding: 1rem;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 25px;
+  border-radius: 8px;
+  width: 95%;
+  max-width: 680px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  border-top: 6px solid var(--color-wine);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: var(--color-wine);
+  font-size: 1.4rem;
+}
+
+.btn-cerrar {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+.modal-body {
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.modal-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.modal-table th {
+  background-color: var(--color-beige);
+  padding: 12px;
+  text-align: left;
+  color: var(--color-wine);
+}
+
+.modal-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.badge {
+  background-color: var(--color-beige);
+  color: #0f0101;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.td-foto {
+  width: 52px;
+  text-align: center;
+}
+
+.foto-egresado,
+.avatar-placeholder {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+.foto-egresado {
+  object-fit: cover;
+  border: 2px solid var(--color-wine);
+}
+
+.avatar-placeholder {
+  background: var(--color-wine);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .card-anio {
+    width: 100%;
+  }
+
+  .modal-table {
+    min-width: 560px;
+  }
+}

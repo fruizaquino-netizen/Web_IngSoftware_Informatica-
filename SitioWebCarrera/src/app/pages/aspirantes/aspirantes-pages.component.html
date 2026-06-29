@@ -42,7 +42,7 @@
     </p>
   </header>
   <!-- PROCESO -->
-  <section class="proceso-box">
+  <section class="proceso-box" id="proceso-admision">
     <h2>{{ content().ASPIRANTES.PROCESS_TITLE }}</h2>
     <div class="pasos">
       <ng-container *ngFor="let step of content().ASPIRANTES.STEPS; let i = index; let last = last">
@@ -67,7 +67,7 @@
     </a>
   </section>
   <!-- INFO -->
-  <section class="info">
+  <section class="info" id="requisitos-fechas">
     <div class="info-card">
       <h3>{{ content().ASPIRANTES.REQUIREMENTS_TITLE }}</h3>
       <ul>
@@ -83,7 +83,7 @@
     </div>
   </section>
   <!-- CTA -->
-  <section class="cta">
+  <section class="cta" id="mas-informacion">
     <h2>{{ content().ASPIRANTES.CTA_TITLE }}</h2>
     <p>
       {{ content().ASPIRANTES.CTA_TEXT }}

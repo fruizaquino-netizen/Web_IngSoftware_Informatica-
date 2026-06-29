@@ -1,0 +1,138 @@
+.egresados-page {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.egresados-header {
+  margin-bottom: 32px;
+}
+
+.egresados-header h1 {
+  font-size: clamp(2rem, 2.6vw, 2.6rem);
+  color: var(--color-wine);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.egresados-header p {
+  max-width: 800px;
+  color: var(--color-gray-500);
+}
+
+.egresados-section {
+  margin-bottom: 32px;
+}
+
+.egresados-section h2 {
+  font-size: 1.4rem;
+  color: var(--color-wine);
+  margin-bottom: 20px;
+  border-left: 6px solid var(--color-wine-soft);
+  padding-left: 13px;
+}
+
+.filtros {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.filtro {
+  background-color: var(--color-beige);
+  border: 1.2px solid var(--color-beige-border);
+  color: var(--color-wine);
+  padding: 10px 32px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filtro.activo {
+  background-color: var(--color-wine);
+  color: var(--color-white);
+}
+
+.total-egresados {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  background-color: var(--color-beige);
+  padding: 12px 20px;
+  border-left: 6px solid var(--color-wine-soft);
+  border-radius: 8px;
+  margin-bottom: 36px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.total-label {
+  color: #0f0101;
+  font-size: 17px;
+}
+
+.total-badge {
+  background-color: var(--color-wine);
+  color: var(--color-white);
+  font-size: 20px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 8px;
+  min-width: 30px;
+  text-align: center;
+}
+
+.tabla-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow-x: auto;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: var(--color-beige);
+}
+
+th,
+td {
+  padding: 18px;
+  text-align: left;
+  border-bottom: 1px solid #e6ded2;
+}
+
+th {
+  font-weight: 600;
+  color: #0f0101;
+  font-size: 18px;
+}
+
+.badge {
+  background-color: var(--color-beige);
+  color: #0f0101;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.empty-row {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .filtro {
+    flex: 1 1 45%;
+  }
+
+  .total-egresados {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  table {
+    min-width: 600px;
+  }
+}

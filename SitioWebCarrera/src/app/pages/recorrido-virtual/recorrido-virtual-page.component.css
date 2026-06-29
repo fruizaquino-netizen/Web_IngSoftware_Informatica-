@@ -1,0 +1,56 @@
+.tour-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+  text-align: center;
+}
+
+.tour-page h1 {
+  color: var(--color-wine);
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+
+.visor {
+  position: relative;
+  max-width: 960px;
+  margin: auto;
+  padding: 20px;
+  background-color: var(--color-beige);
+  border-radius: 8px;
+  border: 1px solid var(--color-beige-border);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.visor img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  background-color: #f7f5f2;
+}
+
+.controls {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.controls button {
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: 8px;
+  border: 1px solid var(--color-wine);
+  cursor: pointer;
+  background-color: var(--color-wine);
+  color: var(--color-white);
+  transition: all 0.25s ease;
+}
+
+.controls button:hover {
+  filter: brightness(0.92);
+  transform: translateY(-1px);
+}

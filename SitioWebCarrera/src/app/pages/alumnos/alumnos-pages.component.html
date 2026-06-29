@@ -12,8 +12,48 @@
   <p>{{ content().ALUMNOS.SUBTITLE }}</p>
 </header>
 
+  <section class="student-info-grid">
+    <article class="student-info-card" id="horarios">
+      <h2>{{ content().ALUMNOS.SCHEDULE_TITLE }}</h2>
+      <p>{{ content().ALUMNOS.SCHEDULE_TEXT }}</p>
+      <ul>
+        <li *ngFor="let item of content().ALUMNOS.SCHEDULE_ITEMS">{{ item }}</li>
+      </ul>
+      <a
+        class="student-action-link"
+        [href]="content().ALUMNOS.SCHEDULE_URL"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ content().ALUMNOS.SCHEDULE_LINK_LABEL }}
+      </a>
+    </article>
+
+    <article class="student-info-card calendar-card" id="calendario-escolar">
+      <div>
+        <h2>{{ content().ALUMNOS.CALENDAR_TITLE }}</h2>
+        <p>{{ content().ALUMNOS.CALENDAR_TEXT }}</p>
+        <a
+          class="student-action-link"
+          [href]="content().ALUMNOS.CALENDAR_URL"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ content().ALUMNOS.CALENDAR_LINK_LABEL }}
+        </a>
+      </div>
+
+      <iframe
+        class="calendar-preview"
+        [attr.src]="content().ALUMNOS.CALENDAR_URL"
+        title="Vista previa de Servicios Escolares"
+      ></iframe>
+    </article>
+  </section>
+
   <!-- CARRUSEL -->
-  <div class="carousel-section" *ngIf="items().length > 0; else sinContenido">
+  <section class="carousel-section" id="galeria" *ngIf="items().length > 0; else sinContenido">
+    <h2 class="section-title">{{ content().ALUMNOS.GALLERY_TITLE }}</h2>
 
     <div class="carousel-stage">
       <button class="carousel-btn" (click)="prev()">&#8249;</button>
@@ -60,7 +100,7 @@
       </div>
     </div>
 
-  </div>
+  </section>
 
   <ng-template #sinContenido>
   <div class="empty-state">

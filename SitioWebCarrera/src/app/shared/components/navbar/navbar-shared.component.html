@@ -1,4 +1,3 @@
-<!-- Franja institucional superior -->
 <div class="top-bar-institucional"></div>
 
 <nav
@@ -6,17 +5,11 @@
   [class.scrolled]="isScrolled"
 >
   <div class="container">
-
-    <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/" aria-label="Inicio">
-      <img
-        src="assets/img/icon_idssi.png"
-        alt="IDSSI Logo"
-        class="logo-img"
-      />
+    <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/" aria-label="Inicio" (click)="closeNavbar()">
+      <img src="assets/img/icon_idssi.png" alt="IDSSI Logo" class="logo-img" />
       <span class="brand-text">IDSSI</span>
     </a>
 
-    <!-- Boton hamburguesa -->
     <button
       class="navbar-toggler"
       type="button"
@@ -24,85 +17,65 @@
       data-bs-target="#navbarInstitucional"
       aria-controls="navbarInstitucional"
       aria-expanded="false"
-      aria-label="Menú de navegación">
+      aria-label="Menú de navegación"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!--  -->
     <div class="collapse navbar-collapse justify-content-end" id="navbarInstitucional">
-      <ul class="navbar-nav align-items-lg-center gap-lg-4">
-
+      <ul class="navbar-nav align-items-lg-center gap-lg-2">
         <li class="nav-item">
-          <a class="btn btn-institucional"
-             routerLink="/"
-             [class.active-link]="isActive('/')">
+          <a
+            class="nav-link nav-home"
+            routerLink="/"
+            [class.active-link]="isHomeActive()"
+            (click)="closeNavbar()"
+          >
             {{ content().NAVBAR.HOME }}
           </a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link"
-             routerLink="/quienesSomos"
-             [class.active-link]="isActive('/quienesSomos')">
-            {{ content().NAVBAR.ABOUT }}
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link"
-             routerLink="/planEstudios"
-             [class.active-link]="isActive('/planEstudios')">
-            {{ content().NAVBAR.STUDY_PLAN }}
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link"
-             routerLink="/proyectos"
-             [class.active-link]="isActive('/proyectos')">
-            {{ content().NAVBAR.PROJECTS }}
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link"
-             routerLink="/docentes"
-             [class.active-link]="isActive('/docentes')">
-            {{ content().NAVBAR.TEACHERS }}
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link"
-             routerLink="/aspirantes"
-             [class.active-link]="isActive('/aspirantes')">
-            {{ content().NAVBAR.APPLICANTS }}
-          </a>
-        </li>
-
-          <li class="nav-item">
+        @for (group of navGroups; track group.labelKey) {
+          <li class="nav-item dropdown">
             <a
-              class="nav-link"
-              routerLink="/egresados"
-              [class.active-link]="isActive('/egresados')"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarInstitucional"
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              [class.active-link]="isGroupActive(group)"
             >
-              {{ content().NAVBAR.GRADUATES }}
+              {{ content().NAVBAR[group.labelKey] }}
             </a>
-          </li>
-           <li class="nav-item">
-            <a
-    class="nav-link"
-    routerLink="/alumnos"
-    [class.active-link]="isActive('/alumnos')"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarInstitucional">
-    {{ content().NAVBAR.STUDENTS }}
-  </a>
-</li>
 
-        <!-- Idiomas-->
+            <ul class="dropdown-menu dropdown-menu-end nav-dropdown">
+              @for (item of group.items; track item.labelKey) {
+                <li>
+                  @if (item.href) {
+                    <a
+                      class="dropdown-item"
+                      [href]="item.href"
+                      [target]="item.external ? '_blank' : null"
+                      [rel]="item.external ? 'noopener noreferrer' : null"
+                      (click)="closeNavbar()"
+                    >
+                      {{ content().NAVBAR[item.labelKey] }}
+                    </a>
+                  } @else {
+                    <a
+                      class="dropdown-item"
+                      [routerLink]="item.route"
+                      (click)="closeNavbar()"
+                    >
+                      {{ content().NAVBAR[item.labelKey] }}
+                    </a>
+                  }
+                </li>
+              }
+            </ul>
+          </li>
+        }
+
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle language-toggle"
@@ -110,8 +83,9 @@
             id="idiomaDropdown"
             role="button"
             data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <img class="lang-icon me-2" [src]="getLangIconUrl(service.currentLang())" alt="Idioma">
+            aria-expanded="false"
+          >
+            <img class="lang-icon me-2" [src]="getLangIconUrl(service.currentLang())" alt="Idioma" />
             {{ content().NAVBAR.LANGUAGE }}
           </a>
 
@@ -119,27 +93,30 @@
             <li>
               <button
                 class="dropdown-item"
-                (click)="cambiarIdioma('es')"
-                [class.active]="service.currentLang() === 'es'">
-                <img class="lang-icon me-2" src="assets/img/mx.png" alt="MX">
+                (click)="cambiarIdioma('es'); closeNavbar()"
+                [class.active]="service.currentLang() === 'es'"
+              >
+                <img class="lang-icon me-2" src="assets/img/mx.png" alt="MX" />
                 {{ content().NAVBAR.LANG_ES }}
               </button>
             </li>
             <li>
               <button
                 class="dropdown-item"
-                (click)="cambiarIdioma('en')"
-                [class.active]="service.currentLang() === 'en'">
-                <img class="lang-icon me-2" src="assets/img/eu.png" alt="US">
+                (click)="cambiarIdioma('en'); closeNavbar()"
+                [class.active]="service.currentLang() === 'en'"
+              >
+                <img class="lang-icon me-2" src="assets/img/eu.png" alt="US" />
                 {{ content().NAVBAR.LANG_EN }}
               </button>
             </li>
             <li>
               <button
                 class="dropdown-item"
-                (click)="cambiarIdioma('zapoteco')"
-                [class.active]="service.currentLang() === 'zapoteco'">
-                <img class="lang-icon me-2" src="assets/img/lenguas.png" alt="Lenguas">
+                (click)="cambiarIdioma('zapoteco'); closeNavbar()"
+                [class.active]="service.currentLang() === 'zapoteco'"
+              >
+                <img class="lang-icon me-2" src="assets/img/lenguas.png" alt="Lenguas" />
                 {{ content().NAVBAR.LANG_ZAP }}
               </button>
             </li>

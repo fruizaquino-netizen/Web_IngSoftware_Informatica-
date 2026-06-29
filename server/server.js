@@ -14,6 +14,7 @@ prisma.$connect()
 
 const fs = require('fs');
 const path = require('path');
+const { Readable } = require('stream');
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
@@ -24,6 +25,19 @@ const { GoogleGenAI } = require('@google/genai');
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+const HORARIO_PDF_URL =
+  'https://www.unistmo.edu.mx/web/p_ensenanza/horarios/2026/HORARIO_CICLO_ESCOLAR_2025-2026B_IXTEPEC.pdf';
+const CALENDARIO_PDF_URL =
+  'https://www.unistmo.edu.mx/web/p_ensenanza/escolares/Calendario_Escolar_2025-2026.pdf';
+
+app.get('/api/documentos/horario.pdf', (req, res) => {
+  proxyPdf(res, HORARIO_PDF_URL, 'horario-campus-ixtepec.pdf');
+});
+
+app.get('/api/documentos/calendario.pdf', (req, res) => {
+  proxyPdf(res, CALENDARIO_PDF_URL, 'calendario-escolar.pdf');
+});
 
 const uploadDirs = {
   docentes: path.join(__dirname, '../SitioWebCarrera/src/assets/img/Docentes'),
@@ -730,6 +744,40 @@ function cleanData(data) {
   );
 }
 
+function normalizeEvento(evento) {
+  const fecha = evento?.fecha ? new Date(evento.fecha) : null;
+  const dia = Number.isInteger(evento?.dia) ? evento.dia : fecha ? fecha.getDate() : null;
+  const mes = Number.isInteger(evento?.mes) ? evento.mes : fecha ? fecha.getMonth() : null;
+
+  return {
+    id: evento?.id,
+    titulo: evento?.titulo || '',
+    fecha: evento?.fecha || null,
+    descripcion: evento?.descripcion || '',
+    hora: evento?.hora || '',
+    dia,
+    mes
+  };
+}
+
+async function proxyPdf(res, remoteUrl, filename) {
+  try {
+    const response = await fetch(remoteUrl);
+
+    if (!response.ok || !response.body) {
+      throw new Error(`Respuesta no válida: ${response.status}`);
+    }
+
+    res.setHeader('Content-Type', response.headers.get('content-type') || 'application/pdf');
+    res.setHeader('Content-Disposition', `inline; filename="${filename}"`);
+
+    Readable.fromWeb(response.body).pipe(res);
+  } catch (error) {
+    console.error(`No se pudo cargar ${filename}:`, error.message);
+    res.status(502).json({ error: `No se pudo cargar ${filename}` });
+  }
+}
+
 function splitFullName(nombreCompleto = '') {
   const parts = String(nombreCompleto).trim().split(/\s+/).filter(Boolean);
 
@@ -1079,10 +1127,11 @@ app.delete('/api/noticias/:id', requireAuth, async (req, res) => {
 app.get('/api/eventos', async (req, res) => {
   try {
     const eventos = await prisma.evento.findMany({
-      orderBy: [{ mes: 'asc' }, { dia: 'asc' }]
+      orderBy: { fecha: 'asc' }
     });
-    res.json(eventos);
+    res.json(eventos.map(normalizeEvento));
   } catch (error) {
+    console.error('Error al obtener eventos:', error);
     res.status(500).json({ error: 'Error al obtener eventos' });
   }
 });
@@ -1095,12 +1144,15 @@ app.post('/api/eventos', requireAuth, async (req, res) => {
       data: {
         titulo: titulo || nombre,
         fecha: parsedDate,
+        dia: parsedDate ? parsedDate.getDate() : undefined,
+        mes: parsedDate ? parsedDate.getMonth() : undefined,
         descripcion,
         hora
       }
     });
-    res.status(201).json(nuevoEvento);
+    res.status(201).json(normalizeEvento(nuevoEvento));
   } catch (error) {
+    console.error('Error al crear evento:', error);
     res.status(500).json({ error: 'Error al crear evento' });
   }
 });
@@ -1114,12 +1166,15 @@ app.put('/api/eventos/:id', requireAuth, async (req, res) => {
       data: cleanData({
         titulo: titulo || nombre,
         fecha: parsedDate,
+        dia: parsedDate ? parsedDate.getDate() : undefined,
+        mes: parsedDate ? parsedDate.getMonth() : undefined,
         descripcion,
         hora
       })
     });
-    res.json(evento);
+    res.json(normalizeEvento(evento));
   } catch (error) {
+    console.error('Error al actualizar evento:', error);
     res.status(500).json({ error: 'Error al actualizar evento' });
   }
 });

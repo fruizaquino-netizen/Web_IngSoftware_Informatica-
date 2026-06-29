@@ -1,0 +1,23 @@
+<app-breadcrumb
+  [items]="[
+    { label: 'Inicio', link: '/' },
+    { label: 'Horarios' }
+  ]">
+</app-breadcrumb>
+
+<section class="document-page">
+  <header class="document-header">
+    <h1>Horarios</h1>
+    <p>Consulta el horario oficial de clases del campus Ixtepec.</p>
+    <div class="document-actions">
+      <a [href]="scheduleUrl" target="_blank" rel="noopener noreferrer">Ver en otra pestaña</a>
+      <a [href]="scheduleUrl" download target="_blank" rel="noopener noreferrer">Descargar horario</a>
+    </div>
+  </header>
+
+  <iframe
+    class="document-frame"
+    [attr.src]="scheduleUrl"
+    title="Horario oficial Campus Ixtepec">
+  </iframe>
+</section>

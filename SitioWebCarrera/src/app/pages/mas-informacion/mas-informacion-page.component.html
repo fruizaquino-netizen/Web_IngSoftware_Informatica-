@@ -1,0 +1,26 @@
+<app-breadcrumb
+  [items]="[
+    { label: 'Inicio', link: '/' },
+    { label: content().ASPIRANTES.CTA_TITLE }
+  ]">
+</app-breadcrumb>
+
+<section class="more-info-page">
+  <div class="info-panel">
+    <h1>{{ content().ASPIRANTES.CTA_TITLE }}</h1>
+    <p>{{ content().ASPIRANTES.CTA_TEXT }}</p>
+
+    <div class="actions">
+      <a
+        href="mailto:escolares@unistmo.edu.mx?subject=Informes sobre la Licenciatura en Informática">
+        {{ content().ASPIRANTES.CTA_CONTACT }}
+      </a>
+      <a
+        href="https://www.unistmo.edu.mx/web/p_ensenanza/escolares.html"
+        target="_blank"
+        rel="noopener noreferrer">
+        {{ content().ASPIRANTES.CTA_GUIDE }}
+      </a>
+    </div>
+  </div>
+</section>

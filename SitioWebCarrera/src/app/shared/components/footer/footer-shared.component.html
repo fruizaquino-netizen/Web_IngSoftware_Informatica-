@@ -1,39 +1,59 @@
 <footer class="footer">
-  <div class="footer-container">
+  <div class="footer-shell">
+    <div class="footer-grid">
+      <section class="footer-column">
+        <h3>Campus Ixtepec</h3>
+        <div class="contact-block">
+          <p>Carretera Chihuitan Ixtepec S/N, C.P. 70110, Ciudad Ixtepec, Oaxaca.</p>
+          <p>Departamento de Servicios Escolares.</p>
+          <p>Teléfono: (971) 712 70 50</p>
+          <p>Extensiones 212 y 213</p>
+          <p>Correo electrónico: servesc@bianni.unistmo.edu.mx</p>
+        </div>
+      </section>
 
-    <div class="footer-section">
-      <h3 class="footer-title">CONTACTO</h3>
-      <div class="contact-info">
-        <p><strong>Correo:</strong> <span>informatica@unistmo.edu.mx</span></p>
-        <p><strong>Teléfono:</strong> <span>+52 972 115 5207</span></p>
-        <p><strong>Ubicación:</strong> <span>Ixtepec, Oaxaca</span></p>
-      </div>
+      <section class="footer-column">
+        <h3>M.I. Carlos Edgardo Cruz Pérez</h3>
+        <div class="contact-block">
+          <p>Ingeniería en Desarrollo de Software y Sistemas Inteligentes</p>
+          <p>jefatura_dssi@unistmo.edu.mx</p>
+          <p>(971) 7127050 ext. 214</p>
+        </div>
+      </section>
+
+      <section class="footer-column">
+        <h3>Enlaces Rápidos</h3>
+        <ul class="footer-links">
+          <li><a routerLink="/aspirantes" fragment="proceso-admision">Proceso de Admisión</a></li>
+          <li><a routerLink="/planEstudios">Plan de Estudios</a></li>
+          <li><a routerLink="/alumnos" fragment="calendario-escolar">Calendario Escolar</a></li>
+        </ul>
+      </section>
+
+      <section class="footer-column">
+        <h3>Redes Sociales y Legal</h3>
+        <div class="social-group" aria-label="Redes sociales oficiales">
+          <a href="https://www.facebook.com/InformaticaUnistmo" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="currentColor"/></svg>
+          </a>
+          <a href="https://x.com/IUnistmo" class="social-icon" aria-label="X" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@informaticaunistmo7398" class="social-icon" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/></svg>
+          </a>
+        </div>
+
+        <div class="credits-block">
+          <h4>Créditos</h4>
+          <p>Brenda Gomez</p>
+          <p>Sashid Blanco</p>
+        </div>
+      </section>
     </div>
 
-    <div class="footer-section">
-      <h3 class="footer-title">{{ content().FOOTER.FOLLOW }}</h3>
-      <div class="social-group">
-        <a href="https://www.facebook.com/InformaticaUnistmo" class="social-icon" aria-label="Facebook">
-          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="currentColor"/></svg>
-        </a>
-        <a href="https://www.instagram.com/idssi.unistmo/" class="social-icon" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-        </a>
-        <a href="https://www.youtube.com/@informaticaunistmo7398" class="social-icon" aria-label="YouTube">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </a>
-        <a href="https://x.com/IUnistmo" class="social-icon" aria-label="X">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-        <a href="https://wa.me/529721155207" class="social-icon" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.7 8.38 8.38 0 0 1 3.8.9L21 3z"></path><path d="M13.2 14.8c-.5.4-1.1.5-1.7.3-1.4-.4-2.5-1.5-2.9-2.9-.2-.6-.1-1.2.3-1.7l1.1-1.1c.3-.3.8-.3 1.1 0l1.2 1.2c.3.3.3.8 0 1.1l-.5.5c-.2.2-.2.5 0 .7.5.5 1 .9 1.5 1.5.2.2.5.2.7 0l.5-.5c.3-.3.8-.3 1.1 0l1.2 1.2c.3.3.3.8 0 1.1l-1.1 1.1z"></path></svg>
-        </a>
-      </div>
+    <div class="footer-bottom">
+      <p>© 2026 UNISTMO. Todos los derechos reservados.</p>
     </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    <p>{{ content().FOOTER.COPYRIGHT }}</p>
   </div>
 </footer>

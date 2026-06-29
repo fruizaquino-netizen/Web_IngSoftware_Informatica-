@@ -32,6 +32,29 @@
       "DESCRIPTION": "Descubre nuestra oferta educativa en el área de tecnologías de la información, donde podrás formarte como profesional en Informática o como Ingeniero/a en Desarrollo de Software y Sistemas Inteligentes. Ambas carreras están diseñadas para brindarte competencias sólidas en programación, administración de sistemas, bases de datos, desarrollo web y móvil, así como el diseño e implementación de soluciones tecnológicas innovadoras que responden a las necesidades actuales de la industria y la sociedad.",
       "BUTTON": "Ver Plan de Estudios"
     },
+    "PROFILES": {
+      "TITLE": "Perfiles de la Carrera",
+      "ENTRY_TITLE": "Perfil de Ingreso",
+      "ENTRY_ITEMS": [
+        "Interés por la tecnología, la programación y la solución de problemas.",
+        "Habilidad para el razonamiento lógico y matemático.",
+        "Disposición para el aprendizaje autónomo y el trabajo colaborativo.",
+        "Actitud responsable, creativa y comprometida con su entorno."
+      ],
+      "GRADUATE_TITLE": "Perfil de Egreso",
+      "GRADUATE_TEXTS": [
+        "Los egresados y egresadas de la carrera de Ingeniería en Desarrollo de Software y Sistemas Inteligentes serán profesionales altamente capacitados para enfrentar los desafíos tecnológicos del siglo XXI.",
+        "Su formación integral les permitirá diseñar, desarrollar, implementar y mantener soluciones de software y sistemas inteligentes que respondan a las necesidades actuales y futuras de la sociedad e industria.",
+        "Las competencias y habilidades adquiridas durante su formación los posicionan como agentes de cambio y líderes en innovación tecnológica.",
+        "A lo largo de su formación académica, los egresados y egresadas adquirirán aptitudes y valores que les permitirán conducirse como agentes de cambio en diferentes contextos con principios éticos y morales al ejercer su profesión."
+      ],
+      "GRADUATE_ITEMS": [
+        "Diseña, desarrolla e implementa soluciones de software y sistemas inteligentes.",
+        "Integra bases de datos, redes, arquitectura de software y tecnologías emergentes.",
+        "Gestiona proyectos tecnológicos con criterios de calidad, seguridad y responsabilidad social.",
+        "Participa en equipos multidisciplinarios para resolver necesidades reales de organizaciones y comunidades."
+      ]
+    },
     "TOUR": {
       "TITLE": "Recorrido Virtual",
       "ALT": "Recorrido virtual",

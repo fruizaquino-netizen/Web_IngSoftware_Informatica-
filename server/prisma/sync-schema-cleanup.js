@@ -81,10 +81,6 @@ async function main() {
   await updateMany('Evento', {}, {
     $unset: {
       lugar: '',
-      dia: '',
-      mes: '',
-      createdAt: '',
-      updatedAt: ''
     }
   });
 

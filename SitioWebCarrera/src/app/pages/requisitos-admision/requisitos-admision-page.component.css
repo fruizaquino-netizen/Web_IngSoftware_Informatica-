@@ -1,0 +1,88 @@
+.requirements-page {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.page-header h1 {
+  color: var(--color-wine);
+  font-size: clamp(2rem, 2.6vw, 2.6rem);
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.info-card {
+  background: var(--color-beige);
+  border: 1px solid var(--color-beige-border);
+  border-radius: 8px;
+  padding: 28px;
+  box-shadow: 0 8px 20px rgba(107, 15, 26, 0.08);
+}
+
+.info-card h2 {
+  color: var(--color-wine);
+  font-size: 1.25rem;
+  margin-bottom: 18px;
+}
+
+.info-card ul {
+  margin: 0 0 22px;
+  padding-left: 1.1rem;
+}
+
+.info-card li {
+  color: var(--color-gray-700);
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+.info-card a {
+  display: inline-flex;
+  padding: 10px 16px;
+  background: var(--color-wine);
+  color: var(--color-white);
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.date-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-beige-border);
+}
+
+.date-row:last-child {
+  border-bottom: none;
+}
+
+.date-row strong {
+  color: #111827;
+}
+
+.date-row span {
+  color: var(--color-gray-700);
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .date-row {
+    flex-direction: column;
+  }
+
+  .date-row span {
+    text-align: left;
+  }
+}

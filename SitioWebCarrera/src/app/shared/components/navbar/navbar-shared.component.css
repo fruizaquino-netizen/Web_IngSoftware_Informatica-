@@ -1,4 +1,3 @@
-/* Franja superior institucional */
 :host {
   position: sticky;
   top: 0;
@@ -8,7 +7,7 @@
 
 .top-bar-institucional {
   height: 6px;
-  background-color: var(--color-wine);
+  background: linear-gradient(90deg, var(--color-wine), #8f2430);
 }
 
 .navbar-sticky {
@@ -31,7 +30,7 @@
   height: 54px;
   object-fit: cover;
   border: 1px solid var(--color-beige-border);
-  border-radius: 8px;
+  border-radius: 10px;
   transition: transform 0.3s ease;
 }
 
@@ -43,31 +42,55 @@
   color: var(--color-wine);
   font-size: 0.95rem;
   font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .nav-link,
-.btn-institucional {
+.dropdown-item {
   color: var(--color-gray-900);
-  background-color: transparent;
-  border-radius: 8px;
-  box-shadow: none;
+  border-radius: 10px;
   font-size: 0.95rem;
-  padding: 8px 14px;
+  padding: 0.7rem 1rem;
   transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .nav-link:hover,
-.btn-institucional:hover {
+.dropdown-item:hover {
   background-color: rgba(95, 15, 20, 0.08);
   color: var(--color-wine);
+}
+
+.nav-home {
+  background: rgba(95, 15, 20, 0.06);
 }
 
 .active-link {
   background-color: var(--color-wine) !important;
   color: var(--color-white) !important;
-  display: inline-block;
   font-weight: 600;
   box-shadow: 0 4px 8px rgba(95, 15, 20, 0.18);
+}
+
+.nav-dropdown {
+  min-width: 270px;
+  border: 1px solid rgba(95, 15, 20, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+  padding: 0.5rem;
+}
+
+.nav-dropdown .dropdown-item {
+  white-space: normal;
+  line-height: 1.25;
+}
+
+.nav-link,
+.dropdown-toggle {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  margin-left: 0.45rem;
 }
 
 .lang-icon {
@@ -88,10 +111,6 @@
   gap: 6px;
 }
 
-.language-toggle::after {
-  display: none;
-}
-
 @media (max-width: 991px) {
   .logo-img {
     width: 42px;
@@ -100,5 +119,18 @@
 
   .brand-text {
     font-size: 0.9rem;
+  }
+
+  .nav-dropdown {
+    min-width: 100%;
+    border: 0;
+    box-shadow: none;
+    padding: 0.25rem 0 0.5rem;
+  }
+
+  .dropdown-item,
+  .nav-link {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
   }
 }

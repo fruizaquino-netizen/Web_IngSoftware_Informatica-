@@ -1,0 +1,69 @@
+<app-breadcrumb
+  [items]="[
+    { label: 'Inicio', link: '/' },
+    { label: content().EGRESADOS.BY_YEAR }
+  ]">
+</app-breadcrumb>
+
+<section class="egresados-page">
+  <header class="egresados-header">
+    <h1>{{ content().EGRESADOS.BY_YEAR }}</h1>
+    <p>{{ content().EGRESADOS.SUBTITLE }}</p>
+  </header>
+
+  <section class="egresados-section">
+    <div class="egresados-cards">
+      <button
+        class="card-anio"
+        type="button"
+        *ngFor="let anio of aniosDisponibles()"
+        (click)="abrirModalPorAnio(anio)">
+        <span class="anio">{{ anio }}</span>
+        <span class="cantidad">
+          {{ conteoPorAnio()[anio] }}
+          {{ conteoPorAnio()[anio] === 1 ? content().EGRESADOS.SINGULAR : content().EGRESADOS.PLURAL }}
+        </span>
+      </button>
+    </div>
+  </section>
+</section>
+
+<div class="modal-overlay" *ngIf="anioSeleccionado()" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{ content().EGRESADOS.MODAL_TITLE }} {{ anioSeleccionado() }}</h2>
+      <button class="btn-cerrar" type="button" aria-label="Cerrar" (click)="cerrarModal()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <table class="modal-table">
+        <thead>
+          <tr>
+            <th>Foto</th>
+            <th>{{ content().EGRESADOS.TABLE_NAME }}</th>
+            <th>{{ content().EGRESADOS.TABLE_MODALITY }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let egresado of egresadosPorAnioSeleccionado()">
+            <td class="td-foto">
+              <img
+                *ngIf="egresado.foto; else sinFoto"
+                [src]="egresado.foto"
+                [alt]="egresado.nombre"
+                class="foto-egresado"
+              />
+              <ng-template #sinFoto>
+                <div class="avatar-placeholder">
+                  {{ egresado.nombre.charAt(0).toUpperCase() }}
+                </div>
+              </ng-template>
+            </td>
+            <td>{{ egresado.nombre }}</td>
+            <td><span class="badge">{{ getFiltroLabel(egresado.modalidad) }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

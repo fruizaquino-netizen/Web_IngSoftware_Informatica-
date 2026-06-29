@@ -1,0 +1,61 @@
+.profiles-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.profiles-header {
+  background: var(--color-wine);
+  color: var(--color-white);
+  padding: 54px 28px;
+  margin-bottom: 28px;
+}
+
+.profiles-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 2.7rem);
+  font-weight: 700;
+}
+
+.profiles-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 24px;
+}
+
+.profile-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-beige-border);
+  border-radius: 8px;
+  padding: 28px;
+  box-shadow: 0 8px 20px rgba(107, 15, 26, 0.08);
+}
+
+.profile-card h2 {
+  color: var(--color-wine);
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.profile-card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.profile-card li,
+.profile-card p {
+  color: var(--color-gray-700);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.graduate-card {
+  background: var(--color-beige);
+}
+
+@media (max-width: 768px) {
+  .profiles-grid {
+    grid-template-columns: 1fr;
+  }
+}

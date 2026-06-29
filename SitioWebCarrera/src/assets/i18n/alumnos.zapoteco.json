@@ -2,6 +2,22 @@
   "ALUMNOS": {
     "TITLE": "Guidxi Binni Rusiidi",
     "SUBTITLE": "Guca ni riuunda binni rusiidi.",
+    "SCHEDULE_TITLE": "Horarios",
+    "SCHEDULE_TEXT": "Consulta la programación de clases por semestre directamente con la coordinación académica y los avisos oficiales de la carrera.",
+    "SCHEDULE_ITEMS": [
+      "Primer y segundo semestre",
+      "Tercer y cuarto semestre",
+      "Quinto y sexto semestre",
+      "Séptimo y octavo semestre",
+      "Noveno y décimo semestre"
+    ],
+    "SCHEDULE_URL": "http://localhost:3000/api/documentos/horario.pdf",
+    "SCHEDULE_LINK_LABEL": "Ver horario oficial Campus Ixtepec",
+    "CALENDAR_TITLE": "Calendario Escolar",
+    "CALENDAR_TEXT": "Consulta las fechas oficiales publicadas por Servicios Escolares de la universidad.",
+    "CALENDAR_URL": "http://localhost:3000/api/documentos/calendario.pdf",
+    "CALENDAR_LINK_LABEL": "Abrir calendario oficial",
+    "GALLERY_TITLE": "Galería",
     "EMPTY": "Próximamente se publicará contenido de nuestra comunidad estudiantil."
   }
 }

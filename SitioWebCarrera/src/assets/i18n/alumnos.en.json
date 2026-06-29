@@ -2,6 +2,22 @@
   "ALUMNOS": {
     "TITLE": "Our Student Community",
     "SUBTITLE": "Discover the moments and experiences of our students.",
+    "SCHEDULE_TITLE": "Schedules",
+    "SCHEDULE_TEXT": "Check class scheduling by semester through academic coordination and official program announcements.",
+    "SCHEDULE_ITEMS": [
+      "First and second semester",
+      "Third and fourth semester",
+      "Fifth and sixth semester",
+      "Seventh and eighth semester",
+      "Ninth and tenth semester"
+    ],
+    "SCHEDULE_URL": "http://localhost:3000/api/documentos/horario.pdf",
+    "SCHEDULE_LINK_LABEL": "View official Campus Ixtepec schedule",
+    "CALENDAR_TITLE": "Academic Calendar",
+    "CALENDAR_TEXT": "Check the official dates published by the university's School Services department.",
+    "CALENDAR_URL": "http://localhost:3000/api/documentos/calendario.pdf",
+    "CALENDAR_LINK_LABEL": "Open official calendar",
+    "GALLERY_TITLE": "Gallery",
     "EMPTY": "Content from our student community will be published soon."
   }
 }
