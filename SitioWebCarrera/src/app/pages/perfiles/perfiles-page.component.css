@@ -9,9 +9,11 @@
   color: var(--color-white);
   padding: 54px 28px;
   margin-bottom: 28px;
+  rounded-top-left-radius: 8px;
 }
 
 .profiles-header h1 {
+  color: var(--color-white);
   margin: 0;
   font-size: clamp(2rem, 3vw, 2.7rem);
   font-weight: 700;

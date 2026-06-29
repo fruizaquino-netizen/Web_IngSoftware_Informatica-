@@ -26,6 +26,25 @@
   </div>
 </section>
 
+    <section class="news-section" *ngIf="noticias.length">
+      <div class="news-header">
+        <h2 class="section-title">{{ content().INICIO.NEWS_TICKER }}</h2>
+      </div>
+
+      <div class="news-container">
+        <article
+          class="news-card"
+          *ngFor="let noticia of noticias"
+          [class.ia]="noticia.titulo.includes('IA')"
+          [class.google]="noticia.titulo.includes('Google')"
+          [class.hackathon]="noticia.titulo.includes('Hackathon')">
+          <span class="news-date">{{ noticia.fecha }}</span>
+          <h3>{{ noticia.titulo }}</h3>
+          <p>{{ noticia.contenido }}</p>
+        </article>
+      </div>
+    </section>
+
     <section class="container">
       <div class="grid-cards">
         <div class="card card-green" routerLink="/excelecia-academica">

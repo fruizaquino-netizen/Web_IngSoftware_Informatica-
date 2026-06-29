@@ -142,7 +142,9 @@ export class InicioPageComponent {
   }> = [];
 
   // --- Noticias ---
-  noticias: Array<{ titulo: string; fecha: string; contenido: string }> = [];
+  noticias: Array<{ titulo: string; fecha: string; contenido: string }> = this.mapContentNews(
+    defaultContent.INICIO.NEWS
+  );
 
   selectedNews: any = null;
 
@@ -173,6 +175,9 @@ export class InicioPageComponent {
     const data = this.content().INICIO;
     this.monthNames = data.CALENDAR.MONTHS;
     this.daysOfWeek = data.CALENDAR.DAYS;
+    if (!this.noticias.length) {
+      this.noticias = this.mapContentNews(data.NEWS);
+    }
     this.selectedNews = null;
     this.selectedDay = null;
     this.eventosDelDia = [];
@@ -287,6 +292,16 @@ export class InicioPageComponent {
     // Cerramos el modal después de abrir la pestaña
     this.toggleContactModal();
   }
+  private mapContentNews(
+    noticias: Array<{ TITLE: string; DATE: string; CONTENT: string }>
+  ): Array<{ titulo: string; fecha: string; contenido: string }> {
+    return noticias.map((noticia) => ({
+      titulo: noticia.TITLE,
+      fecha: noticia.DATE,
+      contenido: noticia.CONTENT
+    }));
+  }
+
   private cargarNoticias(): void {
     this.http
       .get<Array<{ titulo: string; contenido: string; descripcion?: string; fechaTexto?: string; fecha?: string }>>(this.noticiasApiUrl)
@@ -297,12 +312,16 @@ export class InicioPageComponent {
               titulo: noticia.titulo,
               fecha: noticia.fechaTexto || noticia.fecha || '',
               contenido: noticia.contenido || noticia.descripcion || ''
-            }));
+            })).filter((noticia) => noticia.titulo || noticia.contenido);
+          }
+
+          if (!this.noticias.length) {
+            this.noticias = this.mapContentNews(this.content().INICIO.NEWS);
           }
         },
         error: (error) => {
           console.error('Error al cargar noticias desde la API:', error);
-          this.noticias = [];
+          this.noticias = this.mapContentNews(this.content().INICIO.NEWS);
         }
       });
   }
