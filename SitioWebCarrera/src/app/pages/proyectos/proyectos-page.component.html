@@ -5,7 +5,6 @@
   ]">
 </app-breadcrumb>
 
-<!-- Header -->
 <section class="bg-white py-5 border-bottom">
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
@@ -17,9 +16,7 @@
   </div>
 </section>
 
-<!-- ================= CONTENEDOR ï¿½fï¿½sNICO (IMPORTANTE) ================= -->
 <section class="container py-5 project-filter">
-  <!-- ================= RADIOS OCULTOS ================= -->
   <ng-container *ngFor="let filter of content().filters">
     <input
       type="radio"
@@ -29,7 +26,6 @@
       (change)="setActiveFilter($any(filter.key))">
   </ng-container>
 
-  <!-- ================= FILTROS ================= -->
   <div class="d-flex flex-wrap gap-2 filters mb-4">
     <label
       *ngFor="let filter of content().filters"
@@ -39,7 +35,6 @@
     </label>
   </div>
 
-  <!-- ================= CARDS ================= -->
   <div class="row g-4 projects">
     <div
       class="col-12 col-md-6 col-lg-4 project-item"
@@ -72,12 +67,10 @@
 </section>
 
 
-<!-- Header 2-->
-  <div class="container">
+<div class="container">
     <h1 class="fw-bold mb-3">{{ content().text.galleryTitle }}</h1>
   </div>
 
-<!-- ================= VIDEOS INFORMATIVOS ================= -->
 <section class="container py-5">
   <h2 class="fw-bold mb-4">{{ content().text.videosTitle }}</h2>
   <div class="row g-4">
@@ -96,34 +89,6 @@
 
   </div>
 </section>
-
-
-<!-- ================= GALERï¿½f�,A DE FOTOS ================= -->
-<section class="bg-light py-5">
-  <div class="container">
-    <h2 class="fw-bold mb-4">{{ content().text.imagesTitle }}</h2>
-
-    <div class="row g-4">
-
-      <div
-        class="col-6 col-md-4"
-        *ngFor="let img of galleryImages(); let i = index">
-
-        <img
-          [src]="img"
-          class="img-fluid rounded gallery-img"
-          (click)="openGallery(i)"
-          alt="Imagen de galerï¿½f�,­a">
-
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-
-<!-- ================= MODALS ================= -->
 
 <div
   class="modal fade"
@@ -175,73 +140,6 @@
         <button class="btn btn-secondary" data-bs-dismiss="modal">
           {{ content().text.close }}
         </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ================= MODAL + CARRUSEL ================= -->
-<div
-  class="modal show"
-  style="display: block; background: rgba(0,0,0,0.85);"
-  *ngIf="galleryOpen()"
-  (click)="closeGallery()">
-
-  <div
-    class="modal-dialog modal-xl modal-dialog-centered"
-    (click)="$event.stopPropagation()">
-
-    <div class="modal-content bg-transparent border-0">
-
-      <!-- BOTï¿½fï¿½"N CERRAR -->
-      <div class="modal-header border-0 justify-content-end">
-        <button
-          type="button"
-          class="btn-close btn-close-white"
-          aria-label="Close"
-          (click)="closeGallery()">
-        </button>
-      </div>
-
-      <!-- CUERPO -->
-      <div class="modal-body p-0">
-
-        <div class="carousel slide">
-
-          <div class="carousel-inner text-center">
-
-            <div
-              class="carousel-item"
-              *ngFor="let img of galleryImages(); let i = index"
-              [class.active]="i === activeImage()">
-
-              <img
-                [src]="img"
-                class="img-fluid rounded"
-                style="max-height: 80vh;"
-                alt="Imagen de galerï¿½f�,­a">
-            </div>
-
-          </div>
-
-          <!-- CONTROLES -->
-          <button
-            class="carousel-control-prev"
-            type="button"
-            (click)="prev()">
-            <span class="carousel-control-prev-icon"></span>
-          </button>
-
-          <button
-            class="carousel-control-next"
-            type="button"
-            (click)="next()">
-            <span class="carousel-control-next-icon"></span>
-          </button>
-
-        </div>
-
       </div>
     </div>
   </div>
