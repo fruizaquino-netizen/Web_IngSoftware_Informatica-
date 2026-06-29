@@ -2,11 +2,11 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, OnDestroy, PLATFORM_ID, computed, inject, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NavigationStart, Router } from '@angular/router';
+import { NavigationStart, Router, RouterLink } from '@angular/router';
 import { Subscription, filter } from 'rxjs';
 
-type SectionKey = 'docentes' | 'egresados' | 'proyectos' | 'galeria' | 'noticias' | 'eventos';
-type FieldType = 'text' | 'number' | 'email' | 'date' | 'textarea' | 'select' | 'file';
+type SectionKey = 'docentes' | 'egresados' | 'usuarios' | 'proyectos' | 'galeria' | 'noticias' | 'eventos';
+type FieldType = 'text' | 'number' | 'email' | 'date' | 'textarea' | 'select' | 'file' | 'password';
 
 interface AdminField {
   key: string;
@@ -27,6 +27,7 @@ interface AdminSection {
   endpoint: string;
   idKey: string;
   titleKey: string;
+  canReorder?: boolean;
   tableColumns: { key: string; label: string }[];
   fields: AdminField[];
 }
@@ -38,7 +39,7 @@ const CUSTOM_OPTIONS_KEY = 'admin_panel_custom_options';
 @Component({
   selector: 'app-admin-panel',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './admin-panel.component.html',
   styleUrl: './admin-panel.component.css'
 })
@@ -58,6 +59,7 @@ export class AdminPanelComponent implements OnDestroy {
       endpoint: `${API_BASE_URL}/docentes`,
       idKey: 'id',
       titleKey: 'nombre',
+      canReorder: true,
       tableColumns: [
         { key: 'nombre', label: 'Nombre' },
         { key: 'apellidos', label: 'Apellidos' },
@@ -112,6 +114,7 @@ export class AdminPanelComponent implements OnDestroy {
       endpoint: `${API_BASE_URL}/egresados`,
       idKey: 'id',
       titleKey: 'nombre',
+      canReorder: true,
       tableColumns: [
         { key: 'nombre', label: 'Nombre' },
         { key: 'apellidos', label: 'Apellidos' },
@@ -139,11 +142,38 @@ export class AdminPanelComponent implements OnDestroy {
       ]
     },
     {
+      key: 'usuarios',
+      label: 'Usuarios',
+      endpoint: `${API_BASE_URL}/usuarios`,
+      idKey: 'id',
+      titleKey: 'usuario',
+      canReorder: false,
+      tableColumns: [
+        { key: 'usuario', label: 'Usuario' },
+        { key: 'role', label: 'Rol' }
+      ],
+      fields: [
+        { key: 'usuario', label: 'Usuario', type: 'text', required: true, placeholder: 'Ej. admin' },
+        { key: 'password', label: 'Contraseña', type: 'password', required: true, placeholder: 'Crea una contraseña segura' },
+        {
+          key: 'role',
+          label: 'Rol',
+          type: 'select',
+          required: true,
+          options: [
+            { label: 'Administrador', value: 'admin' },
+            { label: 'Editor', value: 'editor' }
+          ]
+        }
+      ]
+    },
+    {
       key: 'proyectos',
       label: 'Proyectos',
       endpoint: `${API_BASE_URL}/proyectos`,
       idKey: 'id',
       titleKey: 'title',
+      canReorder: true,
       tableColumns: [
         { key: 'title', label: 'Titulo' },
         { key: 'categoria', label: 'Categoria' },
@@ -191,6 +221,7 @@ export class AdminPanelComponent implements OnDestroy {
       endpoint: `${API_BASE_URL}/galeria`,
       idKey: 'id',
       titleKey: 'titulo',
+      canReorder: true,
       tableColumns: [
         { key: 'titulo', label: 'Titulo' },
         { key: 'tipo', label: 'Tipo' },
@@ -224,6 +255,7 @@ export class AdminPanelComponent implements OnDestroy {
       endpoint: `${API_BASE_URL}/noticias`,
       idKey: 'id',
       titleKey: 'titulo',
+      canReorder: true,
       tableColumns: [
         { key: 'titulo', label: 'Titulo' },
         { key: 'fecha', label: 'Fecha' },
@@ -248,6 +280,7 @@ export class AdminPanelComponent implements OnDestroy {
       endpoint: `${API_BASE_URL}/eventos`,
       idKey: 'id',
       titleKey: 'titulo',
+      canReorder: true,
       tableColumns: [
         { key: 'titulo', label: 'Titulo' },
         { key: 'fecha', label: 'Fecha' },
@@ -283,6 +316,7 @@ export class AdminPanelComponent implements OnDestroy {
 
   activeSection = computed(() => this.sections.find((section) => section.key === this.activeKey())!);
   isAuthenticated = computed(() => Boolean(this.token()));
+  canReorderCurrentSection = computed(() => this.activeSection().canReorder !== false);
 
   loginForm = this.fb.nonNullable.group({
     username: ['', Validators.required],
@@ -330,7 +364,7 @@ export class AdminPanelComponent implements OnDestroy {
         this.showSuccess('Sesion iniciada.');
         this.loadSection();
       },
-      error: () => this.error.set('No se pudo iniciar sesion. Revisa usuario y contrasena.')
+      error: (error) => this.error.set(this.describeHttpError(error, 'No se pudo iniciar sesion.'))
     });
   }
 
@@ -352,16 +386,21 @@ export class AdminPanelComponent implements OnDestroy {
   }
 
   loadSection(): void {
+    if (!this.canReorderCurrentSection()) {
+      this.draggedRecordId.set(null);
+      this.dragOverRecordId.set(null);
+    }
+
     this.loading.set(true);
     this.error.set('');
 
-    this.http.get<any[]>(this.activeSection().endpoint).subscribe({
+    this.http.get<any[]>(this.activeSection().endpoint, { headers: this.authHeaders() }).subscribe({
       next: (records) => {
         this.records.set(Array.isArray(records) ? records : []);
         this.loading.set(false);
       },
-      error: () => {
-        this.error.set(`No se pudieron cargar los registros de ${this.activeSection().label}.`);
+      error: (error) => {
+        this.error.set(this.describeHttpError(error, `No se pudieron cargar los registros de ${this.activeSection().label}.`));
         this.loading.set(false);
       }
     });
@@ -463,6 +502,10 @@ export class AdminPanelComponent implements OnDestroy {
   }
 
   moveRecord(record: any, direction: -1 | 1): void {
+    if (!this.canReorderCurrentSection()) {
+      return;
+    }
+
     const current = [...this.records()];
     const index = current.findIndex((item) => item[this.activeSection().idKey] === record[this.activeSection().idKey]);
     const nextIndex = index + direction;
@@ -536,6 +579,10 @@ export class AdminPanelComponent implements OnDestroy {
   }
 
   private persistRecordOrder(records: any[]): void {
+    if (!this.canReorderCurrentSection()) {
+      return;
+    }
+
     this.records.set(records.map((item, orden) => ({ ...item, orden })));
     this.http
       .put(
@@ -674,6 +721,7 @@ export class AdminPanelComponent implements OnDestroy {
     const folderBySection: Record<SectionKey, string> = {
       docentes: 'Docentes',
       egresados: 'Egresados',
+      usuarios: '',
       proyectos: 'Proyectos',
       galeria: 'Galeria',
       noticias: '',
@@ -741,6 +789,10 @@ export class AdminPanelComponent implements OnDestroy {
       return 'Ingresa un correo valido, por ejemplo nombre@dominio.com.';
     }
 
+    if (control.hasError('minlength')) {
+      return 'Usa al menos 6 caracteres.';
+    }
+
     return 'Revisa este campo.';
   }
 
@@ -751,15 +803,21 @@ export class AdminPanelComponent implements OnDestroy {
     for (const field of this.activeSection().fields) {
       const hasExistingFile = field.type === 'file' && Boolean(this.existingFileValue(field.key, record));
       const validators = [];
+      const isUsersPassword = this.activeKey() === 'usuarios' && field.key === 'password';
+      const isOptionalUsersPassword = isUsersPassword && Boolean(record);
 
       const waitsForGalleryType = this.activeKey() === 'galeria' && field.key === 'archivo' && !record?.tipo;
 
-      if (field.required && !hasExistingFile && !waitsForGalleryType) {
+      if (field.required && !hasExistingFile && !waitsForGalleryType && !isOptionalUsersPassword) {
         validators.push(Validators.required);
       }
 
       if (field.type === 'email') {
         validators.push(Validators.email);
+      }
+
+      if (isUsersPassword && !record) {
+        validators.push(Validators.minLength(6));
       }
 
       const fieldValue = this.valueForField(field, record);
@@ -803,6 +861,10 @@ export class AdminPanelComponent implements OnDestroy {
       return String(record.fecha).slice(0, 10);
     }
 
+    if (this.activeKey() === 'usuarios' && key === 'password') {
+      return '';
+    }
+
     if (field?.type === 'file') {
       return this.existingFileValue(key, record) ? 'selected' : '';
     }
@@ -833,6 +895,12 @@ export class AdminPanelComponent implements OnDestroy {
         if (this.removedFiles().has(field.key)) {
           payload[field.key] = '';
         }
+      }
+    }
+
+    if (this.activeKey() === 'usuarios') {
+      if (!payload.password) {
+        delete payload.password;
       }
     }
 
@@ -1070,7 +1138,7 @@ export class AdminPanelComponent implements OnDestroy {
     }
 
     this.loadingMiembrosOptions.set(true);
-    this.http.get<any[]>(`${API_BASE_URL}/miembros-proyecto`).subscribe({
+    this.http.get<any[]>(`${API_BASE_URL}/miembros-proyecto`, { headers: this.authHeaders() }).subscribe({
       next: (miembros) => {
         this.miembrosOptions.set((Array.isArray(miembros) ? miembros : []).map((miembro) => {
           const fullName = String(miembro.nombre || '').trim();
@@ -1143,7 +1211,9 @@ export class AdminPanelComponent implements OnDestroy {
     const backendMessage = error.error?.error || error.message;
 
     if (error.status === 401) {
-      return `${fallback} La sesion expiro o el token no es valido. Cierra sesion y vuelve a entrar.`;
+      return backendMessage
+        ? `${fallback} ${backendMessage}`
+        : `${fallback} La sesion expiro o el token no es valido. Cierra sesion y vuelve a entrar.`;
     }
 
     return backendMessage ? `${fallback} ${backendMessage}` : `${fallback} Verifica los datos.`;

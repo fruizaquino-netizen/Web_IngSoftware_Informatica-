@@ -36,7 +36,7 @@ export class TranslationService {
     });
   }
 
-  // FUNCIï¿½fï¿½f�f¢ï¿½?ï¿½oN CLAVE: Traduce buscando la ruta "HOME.TITLE" dentro del JSON
+  // FUNCIoN CLAVE: Traduce buscando la ruta "HOME.TITLE" dentro del JSON
   translate(key: string): string {
     const data = this.translationsData();
     // Reduce recorre el objeto: data['HOME'] -> data['TITLE']
