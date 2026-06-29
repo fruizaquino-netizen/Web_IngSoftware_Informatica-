@@ -66,23 +66,28 @@ async function migrateProyectoImagenToGaleriaProyecto() {
 async function main() {
   console.log('Sincronizando documentos existentes con schema.prisma...');
 
-  await updateMany('Noticia', {}, {
-    $unset: {
-      descripcion: '',
-      descripcionCorta: '',
-      imagenUrl: '',
-      urlImagen: '',
-      fechaTexto: '',
-      createdAt: '',
-      updatedAt: ''
+  await updateMany(
+    'Noticia',
+    {},
+    {
+      $unset: {
+        descripcionCorta: '',
+        imagenUrl: '',
+        urlImagen: '',
+        fechaTexto: ''
+      }
     }
-  });
+  );
 
-  await updateMany('Evento', {}, {
-    $unset: {
-      lugar: '',
+  await updateMany(
+    'Evento',
+    {},
+    {
+      $unset: {
+        lugar: ''
+      }
     }
-  });
+  );
 
   await updateMany(
     'Docente',
@@ -92,16 +97,34 @@ async function main() {
 
   await updateMany(
     'Egresado',
-    { anio: { $exists: true } },
+    { ano: { $exists: true } },
     [
-      { $set: { ano: '$anio' } },
-      { $unset: 'anio' }
+      { $set: { anio: '$ano' } },
+      { $unset: 'ano' }
     ]
   );
 
   await updateMany(
     'Egresado',
+    { anio: null },
+    { $set: { anio: new Date().getFullYear() } }
+  );
+
+  await updateMany(
+    'Egresado',
+    { nombre: null },
+    { $set: { nombre: '' } }
+  );
+
+  await updateMany(
+    'Egresado',
     { apellidos: { $exists: false } },
+    { $set: { apellidos: '' } }
+  );
+
+  await updateMany(
+    'Egresado',
+    { apellidos: null },
     { $set: { apellidos: '' } }
   );
 

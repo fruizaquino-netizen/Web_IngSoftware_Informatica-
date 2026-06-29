@@ -1,13 +1,13 @@
 <app-breadcrumb
   [items]="[
     { label: 'Inicio', link: '/' },
-    { label: content().QUIENES_SOMOS.PROFILES.TITLE }
+    { label: profilesTitle() }
   ]">
 </app-breadcrumb>
 
 <section class="profiles-page">
   <header class="profiles-header">
-    <h1>{{ content().QUIENES_SOMOS.PROFILES.TITLE }}</h1>
+    <h1>{{ profilesTitle() }}</h1>
   </header>
 
   <div class="profiles-grid">

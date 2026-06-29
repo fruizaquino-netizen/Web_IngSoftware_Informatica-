@@ -118,13 +118,13 @@ export class AdminPanelComponent implements OnDestroy {
       tableColumns: [
         { key: 'nombre', label: 'Nombre' },
         { key: 'apellidos', label: 'Apellidos' },
-        { key: 'ano', label: 'Ano' },
+        { key: 'anio', label: 'Año' },
         { key: 'modalidad', label: 'Modalidad' }
       ],
       fields: [
         { key: 'nombre', label: 'Nombre', type: 'text', required: true, placeholder: 'Ej. Carlos' },
         { key: 'apellidos', label: 'Apellidos', type: 'text', required: true, placeholder: 'Ej. Gomez Ruiz' },
-        { key: 'ano', label: 'Ano', type: 'number', required: true, placeholder: 'Ej. 2024' },
+        { key: 'anio', label: 'Año', type: 'number', required: true, placeholder: 'Ej. 2024' },
         { key: 'foto', label: 'Foto de perfil', type: 'file', wide: true, accept: 'image/*' },
         {
           key: 'modalidad',
@@ -904,8 +904,11 @@ export class AdminPanelComponent implements OnDestroy {
       }
     }
 
-    if ('ano' in payload && payload.ano !== '') {
-      payload.ano = Number(payload.ano);
+    if ('anio' in payload && payload.anio !== '') {
+      payload.anio = Number(payload.anio);
+    } else if ('ano' in payload && payload.ano !== '') {
+      payload.anio = Number(payload.ano);
+      delete payload.ano;
     }
 
     if ('publicacionesTexto' in payload) {

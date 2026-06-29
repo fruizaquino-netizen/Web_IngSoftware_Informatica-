@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslationService } from '../../services/translation.service';
@@ -39,6 +39,10 @@ export class PerfilesPageComponent {
   private translation = inject(TranslationService);
 
   content = signal(defaultContent);
+  profilesTitle = computed(() => {
+    const title = this.content().QUIENES_SOMOS.PROFILES.TITLE?.trim();
+    return title || defaultContent.QUIENES_SOMOS.PROFILES.TITLE;
+  });
 
   constructor() {
     effect(() => {

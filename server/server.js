@@ -608,31 +608,45 @@ function sortByManualThenText(items, textSelector) {
 }
 
 async function normalizeLegacyEgresados() {
-  const emptyStringFields = ['nombre', 'apellidos', 'modalidad'];
-
-  for (const field of emptyStringFields) {
+  try {
     await prisma.$runCommandRaw({
       update: 'Egresado',
       updates: [
         {
-          q: { [field]: null },
-          u: { $set: { [field]: '' } },
+          q: { ano: { $exists: true } },
+          u: [
+            { $set: { anio: '$ano' } },
+            { $unset: 'ano' }
+          ],
           multi: true
         }
       ]
     });
-  }
 
-  await prisma.$runCommandRaw({
-    update: 'Egresado',
-    updates: [
-      {
-        q: { ano: null },
-        u: { $set: { ano: new Date().getFullYear() } },
-        multi: true
-      }
-    ]
-  });
+    await prisma.$runCommandRaw({
+      update: 'Egresado',
+      updates: [
+        {
+          q: { anio: null },
+          u: { $set: { anio: new Date().getFullYear() } },
+          multi: true
+        }
+      ]
+    });
+
+    await prisma.$runCommandRaw({
+      update: 'Egresado',
+      updates: [
+        {
+          q: { nombre: null },
+          u: { $set: { nombre: '' } },
+          multi: true
+        }
+      ]
+    });
+  } catch (error) {
+    console.warn('No se pudo normalizar la coleccion de egresados:', error?.message || error);
+  }
 }
 
 function assetPath(folder, value) {
@@ -744,15 +758,71 @@ function cleanData(data) {
   );
 }
 
+function extractMongoId(value) {
+  if (!value) {
+    return undefined;
+  }
+
+  if (typeof value === 'object' && value.$oid) {
+    return String(value.$oid);
+  }
+
+  return String(value);
+}
+
+function extractMongoDate(value) {
+  if (!value) {
+    return null;
+  }
+
+  if (value instanceof Date) {
+    return value.toISOString();
+  }
+
+  if (typeof value === 'string') {
+    return value;
+  }
+
+  if (typeof value === 'object' && value.$date) {
+    return String(value.$date);
+  }
+
+  return null;
+}
+
+async function readRawMongoCollection(collection, sort = {}) {
+  const result = await prisma.$runCommandRaw({
+    find: collection,
+    filter: {},
+    sort
+  });
+
+  return Array.isArray(result?.cursor?.firstBatch) ? result.cursor.firstBatch : [];
+}
+
+function normalizeRawNoticia(noticia) {
+  return {
+    id: extractMongoId(noticia?._id ?? noticia?.id),
+    titulo: noticia?.titulo || '',
+    contenido: noticia?.contenido || '',
+    descripcion: noticia?.descripcion || '',
+    fechaTexto: noticia?.fechaTexto || '',
+    fecha: extractMongoDate(noticia?.fecha),
+    createdAt: extractMongoDate(noticia?.createdAt),
+    updatedAt: extractMongoDate(noticia?.updatedAt)
+  };
+}
+
 function normalizeEvento(evento) {
-  const fecha = evento?.fecha ? new Date(evento.fecha) : null;
+  const fechaValue = extractMongoDate(evento?.fecha);
+  const fecha = fechaValue ? new Date(fechaValue) : null;
   const dia = Number.isInteger(evento?.dia) ? evento.dia : fecha ? fecha.getDate() : null;
   const mes = Number.isInteger(evento?.mes) ? evento.mes : fecha ? fecha.getMonth() : null;
 
   return {
-    id: evento?.id,
+    id: extractMongoId(evento?._id ?? evento?.id),
     titulo: evento?.titulo || '',
-    fecha: evento?.fecha || null,
+    fecha: fechaValue,
     descripcion: evento?.descripcion || '',
     hora: evento?.hora || '',
     dia,
@@ -1070,11 +1140,10 @@ app.delete('/api/usuarios/:id', requireAuth, async (req, res) => {
 // --- RUTAS DE NOTICIAS ---
 app.get('/api/noticias', async (req, res) => {
   try {
-    const noticias = await prisma.noticia.findMany({
-      orderBy: { fecha: 'desc' }
-    });
-    res.json(noticias);
+    const noticias = await readRawMongoCollection('Noticia', { fecha: -1 });
+    res.json(noticias.map(normalizeRawNoticia));
   } catch (error) {
+    console.error('Error al obtener noticias:', error);
     res.status(500).json({ error: 'Error al obtener noticias' });
   }
 });
@@ -1126,9 +1195,7 @@ app.delete('/api/noticias/:id', requireAuth, async (req, res) => {
 // --- RUTAS DE EVENTOS ---
 app.get('/api/eventos', async (req, res) => {
   try {
-    const eventos = await prisma.evento.findMany({
-      orderBy: { fecha: 'asc' }
-    });
+    const eventos = await readRawMongoCollection('Evento', { fecha: 1 });
     res.json(eventos.map(normalizeEvento));
   } catch (error) {
     console.error('Error al obtener eventos:', error);
@@ -1291,15 +1358,24 @@ app.delete('/api/docentes/:id', requireAuth, async (req, res) => {
 // --- RUTAS DE EGRESADOS ---
 app.get('/api/egresados', async (req, res) => {
   try {
-    await normalizeLegacyEgresados();
     const where = req.query.modalidad
       ? { modalidad: String(req.query.modalidad) }
       : undefined;
 
-    const egresados = await prisma.egresado.findMany({
-      where,
-      orderBy: [{ anio: 'asc' }, { nombre: 'asc' }]
-    });
+    let egresados;
+
+    try {
+      egresados = await prisma.egresado.findMany({
+        where,
+        orderBy: [{ anio: 'asc' }, { nombre: 'asc' }]
+      });
+    } catch (readError) {
+      await normalizeLegacyEgresados();
+      egresados = await prisma.egresado.findMany({
+        where,
+        orderBy: [{ anio: 'asc' }, { nombre: 'asc' }]
+      });
+    }
 
     res.json(egresados);
   } catch (error) {
@@ -1316,7 +1392,7 @@ app.post('/api/egresados', requireAuth, uploadEgresado.single('foto'), async (re
       data: {
         nombre,
         apellidos,
-        ano: resolveYear(req.body),
+        anio: resolveYear(req.body),
         modalidad,
         foto: req.file?.filename || req.body.foto
       }
@@ -1336,7 +1412,7 @@ app.put('/api/egresados/:id', requireAuth, uploadEgresado.single('foto'), async 
       data: cleanData({
         nombre,
         apellidos,
-        ano: resolveYear(req.body),
+        anio: resolveYear(req.body),
         modalidad,
         foto: req.file?.filename || req.body.foto
       })

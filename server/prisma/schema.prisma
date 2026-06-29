@@ -71,8 +71,10 @@ model Publicacion {
 model Egresado {
   id        String              @id @default(auto()) @map("_id") @db.ObjectId
   nombre    String
+  apellidos String?
   anio      Int
   modalidad ModalidadTitulacion
+  foto      String?
   createdAt DateTime             @default(now())
   updatedAt DateTime             @updatedAt
 }
