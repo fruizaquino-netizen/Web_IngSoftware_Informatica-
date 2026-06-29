@@ -993,8 +993,10 @@ app.delete('/api/usuarios/:id', requireAuth, async (req, res) => {
 // --- RUTAS DE NOTICIAS ---
 app.get('/api/noticias', async (req, res) => {
   try {
-    const noticias = await prisma.noticia.findMany();
-    res.json(sortByManualThenText(noticias, (noticia) => noticia.titulo));
+    const noticias = await prisma.noticia.findMany({
+      orderBy: { fecha: 'desc' }
+    });
+    res.json(noticias);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener noticias' });
   }
@@ -1047,8 +1049,10 @@ app.delete('/api/noticias/:id', requireAuth, async (req, res) => {
 // --- RUTAS DE EVENTOS ---
 app.get('/api/eventos', async (req, res) => {
   try {
-    const eventos = await prisma.evento.findMany();
-    res.json(sortByManualThenText(eventos, (evento) => evento.titulo));
+    const eventos = await prisma.evento.findMany({
+      orderBy: [{ mes: 'asc' }, { dia: 'asc' }]
+    });
+    res.json(eventos);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener eventos' });
   }
@@ -1209,10 +1213,11 @@ app.get('/api/egresados', async (req, res) => {
       : undefined;
 
     const egresados = await prisma.egresado.findMany({
-      where
+      where,
+      orderBy: [{ anio: 'asc' }, { nombre: 'asc' }]
     });
 
-    res.json(sortByManualThenText(egresados, (egresado) => `${egresado.nombre} ${egresado.apellidos}`));
+    res.json(egresados);
   } catch (error) {
     console.error('Error al obtener egresados:', error);
     res.status(500).json({ error: 'Error al obtener egresados' });

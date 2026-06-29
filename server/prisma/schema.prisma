@@ -13,20 +13,23 @@ enum TipoMedia {
 }
 
 model Noticia {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  titulo    String
-  fecha     DateTime @default(now())
-  contenido String
-  orden     Int?
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  titulo      String
+  contenido   String
+  descripcion String?
+  imagenUrl   String?
+  fechaTexto  String?
+  fecha       DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Evento {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   titulo      String
   fecha       DateTime?
-  hora        String?
-  descripcion String
-  orden       Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Docente {
@@ -57,13 +60,10 @@ model Publicacion {
 model Egresado {
   id        String              @id @default(auto()) @map("_id") @db.ObjectId
   nombre    String
-  apellidos String
-  ano       Int
-  modalidad String
-  foto      String?
-  orden     Int?
-  createdAt DateTime            @default(now())
-  updatedAt DateTime            @updatedAt
+  anio      Int
+  modalidad ModalidadTitulacion
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
 }
 
 model Proyecto {

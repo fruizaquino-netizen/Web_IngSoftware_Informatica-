@@ -7,8 +7,9 @@ import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.componen
 
 interface Egresado {
   nombre: string;
-  anio: number;
+  anio: number;       //campo interno correcto (sin tilde, es el key del API)
   modalidad: 'tesis' | 'ceneval' | 'experiencia';
+  foto?: string;      //campo opcional de foto
 }
 
 const defaultContent = {

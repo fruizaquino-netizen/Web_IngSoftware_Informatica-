@@ -118,23 +118,35 @@
     </div>
 
     <div class="modal-body">
-      <table class="modal-table">
-        <thead>
-          <tr>
-            <th>{{ content().EGRESADOS.TABLE_NAME }}</th>
-            <th>{{ content().EGRESADOS.TABLE_MODALITY }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let e of egresadosPorAnioSeleccionado()">
-            <td>{{ e.nombre }}</td>
-            <td>
-              <span class="badge">{{ getFiltroLabel(e.modalidad) }}</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-  </div>
+  <table class="modal-table">
+    <thead>
+      <tr>
+        <th>Foto</th>
+        <th>{{ content().EGRESADOS.TABLE_NAME }}</th>
+        <th>{{ content().EGRESADOS.TABLE_MODALITY }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of egresadosPorAnioSeleccionado()">
+        <!--Foto de perfil: si existe la muestra, si no un avatar genérico -->
+        <td class="td-foto">
+          <img
+            *ngIf="e.foto; else sinFoto"
+            [src]="e.foto"
+            [alt]="e.nombre"
+            class="foto-egresado"
+          />
+          <ng-template #sinFoto>
+            <div class="avatar-placeholder">
+              {{ e.nombre.charAt(0).toUpperCase() }}
+            </div>
+          </ng-template>
+        </td>
+        <td>{{ e.nombre }}</td>
+        <td>
+          <span class="badge">{{ getFiltroLabel(e.modalidad) }}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
