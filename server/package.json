@@ -8,6 +8,7 @@
     "start": "node server.js",
     "db:push": "prisma db push",
     "db:seed": "node prisma/seed.js",
+    "db:sync-schema": "node prisma/sync-schema-cleanup.js",
     "db:update-image-paths": "node prisma/update-image-paths.js"
   },
   "keywords": [],
@@ -17,9 +18,11 @@
   "dependencies": {
     "@google/genai": "^1.40.0",
     "@prisma/client": "^6.19.0",
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "multer": "^2.2.0"
   },
   "devDependencies": {
     "@types/node": "^25.6.0",

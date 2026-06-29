@@ -16,6 +16,8 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
+const multer = require('multer');
 const { GoogleGenAI } = require('@google/genai');
 
 
@@ -23,14 +25,61 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const uploadDirs = {
+  docentes: path.join(__dirname, '../SitioWebCarrera/src/assets/img/Docentes'),
+  egresados: path.join(__dirname, '../SitioWebCarrera/src/assets/img/Egresados'),
+  proyectos: path.join(__dirname, '../SitioWebCarrera/src/assets/img/Proyectos'),
+  galeria: path.join(__dirname, '../SitioWebCarrera/src/assets/img/Galeria')
+};
+
+Object.values(uploadDirs).forEach((dir) => {
+  fs.mkdirSync(dir, { recursive: true });
+});
+
+function safeFileBaseName(name) {
+  return path
+    .basename(name, path.extname(name))
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9_-]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .slice(0, 60) || 'archivo';
+}
+
+function createUploader(entity, acceptsFile = () => true) {
+  return multer({
+    storage: multer.diskStorage({
+      destination: (req, file, cb) => cb(null, uploadDirs[entity]),
+      filename: (req, file, cb) => {
+        const ext = path.extname(file.originalname).toLowerCase();
+        const baseName = safeFileBaseName(file.originalname);
+        cb(null, `${baseName}_${Date.now()}${ext}`);
+      }
+    }),
+    fileFilter: (req, file, cb) => {
+      const isValidFile = acceptsFile(file);
+      cb(isValidFile ? null : new Error('Tipo de archivo no permitido para este campo'), isValidFile);
+    }
+  });
+}
+
+const uploadDocente = createUploader('docentes', (file) => file.mimetype.startsWith('image/'));
+const uploadEgresado = createUploader('egresados', (file) => file.mimetype.startsWith('image/'));
+const uploadProyecto = createUploader('proyectos', (file) => {
+  if (file.fieldname === 'imagenPortada' || file.fieldname === 'image') {
+    return file.mimetype.startsWith('image/');
+  }
+
+  return file.mimetype.startsWith('image/') || file.mimetype.startsWith('video/');
+});
+const uploadGaleria = createUploader('galeria', (file) => file.mimetype.startsWith('image/') || file.mimetype.startsWith('video/'));
+
 const AUTH_SECRET = process.env.AUTH_SECRET || 'dev-secret-change-me';
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
 const TOKEN_TTL_MS = 1000 * 60 * 60 * 8;
 
-if (!process.env.AUTH_SECRET || !process.env.ADMIN_USERNAME || !process.env.ADMIN_PASSWORD) {
+if (!process.env.AUTH_SECRET) {
   console.warn(
-    '⚠️  Configura AUTH_SECRET, ADMIN_USERNAME y ADMIN_PASSWORD en server/.env para producción.'
+    '⚠️  Configura AUTH_SECRET en server/.env para producción.'
   );
 }
 
@@ -465,7 +514,7 @@ function requireAuth(req, res, next) {
 }
 
 function normalizePublicaciones(publicaciones = []) {
-  return publicaciones.map((publicacion) => ({
+  return parseArrayField(publicaciones).map((publicacion) => ({
     titulo: publicacion.titulo,
     anio: Number(publicacion.anio),
     enlace: publicacion.enlace || '#'
@@ -473,38 +522,338 @@ function normalizePublicaciones(publicaciones = []) {
 }
 
 function normalizeMiembros(miembros = []) {
-  return miembros.map((miembro) => ({
+  return parseArrayField(miembros).map((miembro, index) => ({
     nombre: typeof miembro === 'string' ? miembro : miembro.nombre
+  })).filter((miembro) => miembro.nombre).map((miembro, index) => ({
+    ...miembro,
+    orden: index
   }));
 }
 
-function normalizeProyectoGaleria(galeria = []) {
-  return galeria.map((item) => ({
-    url: typeof item === 'string' ? item : item.url
-  }));
+async function syncMiembrosCatalogo(miembros = []) {
+  if (!prisma.miembroProyectoCatalogo) {
+    return;
+  }
+
+  const names = [...new Set(normalizeMiembros(miembros).map((miembro) => miembro.nombre.trim()).filter(Boolean))];
+
+  for (const nombre of names) {
+    await prisma.miembroProyectoCatalogo.upsert({
+      where: { nombre },
+      update: {},
+      create: { nombre }
+    });
+  }
+}
+
+function sortByManualThenText(items, textSelector) {
+  const hasManualOrder = items.some((item) => Number.isFinite(item?.orden));
+
+  return [...items].sort((a, b) => {
+    if (hasManualOrder) {
+      const aOrden = Number.isFinite(a?.orden) ? a.orden : Number.MAX_SAFE_INTEGER;
+      const bOrden = Number.isFinite(b?.orden) ? b.orden : Number.MAX_SAFE_INTEGER;
+      if (aOrden !== bOrden) {
+        return aOrden - bOrden;
+      }
+    }
+
+    return String(textSelector(a) || '').localeCompare(String(textSelector(b) || ''), 'es', {
+      sensitivity: 'base'
+    });
+  });
+}
+
+function assetPath(folder, value) {
+  if (!value) {
+    return '';
+  }
+
+  const text = String(value);
+  if (/^(https?:)?\/\//i.test(text) || text.startsWith('data:') || text.startsWith('assets/')) {
+    return text;
+  }
+
+  return `assets/img/${folder}/${text}`;
+}
+
+async function reorderRecords(model, ids = []) {
+  const validIds = Array.isArray(ids) ? ids.filter(Boolean) : [];
+
+  await Promise.all(
+    validIds.map((id, index) =>
+      model.update({
+        where: { id },
+        data: { orden: index }
+      })
+    )
+  );
+}
+
+async function miembrosProyectoCatalogo() {
+  const [catalogo, miembrosUsados] = await Promise.all([
+    prisma.miembroProyectoCatalogo
+      ? prisma.miembroProyectoCatalogo.findMany().catch(() => [])
+      : Promise.resolve([]),
+    prisma.proyectoMiembro.findMany().catch(() => [])
+  ]);
+  const byName = new Map();
+
+  [...catalogo, ...miembrosUsados].forEach((miembro) => {
+    const nombre = String(miembro?.nombre || '').trim();
+    if (!nombre || byName.has(nombre.toLowerCase())) {
+      return;
+    }
+
+    byName.set(nombre.toLowerCase(), {
+      id: miembro.id || nombre,
+      nombre,
+      orden: miembro.orden
+    });
+  });
+
+  return sortByManualThenText([...byName.values()], (miembro) => miembro.nombre);
+}
+
+function normalizeProjectGalleryValue(value = '') {
+  const text = String(value || '').trim();
+
+  return text.replace(/^assets\/img\/Proyectos\//i, '');
+}
+
+function parseArrayField(value) {
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (value === undefined || value === null || value === '') {
+    return [];
+  }
+
+  if (typeof value === 'string') {
+    try {
+      const parsed = JSON.parse(value);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      return value
+        .split('\n')
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+  }
+
+  return [];
+}
+
+function firstUploadedFile(req, ...fieldNames) {
+  if (req.file) {
+    return req.file;
+  }
+
+  for (const fieldName of fieldNames) {
+    const files = req.files?.[fieldName];
+    if (Array.isArray(files) && files.length > 0) {
+      return files[0];
+    }
+  }
+
+  return null;
+}
+
+function uploadedFileNames(req, ...fieldNames) {
+  return fieldNames.flatMap((fieldName) => {
+    const files = req.files?.[fieldName];
+    return Array.isArray(files) ? files.map((file) => file.filename) : [];
+  });
+}
+
+function cleanData(data) {
+  return Object.fromEntries(
+    Object.entries(data).filter(([, value]) => value !== undefined)
+  );
+}
+
+function splitFullName(nombreCompleto = '') {
+  const parts = String(nombreCompleto).trim().split(/\s+/).filter(Boolean);
+
+  if (parts.length <= 1) {
+    return { nombre: parts[0] || '', apellidos: '' };
+  }
+
+  return {
+    nombre: parts.slice(0, -2).join(' ') || parts[0],
+    apellidos: parts.slice(-2).join(' ')
+  };
+}
+
+function resolveNombreApellidos(body) {
+  if (body.nombre && body.apellidos !== undefined) {
+    return {
+      nombre: body.nombre,
+      apellidos: body.apellidos
+    };
+  }
+
+  if (!body.nombre) {
+    return { nombre: undefined, apellidos: undefined };
+  }
+
+  return splitFullName(body.nombre);
+}
+
+function resolveYear(body) {
+  const value = body.ano ?? body.anio ?? body.anioText;
+  return value === undefined || value === '' ? undefined : Number(value);
 }
 
 app.get('/api/health', (req, res) => {
   res.json({ ok: true });
 });
 
-app.post('/api/auth/login', (req, res) => {
-  const { username, password } = req.body;
-
-  if (!safeEqual(username, ADMIN_USERNAME) || !safeEqual(password, ADMIN_PASSWORD)) {
-    return res.status(401).json({ error: 'Credenciales incorrectas' });
+app.get('/api/miembros-proyecto', async (req, res) => {
+  try {
+    res.json(await miembrosProyectoCatalogo());
+  } catch (error) {
+    console.error('Error al obtener miembros de proyecto:', error);
+    res.status(500).json({ error: 'Error al obtener miembros de proyecto' });
   }
+});
 
-  const token = signToken({
-    sub: ADMIN_USERNAME,
-    role: 'admin',
-    exp: Date.now() + TOKEN_TTL_MS
-  });
+app.post('/api/miembros-proyecto', requireAuth, async (req, res) => {
+  try {
+    const nombre = String(req.body.nombre || '').trim();
+
+    if (!nombre) {
+      return res.status(400).json({ error: 'El nombre es obligatorio' });
+    }
+
+    const miembro = prisma.miembroProyectoCatalogo
+      ? await prisma.miembroProyectoCatalogo.upsert({
+          where: { nombre },
+          update: {},
+          create: { nombre }
+        })
+      : { id: nombre, nombre };
+
+    res.status(201).json(miembro);
+  } catch (error) {
+    console.error('Error al guardar miembro de proyecto:', error);
+    res.status(500).json({ error: 'Error al guardar miembro de proyecto' });
+  }
+});
+
+const reorderModels = {
+  docentes: prisma.docente,
+  egresados: prisma.egresado,
+  proyectos: prisma.proyecto,
+  galeria: prisma.galeriaItem,
+  noticias: prisma.noticia,
+  eventos: prisma.evento
+};
+
+app.put('/api/:section/reordenar', requireAuth, async (req, res) => {
+  try {
+    const model = reorderModels[req.params.section];
+
+    if (!model) {
+      return res.status(404).json({ error: 'Seccion no encontrada' });
+    }
+
+    await reorderRecords(model, req.body.ids);
+    res.json({ ok: true });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al reordenar registros' });
+  }
+});
+
+app.post('/api/auth/register-admin', async (req, res) => {
+  try {
+    const { usuario, username, password, role = 'admin' } = req.body;
+    const adminUser = String(usuario || username || '').trim();
+
+    if (!adminUser || !password || typeof password !== 'string') {
+      return res.status(400).json({
+        error: 'usuario y password son obligatorios'
+      });
+    }
+
+    const passwordHash = await bcrypt.hash(password, 10);
+    const admin = await prisma.usuarioAdmin.create({
+      data: {
+        usuario: adminUser,
+        password: passwordHash,
+        role: String(role || 'admin')
+      },
+      select: {
+        id: true,
+        usuario: true,
+        role: true
+      }
+    });
+
+    res.status(201).json(admin);
+  } catch (error) {
+    if (error?.code === 'P2002') {
+      return res.status(409).json({ error: 'El usuario admin ya existe' });
+    }
+
+    console.error('Error al registrar admin:', error);
+    res.status(500).json({ error: 'Error al registrar administrador' });
+  }
+});
+
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const { usuario, username, password } = req.body;
+    const adminUser = String(usuario || username || '').trim();
+
+    if (!adminUser || !password || typeof password !== 'string') {
+      return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
+    }
+
+    const admin = await prisma.usuarioAdmin.findUnique({
+      where: { usuario: adminUser }
+    });
+
+    const passwordMatches = admin
+      ? await bcrypt.compare(password, admin.password)
+      : false;
+
+    if (!admin || !passwordMatches) {
+      return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
+    }
+
+    const token = signToken({
+      sub: admin.id,
+      usuario: admin.usuario,
+      role: admin.role,
+      exp: Date.now() + TOKEN_TTL_MS
+    });
+
+    res.json({
+      token,
+      tokenType: 'Bearer',
+      expiresIn: TOKEN_TTL_MS / 1000,
+      user: {
+        id: admin.id,
+        usuario: admin.usuario,
+        role: admin.role
+      }
+    });
+  } catch (error) {
+    console.error('Error en login:', error);
+    res.status(500).json({ error: 'Error al iniciar sesión' });
+  }
+});
+
+app.post('/api/auth/logout', (req, res) => {
+  res.clearCookie('token');
+  res.clearCookie('authToken');
+  res.clearCookie('Authorization');
 
   res.json({
-    token,
-    tokenType: 'Bearer',
-    expiresIn: TOKEN_TTL_MS / 1000
+    ok: true,
+    message: 'Sesión cerrada correctamente. Limpia el token del cliente.'
   });
 });
 
@@ -512,9 +861,8 @@ app.post('/api/auth/login', (req, res) => {
 app.get('/api/noticias', async (req, res) => {
   try {
     const noticias = await prisma.noticia.findMany({
-  orderBy: { fecha: 'desc' },
-  where: { titulo: { not: undefined } }  // ✅ evita documentos corruptos
-});
+      orderBy: { fecha: 'desc' }
+    });
     res.json(noticias);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener noticias' });
@@ -523,15 +871,12 @@ app.get('/api/noticias', async (req, res) => {
 
 app.post('/api/noticias', requireAuth, async (req, res) => {
   try {
-    const { titulo, contenido, descripcion, imagenUrl, fecha, fechaTexto } = req.body;
+    const { titulo, contenido, descripcion, fecha } = req.body;
     const parsedDate = parseApiDate(fecha) || new Date();
     const nuevaNoticia = await prisma.noticia.create({
       data: {
         titulo,
         contenido: contenido || descripcion || '',
-        descripcion: descripcion || contenido || '',
-        imagenUrl,
-        fechaTexto: fechaTexto || formatSpanishDate(parsedDate),
         fecha: parsedDate
       }
     });
@@ -543,18 +888,15 @@ app.post('/api/noticias', requireAuth, async (req, res) => {
 
 app.put('/api/noticias/:id', requireAuth, async (req, res) => {
   try {
-    const { titulo, contenido, descripcion, imagenUrl, fecha, fechaTexto } = req.body;
+    const { titulo, contenido, descripcion, fecha } = req.body;
     const parsedDate = parseApiDate(fecha);
     const noticia = await prisma.noticia.update({
       where: { id: req.params.id },
-      data: {
+      data: cleanData({
         titulo,
-        contenido,
-        descripcion,
-        imagenUrl,
-        fechaTexto: fechaTexto || formatSpanishDate(parsedDate),
+        contenido: contenido || descripcion,
         fecha: parsedDate
-      }
+      })
     });
     res.json(noticia);
   } catch (error) {
@@ -575,9 +917,8 @@ app.delete('/api/noticias/:id', requireAuth, async (req, res) => {
 app.get('/api/eventos', async (req, res) => {
   try {
     const eventos = await prisma.evento.findMany({
-  orderBy: [{ mes: 'asc' }, { dia: 'asc' }],
-  where: { titulo: { not: undefined } }  // ✅
-});
+      orderBy: [{ mes: 'asc' }, { dia: 'asc' }]
+    });
     res.json(eventos);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener eventos' });
@@ -586,17 +927,14 @@ app.get('/api/eventos', async (req, res) => {
 
 app.post('/api/eventos', requireAuth, async (req, res) => {
   try {
-    const { titulo, nombre, fecha, lugar, descripcion, hora, dia, mes } = req.body;
+    const { titulo, nombre, fecha, descripcion, hora } = req.body;
     const parsedDate = parseApiDate(fecha);
     const nuevoEvento = await prisma.evento.create({
       data: {
         titulo: titulo || nombre,
         fecha: parsedDate,
-        lugar,
         descripcion,
-        hora,
-        dia: dia ?? parsedDate?.getDate(),
-        mes: mes ?? parsedDate?.getMonth()
+        hora
       }
     });
     res.status(201).json(nuevoEvento);
@@ -607,19 +945,16 @@ app.post('/api/eventos', requireAuth, async (req, res) => {
 
 app.put('/api/eventos/:id', requireAuth, async (req, res) => {
   try {
-    const { titulo, nombre, fecha, lugar, descripcion, hora, dia, mes } = req.body;
+    const { titulo, nombre, fecha, descripcion, hora } = req.body;
     const parsedDate = parseApiDate(fecha);
     const evento = await prisma.evento.update({
       where: { id: req.params.id },
-      data: {
+      data: cleanData({
         titulo: titulo || nombre,
         fecha: parsedDate,
-        lugar,
         descripcion,
-        hora,
-        dia: dia ?? parsedDate?.getDate(),
-        mes: mes ?? parsedDate?.getMonth()
-      }
+        hora
+      })
     });
     res.json(evento);
   } catch (error) {
@@ -644,30 +979,30 @@ app.get('/api/docentes', async (req, res) => {
         publicaciones: {
           orderBy: [{ anio: 'desc' }, { titulo: 'asc' }]
         }
-      },
-      orderBy: { nombre: 'asc' }
+      }
     });
-    res.json(docentes);
+    res.json(sortByManualThenText(docentes, (docente) => `${docente.nombre} ${docente.apellidos}`));
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener docentes' });
   }
 });
 
-app.post('/api/docentes', requireAuth, async (req, res) => {
+app.post('/api/docentes', requireAuth, uploadDocente.single('imagen'), async (req, res) => {
   try {
     const {
-      nombre,
       especialidad,
       cargo,
-      imagen,
       descripcion,
       email,
       publicaciones = []
     } = req.body;
+    const { nombre, apellidos } = resolveNombreApellidos(req.body);
+    const imagen = req.file?.filename || req.body.imagen;
 
     const docente = await prisma.docente.create({
       data: {
         nombre,
+        apellidos,
         especialidad,
         cargo,
         imagen,
@@ -686,28 +1021,29 @@ app.post('/api/docentes', requireAuth, async (req, res) => {
   }
 });
 
-app.put('/api/docentes/:id', requireAuth, async (req, res) => {
+app.put('/api/docentes/:id', requireAuth, uploadDocente.single('imagen'), async (req, res) => {
   try {
     const {
-      nombre,
       especialidad,
       cargo,
-      imagen,
       descripcion,
       email,
       publicaciones
     } = req.body;
+    const { nombre, apellidos } = resolveNombreApellidos(req.body);
+    const imagen = req.file?.filename || req.body.imagen;
 
     const docente = await prisma.docente.update({
       where: { id: req.params.id },
-      data: {
+      data: cleanData({
         nombre,
+        apellidos,
         especialidad,
         cargo,
         imagen,
         descripcion,
         email,
-        ...(Array.isArray(publicaciones)
+        ...(publicaciones !== undefined
           ? {
               publicaciones: {
                 deleteMany: {},
@@ -715,7 +1051,7 @@ app.put('/api/docentes/:id', requireAuth, async (req, res) => {
               }
             }
           : {})
-      },
+      }),
       include: { publicaciones: true }
     });
 
@@ -739,12 +1075,10 @@ app.delete('/api/docentes/:id', requireAuth, async (req, res) => {
 app.get('/api/egresados', async (req, res) => {
   try {
     const egresados = await prisma.egresado.findMany({
-      where: {
-        anio: { not: null },
-        ...(req.query.modalidad ? { modalidad: String(req.query.modalidad) } : {})
-      },
+      where,
       orderBy: [{ anio: 'asc' }, { nombre: 'asc' }]
     });
+
     res.json(egresados);
   } catch (error) {
     console.error(error);
@@ -752,14 +1086,17 @@ app.get('/api/egresados', async (req, res) => {
   }
 });
 
-app.post('/api/egresados', requireAuth, async (req, res) => {
+app.post('/api/egresados', requireAuth, uploadEgresado.single('foto'), async (req, res) => {
   try {
-    const { nombre, anio, modalidad } = req.body;
+    const { modalidad } = req.body;
+    const { nombre, apellidos } = resolveNombreApellidos(req.body);
     const egresado = await prisma.egresado.create({
       data: {
         nombre,
-        anio,
-        modalidad
+        apellidos,
+        ano: resolveYear(req.body),
+        modalidad,
+        foto: req.file?.filename || req.body.foto
       }
     });
     res.status(201).json(egresado);
@@ -768,16 +1105,19 @@ app.post('/api/egresados', requireAuth, async (req, res) => {
   }
 });
 
-app.put('/api/egresados/:id', requireAuth, async (req, res) => {
+app.put('/api/egresados/:id', requireAuth, uploadEgresado.single('foto'), async (req, res) => {
   try {
-    const { nombre, anio, modalidad } = req.body;
+    const { modalidad } = req.body;
+    const { nombre, apellidos } = resolveNombreApellidos(req.body);
     const egresado = await prisma.egresado.update({
       where: { id: req.params.id },
-      data: {
+      data: cleanData({
         nombre,
-        anio,
-        modalidad
-      }
+        apellidos,
+        ano: resolveYear(req.body),
+        modalidad,
+        foto: req.file?.filename || req.body.foto
+      })
     });
     res.json(egresado);
   } catch (error) {
@@ -797,124 +1137,162 @@ app.delete('/api/egresados/:id', requireAuth, async (req, res) => {
 // --- RUTAS DE PROYECTOS ---
 app.get('/api/proyectos', async (req, res) => {
   try {
-    const where = req.query.categoryKey
-      ? { categoryKey: String(req.query.categoryKey) }
+    const where = req.query.categoria || req.query.categoryKey
+      ? { categoria: String(req.query.categoria || req.query.categoryKey) }
       : undefined;
 
     const proyectos = await prisma.proyecto.findMany({
       where,
       include: {
-        miembros: { orderBy: { nombre: 'asc' } },
-        galeria: true
-      },
-      orderBy: [{ categoryLabel: 'asc' }, { title: 'asc' }]
+        miembros: true
+      }
     });
 
-    res.json(proyectos);
+    const sortedProjects = sortByManualThenText(proyectos, (proyecto) => proyecto.title).map((proyecto) => ({
+      ...proyecto,
+      categoryKey: proyecto.categoria === 'Sistemas Inteligentes' ? 'sistemas' : 'software',
+      categoryLabel: proyecto.categoria,
+      image: assetPath('Proyectos', proyecto.imagenPortada),
+      galeria: (proyecto.galeriaProyecto || []).map((url) => ({
+        url: assetPath('Proyectos', url),
+        tipo: /\.(mp4|webm|ogg|mov)$/i.test(String(url)) ? 'video' : 'imagen'
+      })),
+      miembros: sortByManualThenText(proyecto.miembros || [], (miembro) => miembro.nombre)
+    }));
+
+    res.json(sortedProjects);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener proyectos' });
   }
 });
 
-app.post('/api/proyectos', requireAuth, async (req, res) => {
+app.post(
+  '/api/proyectos',
+  requireAuth,
+  uploadProyecto.fields([
+    { name: 'imagenPortada', maxCount: 1 },
+    { name: 'image', maxCount: 1 },
+    { name: 'galeriaProyecto', maxCount: 30 },
+    { name: 'galeria', maxCount: 30 }
+  ]),
+  async (req, res) => {
   try {
     const {
+      categoria,
       categoryKey,
       categoryLabel,
       title,
       summary,
-      image,
+      imagenPortada,
       description,
-      videoUrl,
-      miembros = [],
-      galeria = []
+      miembros = []
     } = req.body;
+    const portada = firstUploadedFile(req, 'imagenPortada', 'image')?.filename || imagenPortada || req.body.image;
+    const galeriaProyecto = [
+      ...parseArrayField(req.body.galeriaProyecto || req.body.galeria).map((item) =>
+        normalizeProjectGalleryValue(typeof item === 'string' ? item : item.url)
+      ),
+      ...uploadedFileNames(req, 'galeriaProyecto', 'galeria')
+    ].filter(Boolean);
+    const normalizedMiembros = normalizeMiembros(miembros);
+    await syncMiembrosCatalogo(normalizedMiembros);
 
     const proyecto = await prisma.proyecto.create({
       data: {
-        categoryKey,
-        categoryLabel,
+        categoria: categoria || categoryLabel || categoryKey || 'Otros',
         title,
         summary,
-        image,
+        imagenPortada: portada,
         description,
-        videoUrl,
+        galeriaProyecto,
         miembros: {
-          create: normalizeMiembros(miembros)
-        },
-        galeria: {
-          create: normalizeProyectoGaleria(galeria)
+          create: normalizedMiembros
         }
       },
       include: {
-        miembros: true,
-        galeria: true
+        miembros: true
       }
     });
 
     res.status(201).json(proyecto);
   } catch (error) {
+    console.error('Error al crear proyecto:', error);
     res.status(500).json({ error: 'Error al crear proyecto' });
   }
-});
+  }
+);
 
-app.put('/api/proyectos/:id', requireAuth, async (req, res) => {
+app.put(
+  '/api/proyectos/:id',
+  requireAuth,
+  uploadProyecto.fields([
+    { name: 'imagenPortada', maxCount: 1 },
+    { name: 'image', maxCount: 1 },
+    { name: 'galeriaProyecto', maxCount: 30 },
+    { name: 'galeria', maxCount: 30 }
+  ]),
+  async (req, res) => {
   try {
     const {
+      categoria,
       categoryKey,
       categoryLabel,
       title,
       summary,
-      image,
+      imagenPortada,
       description,
-      videoUrl,
       miembros,
-      galeria
+      galeriaProyecto
     } = req.body;
+    const portada = firstUploadedFile(req, 'imagenPortada', 'image')?.filename || imagenPortada || req.body.image;
+    const uploadedGaleria = uploadedFileNames(req, 'galeriaProyecto', 'galeria');
+    const bodyGaleria = req.body.galeriaProyecto !== undefined || req.body.galeria !== undefined
+      ? parseArrayField(galeriaProyecto || req.body.galeria).map((item) =>
+          normalizeProjectGalleryValue(typeof item === 'string' ? item : item.url)
+        )
+      : undefined;
+    const normalizedMiembros = miembros !== undefined ? normalizeMiembros(miembros) : undefined;
+
+    if (normalizedMiembros) {
+      await syncMiembrosCatalogo(normalizedMiembros);
+    }
 
     const proyecto = await prisma.proyecto.update({
       where: { id: req.params.id },
-      data: {
-        categoryKey,
-        categoryLabel,
+      data: cleanData({
+        categoria: categoria || categoryLabel || categoryKey,
         title,
         summary,
-        image,
+        imagenPortada: portada,
         description,
-        videoUrl,
-        ...(Array.isArray(miembros)
+        galeriaProyecto: bodyGaleria !== undefined || uploadedGaleria.length > 0
+          ? [...(bodyGaleria || []), ...uploadedGaleria].filter(Boolean)
+          : undefined,
+        ...(miembros !== undefined
           ? {
               miembros: {
                 deleteMany: {},
-                create: normalizeMiembros(miembros)
+                create: normalizedMiembros
               }
             }
           : {}),
-        ...(Array.isArray(galeria)
-          ? {
-              galeria: {
-                deleteMany: {},
-                create: normalizeProyectoGaleria(galeria)
-              }
-            }
-          : {})
-      },
+      }),
       include: {
-        miembros: true,
-        galeria: true
+        miembros: true
       }
     });
 
     res.json(proyecto);
   } catch (error) {
+    console.error('Error al actualizar proyecto:', error);
     res.status(500).json({ error: 'Error al actualizar proyecto' });
   }
-});
+  }
+);
 
 app.delete('/api/proyectos/:id', requireAuth, async (req, res) => {
   try {
     await prisma.proyectoMiembro.deleteMany({ where: { proyectoId: req.params.id } });
-    await prisma.proyectoImagen.deleteMany({ where: { proyectoId: req.params.id } });
     await prisma.proyecto.delete({ where: { id: req.params.id } });
     res.json({ ok: true });
   } catch (error) {
@@ -925,49 +1303,68 @@ app.delete('/api/proyectos/:id', requireAuth, async (req, res) => {
 // --- RUTAS DE GALERIA ---
 app.get('/api/galeria', async (req, res) => {
   try {
-    const galeria = await prisma.galeriaItem.findMany({
-      orderBy: { createdAt: 'asc' }
-    });
-    res.json(galeria);
+    const galeria = await prisma.galeriaItem.findMany();
+    res.json(sortByManualThenText(galeria, (item) => item.titulo || item.url).map((item) => ({
+      ...item,
+      url: assetPath('Galeria', item.url)
+    })));
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener galeria' });
   }
 });
 
-app.post('/api/galeria', requireAuth, async (req, res) => {
+app.post(
+  '/api/galeria',
+  requireAuth,
+  uploadGaleria.fields([
+    { name: 'archivo', maxCount: 1 },
+    { name: 'url', maxCount: 1 }
+  ]),
+  async (req, res) => {
   try {
     const { titulo, categoria, url, tipo } = req.body;
+    const archivo = firstUploadedFile(req, 'archivo', 'url')?.filename || url;
     const item = await prisma.galeriaItem.create({
       data: {
         titulo,
         categoria,
-        url,
-        tipo
+        url: archivo,
+        tipo: tipo || (firstUploadedFile(req, 'archivo', 'url')?.mimetype.startsWith('video/') ? 'video' : 'imagen')
       }
     });
     res.status(201).json(item);
   } catch (error) {
     res.status(500).json({ error: 'Error al crear item de galeria' });
   }
-});
+  }
+);
 
-app.put('/api/galeria/:id', requireAuth, async (req, res) => {
+app.put(
+  '/api/galeria/:id',
+  requireAuth,
+  uploadGaleria.fields([
+    { name: 'archivo', maxCount: 1 },
+    { name: 'url', maxCount: 1 }
+  ]),
+  async (req, res) => {
   try {
     const { titulo, categoria, url, tipo } = req.body;
+    const uploadedFile = firstUploadedFile(req, 'archivo', 'url');
     const item = await prisma.galeriaItem.update({
       where: { id: req.params.id },
-      data: {
+      data: cleanData({
         titulo,
         categoria,
-        url,
-        tipo
-      }
+        url: uploadedFile?.filename || url,
+        tipo: tipo || (uploadedFile?.mimetype.startsWith('video/') ? 'video' : undefined)
+      })
     });
     res.json(item);
   } catch (error) {
     res.status(500).json({ error: 'Error al actualizar item de galeria' });
   }
-});
+  }
+);
 
 app.delete('/api/galeria/:id', requireAuth, async (req, res) => {
   try {

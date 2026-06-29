@@ -139,7 +139,7 @@ export class ProyectoPageComponent {
             projects: [],
             videos: []
           });
-          const keys = new Set(this.content().filters.map((f) => f.key));
+          const keys = new Set(this.content().filters.map((f: { key: string }) => f.key));
           if (!keys.has(this.activeFilter())) {
             this.activeFilter.set('all');
           }
@@ -149,7 +149,7 @@ export class ProyectoPageComponent {
         });
     });
   }
-  content = signal(defaultContent);
+  content = signal<any>(defaultContent);
 
   activeFilter = signal<'all' | 'software' | 'sistemas'>('all');
 
@@ -159,7 +159,7 @@ export class ProyectoPageComponent {
     if (filterKey === 'all') {
       return items;
     }
-    return items.filter((project) => project.categoryKey === filterKey);
+    return items.filter((project: { categoryKey: string }) => project.categoryKey === filterKey);
   });
 
   galleryImages = signal([
@@ -235,7 +235,7 @@ export class ProyectoPageComponent {
         description: string;
         videoUrl?: string | null;
         miembros?: Array<{ nombre: string }>;
-        galeria?: Array<{ url: string }>;
+        galeria?: Array<{ url: string; tipo?: 'imagen' | 'video' }>;
       }>>(this.proyectosApiUrl)
       .subscribe({
         next: (projects) => {
@@ -255,7 +255,10 @@ export class ProyectoPageComponent {
               modal: {
                 description: project.description,
                 members: (project.miembros || []).map((miembro) => miembro.nombre),
-                gallery: (project.galeria || []).map((imagen) => imagen.url),
+                gallery: (project.galeria || []).map((media) => ({
+                  url: media.url,
+                  tipo: media.tipo || (this.isVideoMedia(media.url) ? 'video' : 'imagen')
+                })),
                 videoUrl: project.videoUrl || ''
               }
             }))
@@ -310,6 +313,10 @@ export class ProyectoPageComponent {
           }));
         }
       });
+  }
+
+  isVideoMedia(url: string): boolean {
+    return /\.(mp4|webm|ogg|mov)$/i.test(url);
   }
 }
 

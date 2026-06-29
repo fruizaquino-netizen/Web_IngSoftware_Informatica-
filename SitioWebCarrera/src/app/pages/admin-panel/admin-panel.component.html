@@ -1,5 +1,5 @@
 <section class="admin-shell">
-  <header class="admin-header">
+  <header class="admin-header" [class.login-header]="!isAuthenticated()">
     <div>
       <p class="eyebrow">Administracion</p>
       <h1>AdminPanel</h1>
@@ -12,18 +12,65 @@
   </header>
 
   @if (!isAuthenticated()) {
+    <div class="login-stage">
     <form class="login-panel" [formGroup]="loginForm" (ngSubmit)="login()">
-      <h2>Acceso de administrador</h2>
+      <div class="login-title">
+        <span class="login-mark">AP</span>
+        <div>
+          <h2>Acceso de administrador</h2>
+          <p>Ingresa para actualizar el contenido del sitio.</p>
+        </div>
+      </div>
       <label>
         Usuario
-        <input type="text" formControlName="username" autocomplete="username" />
+        <input
+          type="text"
+          formControlName="username"
+          autocomplete="username"
+          placeholder="Ej. admin"
+          [class.invalid-field]="isLoginFieldInvalid('username')"
+        />
+        @if (isLoginFieldInvalid('username')) {
+          <span class="field-error">Ingresa tu usuario.</span>
+        }
       </label>
-      <label>
+      <label class="password-label">
         Contrasena
-        <input type="password" formControlName="password" autocomplete="current-password" />
+        <span class="password-control">
+          <input
+            [type]="showPassword() ? 'text' : 'password'"
+            formControlName="password"
+            autocomplete="current-password"
+            placeholder="Ingresa tu contrasena"
+            [class.invalid-field]="isLoginFieldInvalid('password')"
+          />
+          <button
+            type="button"
+            class="password-toggle"
+            (click)="togglePasswordVisibility()"
+            [attr.aria-label]="showPassword() ? 'Ocultar contrasena' : 'Mostrar contrasena'"
+          >
+            @if (showPassword()) {
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            } @else {
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" />
+                <circle cx="12" cy="12" r="3" />
+                <path d="M4 4l16 16" />
+              </svg>
+            }
+          </button>
+        </span>
+        @if (isLoginFieldInvalid('password')) {
+          <span class="field-error">Ingresa tu contrasena.</span>
+        }
       </label>
       <button type="submit" class="primary-button">Entrar</button>
     </form>
+    </div>
   } @else {
     <div class="admin-layout">
       <nav class="section-nav" aria-label="Secciones administrativas">
@@ -44,7 +91,7 @@
             <h2>{{ activeSection().label }}</h2>
             <span>{{ records().length }} registro(s)</span>
           </div>
-          <button type="button" class="primary-button" (click)="openCreateForm()">Agregar Nuevo</button>
+          <button type="button" class="primary-button" (click)="openCreateForm()">+ Nuevo</button>
         </div>
 
         @if (message()) {
@@ -66,6 +113,7 @@
 
             <div class="form-grid">
               @for (field of activeSection().fields; track field.key) {
+                @if (isFieldVisible(field)) {
                 <label [class.wide]="field.wide">
                   {{ field.label }}
 
@@ -73,30 +121,125 @@
                     <textarea
                       [formControlName]="field.key"
                       [placeholder]="field.placeholder || ''"
-                      rows="4"
+                      [class.invalid-field]="isFieldInvalid(field.key)"
+                      [rows]="field.key === 'publicacionesTexto' ? 7 : 4"
                     ></textarea>
+                    @if (field.key === 'publicacionesTexto' && publicacionesPreviewLines().length) {
+                      <ul class="publications-preview" aria-label="Vista previa de publicaciones">
+                        @for (line of publicacionesPreviewLines(); track line) {
+                          <li>{{ line }}</li>
+                        }
+                      </ul>
+                    }
                   } @else if (field.type === 'select') {
-                    <select [formControlName]="field.key">
-                      <option value="">Selecciona una opcion</option>
-                      @for (option of field.options || []; track option.value) {
+                    <select
+                      [formControlName]="field.key"
+                      [attr.multiple]="field.multiple ? '' : null"
+                      [class.multi-select]="field.multiple"
+                      [class.invalid-field]="isFieldInvalid(field.key)"
+                    >
+                      @if (!field.multiple) {
+                        <option value="">Selecciona una opcion</option>
+                      }
+                      @for (option of optionsForField(field); track option.value) {
                         <option [value]="option.value">{{ option.label }}</option>
                       }
                     </select>
+                    @if (activeKey() === 'proyectos' && field.key === 'miembrosTexto' && loadingMiembrosOptions()) {
+                      <span class="field-hint">Cargando miembros...</span>
+                    }
+                    @if (shouldShowOtherInput(field)) {
+                      <input
+                        type="text"
+                        [formControlName]="field.otherKey!"
+                        placeholder="Escribe la nueva opcion"
+                        [class.invalid-field]="isFieldInvalid(field.otherKey!)"
+                      />
+                      @if (otherFieldError(field)) {
+                        <span class="field-error">{{ otherFieldError(field) }}</span>
+                      }
+                    }
+                  } @else if (field.type === 'file') {
+                    <div class="file-control" [class.invalid-field]="isFieldInvalid(field.key)">
+                      @if (existingFileUrl(field)) {
+                        <div class="current-file">
+                          @if (isPreviewableFile(field)) {
+                            <img [src]="existingFileUrl(field)" [alt]="'Imagen actual de ' + field.label" />
+                          }
+                          <div>
+                            <span>Archivo actual</span>
+                            <strong>{{ existingFileLabel(field) }}</strong>
+                          </div>
+                          <button type="button" class="text-danger-button" (click)="removeExistingFile(field)">
+                            Quitar
+                          </button>
+                        </div>
+                      } @else if (hasExistingFile(field) && isExistingFileRemoved(field.key)) {
+                        <div class="removed-file">
+                          <span>La imagen actual se eliminara al guardar.</span>
+                          <button type="button" class="text-button" (click)="restoreExistingFile(field)">
+                            Restaurar
+                          </button>
+                        </div>
+                      }
+                      <input
+                        type="file"
+                        [attr.accept]="fileAcceptForField(field)"
+                        [attr.multiple]="field.multiple ? '' : null"
+                        (change)="onFileChange($event, field)"
+                      />
+                      @if (selectedFileNames(field)) {
+                        <span class="field-hint">Nuevo archivo: {{ selectedFileNames(field) }}</span>
+                      }
+                    </div>
+                    @if (activeKey() === 'proyectos' && field.key === 'galeriaProyecto' && projectGalleryItems().length) {
+                      <div class="project-gallery-list">
+                        @for (item of projectGalleryItems(); track item; let i = $index) {
+                          <div class="project-gallery-item">
+                            <div class="project-gallery-preview">
+                              @if (isVideoFile(item)) {
+                                <video [src]="projectGalleryPreviewUrl(item)" controls muted></video>
+                              } @else {
+                                <img [src]="projectGalleryPreviewUrl(item)" alt="Archivo de galeria del proyecto" />
+                              }
+                            </div>
+                            <span>{{ item.split('/').pop() }}</span>
+                            <div class="gallery-order-buttons">
+                              <button type="button" class="icon-button small" (click)="moveProjectGalleryItem(i, -1)" [disabled]="i === 0" aria-label="Subir archivo">
+                                &uarr;
+                              </button>
+                              <button type="button" class="icon-button small" (click)="moveProjectGalleryItem(i, 1)" [disabled]="i === projectGalleryItems().length - 1" aria-label="Bajar archivo">
+                                &darr;
+                              </button>
+                              <button type="button" class="text-danger-button" (click)="removeProjectGalleryItem(i)">
+                                Quitar
+                              </button>
+                            </div>
+                          </div>
+                        }
+                      </div>
+                    }
                   } @else {
                     <input
                       [type]="field.type"
                       [formControlName]="field.key"
                       [placeholder]="field.placeholder || ''"
+                      [class.invalid-field]="isFieldInvalid(field.key)"
                     />
                   }
+
+                  @if (fieldError(field.key)) {
+                    <span class="field-error">{{ fieldError(field.key) }}</span>
+                  }
                 </label>
+                }
               }
             </div>
 
             <div class="form-actions">
               <button type="button" class="ghost-button" (click)="cancelForm()">Cancelar</button>
               <button type="submit" class="primary-button">
-                {{ editingRecord() ? 'Guardar cambios' : 'Crear registro' }}
+                {{ editingRecord() ? 'Guardar' : 'Crear' }}
               </button>
             </div>
           </form>
@@ -106,6 +249,7 @@
           <table>
             <thead>
               <tr>
+                <th class="drag-column" aria-label="Orden"></th>
                 @for (column of activeSection().tableColumns; track column.key) {
                   <th>{{ column.label }}</th>
                 }
@@ -115,26 +259,39 @@
             <tbody>
               @if (loading()) {
                 <tr>
-                  <td [attr.colspan]="activeSection().tableColumns.length + 1" class="empty-cell">
+                  <td [attr.colspan]="activeSection().tableColumns.length + 2" class="empty-cell">
                     Cargando registros...
                   </td>
                 </tr>
               } @else {
                 @for (record of records(); track record[activeSection().idKey]) {
-                  <tr>
+                  <tr
+                    draggable="true"
+                    [class.dragging-row]="draggedRecordId() === record[activeSection().idKey]"
+                    [class.drag-over-row]="dragOverRecordId() === record[activeSection().idKey]"
+                    (dragstart)="onRecordDragStart($event, record)"
+                    (dragover)="onRecordDragOver($event, record)"
+                    (drop)="onRecordDrop($event, record)"
+                    (dragend)="onRecordDragEnd()"
+                  >
+                    <td class="drag-cell" aria-hidden="true">
+                      <span class="drag-handle">::</span>
+                    </td>
                     @for (column of activeSection().tableColumns; track column.key) {
                       <td>{{ displayValue(record, column.key) }}</td>
                     }
                     <td class="row-actions">
-                      <button type="button" class="edit-button" (click)="openEditForm(record)">Editar</button>
-                      <button type="button" class="delete-button" (click)="deleteRecord(record)">
-                        Eliminar
-                      </button>
+                      <div class="action-buttons">
+                        <button type="button" class="edit-button" (click)="openEditForm(record)">Editar</button>
+                        <button type="button" class="delete-button" (click)="deleteRecord(record)">
+                          Eliminar
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 } @empty {
                   <tr>
-                    <td [attr.colspan]="activeSection().tableColumns.length + 1" class="empty-cell">
+                    <td [attr.colspan]="activeSection().tableColumns.length + 2" class="empty-cell">
                       No hay registros en esta seccion.
                     </td>
                   </tr>
