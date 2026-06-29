@@ -1,11 +1,20 @@
 .admin-shell {
+  position: relative;
+  isolation: isolate;
   min-height: 100vh;
+  overflow: hidden;
   padding: clamp(24px, 4vw, 48px);
-  background:
-    radial-gradient(circle at top left, rgba(157, 36, 73, 0.08), transparent 30rem),
-    #f4f7fb;
+  background-color: #f4f7fb;
+  background-image:
+    linear-gradient(rgba(244, 247, 251, 0.72), rgba(244, 247, 251, 0.82)),
+    radial-gradient(circle at top left, rgba(157, 36, 73, 0.1), transparent 30rem),
+    url('/assets/img/fondo_admin.png');
+  background-position: center, top left, center;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: cover, auto, cover;
+  background-attachment: fixed, fixed, fixed;
   color: #182235;
-  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  font-family: Inter, Roboto, 'Montserrat', 'Plus Jakarta Sans', Arial, sans-serif;
 }
 
 .admin-header {
@@ -56,6 +65,7 @@
 }
 
 .login-stage {
+  position: relative;
   display: grid;
   width: min(100%, 820px);
   min-height: clamp(420px, 58vh, 620px);
@@ -63,6 +73,17 @@
   justify-items: center;
   margin: 0 auto;
   padding-top: clamp(16px, 5vh, 64px);
+}
+
+.login-stage::before {
+  position: absolute;
+  inset: -3rem -8vw -2rem auto;
+  width: min(52vw, 620px);
+  aspect-ratio: 1;
+  background: url('/assets/img/fondo_admin.png') center / contain no-repeat;
+  content: '';
+  opacity: 0.16;
+  pointer-events: none;
 }
 
 .admin-layout {
@@ -78,7 +99,7 @@
 .content-panel,
 .login-panel,
 .record-form {
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(255, 255, 255, 0.88);
   border: 1px solid rgba(203, 213, 225, 0.75);
   border-radius: 8px;
   box-shadow: 0 20px 42px rgba(15, 23, 42, 0.08);
@@ -91,6 +112,8 @@
   padding: 10px;
   position: sticky;
   top: 18px;
+  border-right-color: rgba(103, 16, 25, 0.16);
+  box-shadow: 10px 0 28px rgba(15, 23, 42, 0.06), 0 18px 38px rgba(15, 23, 42, 0.06);
 }
 
 .section-nav button {
@@ -119,7 +142,7 @@
 
 .content-panel {
   min-width: 0;
-  padding: clamp(16px, 2vw, 24px);
+  padding: clamp(22px, 2.4vw, 34px);
 }
 
 .panel-toolbar {
@@ -158,8 +181,8 @@
 }
 
 .primary-button {
-  border: 1px solid #a72350;
-  background: #a72350;
+  border: 1px solid #671019;
+  background: #671019;
   color: #ffffff;
   padding: 0 20px;
 }
@@ -186,16 +209,19 @@
 }
 
 .login-panel {
+  position: relative;
+  z-index: 1;
   width: min(460px, 100%);
-  padding: clamp(22px, 4vw, 34px);
+  padding: clamp(24px, 4vw, 34px) clamp(22px, 4vw, 34px) clamp(34px, 5vw, 46px);
 }
 
 .login-title {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   align-items: center;
   margin-bottom: 24px;
+  text-align: center;
 }
 
 .login-mark {
@@ -207,6 +233,34 @@
   background: #671019;
   color: #ffffff;
   font-weight: 900;
+}
+
+.login-panel .primary-button {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.login-links {
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+.login-notice {
+  margin-bottom: 16px;
+}
+
+.support-link {
+  color: #64748b;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.support-link:hover,
+.support-link:focus-visible {
+  color: #671019;
+  text-decoration: underline;
 }
 
 .login-panel label,
@@ -248,7 +302,7 @@ textarea {
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: #a72350;
+  border-color: #671019;
   box-shadow: 0 0 0 3px rgba(157, 36, 73, 0.12);
 }
 
@@ -317,7 +371,7 @@ select:focus {
 }
 
 .record-form {
-  padding: clamp(16px, 2vw, 24px);
+  padding: clamp(22px, 2.4vw, 34px);
   margin-bottom: 18px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
 }
@@ -391,9 +445,11 @@ select:focus {
   align-items: center;
   gap: 12px;
   min-width: 0;
-  border-radius: 8px;
+  border: 1px solid rgba(203, 213, 225, 0.9);
+  border-radius: 10px;
   background: #ffffff;
-  padding: 10px;
+  padding: 12px;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.07);
 }
 
 .current-file img {
@@ -618,7 +674,7 @@ tbody tr.drag-over-row .drag-handle {
 }
 
 .actions-column {
-  width: 210px;
+  width: 116px;
 }
 
 .row-actions {
@@ -628,9 +684,53 @@ tbody tr.drag-over-row .drag-handle {
 
 .action-buttons {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
+  justify-content: flex-start;
+}
+
+.icon-action {
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #475569;
+  cursor: pointer;
+  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.icon-action svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.icon-action:hover,
+.icon-action:focus-visible {
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+  transform: translateY(-1px);
+}
+
+.edit-action:hover,
+.edit-action:focus-visible {
+  background: #eef2ff;
+  color: #3730a3;
+}
+
+.delete-action:hover,
+.delete-action:focus-visible {
+  background: #fee2e2;
+  color: #991b1b;
 }
 
 .edit-button,

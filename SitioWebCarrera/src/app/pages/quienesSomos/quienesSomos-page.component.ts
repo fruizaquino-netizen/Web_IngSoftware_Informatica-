@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslationService } from '../../services/translation.service';
 import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
+import { parseJsonWithBom } from '../../shared/json-helpers';
 
 interface HeroInfo {
   titulo: string;
@@ -281,9 +282,11 @@ export class QuienesSomosPageComponent {
       const lang = this.translation.currentLang();
       const fileLang = lang === 'en' ? 'en' : lang === 'zapoteco' ? 'zapoteco' : 'es';
       this.http
-        .get(`assets/i18n/quienes-somos.${fileLang}.json`)
-        .subscribe((data) => {
-          this.content.set(data as typeof defaultContent);
+        .get(`assets/i18n/quienes-somos.${fileLang}.json`, { responseType: 'text' })
+        .subscribe((text) => {
+          this.content.set(
+            parseJsonWithBom<typeof defaultContent>(text, defaultContent, `quienes-somos.${fileLang}.json`)
+          );
         });
     });
   }

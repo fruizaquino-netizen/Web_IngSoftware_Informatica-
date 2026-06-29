@@ -4,6 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslationService } from '../../services/translation.service';
 import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
+import { parseJsonWithBom } from '../../shared/json-helpers';
 
 const defaultContent = {
   text: {
@@ -132,10 +133,10 @@ export class ProyectoPageComponent {
       const lang = this.translation.currentLang();
       const fileLang = lang === 'en' ? 'en' : lang === 'zapoteco' ? 'zapoteco' : 'es';
       this.http
-        .get(`assets/i18n/proyectos.${fileLang}.json`)
-        .subscribe((data) => {
+        .get(`assets/i18n/proyectos.${fileLang}.json`, { responseType: 'text' })
+        .subscribe((text) => {
           this.content.set({
-            ...(data as typeof defaultContent),
+            ...parseJsonWithBom<typeof defaultContent>(text, defaultContent, `proyectos.${fileLang}.json`),
             projects: [],
             videos: []
           });

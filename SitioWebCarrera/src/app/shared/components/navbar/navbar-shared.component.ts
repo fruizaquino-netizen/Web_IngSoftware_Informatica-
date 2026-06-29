@@ -1,9 +1,10 @@
-﻿import { Component, HostListener, inject, effect, signal } from '@angular/core';
+import { Component, HostListener, inject, effect, signal, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
 import { TranslationService } from '../../../services/translation.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { parseJsonWithBom } from '../../json-helpers';
 
 const defaultContent = {
   NAVBAR: {
@@ -32,22 +33,17 @@ const defaultContent = {
 export class NavbarSharedComponent {
   public service = inject(TranslationService);
   private http = inject(HttpClient);
+  private platformId = inject(PLATFORM_ID);
+  private readonly isBrowser = isPlatformBrowser(this.platformId);
 
   content = signal(defaultContent);
-
-  cambiarIdioma(lang: 'es' | 'en' | 'zapoteco') {
-    this.service.changeLanguage(lang);
-  }
-
-  getLangIconUrl(lang: 'es' | 'en' | 'zapoteco'): string {
-    if (lang === 'en') return 'assets/img/eu.png';
-    if (lang === 'zapoteco') return 'assets/img/lenguas.png';
-    return 'assets/img/mx.png';
-  }
-
   isScrolled = false;
 
   constructor(private router: Router) {
+    if (!this.isBrowser) {
+      return;
+    }
+
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -61,11 +57,23 @@ export class NavbarSharedComponent {
       const lang = this.service.currentLang();
       const fileLang = lang === 'en' ? 'en' : lang === 'zapoteco' ? 'zapoteco' : 'es';
       this.http
-        .get(`assets/i18n/navbar.${fileLang}.json`)
-        .subscribe((data) => {
-          this.content.set(data as typeof defaultContent);
+        .get(`assets/i18n/navbar.${fileLang}.json`, { responseType: 'text' })
+        .subscribe((text) => {
+          this.content.set(
+            parseJsonWithBom<typeof defaultContent>(text, defaultContent, `navbar.${fileLang}.json`)
+          );
         });
     });
+  }
+
+  cambiarIdioma(lang: 'es' | 'en' | 'zapoteco') {
+    this.service.changeLanguage(lang);
+  }
+
+  getLangIconUrl(lang: 'es' | 'en' | 'zapoteco'): string {
+    if (lang === 'en') return 'assets/img/eu.png';
+    if (lang === 'zapoteco') return 'assets/img/lenguas.png';
+    return 'assets/img/mx.png';
   }
 
   isActive(path: string): boolean {
@@ -85,6 +93,10 @@ export class NavbarSharedComponent {
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
+    if (!this.isBrowser) {
+      return;
+    }
+
     this.isScrolled = window.scrollY > 20;
   }
 }

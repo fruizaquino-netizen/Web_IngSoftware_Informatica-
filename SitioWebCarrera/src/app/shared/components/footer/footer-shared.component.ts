@@ -1,10 +1,11 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslationService } from '../../../services/translation.service';
+import { parseJsonWithBom } from '../../json-helpers';
 
 const defaultContent = {
   FOOTER: {
-    // Mantuvimos solo lo necesario para el diseño minimalista
     FOLLOW: 'SÍGUENOS',
     COPYRIGHT: '© 2026 UNISTMO. Todos los derechos reservados.'
   }
@@ -20,24 +21,30 @@ const defaultContent = {
 export class FooterSharedComponent {
   private http = inject(HttpClient);
   private translation = inject(TranslationService);
+  private platformId = inject(PLATFORM_ID);
+  private readonly isBrowser = isPlatformBrowser(this.platformId);
 
-  // Inicializamos con el contenido por defecto
   content = signal(defaultContent);
 
   constructor() {
+    if (!this.isBrowser) {
+      return;
+    }
+
     effect(() => {
-      // Detecta el cambio de idioma (es, en, zapoteco)
       const lang = this.translation.currentLang();
       const fileLang = lang === 'en' ? 'en' : lang === 'zapoteco' ? 'zapoteco' : 'es';
 
       this.http
-        .get(`assets/i18n/footer.${fileLang}.json`)
+        .get(`assets/i18n/footer.${fileLang}.json`, { responseType: 'text' })
         .subscribe({
-          next: (data) => {
-            this.content.set(data as typeof defaultContent);
+          next: (text) => {
+            this.content.set(
+              parseJsonWithBom<typeof defaultContent>(text, defaultContent, `footer.${fileLang}.json`)
+            );
           },
           error: (err) => {
-            console.warn('No se pudo cargar el archivo de traducción, usando fallback:', err);
+            console.warn('No se pudo cargar el archivo de traduccion, usando fallback:', err);
             this.content.set(defaultContent);
           }
         });

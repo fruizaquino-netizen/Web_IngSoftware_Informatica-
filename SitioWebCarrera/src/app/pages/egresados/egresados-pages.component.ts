@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslationService } from '../../services/translation.service';
 import { BreadcrumbComponent } from '../../shared/breadcrumb/breadcrumb.component';
+import { parseJsonWithBom } from '../../shared/json-helpers';
 
 interface Egresado {
   nombre: string;
@@ -64,9 +65,11 @@ export class EgresadosPagesComponent {
       const lang = this.translation.currentLang();
       const fileLang = lang === 'en' ? 'en' : lang === 'zapoteco' ? 'zapoteco' : 'es';
       this.http
-        .get(`assets/i18n/egresados.${fileLang}.json`)
-        .subscribe((data) => {
-          this.content.set(data as typeof defaultContent);
+        .get(`assets/i18n/egresados.${fileLang}.json`, { responseType: 'text' })
+        .subscribe((text) => {
+          this.content.set(
+            parseJsonWithBom<typeof defaultContent>(text, defaultContent, `egresados.${fileLang}.json`)
+          );
         });
     });
   }

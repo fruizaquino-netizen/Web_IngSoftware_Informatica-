@@ -593,6 +593,34 @@ function sortByManualThenText(items, textSelector) {
   });
 }
 
+async function normalizeLegacyEgresados() {
+  const emptyStringFields = ['nombre', 'apellidos', 'modalidad'];
+
+  for (const field of emptyStringFields) {
+    await prisma.$runCommandRaw({
+      update: 'Egresado',
+      updates: [
+        {
+          q: { [field]: null },
+          u: { $set: { [field]: '' } },
+          multi: true
+        }
+      ]
+    });
+  }
+
+  await prisma.$runCommandRaw({
+    update: 'Egresado',
+    updates: [
+      {
+        q: { ano: null },
+        u: { $set: { ano: new Date().getFullYear() } },
+        multi: true
+      }
+    ]
+  });
+}
+
 function assetPath(folder, value) {
   if (!value) {
     return '';
@@ -844,12 +872,16 @@ app.post('/api/auth/login', async (req, res) => {
       where: { usuario: adminUser }
     });
 
+    if (!admin) {
+      return res.status(401).json({ error: 'Usuario incorrecto' });
+    }
+
     const passwordMatches = admin
       ? await bcrypt.compare(password, admin.password)
       : false;
 
-    if (!admin || !passwordMatches) {
-      return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
+    if (!passwordMatches) {
+      return res.status(401).json({ error: 'Contrasena incorrecta' });
     }
 
     const token = signToken({
@@ -884,6 +916,107 @@ app.post('/api/auth/logout', (req, res) => {
     ok: true,
     message: 'Sesión cerrada correctamente. Limpia el token del cliente.'
   });
+});
+
+// --- RUTAS DE USUARIOS ADMIN ---
+app.get('/api/usuarios', requireAuth, async (req, res) => {
+  try {
+    const usuarios = await prisma.usuarioAdmin.findMany({
+      select: {
+        id: true,
+        usuario: true,
+        role: true
+      },
+      orderBy: {
+        usuario: 'asc'
+      }
+    });
+
+    res.json(usuarios);
+  } catch (error) {
+    console.error('Error al obtener usuarios admin:', error);
+    res.status(500).json({ error: 'Error al obtener usuarios' });
+  }
+});
+
+app.post('/api/usuarios', requireAuth, async (req, res) => {
+  try {
+    const usuario = String(req.body.usuario || '').trim();
+    const password = String(req.body.password || '');
+    const role = String(req.body.role || 'editor').trim() || 'editor';
+
+    if (!usuario || !password) {
+      return res.status(400).json({ error: 'usuario y password son obligatorios' });
+    }
+
+    const creado = await prisma.usuarioAdmin.create({
+      data: {
+        usuario,
+        password: await bcrypt.hash(password, 10),
+        role
+      },
+      select: {
+        id: true,
+        usuario: true,
+        role: true
+      }
+    });
+
+    res.status(201).json(creado);
+  } catch (error) {
+    if (error?.code === 'P2002') {
+      return res.status(409).json({ error: 'El usuario ya existe' });
+    }
+
+    console.error('Error al crear usuario admin:', error);
+    res.status(500).json({ error: 'Error al crear usuario' });
+  }
+});
+
+app.put('/api/usuarios/:id', requireAuth, async (req, res) => {
+  try {
+    const usuario = String(req.body.usuario || '').trim();
+    const role = String(req.body.role || '').trim();
+    const password = String(req.body.password || '').trim();
+    const data = cleanData({
+      usuario: usuario || undefined,
+      role: role || undefined,
+      ...(password ? { password: await bcrypt.hash(password, 10) } : {})
+    });
+
+    const actualizado = await prisma.usuarioAdmin.update({
+      where: { id: req.params.id },
+      data,
+      select: {
+        id: true,
+        usuario: true,
+        role: true
+      }
+    });
+
+    res.json(actualizado);
+  } catch (error) {
+    if (error?.code === 'P2002') {
+      return res.status(409).json({ error: 'El usuario ya existe' });
+    }
+
+    console.error('Error al actualizar usuario admin:', error);
+    res.status(500).json({ error: 'Error al actualizar usuario' });
+  }
+});
+
+app.delete('/api/usuarios/:id', requireAuth, async (req, res) => {
+  try {
+    if (req.user?.sub === req.params.id) {
+      return res.status(400).json({ error: 'No puedes eliminar tu propia cuenta desde esta sesion' });
+    }
+
+    await prisma.usuarioAdmin.delete({ where: { id: req.params.id } });
+    res.json({ ok: true });
+  } catch (error) {
+    console.error('Error al eliminar usuario admin:', error);
+    res.status(500).json({ error: 'Error al eliminar usuario' });
+  }
 });
 
 // --- RUTAS DE NOTICIAS ---
@@ -1103,6 +1236,11 @@ app.delete('/api/docentes/:id', requireAuth, async (req, res) => {
 // --- RUTAS DE EGRESADOS ---
 app.get('/api/egresados', async (req, res) => {
   try {
+    await normalizeLegacyEgresados();
+    const where = req.query.modalidad
+      ? { modalidad: String(req.query.modalidad) }
+      : undefined;
+
     const egresados = await prisma.egresado.findMany({
       where,
       orderBy: [{ anio: 'asc' }, { nombre: 'asc' }]
@@ -1110,7 +1248,7 @@ app.get('/api/egresados', async (req, res) => {
 
     res.json(egresados);
   } catch (error) {
-    console.error(error);
+    console.error('Error al obtener egresados:', error);
     res.status(500).json({ error: 'Error al obtener egresados' });
   }
 });
