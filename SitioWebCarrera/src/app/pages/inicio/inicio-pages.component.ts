@@ -145,21 +145,26 @@ export class InicioPageComponent {
   selectedNews: any = null;
 
   constructor() {
-    this.generateCalendar();
+  this.generateCalendar();
 
-    effect(() => {
-      const lang = this.translation.currentLang();
-      const fileLang = lang === 'en' ? 'en' : lang === 'zapoteco' ? 'zapoteco' : 'es';
-      this.http
-        .get(`assets/i18n/inicio.${fileLang}.json`)
-        .subscribe((data) => {
-          this.content.set(data as typeof defaultContent);
-          this.applyContent();
-          this.cargarNoticias();
-          this.cargarEventos();
-        });
-    });
-  }
+  // ✅ Cargar datos inmediatamente al iniciar
+  this.cargarNoticias();
+  this.cargarEventos();
+
+  effect(() => {
+    const lang = this.translation.currentLang();
+    const fileLang = lang === 'en' ? 'en' : lang === 'zapoteco' ? 'zapoteco' : 'es';
+    this.http
+      .get(`assets/i18n/inicio.${fileLang}.json`)
+      .subscribe((data) => {
+        this.content.set(data as typeof defaultContent);
+        this.applyContent();
+        // ✅ Re-cargar solo al cambiar idioma (para traducción futura)
+        this.cargarNoticias();
+        this.cargarEventos();
+      });
+  });
+}
 
   private applyContent() {
     const data = this.content().INICIO;

@@ -512,8 +512,9 @@ app.post('/api/auth/login', (req, res) => {
 app.get('/api/noticias', async (req, res) => {
   try {
     const noticias = await prisma.noticia.findMany({
-      orderBy: { fecha: 'desc' }
-    });
+  orderBy: { fecha: 'desc' },
+  where: { titulo: { not: undefined } }  // ✅ evita documentos corruptos
+});
     res.json(noticias);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener noticias' });
@@ -574,8 +575,9 @@ app.delete('/api/noticias/:id', requireAuth, async (req, res) => {
 app.get('/api/eventos', async (req, res) => {
   try {
     const eventos = await prisma.evento.findMany({
-      orderBy: [{ mes: 'asc' }, { dia: 'asc' }]
-    });
+  orderBy: [{ mes: 'asc' }, { dia: 'asc' }],
+  where: { titulo: { not: undefined } }  // ✅
+});
     res.json(eventos);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener eventos' });
@@ -736,17 +738,16 @@ app.delete('/api/docentes/:id', requireAuth, async (req, res) => {
 // --- RUTAS DE EGRESADOS ---
 app.get('/api/egresados', async (req, res) => {
   try {
-    const where = req.query.modalidad
-      ? { modalidad: String(req.query.modalidad) }
-      : undefined;
-
     const egresados = await prisma.egresado.findMany({
-      where,
+      where: {
+        anio: { not: null },
+        ...(req.query.modalidad ? { modalidad: String(req.query.modalidad) } : {})
+      },
       orderBy: [{ anio: 'asc' }, { nombre: 'asc' }]
     });
-
     res.json(egresados);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Error al obtener egresados' });
   }
 });
