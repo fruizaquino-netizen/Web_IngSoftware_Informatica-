@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="1.715" tests="1" failures="0">
+  <testsuite name="Root Suite" timestamp="2026-06-30T07:13:16" tests="0" file="cypress\e2e\home.cy.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Pruebas del Sitio Web Carrera" timestamp="2026-06-30T07:13:16" tests="1" time="1.710" failures="0">
+    <testcase name="Pruebas del Sitio Web Carrera Debería cargar la landing page correctamente" time="1.544" classname="Debería cargar la landing page correctamente">
+    </testcase>
+  </testsuite>
+</testsuites>

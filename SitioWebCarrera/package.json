@@ -47,7 +47,9 @@
     "@types/express": "^5.0.1",
     "@types/node": "^20.19.43",
     "angular-cli-ghpages": "^3.0.2",
+    "cypress": "^15.18.0",
     "jsdom": "^27.1.0",
+    "karma-junit-reporter": "^2.0.1",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
   },

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="3" failures="3" errors="0" time="0">
+    <testsuite name="src/app/app.spec.ts" timestamp="2026-06-30T06:50:53.409Z" hostname="Nashelly" tests="1" failures="1" errors="0" skipped="0" time="0">
+        <testcase classname="src/app/app.spec.ts" name="src/app/app.spec.ts" time="0">
+            <failure message="describe is not defined" type="ReferenceError">
+ReferenceError: describe is not defined
+ ❯ src/app/app.spec.ts:7:1
+            </failure>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/app/shared/breadcrumb/breadcrumb.spec.ts" timestamp="2026-06-30T06:50:53.422Z" hostname="Nashelly" tests="1" failures="1" errors="0" skipped="0" time="0">
+        <testcase classname="src/app/shared/breadcrumb/breadcrumb.spec.ts" name="src/app/shared/breadcrumb/breadcrumb.spec.ts" time="0">
+            <failure message="describe is not defined" type="ReferenceError">
+ReferenceError: describe is not defined
+ ❯ src/app/shared/breadcrumb/breadcrumb.spec.ts:6:1
+            </failure>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/app/shared/scroll-top/scroll-top.spec.ts" timestamp="2026-06-30T06:50:53.432Z" hostname="Nashelly" tests="1" failures="1" errors="0" skipped="0" time="0">
+        <testcase classname="src/app/shared/scroll-top/scroll-top.spec.ts" name="src/app/shared/scroll-top/scroll-top.spec.ts" time="0">
+            <failure message="describe is not defined" type="ReferenceError">
+ReferenceError: describe is not defined
+ ❯ src/app/shared/scroll-top/scroll-top.spec.ts:5:1
+            </failure>
+        </testcase>
+    </testsuite>
+</testsuites>
